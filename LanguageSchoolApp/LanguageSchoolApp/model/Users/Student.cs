@@ -15,7 +15,7 @@ namespace LanguageSchoolApp.model.Users
         public List<FinishedCourse> FinishedCourses { get; set; }
         public List<ExamResults> FinishedExamResults { get; set; }
         public Course EnrolledCourse { get; set; }
-        public List<PenaltyPoint> PenaltyPoints { get; set; }
+        public List<int> PenaltyPoints { get; set; }
 
         public Student() { }
 
@@ -24,7 +24,7 @@ namespace LanguageSchoolApp.model.Users
                     string _password, ProfessionalDegree _professionalDegree,
                     List<FinishedCourse> _finishedCourses, Course _enrolledCourse,
                     List<ExamResults> _finishedExamResults,
-                    List<PenaltyPoint> _penaltyPoints)
+                    List<int> _penaltyPoints)
         {
             Name = _name;
             Surname = _surname;
@@ -55,7 +55,7 @@ namespace LanguageSchoolApp.model.Users
             FinishedCourses = new List<FinishedCourse>();
             FinishedExamResults = new List<ExamResults>();
             EnrolledCourse = new Course();
-            PenaltyPoints = new List<PenaltyPoint>();
+            PenaltyPoints = new List<int>();
 
         }
     }
