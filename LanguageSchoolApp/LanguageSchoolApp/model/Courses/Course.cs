@@ -33,7 +33,7 @@ namespace LanguageSchoolApp.model.Courses
 
         public Course(LanguageProficiency _languageProficiency, int _maxParticipants, int _duration, 
             DateTime _classDays, DateTime _beginningDate, CourseType _courseType) {
-            Id = generateId(_languageProficiency, _beginningDate, _courseType);
+            Id = GenerateId(_languageProficiency, _beginningDate, _courseType);
             LanguageProficiency = _languageProficiency;
             MaxParticipants = _maxParticipants;
             Duration = _duration;
@@ -42,7 +42,7 @@ namespace LanguageSchoolApp.model.Courses
             CourseType = _courseType;
         }
 
-        private int generateId(LanguageProficiency languageProficiency, DateTime beginningDate, CourseType courseType) {
+        private int GenerateId(LanguageProficiency languageProficiency, DateTime beginningDate, CourseType courseType) {
             string combination = languageProficiency.LanguageName + 
                                 languageProficiency.LanguageLevel.ToString() + 
                                 beginningDate.ToString("ddMMyyyy") + courseType.ToString();

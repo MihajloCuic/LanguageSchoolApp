@@ -9,8 +9,6 @@ namespace LanguageSchoolApp.model.Users
 {
     public class Director : User
     {
-        public static readonly string filename = Path.Combine("..", "..", "..", "data", "Director.json");
-
         public Director() { }
         public Director(string _name, string _surname, Gender _gender, DateTime _birthday, int _phoneNumber, string _email, string _password)
         {
