@@ -8,10 +8,12 @@ using LanguageSchoolApp.exceptions.Users;
 using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.repository.Users.Students;
 using LanguageSchoolApp.repository.Users.Teachers;
+using LanguageSchoolApp.exceptions.Courses;
+using System.Net.Http.Headers;
 
-namespace LanguageSchoolApp.service.Users.Validation
+namespace LanguageSchoolApp.service.Validation
 {
-    public class UserValidations
+    public class Validations
     {
         private static bool IsAlpha(string str)
         {
@@ -23,7 +25,7 @@ namespace LanguageSchoolApp.service.Users.Validation
             return str.All(char.IsDigit);
         }
 
-        public static bool Validate(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword)
+        public static bool ValidateUser(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword)
         {
             if (string.IsNullOrEmpty(name) || !IsAlpha(name))
             {
@@ -57,7 +59,7 @@ namespace LanguageSchoolApp.service.Users.Validation
             {
                 Gender gender = Enum.Parse<Gender>(genderStr);
             }
-            catch (ArgumentException) 
+            catch (ArgumentException)
             {
                 throw new UserValidationException("Invalid gender format", UserValidationExceptionType.InvalidGender);
             }
@@ -89,5 +91,67 @@ namespace LanguageSchoolApp.service.Users.Validation
             }
             return true;
         }
+
+        public static bool ValidateCourse(string languageName, string languageLevelStr, int maxParticipants, int duration, List<KeyValuePair<string, string>> classPeriodsStr, string beginningDateStr, string courseTypeStr)
+        {
+            if (String.IsNullOrEmpty(languageName) || !IsAlpha(languageName)) 
+            {
+                throw new CourseException("Invalid language name", CourseExceptionType.InvalidLanguageName);
+            }
+            try
+            {
+                Enum.Parse<LanguageLevel>(languageLevelStr);
+            }
+            catch (ArgumentException) 
+            { 
+                throw new CourseException("Invalid language level format", CourseExceptionType.InvalidLanguageLevel);
+            }
+            if (maxParticipants < 0) 
+            { 
+                throw new CourseException("Max participants must be greater than 0", CourseExceptionType.InvalidMaxParticipants);
+            }
+            if (duration < 0) 
+            {
+                throw new CourseException("Duration must be greater than 0", CourseExceptionType.InvalidDuration);
+            }
+            try
+            {
+                foreach (KeyValuePair<string, string> classPeriodStr in classPeriodsStr)
+                {
+                    Enum.Parse<DaysOfWeek>(classPeriodStr.Key);
+                    TimeOnly.Parse(classPeriodStr.Value);
+                }
+            }
+            catch (ArgumentException)
+            {
+                throw new CourseException("Invalid class day format", CourseExceptionType.InvalidClassDay);
+            }
+            catch (FormatException) 
+            {
+                throw new CourseException("Invalid class time format", CourseExceptionType.InvalidClassTime);
+            }
+            try
+            {
+                DateTime beginningDate = DateTime.Parse(beginningDateStr);
+                if (beginningDate < DateTime.Now)
+                {
+                    throw new CourseException("Course cannot begin in past", CourseExceptionType.InvalidBeginningDate);
+                }
+            }
+            catch (FormatException) 
+            {
+                throw new CourseException("Invalid beginning date format", CourseExceptionType.InvalidBeginningDate);
+            }
+            try
+            { 
+                Enum.Parse<CourseType>(courseTypeStr);
+            }
+            catch (ArgumentException) 
+            { 
+                throw new CourseException("Invalid course type format", CourseExceptionType.InvalidCourseType);
+            }
+            return true;
+        }
+
     }
 }

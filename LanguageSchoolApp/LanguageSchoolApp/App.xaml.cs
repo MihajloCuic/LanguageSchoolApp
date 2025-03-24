@@ -2,9 +2,11 @@
 using System.Data;
 using System.ServiceProcess;
 using System.Windows;
+using LanguageSchoolApp.repository.Courses;
 using LanguageSchoolApp.repository.Users.Directors;
 using LanguageSchoolApp.repository.Users.Students;
 using LanguageSchoolApp.repository.Users.Teachers;
+using LanguageSchoolApp.service.Courses;
 using LanguageSchoolApp.service.Users.Directors;
 using LanguageSchoolApp.service.Users.Students;
 using LanguageSchoolApp.service.Users.Teachers;
@@ -37,6 +39,9 @@ namespace LanguageSchoolApp
 
             services.AddSingleton<IDirectorRepository, DirectorRepository>();
             services.AddSingleton<IDirectorService, DirectorService>();
+
+            services.AddSingleton<ICourseRepository, CourseRepository>();
+            services.AddSingleton<ICourseService, CourseService>();
         }
     }
 

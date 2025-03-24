@@ -1,6 +1,5 @@
 ﻿using LanguageSchoolApp.exceptions.Users;
 using LanguageSchoolApp.model;
-using LanguageSchoolApp.service.Users.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.repository.Users.Students;
+using LanguageSchoolApp.service.Validation;
 
 namespace LanguageSchoolApp.service.Users.Students
 {
@@ -33,7 +33,7 @@ namespace LanguageSchoolApp.service.Users.Students
         public void CreateStudent(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string email, string password, string confirmPassword, string professionalDegreeStr) 
         { 
             ValidateStudent(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword, professionalDegreeStr);
-            UserValidations.ValidateEmail(email);
+            Validations.ValidateEmail(email);
             Gender gender = Enum.Parse<Gender>(genderStr);
             DateTime birthday = DateTime.Parse(birthdayStr);
             ProfessionalDegree professionalDegree = Enum.Parse<ProfessionalDegree>(professionalDegreeStr);
@@ -63,7 +63,7 @@ namespace LanguageSchoolApp.service.Users.Students
 
         public bool ValidateStudent(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, string professionalDegreeStr) 
         {
-            UserValidations.Validate(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword);
+            Validations.ValidateUser(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword);
             try
             { 
                 ProfessionalDegree professionalDegree = Enum.Parse<ProfessionalDegree>(professionalDegreeStr);

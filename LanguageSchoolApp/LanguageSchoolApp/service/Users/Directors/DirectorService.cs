@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.model;
-using LanguageSchoolApp.service.Users.Validation;
+using LanguageSchoolApp.service.Validation;
 
 namespace LanguageSchoolApp.service.Users.Directors
 {
@@ -35,8 +35,8 @@ namespace LanguageSchoolApp.service.Users.Directors
 
         public bool ValidateDirector(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string email, string password, string confirmPassword) 
         {
-            UserValidations.Validate(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword);
-            UserValidations.ValidateEmail(email);
+            Validations.ValidateUser(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword);
+            Validations.ValidateEmail(email);
             return true;
         }
     }

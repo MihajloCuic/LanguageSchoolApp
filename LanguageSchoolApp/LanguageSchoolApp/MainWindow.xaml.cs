@@ -3,6 +3,7 @@ using LanguageSchoolApp.repository.Courses;
 using LanguageSchoolApp.repository.Exams;
 using LanguageSchoolApp.repository.Notifications;
 using LanguageSchoolApp.repository.Users;
+using LanguageSchoolApp.service.Courses;
 using LanguageSchoolApp.service.Users.Directors;
 using LanguageSchoolApp.service.Users.Students;
 using LanguageSchoolApp.service.Users.Teachers;
@@ -29,12 +30,15 @@ namespace LanguageSchoolApp
         private readonly IStudentService _studentService;
         private readonly ITeacherService _teacherService;
         private readonly IDirectorService _directorService;
+        private readonly ICourseService _courseService;
         public MainWindow()
         {
             InitializeComponent();
             _studentService = App.ServiceProvider.GetService<IStudentService>(); //prosledjivanje service-a
             _teacherService = App.ServiceProvider.GetService<ITeacherService>();
             _directorService = App.ServiceProvider.GetService<IDirectorService>();
+            _courseService = App.ServiceProvider.GetService<ICourseService>();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -54,6 +58,16 @@ namespace LanguageSchoolApp
 
             //_directorService.UpdateDirector("director", "surname", "Male", "19.05.1973.", "1234567890", "director@gmail.com", "sifra", "sifra");
             //_directorService.GetDirector();
+
+            //List<KeyValuePair<string, string>> classPeriods = new List<KeyValuePair<string, string>>();
+            //classPeriods.Add(new KeyValuePair<string, string>("Monday", "13:30"));
+            //classPeriods.Add(new KeyValuePair<string, string>("Wednesday", "17:00"));
+            //classPeriods.Add(new KeyValuePair<string, string>("Friday", "20:30"));
+            //_courseService.CreateCourse("English", "B2", 25, 2, classPeriods, "13.05.2025.", "Live", "teacher@gmail.com");
+            //_courseService.GetAllCourses();
+            //_courseService.GetCourse(-2145913737);
+            //_courseService.UpdateCourse(-2145913737, "Spanish", "C1", 30, 3, classPeriods, "12.05.2025.", "Live");
+            //_courseService.DeleteCourse(-2145913737);
         }
     }
 }
