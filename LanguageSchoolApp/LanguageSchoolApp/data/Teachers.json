@@ -1,0 +1,24 @@
+{
+  "teacher@gmail.com": {
+    "Grade": 0.0,
+    "MyCourses": [],
+    "MyExams": [],
+    "LanguageProficiencies": [
+      {
+        "LanguageName": "English",
+        "LanguageLevel": 3
+      },
+      {
+        "LanguageName": "Spanish",
+        "LanguageLevel": 4
+      }
+    ],
+    "Name": "mirka",
+    "Surname": "mirkovic",
+    "Gender": 0,
+    "Birthday": "2003-05-18T00:00:00",
+    "PhoneNumber": "0654432456",
+    "Email": "teacher@gmail.com",
+    "Password": "sifra"
+  }
+}

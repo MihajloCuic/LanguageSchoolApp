@@ -18,16 +18,10 @@ namespace LanguageSchoolApp.model.Users
         public Teacher() { }
 
         public Teacher(string _name, string _surname, Gender _gender,
-                    DateTime _birthday, int _phoneNumber, string _email,
+                    DateTime _birthday, string _phoneNumber, string _email,
                     string _password, double _grade, List<Course> _myCourses, List<Exam> _myExams,
-                    List<LanguageProficiency> _languageProficiencies) { 
-            Name = _name;
-            Surname = _surname;
-            Gender = _gender;
-            Birthday = _birthday;
-            PhoneNumber = _phoneNumber;
-            Email = _email;
-            Password = _password;
+                    List<LanguageProficiency> _languageProficiencies)
+        :base(_name, _surname, _gender, _birthday, _phoneNumber, _email, _password) { 
             Grade = _grade;
             MyCourses = _myCourses;
             MyExams = _myExams;
@@ -35,19 +29,13 @@ namespace LanguageSchoolApp.model.Users
         }
 
         public Teacher(string _name, string _surname, Gender _gender,
-                    DateTime _birthday, int _phoneNumber, string _email,
-                    string _password) { 
-            Name = _name;
-            Surname = _surname;
-            Gender = _gender;
-            Birthday = _birthday;
-            PhoneNumber = _phoneNumber;
-            Email = _email;
-            Password = _password;
+                    DateTime _birthday, string _phoneNumber, string _email,
+                    string _password, List<LanguageProficiency> _languageProficiencies) 
+        :base(_name, _surname, _gender, _birthday, _phoneNumber, _email, _password) { 
             Grade = 0.0;
             MyCourses = new List<Course>();
             MyExams = new List<Exam>();
-            LanguageProficiencies = new List<LanguageProficiency>();
+            LanguageProficiencies = _languageProficiencies;
         }
     }
 }

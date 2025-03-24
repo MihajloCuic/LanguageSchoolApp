@@ -1,0 +1,16 @@
+{
+  "email@gmail.com": {
+    "ProfessionalDegree": 5,
+    "FinishedCourses": [],
+    "FinishedExamResults": [],
+    "EnrolledCourse": null,
+    "PenaltyPoints": [],
+    "Name": "marko",
+    "Surname": "markovic",
+    "Gender": 1,
+    "Birthday": "2001-03-13T00:00:00",
+    "PhoneNumber": "0654430598",
+    "Email": "email@gmail.com",
+    "Password": "sifra"
+  }
+}
