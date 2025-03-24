@@ -22,6 +22,16 @@ namespace LanguageSchoolApp.model
         Doctorate
     }
 
+    public enum DaysOfWeek
+    { 
+        Monday = 1,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
+        Saturday,
+        Sunday
+    }
     public enum LanguageLevel
     {
         A1,

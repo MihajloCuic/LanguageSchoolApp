@@ -1,1 +1,27 @@
-{}
+{
+  "193304220": {
+    "Id": 193304220,
+    "LanguageProficiency": {
+      "LanguageName": "English",
+      "LanguageLevel": 3
+    },
+    "MaxParticipants": 25,
+    "Duration": 2,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 1,
+        "StartTime": "13:30:00"
+      },
+      {
+        "DayOfWeek": 3,
+        "StartTime": "17:00:00"
+      },
+      {
+        "DayOfWeek": 5,
+        "StartTime": "20:30:00"
+      }
+    ],
+    "BeginningDate": "2025-05-13T00:00:00",
+    "CourseType": 0
+  }
+}

@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using LanguageSchoolApp.repository.Users.Teachers;
 using LanguageSchoolApp.model.Users;
-using LanguageSchoolApp.service.Users.Validation;
 using LanguageSchoolApp.exceptions.Users;
 using LanguageSchoolApp.model;
 using LanguageSchoolApp.model.Courses;
+using LanguageSchoolApp.service.Validation;
 
 namespace LanguageSchoolApp.service.Users.Teachers
 {
@@ -34,7 +34,7 @@ namespace LanguageSchoolApp.service.Users.Teachers
         public void CreateTeacher(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string email, string password, string confirmPassword, List<KeyValuePair<string, string>> languageProficienciesStr) 
         {
             ValidateTeacher(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword, languageProficienciesStr);
-            UserValidations.ValidateEmail(email);
+            Validations.ValidateEmail(email);
             Gender gender = Enum.Parse<Gender>(genderStr);
             DateTime birthday = DateTime.Parse(birthdayStr);
             List<LanguageProficiency> languageProficiencies = new List<LanguageProficiency>();
@@ -77,7 +77,7 @@ namespace LanguageSchoolApp.service.Users.Teachers
         
         public bool ValidateTeacher(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, List<KeyValuePair<string, string>> languageProficienciesStr) 
         {
-            UserValidations.Validate(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword);
+            Validations.ValidateUser(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword);
             try
             {
                 foreach (KeyValuePair<string, string> langProficiency in languageProficienciesStr) 

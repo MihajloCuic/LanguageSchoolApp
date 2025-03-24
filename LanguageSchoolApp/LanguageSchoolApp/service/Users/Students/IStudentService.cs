@@ -1,6 +1,6 @@
 ﻿using LanguageSchoolApp.model;
 using LanguageSchoolApp.repository.Users;
-using LanguageSchoolApp.service.Users.Validation;
+using LanguageSchoolApp.service.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
