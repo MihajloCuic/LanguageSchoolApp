@@ -20,19 +20,12 @@ namespace LanguageSchoolApp.model.Users
         public Student() { }
 
         public Student(string _name, string _surname, Gender _gender,
-                    DateTime _birthday, int _phoneNumber, string _email,
+                    DateTime _birthday, string _phoneNumber, string _email,
                     string _password, ProfessionalDegree _professionalDegree,
                     List<FinishedCourse> _finishedCourses, Course _enrolledCourse,
                     List<ExamResults> _finishedExamResults,
                     List<int> _penaltyPoints)
-        {
-            Name = _name;
-            Surname = _surname;
-            Gender = _gender;
-            Birthday = _birthday;
-            PhoneNumber = _phoneNumber;
-            Email = _email;
-            Password = _password;
+        :base(_name, _surname, _gender, _birthday, _phoneNumber, _email, _password) {
             ProfessionalDegree = _professionalDegree;
             FinishedCourses = _finishedCourses;
             FinishedExamResults = _finishedExamResults;
@@ -41,20 +34,13 @@ namespace LanguageSchoolApp.model.Users
         }
 
         public Student(string _name, string _surname, Gender _gender,
-                    DateTime _birthday, int _phoneNumber, string _email,
+                    DateTime _birthday, string _phoneNumber, string _email,
                     string _password, ProfessionalDegree _professionalDegree)
-        {
-            Name = _name;
-            Surname = _surname;
-            Gender = _gender;
-            Birthday = _birthday;
-            PhoneNumber = _phoneNumber;
-            Email = _email;
-            Password = _password;
+        :base(_name, _surname, _gender, _birthday, _phoneNumber, _email, _password) {
             ProfessionalDegree = _professionalDegree;
             FinishedCourses = new List<FinishedCourse>();
             FinishedExamResults = new List<ExamResults>();
-            EnrolledCourse = new Course();
+            EnrolledCourse = null;
             PenaltyPoints = new List<int>();
 
         }
