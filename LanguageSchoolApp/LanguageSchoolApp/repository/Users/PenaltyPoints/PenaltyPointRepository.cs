@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LanguageSchoolApp.model.Users;
 
-namespace LanguageSchoolApp.repository.Users
+namespace LanguageSchoolApp.repository.Users.PenaltyPoints
 {
     public class PenaltyPointRepository
     {
