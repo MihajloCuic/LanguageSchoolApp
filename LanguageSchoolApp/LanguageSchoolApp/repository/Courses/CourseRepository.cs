@@ -36,11 +36,20 @@ namespace LanguageSchoolApp.repository.Courses
             return allCourses[courseId];
         }
 
-        public List<Course> CheckIfCoursesMatch(DateTime beginningDate, CourseType courseType, List<ClassPeriod> classPeriods) 
+        public bool CourseExists(int courseId) 
+        { 
+            return allCourses.ContainsKey(courseId);    
+        }
+
+        public List<Course> CheckIfCoursesMatch(int courseId, DateTime beginningDate, CourseType courseType, List<ClassPeriod> classPeriods) 
         { 
             List<Course> matchingCourses = new List<Course>();
             foreach (Course course in allCourses.Values) 
             {
+                if (course.Id == courseId) 
+                {
+                    continue;
+                }
                 if (course.BeginningDate.Equals(beginningDate) && 
                     course.CourseType.Equals(courseType) &&
                     course.ClassPeriods.SequenceEqual(classPeriods)) 
