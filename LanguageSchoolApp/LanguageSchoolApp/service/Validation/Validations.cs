@@ -9,7 +9,7 @@ using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.repository.Users.Students;
 using LanguageSchoolApp.repository.Users.Teachers;
 using LanguageSchoolApp.exceptions.Courses;
-using System.Net.Http.Headers;
+using LanguageSchoolApp.exceptions.Exams;
 
 namespace LanguageSchoolApp.service.Validation
 {
@@ -153,5 +153,33 @@ namespace LanguageSchoolApp.service.Validation
             return true;
         }
 
+        public static bool ValidateExam(string languageName, string languageLevelStr, string examDateStr, int maxParticipants) 
+        {
+            if (String.IsNullOrEmpty(languageName) || !IsAlpha(languageName)) 
+            {
+                throw new ExamException("Invalid language name", ExamExceptionType.InvalidLanguageName);
+            }
+            try
+            {
+                Enum.Parse<LanguageLevel>(languageLevelStr);
+            }
+            catch(ArgumentException)
+            {
+                throw new ExamException("Invalid language level", ExamExceptionType.InvalidLanguageLevel);
+            }
+            try
+            {
+                DateTime.Parse(examDateStr);
+            }
+            catch (FormatException) 
+            {
+                throw new ExamException("Invalid exam date format", ExamExceptionType.InvalidExamDate);
+            }
+            if (maxParticipants < 0) 
+            {
+                throw new ExamException("Max participants must be greater than 0", ExamExceptionType.InvalidMaxParticipants);
+            }
+            return true;
+        }
     }
 }

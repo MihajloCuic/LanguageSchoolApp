@@ -9,10 +9,16 @@ namespace LanguageSchoolApp.model.Exams
 {
     public class ExamResults
     {
-        public Exam Exam { get; set; }
-        public int totalScore { get; set; }
-        public Dictionary<ExamPart, int> partialScores { get; set; }
+        public int ExamId { get; set; }
+        public int TotalScore { get; set; }
+        public Dictionary<ExamPart, int> PartialScores { get; set; }
 
         public ExamResults() { }
+
+        public ExamResults(int _examId, int _totalScore) 
+        { 
+            ExamId = _examId;
+            TotalScore = _totalScore;
+        }
     }
 }

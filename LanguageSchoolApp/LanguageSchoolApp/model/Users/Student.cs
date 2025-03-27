@@ -14,7 +14,7 @@ namespace LanguageSchoolApp.model.Users
         public ProfessionalDegree ProfessionalDegree { get; set; }
         public List<FinishedCourse> FinishedCourses { get; set; }
         public List<ExamResults> FinishedExamResults { get; set; }
-        public Course EnrolledCourse { get; set; }
+        public int EnrolledCourseId { get; set; }
         public List<int> PenaltyPoints { get; set; }
 
         public Student() { }
@@ -22,14 +22,14 @@ namespace LanguageSchoolApp.model.Users
         public Student(string _name, string _surname, Gender _gender,
                     DateTime _birthday, string _phoneNumber, string _email,
                     string _password, ProfessionalDegree _professionalDegree,
-                    List<FinishedCourse> _finishedCourses, Course _enrolledCourse,
+                    List<FinishedCourse> _finishedCourses, int _enrolledCourseId,
                     List<ExamResults> _finishedExamResults,
                     List<int> _penaltyPoints)
         :base(_name, _surname, _gender, _birthday, _phoneNumber, _email, _password) {
             ProfessionalDegree = _professionalDegree;
             FinishedCourses = _finishedCourses;
             FinishedExamResults = _finishedExamResults;
-            EnrolledCourse = _enrolledCourse;
+            EnrolledCourseId = _enrolledCourseId;
             PenaltyPoints = _penaltyPoints;
         }
 
@@ -40,7 +40,7 @@ namespace LanguageSchoolApp.model.Users
             ProfessionalDegree = _professionalDegree;
             FinishedCourses = new List<FinishedCourse>();
             FinishedExamResults = new List<ExamResults>();
-            EnrolledCourse = null;
+            EnrolledCourseId = -1;
             PenaltyPoints = new List<int>();
 
         }

@@ -1,8 +1,8 @@
 {
   "teacher@gmail.com": {
     "Grade": 0.0,
-    "MyCourses": [],
-    "MyExams": [],
+    "MyCoursesIds": [],
+    "MyExamsIds": [],
     "LanguageProficiencies": [
       {
         "LanguageName": "English",
@@ -13,12 +13,12 @@
         "LanguageLevel": 4
       }
     ],
-    "Name": "mirka",
-    "Surname": "mirkovic",
-    "Gender": 0,
-    "Birthday": "2003-05-18T00:00:00",
-    "PhoneNumber": "0654432456",
+    "Name": "name",
+    "Surname": "surname",
+    "Gender": 1,
+    "Birthday": "2002-04-18T00:00:00",
+    "PhoneNumber": "064832295",
     "Email": "teacher@gmail.com",
-    "Password": "sifra"
+    "Password": "password"
   }
 }

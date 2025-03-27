@@ -23,17 +23,5 @@ namespace LanguageSchoolApp.model.Exams
             ExamDate = _examDate;
             MaxParticipants = _maxParticipants;
         }
-
-        public Exam(LanguageProficiency _languageProficiency, DateTime _examDate, int _maxParticipants) {
-            Id = GenerateId(_languageProficiency, _examDate);
-            LanguageProficiency = _languageProficiency;
-            ExamDate = _examDate;
-            MaxParticipants = _maxParticipants;
-        }
-
-        private int GenerateId(LanguageProficiency languageProficiency, DateTime examDate) { 
-            string combination = languageProficiency.LanguageName + languageProficiency.LanguageLevel.ToString() + examDate.ToString("ddMMyyyy");
-            return combination.GetHashCode();
-        }
     }
 }
