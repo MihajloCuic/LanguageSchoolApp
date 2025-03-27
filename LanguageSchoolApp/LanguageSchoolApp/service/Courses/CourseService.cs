@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LanguageSchoolApp.service.Validation;
 using LanguageSchoolApp.exceptions.Courses;
+using System.Security.Cryptography;
 
 namespace LanguageSchoolApp.service.Courses
 {
@@ -28,6 +29,11 @@ namespace LanguageSchoolApp.service.Courses
         public Course GetCourse(int courseId) 
         { 
             return courseRepository.GetCourse(courseId);
+        }
+
+        public bool CourseExists(int courseId) 
+        { 
+            return courseRepository.CourseExists(courseId);
         }
 
         public void CreateCourse(string languageName, string languageLevelStr, int maxParticipants, 
@@ -51,7 +57,7 @@ namespace LanguageSchoolApp.service.Courses
 
             if (courseType == CourseType.Live) 
             {
-                List<Course> matchingCourses = courseRepository.CheckIfCoursesMatch(beginningDate, courseType, classPeriods);
+                List<Course> matchingCourses = courseRepository.CheckIfCoursesMatch(-1, beginningDate, courseType, classPeriods);
                 if (matchingCourses.Count >= 2)
                 {
                     throw new CourseException("All classrooms are full", CourseExceptionType.ClassroomsFull);
@@ -59,6 +65,11 @@ namespace LanguageSchoolApp.service.Courses
             }
 
             int courseId = GenerateId(languageProficiency, beginningDate, courseType, teacherId);
+            if (CourseExists(courseId)) 
+            { 
+                throw new CourseException("Same course already exists", CourseExceptionType.CourseAlreadyExists);
+            }
+
             Course newCourse = new Course(courseId, languageProficiency, maxParticipants, duration, classPeriods, beginningDate, courseType);
             courseRepository.AddCourse(newCourse);
         }
@@ -84,7 +95,7 @@ namespace LanguageSchoolApp.service.Courses
 
             if (courseType == CourseType.Live)
             {
-                List<Course> matchingCourses = courseRepository.CheckIfCoursesMatch(beginningDate, courseType, classPeriods);
+                List<Course> matchingCourses = courseRepository.CheckIfCoursesMatch(courseId, beginningDate, courseType, classPeriods);
                 if (matchingCourses.Count >= 2)
                 {
                     throw new CourseException("All classrooms are full", CourseExceptionType.ClassroomsFull);
@@ -104,7 +115,10 @@ namespace LanguageSchoolApp.service.Courses
 
         public void DeleteCourse(int courseId) 
         {
-            GetCourse(courseId); //check if course exists else throws exception
+            if (!CourseExists(courseId))
+            {
+                throw new CourseException("Course not found", CourseExceptionType.CourseNotFound);
+            }
             courseRepository.DeleteCourse(courseId);
         }
 
@@ -113,7 +127,13 @@ namespace LanguageSchoolApp.service.Courses
             string combination = teacherId + languageProficiency.LanguageName +
                                 languageProficiency.LanguageLevel.ToString() +
                                 beginningDate.ToString("ddMMyyyy") + courseType.ToString();
-            return combination.GetHashCode();
+            using (SHA256 sha256 = SHA256.Create())
+            {
+                byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(combination));
+                int hashCode = BitConverter.ToInt32(hashBytes, 0);
+
+                return hashCode == int.MinValue ? 0 : Math.Abs(hashCode);
+            }
         }
     }
 }

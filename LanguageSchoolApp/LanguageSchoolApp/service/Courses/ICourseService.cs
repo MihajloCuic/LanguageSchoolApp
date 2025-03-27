@@ -12,6 +12,7 @@ namespace LanguageSchoolApp.service.Courses
     {
         Dictionary<int, Course> GetAllCourses();
         Course GetCourse(int courseId);
+        bool CourseExists(int courseId);
         void CreateCourse(string languageName, string languageLevel, int maxParticipants, int duration, List<KeyValuePair<string, string>> classPeriods, string beginningDate, string courseType, string teacherId);
         void UpdateCourse(int courseId, string languageName, string languageLevel, int maxParticipants, int duration, List<KeyValuePair<string, string>> classPeriods, string beginningDate, string courseType);
         void DeleteCourse(int courseId);
