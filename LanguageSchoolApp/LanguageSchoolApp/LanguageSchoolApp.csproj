@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="data\" />
-    <Folder Include="service\Exams\" />
     <Folder Include="service\Notifications\" />
     <Folder Include="service\Users\PenaltyPoint\" />
     <Folder Include="viewModel\Courses\" />

@@ -1,1 +1,11 @@
-{}
+{
+  "1390667643": {
+    "Id": 1390667643,
+    "LanguageProficiency": {
+      "LanguageName": "Spanish",
+      "LanguageLevel": 3
+    },
+    "ExamDate": "2025-04-12T11:30:00",
+    "MaxParticipants": 10
+  }
+}

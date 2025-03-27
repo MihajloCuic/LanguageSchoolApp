@@ -9,6 +9,7 @@ namespace LanguageSchoolApp.exceptions.Courses
     public enum CourseExceptionType 
     { 
         CourseNotFound,
+        CourseAlreadyExists,
         InvalidLanguageName,
         InvalidLanguageLevel,
         InvalidMaxParticipants,
