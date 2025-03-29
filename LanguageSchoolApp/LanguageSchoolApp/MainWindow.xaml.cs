@@ -20,6 +20,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using LanguageSchoolApp.service.Validation;
+using LanguageSchoolApp.exceptions.Users;
 
 namespace LanguageSchoolApp
 {
@@ -28,14 +30,16 @@ namespace LanguageSchoolApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private User _user;
         private readonly IStudentService _studentService;
         private readonly ITeacherService _teacherService;
         private readonly IDirectorService _directorService;
         private readonly ICourseService _courseService;
         private readonly IExamService _examService;
-        public MainWindow()
+        public MainWindow(User user)
         {
             InitializeComponent();
+            _user = user;
             _studentService = App.ServiceProvider.GetService<IStudentService>(); //prosledjivanje service-a
             _teacherService = App.ServiceProvider.GetService<ITeacherService>();
             _directorService = App.ServiceProvider.GetService<IDirectorService>();
@@ -80,6 +84,19 @@ namespace LanguageSchoolApp
             //allIds.Add(1390667643);
             //_examService.GetAllExamsById(allIds);
             //_examService.GetExam(1390667643);
+
+            //try
+            //{
+            //    User user = Validations.Login("director@gmail.com", "sifra");
+            //    login.Content = user.Name;
+            //
+            //    User user = Validations.Login("director@gmail.com", "jaaa");
+            //    login.Content = user.Name;
+            //}
+            //catch (UserException ex) 
+            //{ 
+            //    login.Content = ex.Text;
+            //}
         }
     }
 }

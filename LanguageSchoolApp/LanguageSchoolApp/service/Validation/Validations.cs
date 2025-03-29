@@ -10,6 +10,7 @@ using LanguageSchoolApp.repository.Users.Students;
 using LanguageSchoolApp.repository.Users.Teachers;
 using LanguageSchoolApp.exceptions.Courses;
 using LanguageSchoolApp.exceptions.Exams;
+using LanguageSchoolApp.repository.Users.Directors;
 
 namespace LanguageSchoolApp.service.Validation
 {
@@ -180,6 +181,31 @@ namespace LanguageSchoolApp.service.Validation
                 throw new ExamException("Max participants must be greater than 0", ExamExceptionType.InvalidMaxParticipants);
             }
             return true;
+        }
+
+        public static User Login(string email, string password) 
+        {
+            if (String.IsNullOrEmpty(email) || string.IsNullOrEmpty(password)) 
+            {
+                throw new UserException("Email or password not correct", UserExceptionType.InvalidLoginInput);
+            }
+            Dictionary<string, Student> allStudents = StudentRepository.ReadFromFile();
+            if (allStudents.TryGetValue(email, out Student student) && student.Password == password) 
+            { 
+                return allStudents[email];
+            }
+            Dictionary<string, Teacher> allTeachers = TeacherRepository.ReadFromFile();
+            if (allTeachers.TryGetValue(email, out Teacher teacher) && teacher.Password ==password)
+            {
+                return allTeachers[email];
+            }
+            Director director = DirectorRepository.ReadFromFile();
+            if (director.Email == email && director.Password == password) 
+            { 
+                return director;
+            }
+            
+            throw new UserException("Email or password not correct", UserExceptionType.InvalidLoginInput);
         }
     }
 }
