@@ -2,8 +2,22 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LanguageSchoolApp"
-             StartupUri="MainWindow.xaml">
+             xmlns:viewModel="clr-namespace:LanguageSchoolApp.viewModel.Users"
+             xmlns:view="clr-namespace:LanguageSchoolApp.view.Users"
+             xmlns:converter="clr-namespace:LanguageSchoolApp.converter"
+             StartupUri="view/Users/Login.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="theme/ButtonThemes.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
+                <view:Login/>
+            </DataTemplate>
+
+            <converter:BoolToColorConverter x:Key="BoolToColorConverter"/>
+            <converter:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
