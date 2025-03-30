@@ -12,25 +12,22 @@ namespace LanguageSchoolApp.model.Notifications
     public class Notification
     {
         public int Id { get; set; }
-        public User Sender { get; set; }
-        public User Receiver { get; set; }
+        public string SenderId { get; set; }
+        public string ReceiverId { get; set; }
         public NotificationType NotificationType { get; set; }
         public string Message { get; set; }
+        public bool IsRead { get; set; }
 
         public Notification() { }
 
-        public Notification(User _sender, User _receiver, NotificationType _notificationType, string _message)
+        public Notification(int _id, string _senderId, string _receiverId, NotificationType _notificationType, string _message, bool _isRead)
         {
-            Id = GenerateId(_sender.Email, _receiver.Email, _notificationType);
-            Sender = _sender;
-            Receiver = _receiver;
+            Id = _id;
+            SenderId = _senderId;
+            ReceiverId = _receiverId;
             NotificationType = _notificationType;
             Message = _message;
-        }
-
-        private int GenerateId(string senderId, string receiverId, NotificationType notificationType) {
-            string combined = senderId + receiverId + notificationType.ToString() + DateTime.Now.ToString("ddMMyyyy");
-            return combined.GetHashCode();
+            IsRead = _isRead;
         }
     }
 }

@@ -10,11 +10,50 @@ using LanguageSchoolApp.model.Notifications;
 
 namespace LanguageSchoolApp.repository.Notifications
 {
-    public class NotificationRepository
+    public class NotificationRepository : INotificationRepository
     {
-        public static readonly string filename = Path.Combine("..", "..", "..", "data", "Notifications.json");
+        private static readonly string filename = Path.Combine("..", "..", "..", "data", "Notifications.json");
+        private readonly Dictionary<int, Notification> allNotifications;
 
-        public static void WriteToFile(Dictionary<int, Notification> allNotifications)
+        public NotificationRepository() 
+        {
+            allNotifications = ReadFromFile();
+        }
+
+        public Dictionary<int, Notification> GetAllNotifications() 
+        { 
+            return allNotifications;
+        }
+
+        public Notification GetNotification(int id) 
+        {
+            if (!allNotifications.ContainsKey(id)) 
+            { 
+                //throw notification exception
+            }
+            return allNotifications[id];
+        }
+
+        public List<Notification> GetUnreadNotificationsByReceiver(string receiverId) 
+        { 
+            List<Notification> foundNotifications = new List<Notification>();
+            foreach (Notification notification in allNotifications.Values) 
+            { 
+                if(notification.ReceiverId == receiverId && notification.IsRead == false) 
+                { 
+                    foundNotifications.Add(notification);
+                }
+            }
+            return foundNotifications;
+        }
+
+        public void AddNotification(int id, Notification notification) 
+        { }
+
+        public void DeleteNotification(int id) 
+        { }
+
+        public void WriteToFile()
         {
             try
             {
@@ -29,17 +68,17 @@ namespace LanguageSchoolApp.repository.Notifications
 
         public static Dictionary<int, Notification> ReadFromFile()
         {
-            Dictionary<int, Notification> allNotifications = new Dictionary<int, Notification>();
+            Dictionary<int, Notification> notifications = new Dictionary<int, Notification>();
             try
             {
                 string data = File.ReadAllText(filename);
-                allNotifications = JsonConvert.DeserializeObject<Dictionary<int, Notification>>(data);
+                notifications = JsonConvert.DeserializeObject<Dictionary<int, Notification>>(data);
             }
             catch (IOException e)
             {
                 throw new Exception(e.Message);
             }
-            return allNotifications;
+            return notifications;
         }
     }
 }
