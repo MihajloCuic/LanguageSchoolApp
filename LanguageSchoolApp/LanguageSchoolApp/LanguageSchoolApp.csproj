@@ -10,12 +10,8 @@
 
   <ItemGroup>
     <Folder Include="assets\font\" />
-    <Folder Include="service\Notifications\" />
     <Folder Include="service\Users\PenaltyPoint\" />
-    <Folder Include="viewModel\Courses\" />
-    <Folder Include="viewModel\Exams\" />
     <Folder Include="viewModel\Notifications\" />
-    <Folder Include="view\Courses\" />
     <Folder Include="view\Exams\" />
     <Folder Include="view\Notifications\" />
   </ItemGroup>

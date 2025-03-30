@@ -5,10 +5,124 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LanguageSchoolApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Button Content="Button" HorizontalAlignment="Center" Margin="0,202,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <Label Content="" Name="login" HorizontalAlignment="Center" Margin="0,252,0,0" VerticalAlignment="Top"/>
+        Height="600" Width="920"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True">
 
-    </Grid>
+    <Border Background="#2E6C7B"
+            CornerRadius="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="267"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="111"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Label Content="Global Speak&#x0a;Academy Lingua"
+                   Foreground="#fff"
+                   FontSize="22" Margin="45,18,39,26" FontFamily="Cambria" FontWeight="Bold"/>
+            <Separator HorizontalAlignment="Left" Margin="45,110,0,0" VerticalAlignment="Top" Height="1" Width="118" Background="#fff"/>
+            <StackPanel Grid.Row="1" Margin="0,0,0,129">
+                <RadioButton Content="{Binding MenuItem1}" FontFamily="Cambria" Foreground="#fff"
+                             Height="50"
+                             FontSize="22"
+                             Margin="0,37,0,0"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="{Binding MenuItem2}" FontFamily="Cambria" Foreground="#fff"
+                             Height="50"
+                             FontSize="22"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="{Binding MenuItem3}" FontFamily="Cambria" Foreground="#fff"
+                             Height="50"
+                             FontSize="22"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="{Binding MenuItem4}" FontFamily="Cambria" Foreground="#fff"
+                             Height="50"
+                             FontSize="22"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="{Binding MenuItem5}" FontFamily="Cambria" Foreground="#fff"
+                             Height="50"
+                             FontSize="22"
+                             Style="{StaticResource MenuButtonTheme}"/>
+                <RadioButton Content="{Binding MenuItem6}" FontFamily="Cambria" Foreground="#fff"
+                             Height="50"
+                             FontSize="22"
+                             Style="{StaticResource MenuButtonTheme}"/>
+            </StackPanel>
+            <Button Content="X"
+                    Background="Transparent"
+                    Foreground="#fff"
+                    BorderThickness="0"
+                    Height="26"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Width="17" Margin="614,15,22,70" 
+                    Style="{StaticResource TransparentButtonStyle}" Grid.Column="1" Click="Exit"
+                    ></Button>
+            <Button Content="_"
+                    Grid.Column="1"
+                    Foreground="#fff"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    FontSize="25"
+                    Style="{StaticResource TransparentButtonStyle}"
+                    FontWeight="Bold" Margin="588,5,44,70" 
+                    Click="Minimize"/>
+            <StackPanel Orientation="Horizontal" Margin="20,385,10,41" Grid.Row="1">
+                <Ellipse HorizontalAlignment="Left" Height="51"  Grid.Row="1"  VerticalAlignment="Center" Width="51">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\user.png"/>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Label Content="{Binding Username}" VerticalAlignment="Center" FontFamily="Cambria" Foreground="#fff" FontSize="22"/>
+                <Separator Background="#fff" Width="36" Height="4" RenderTransformOrigin="0.5,0.5">
+                    <Separator.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Separator.RenderTransform>
+                </Separator>
+                <StackPanel Orientation="Vertical">
+                    <Button Style="{StaticResource TransparentButtonStyle}">
+                        <Image Margin="0,0,0,10" Height="24" Width="24" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\cog-wheel-silhouette.png"/>
+                    </Button>
+                    <Button Style="{StaticResource TransparentButtonStyle}">
+                        <Image Height="24" Width="24" 
+                               Margin="3,0,0,0"
+                               Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\logout.png"/>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+
+            <TextBox Height="35"
+                     Width="252"
+                     Grid.Column="1"
+                     HorizontalAlignment="Left"
+                     VerticalContentAlignment="Center"
+                     Margin="67,0,0,0"
+                     Style="{StaticResource TextBoxSearch}"/>
+            <Button Style="{StaticResource TransparentButtonStyle}"
+                    Grid.Column="1" Height="24" Margin="339,43,290,44">
+                <Image Height="24" Width="24" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\bell.png" RenderTransformOrigin="1.021,0.604"/>
+            </Button>
+            <Ellipse Height="7" Fill="Red" Width="7" Grid.Column="1" 
+                     Margin="353,43,293,61"
+                     Visibility="{Binding UnreadNotificationsExist, Converter={StaticResource BoolToVisibilityConverter}}"/>
+
+            <Border CornerRadius="20,0,20,0" Grid.Row="1" Grid.Column="1"
+                    Background="#fff">
+                <ContentControl Grid.Row="1" Grid.Column="1"
+                            Content="{Binding CurrentView}"/>
+            </Border>
+        </Grid>
+    </Border>
 </Window>

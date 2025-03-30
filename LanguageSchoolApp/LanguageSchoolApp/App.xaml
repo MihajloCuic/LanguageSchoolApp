@@ -2,22 +2,30 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LanguageSchoolApp"
-             xmlns:viewModel="clr-namespace:LanguageSchoolApp.viewModel.Users"
-             xmlns:view="clr-namespace:LanguageSchoolApp.view.Users"
+             xmlns:viewModelUsers="clr-namespace:LanguageSchoolApp.viewModel.Users"
+             xmlns:viewUsers="clr-namespace:LanguageSchoolApp.view.Users"
+             xmlns:viewModelCourses="clr-namespace:LanguageSchoolApp.viewModel.Courses"
+             xmlns:viewCourses="clr-namespace:LanguageSchoolApp.view.Courses"
              xmlns:converter="clr-namespace:LanguageSchoolApp.converter"
              StartupUri="view/Users/Login.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="theme/ButtonThemes.xaml"/>
+                <ResourceDictionary Source="theme/MenuButtonTheme.xaml"/>
+                <ResourceDictionary Source="theme/TextBoxSearchTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
-            <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
-                <view:Login/>
-            </DataTemplate>
 
             <converter:BoolToColorConverter x:Key="BoolToColorConverter"/>
             <converter:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+            <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+
+            <DataTemplate DataType="{x:Type viewModelUsers:LoginViewModel}">
+                <viewUsers:Login/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelCourses:AvailableCoursesViewModel}">
+                <viewCourses:AvailableCoursesView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
