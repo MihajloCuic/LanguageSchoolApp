@@ -19,6 +19,7 @@
             <converter:BoolToColorConverter x:Key="BoolToColorConverter"/>
             <converter:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+            <converter:MethodToStringConverter x:Key="MethodToStringConverter"/>
 
             <DataTemplate DataType="{x:Type viewModelUsers:LoginViewModel}">
                 <viewUsers:Login/>
