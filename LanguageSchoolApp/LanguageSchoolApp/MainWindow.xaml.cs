@@ -32,21 +32,10 @@ namespace LanguageSchoolApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly IStudentService _studentService;
-        private readonly ITeacherService _teacherService;
-        private readonly IDirectorService _directorService;
-        private readonly ICourseService _courseService;
-        private readonly IExamService _examService;
-
         public MainWindow(User user)
         {
             InitializeComponent();
             DataContext = new MainViewModel(user);
-            _studentService = App.ServiceProvider.GetService<IStudentService>(); //prosledjivanje service-a
-            _teacherService = App.ServiceProvider.GetService<ITeacherService>();
-            _directorService = App.ServiceProvider.GetService<IDirectorService>();
-            _courseService = App.ServiceProvider.GetService<ICourseService>();
-            _examService = App.ServiceProvider.GetService<IExamService>();
         }
 
         private void Exit(object sender, RoutedEventArgs e)
