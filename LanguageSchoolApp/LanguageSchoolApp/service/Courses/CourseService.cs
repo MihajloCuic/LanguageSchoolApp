@@ -36,6 +36,11 @@ namespace LanguageSchoolApp.service.Courses
             return courseRepository.CourseExists(courseId);
         }
 
+        public List<Course> GetAllAvailableCourses() 
+        { 
+            return courseRepository.GetAllAvailableCourses();
+        }
+
         public void CreateCourse(string languageName, string languageLevelStr, int maxParticipants, 
             int duration, List<KeyValuePair<string, string>> classPeriodsStr, string beginningDateStr, string courseTypeStr, string teacherId) 
         {

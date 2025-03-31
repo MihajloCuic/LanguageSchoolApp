@@ -41,6 +41,20 @@ namespace LanguageSchoolApp.repository.Courses
             return allCourses.ContainsKey(courseId);    
         }
 
+        public List<Course> GetAllAvailableCourses()
+        { 
+            List<Course> foundCourses = new List<Course>();
+            foreach (Course course in allCourses.Values) 
+            {
+                if (course.ParticipantsIds.Count < course.MaxParticipants && (course.BeginningDate - DateTime.Now).TotalDays >= 7) 
+                { 
+                    foundCourses.Add(course);
+                }
+            }
+            return foundCourses;
+
+        }
+
         public List<Course> CheckIfCoursesMatch(int courseId, DateTime beginningDate, CourseType courseType, List<ClassPeriod> classPeriods) 
         { 
             List<Course> matchingCourses = new List<Course>();

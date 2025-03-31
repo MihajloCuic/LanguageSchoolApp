@@ -13,6 +13,7 @@ namespace LanguageSchoolApp.repository.Courses
         Dictionary<int, Course> GetAllCourses();
         Course GetCourse(int courseId);
         bool CourseExists(int courseId);
+        List<Course> GetAllAvailableCourses();
         List<Course> CheckIfCoursesMatch(int courseId, DateTime beginningDate, CourseType courseType, List<ClassPeriod> classPeriods);
         void AddCourse(Course course);
         void UpdateCourse(int courseId, Course course);
