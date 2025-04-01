@@ -7,6 +7,7 @@ using LanguageSchoolApp.core;
 using LanguageSchoolApp.exceptions.Users;
 using LanguageSchoolApp.service.Validation;
 using LanguageSchoolApp.model.Users;
+using LanguageSchoolApp.view.Users;
 
 namespace LanguageSchoolApp.viewModel.Users
 {
@@ -75,7 +76,7 @@ namespace LanguageSchoolApp.viewModel.Users
         public LoginViewModel() 
         {
             LoginCommand = new RelayCommand(Login, CanLogin);
-            RegisterCommand = new RelayCommand(Register, CanRegister);
+            RegisterCommand = new RelayCommand(OpenRegisterWindow, CanOpenRegisterWindow);
         }
 
         public bool CanLogin(object? parameter) 
@@ -100,8 +101,14 @@ namespace LanguageSchoolApp.viewModel.Users
             }
         }
 
-        private void Register(object? parameter) { }
-        private bool CanRegister(object? parameter) 
+        private void OpenRegisterWindow(object? parameter) 
+        {
+            Register registerWindow = new Register();
+            registerWindow.Show();
+            CloseAction();
+        }
+
+        private bool CanOpenRegisterWindow(object? parameter) 
         {
             return true;
         }

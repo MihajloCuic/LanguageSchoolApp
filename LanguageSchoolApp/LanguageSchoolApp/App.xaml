@@ -14,6 +14,10 @@
                 <ResourceDictionary Source="theme/ButtonThemes.xaml"/>
                 <ResourceDictionary Source="theme/MenuButtonTheme.xaml"/>
                 <ResourceDictionary Source="theme/TextBoxSearchTheme.xaml"/>
+                <ResourceDictionary Source="theme/RoundedTextBoxTheme.xaml"/>
+                <ResourceDictionary Source="theme/RoundedComboBoxTheme.xaml"/>
+                <ResourceDictionary Source="theme/RoundedDatePickerTheme.xaml"/>
+                <ResourceDictionary Source="theme/CustomRadioButtonTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <converter:BoolToColorConverter x:Key="BoolToColorConverter"/>
@@ -23,6 +27,9 @@
 
             <DataTemplate DataType="{x:Type viewModelUsers:LoginViewModel}">
                 <viewUsers:Login/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelUsers:RegisterViewModel}">
+                <viewUsers:Register/>
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModelCourses:AvailableCoursesViewModel}">
                 <viewCourses:AvailableCoursesView/>
