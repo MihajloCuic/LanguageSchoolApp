@@ -1,0 +1,214 @@
+﻿<Window x:Class="LanguageSchoolApp.view.Users.Register"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LanguageSchoolApp.view.Users"
+        xmlns:viewModel="clr-namespace:LanguageSchoolApp.viewModel.Users"
+        mc:Ignorable="d"
+        Title="Register" Height="600" Width="920"
+        Background="Transparent"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize">
+    <Window.DataContext>
+        <viewModel:RegisterViewModel/>
+    </Window.DataContext>
+
+    <Border Background="#fff"
+            CornerRadius="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="390"/>
+                <ColumnDefinition Width="510"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="#2E6C7B" CornerRadius="20,0,0,20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Top" Width="228" Margin="0,161,0,0" Height="206" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\world_white.png"/>
+                    <Label FontFamily="Cambria"
+                           Content="Already have an account ?"
+                           Foreground="#fff" 
+                           FontSize="15"
+                           Margin="108,492,98,75" Grid.RowSpan="2"/>
+                    <Button Content="Login" 
+                            Grid.Row="1"
+                            Height="37"
+                            Width="193"
+                            Style="{StaticResource RoundedButtonStyle}" 
+                            Margin="98,25,98,38" 
+                            FontFamily="Cambria Math"
+                            Command="{Binding LoginCommand}"/>
+                </Grid>
+            </Border>
+            <Grid Grid.Column="1">
+                <Button Content="X"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Height="26"
+                        FontSize="20"
+                        FontWeight="Bold"
+                        Width="17" Margin="493,10,0,564" 
+                        Click="Exit"
+                        Style="{StaticResource TransparentButtonStyle}"
+                        ></Button>
+                <Button Content="_"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        FontSize="25"
+                        Style="{StaticResource TransparentButtonStyle}"
+                        FontWeight="Bold" Margin="462,-1,19,562" 
+                        Click="Minimize"/>
+                <Label Content="Register Account" 
+                       HorizontalAlignment="Left" 
+                       Margin="48,70,0,0"
+                       FontSize="32"
+                       FontFamily="Cambria"
+                       FontWeight="Bold"
+                       VerticalAlignment="Top"/>
+                
+                <Label FontFamily="Cambria" FontSize="18" Content="Name" Margin="48,140,400,432"/>
+                <TextBox Height="34" Width="192" 
+                         Text="{Binding Name}" 
+                         Style="{StaticResource RoundedTextBox}" 
+                         Margin="48,166,270,400"/>
+                <Label FontFamily="Cambria" FontSize="13" Content="{Binding NameError}" Margin="48,200,270,377" Foreground="#fa1302"/>
+                
+                <Label FontFamily="Cambria" FontSize="18" Content="Surname" Margin="284,140,143,432"/>
+                <TextBox Height="34" Width="192" 
+                         Text="{Binding Surname}" 
+                         Style="{StaticResource RoundedTextBox}" 
+                         Margin="284,166,34,400"/>
+                <Label FontFamily="Cambria" FontSize="13" Content="{Binding SurnameError}" Margin="284,200,34,377" Foreground="#fa1302"/>
+
+                <Label FontFamily="Cambria" FontSize="18" Content="Phone Number" Margin="48,223,333,349"/>
+                <TextBox Height="34" Width="192" 
+                         Text="{Binding PhoneNumber}" 
+                         Style="{StaticResource RoundedTextBox}" 
+                         Margin="48,249,270,317"/>
+                <Label FontFamily="Cambria" FontSize="13" Content="{Binding PhoneNumberError}" Margin="48,284,270,293" Foreground="#fa1302"/>
+
+                <Label FontFamily="Cambria" FontSize="18" Content="E-mail" Margin="284,223,164,349"/>
+                <TextBox Height="34" Width="192" 
+                         Text="{Binding Email}" 
+                         Style="{StaticResource RoundedTextBox}" 
+                         Margin="284,249,34,317"/>
+                <Label FontFamily="Cambria" FontSize="13" Content="{Binding EmailError}" Margin="284,284,34,293" Foreground="#fa1302"/>
+
+                <Label FontFamily="Cambria" FontSize="18" Content="Professional degree" Margin="48,391,298,178"/>
+                <ComboBox Margin="48,417,270,149"
+                          SelectedIndex="{Binding Degree}"
+                          Height="34"
+                          Width="192"
+                          Style="{StaticResource ComboboxStyle}">
+                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">Elementary School</ComboBoxItem>
+                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">High School</ComboBoxItem>
+                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">Vocational School</ComboBoxItem>
+                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">Colage</ComboBoxItem>
+                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">Master</ComboBoxItem>
+                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">Doctorate</ComboBoxItem>
+                </ComboBox>
+                <Label FontFamily="Cambria" FontSize="13" Content="{Binding ProfessionalDegreeError}" Margin="48,451,270,126" Foreground="#fa1302"/>
+
+                <DatePicker HorizontalAlignment="Left" 
+                            Margin="48,333,0,0" 
+                            Height="34" Width="192"
+                            SelectedDate="{Binding Birthday}"
+                            VerticalAlignment="Top"/>
+                <Label FontFamily="Cambria" FontSize="13" Content="{Binding BirthdayError}" Margin="48,367,270,210" Foreground="#fa1302"/>
+                <Label FontFamily="Cambria" FontSize="18" Content="Date of birth" Margin="48,307,353,265"/>
+                
+                <Label FontFamily="Cambria" FontSize="18" Content="Password" Margin="284,307,130,265"/>
+                <TextBox x:Name="PTextBox" 
+                         Height="34" Width="192" 
+                         Visibility="Collapsed" 
+                         Text="{Binding Password}" 
+                         Style="{StaticResource RoundedTextBox}" 
+                         Margin="284,333,34,233"/>
+                <PasswordBox x:Name="PPasswordBox" 
+                             Visibility="Visible" 
+                             PasswordChar="●"
+                             Height="34" Width="192" 
+                             PasswordChanged="PasswordChanged"
+                             Style="{StaticResource RoundedPasswordBox}" 
+                             Margin="284,333,34,233"/>
+                <Label FontFamily="Cambria" FontSize="13" Content="{Binding PasswordError}" Margin="367,312,19,265" Foreground="#fa1302"/>
+
+                <Label FontFamily="Cambria" FontSize="18" Content="Confirm Passowrd" Margin="284,391,69,181"/>
+                <TextBox x:Name="CPTextBox" 
+                         Height="34" Width="192"
+                         Visibility="Collapsed"
+                         Text="{Binding ConfirmPassword}" 
+                         Style="{StaticResource RoundedTextBox}" 
+                         Margin="284,417,34,149"/>
+                <PasswordBox x:Name="CPPasswordBox" 
+                             Visibility="Visible" 
+                             PasswordChar="●"
+                             Height="34" Width="192" 
+                             PasswordChanged="ConfirmPasswordChanged"
+                             Style="{StaticResource RoundedPasswordBox}" 
+                             Margin="284,417,34,149"/>
+                <Label FontFamily="Cambria" FontSize="13" Content="{Binding ConfirmPasswordError}" Margin="284,478,34,97" Foreground="#fa1302"/>
+
+                <CheckBox
+                    x:Name="ShowPasswordCheckBox"
+                    Margin="388,376,107,209"
+                    Checked="ShowPassword"
+                    Unchecked="HidePassword"/>
+                <Label Content="Show password" 
+                    FontFamily="Cambria"
+                    FontSize="10"
+                    Margin="401,371,31,201"/>
+                <CheckBox
+                    x:Name="ShowPasswordCheckBox_Copy"
+                    Margin="388,460,107,125"
+                    Checked="ShowConfirmPassword"
+                    Unchecked="HideConfirmPassword"/>
+                <Label Content="Show password" 
+                    FontFamily="Cambria"
+                    FontSize="10"
+                    Margin="401,455,31,117"/>
+
+                <Label FontFamily="Cambria" FontSize="18" Content="Gender" Margin="48,472,393,100"/>
+                <Border CornerRadius="10"
+                        Background="#fff"
+                        Height="34" Width="192" Margin="48,498,270,68">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#000"
+                                          Direction="315"
+                                          ShadowDepth="5"
+                                          BlurRadius="10"
+                                          Opacity="0.3"/>
+                    </Border.Effect>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <RadioButton Content="Male" 
+                                     FontSize="14"
+                                     VerticalAlignment="Center" 
+                                     Margin="0,0,36,0"
+                                     IsChecked="True"
+                                     Command="{Binding MaleCommand}"
+                                     Style="{StaticResource CustomRadioButtonTheme}"/>
+                        <RadioButton Content="Female" 
+                                     FontSize="14" 
+                                     VerticalAlignment="Center"
+                                     Command="{Binding FemaleCommand}"
+                                     Style="{StaticResource CustomRadioButtonTheme}"/>
+                    </StackPanel>
+                </Border>
+                <Label FontFamily="Cambria" FontSize="13" Content="{Binding GenderError}" Margin="48,532,270,45" Foreground="#fa1302"/>
+
+                <Button Content="Register"
+                        Background="#2E6C7B"
+                        Foreground="#fff"
+                        FontFamily="Cambria Math"
+                        FontSize="17"
+                        Style="{StaticResource RoundedButtonStyle}" 
+                        Margin="348,518,31,41"
+                        Command="{Binding RegisterCommand}"/>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

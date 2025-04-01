@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 namespace LanguageSchoolApp.exceptions.Users
 {
     public enum UserValidationExceptionType { 
-        EmptyField,
+        EmptyEmailField,
+        EmptyPasswordField,
+        EmptyConfirmPasswordField,
         InvalidName,
         InvalidSurname,
         InvalidGender,
