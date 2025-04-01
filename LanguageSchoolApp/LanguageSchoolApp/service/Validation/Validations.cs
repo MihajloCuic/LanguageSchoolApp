@@ -40,6 +40,14 @@ namespace LanguageSchoolApp.service.Validation
             {
                 throw new UserValidationException("Invalid phone number format", UserValidationExceptionType.InvalidPhoneFormat);
             }
+            if (string.IsNullOrEmpty(password))
+            {
+                throw new UserValidationException("Password is Empty", UserValidationExceptionType.EmptyPasswordField);
+            }
+            if (string.IsNullOrEmpty(confirmPassword))
+            {
+                throw new UserValidationException("Password is Empty", UserValidationExceptionType.EmptyConfirmPasswordField);
+            }
             if (password != confirmPassword)
             {
                 throw new UserValidationException("Passwords don't match", UserValidationExceptionType.PasswordsNotMatching);
@@ -72,7 +80,7 @@ namespace LanguageSchoolApp.service.Validation
         {
             if (string.IsNullOrEmpty(email))
             {
-                throw new UserValidationException("Email Field is Empty!", UserValidationExceptionType.EmptyField);
+                throw new UserValidationException("Email Field is Empty!", UserValidationExceptionType.EmptyEmailField);
             }
             if (!email.Contains("@") || !email.Contains("."))
             {
