@@ -26,6 +26,11 @@ namespace LanguageSchoolApp.service.Courses
             return courseRepository.GetAllCourses();
         }
 
+        public List<Course> GetAllCoursesById(List<int> courseIds)
+        { 
+            return courseRepository.GetAllCoursesById(courseIds);
+        }
+
         public Course GetCourse(int courseId) 
         { 
             return courseRepository.GetCourse(courseId);
@@ -41,7 +46,7 @@ namespace LanguageSchoolApp.service.Courses
             return courseRepository.GetAllAvailableCourses();
         }
 
-        public List<Course> GetAllFilteredCourses(string languageName, string languageLevelStr, string courseTypeStr)
+        public List<Course> GetAllFilteredCourses(List<Course> courses, string languageName, string languageLevelStr, string courseTypeStr)
         {
             LanguageLevel? languageLevel = null;
             if (!string.IsNullOrEmpty(languageLevelStr))
@@ -53,14 +58,14 @@ namespace LanguageSchoolApp.service.Courses
             { 
                 courseType = Enum.Parse<CourseType>(courseTypeStr);
             }
-            return courseRepository.GetAllFilteredCourses(languageName, languageLevel, courseType);
+            return courseRepository.GetAllFilteredCourses(courses, languageName, languageLevel, courseType);
         }
 
-        public List<Course> SortCourses(string beginningDateSortingStr, string durationSortingStr)
+        public List<Course> SortCourses(List<Course> courses, string beginningDateSortingStr, string durationSortingStr)
         {
             SortingDirection beginningDateSorting = Enum.Parse<SortingDirection>(beginningDateSortingStr);
             SortingDirection durationSorting = Enum.Parse<SortingDirection>(durationSortingStr);
-            return courseRepository.SortCourses(beginningDateSorting, durationSorting);
+            return courseRepository.SortCourses(courses, beginningDateSorting, durationSorting);
         }
 
         public void CreateCourse(string languageName, string languageLevelStr, int maxParticipants, 
@@ -161,6 +166,22 @@ namespace LanguageSchoolApp.service.Courses
 
                 return hashCode == int.MinValue ? 0 : Math.Abs(hashCode);
             }
+        }
+
+        private FinishedCourseDTO CourseToFinishedCourseDTO(Course course, FinishedCourse finishedCourse)
+        {
+            return new FinishedCourseDTO(course.Id, course.LanguageProficiency, course.Duration, course.ClassPeriods, course.BeginningDate, course.CourseType, finishedCourse.Grade);
+        }
+
+        public List<FinishedCourseDTO> GetFinishedCoursesDTO(List<FinishedCourse> finishedCourses)
+        { 
+            List<int> courseIds = finishedCourses.Select(fc => fc.CourseId).ToList();
+            List<Course> courses = GetAllCoursesById(courseIds);
+            var coursesDict = courses.ToDictionary(c => c.Id);
+
+            return finishedCourses.Where(fc => coursesDict.ContainsKey(fc.CourseId))
+                                  .Select(fc => CourseToFinishedCourseDTO(coursesDict[fc.CourseId], fc))
+                                  .ToList();
         }
     }
 }

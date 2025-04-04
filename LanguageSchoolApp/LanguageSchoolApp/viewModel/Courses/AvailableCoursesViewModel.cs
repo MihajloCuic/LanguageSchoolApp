@@ -17,6 +17,7 @@ namespace LanguageSchoolApp.viewModel.Courses
         private readonly ICourseService courseService;
         public CourseFilterViewModel CourseFilterVM { get; }
         public CourseSortingViewModel CourseSortingVM { get; }
+        public CancelCourseFiltersViewModel CancelCourseFiltersVM { get; }
 
         private ObservableCollection<Course> _availableCourses;
         private List<Course> _allAvailableCourses;
@@ -56,12 +57,23 @@ namespace LanguageSchoolApp.viewModel.Courses
 
             CourseFilterVM = new CourseFilterViewModel(this);
             CourseSortingVM = new CourseSortingViewModel(this);
+            CancelCourseFiltersVM = new CancelCourseFiltersViewModel(CourseFilterVM);
 
 
             ApplyCommand = new RelayCommand<object>(Apply, CanApply);
             ScheduleCommand = new RelayCommand<object>(SeeSchedule, CanSeeSchedule);
             PreviousPageCommand = new RelayCommand<object>(PreviousPage, CanPreviousPage);
             NextPageCommand = new RelayCommand<object>(NextPage, CanNextPage);
+        }
+
+        public void SortList(string beginningDateSorting, string durationSorting)
+        { 
+            UpdateCourseList(courseService.SortCourses(_allAvailableCourses, beginningDateSorting, durationSorting));
+        }
+
+        public void FilterList(string languageNameFilter, string languageLevelFilter, string courseTypeFilter)
+        { 
+            UpdateCourseList(courseService.GetAllFilteredCourses(_allAvailableCourses, languageNameFilter, languageLevelFilter, courseTypeFilter));
         }
 
         public void UpdateCourseList(List<Course> courseList)

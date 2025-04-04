@@ -1,7 +1,16 @@
 {
   "student@gmail.com": {
     "ProfessionalDegree": 5,
-    "FinishedCourses": [],
+    "FinishedCourses": [
+      {
+        "CourseId": 4,
+        "Grade": 5
+      },
+      {
+        "CourseId": 5,
+        "Grade": 2
+      }
+    ],
     "FinishedExamResults": [],
     "EnrolledCourseId": 0,
     "PenaltyPoints": [],
