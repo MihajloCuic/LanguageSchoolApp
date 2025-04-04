@@ -34,27 +34,33 @@
                              FontSize="22"
                              Margin="0,37,0,0"
                              IsChecked="True"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding ChangeToMenuItem1Command}"/>
                 <RadioButton Content="{Binding MenuItem2}" FontFamily="Cambria" Foreground="#fff"
                              Height="50"
                              FontSize="22"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding ChangeToMenuItem2Command}"/>
                 <RadioButton Content="{Binding MenuItem3}" FontFamily="Cambria" Foreground="#fff"
                              Height="50"
                              FontSize="22"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding ChangeToMenuItem3Command}"/>
                 <RadioButton Content="{Binding MenuItem4}" FontFamily="Cambria" Foreground="#fff"
                              Height="50"
                              FontSize="22"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding ChangeToMenuItem4Command}"/>
                 <RadioButton Content="{Binding MenuItem5}" FontFamily="Cambria" Foreground="#fff"
                              Height="50"
                              FontSize="22"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding ChangeToMenuItem5Command}"/>
                 <RadioButton Content="{Binding MenuItem6}" FontFamily="Cambria" Foreground="#fff"
                              Height="50"
                              FontSize="22"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}"
+                             Command="{Binding ChangeToMenuItem6Command}"/>
             </StackPanel>
             <Button Content="X"
                     Background="Transparent"

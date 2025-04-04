@@ -40,6 +40,12 @@
             <DataTemplate DataType="{x:Type viewModelCourses:CourseSortingViewModel}">
                 <viewCourses:CourseSorting/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelCourses:CancelCourseFiltersViewModel}">
+                <viewCourses:CancelCourseFiltersView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelCourses:FinishedCoursesViewModel}">
+                <viewCourses:FinishedCoursesView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

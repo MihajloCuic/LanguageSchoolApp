@@ -13,6 +13,7 @@ namespace LanguageSchoolApp.viewModel.Courses
     {
         private readonly ICourseService courseService;
         private AvailableCoursesViewModel _availableCoursesViewModel;
+        private FinishedCoursesViewModel _finishedCoursesViewModel;
 
         private string _languageNameFilter;
         private string _languageLevelFilter;
@@ -96,6 +97,21 @@ namespace LanguageSchoolApp.viewModel.Courses
             CancelFilterCommand = new RelayCommand<string>(CancelFilter, CanCancelFilter);
         }
 
+        public CourseFilterViewModel(FinishedCoursesViewModel finishedCoursesVM)
+        {
+            courseService = App.ServiceProvider.GetService<ICourseService>();
+            _finishedCoursesViewModel = finishedCoursesVM;
+
+            CourseTypeVisible = false;
+            LanguageLevelVisible = false;
+            LanguageNameVisible = false;
+
+            LiveButtonCommand = new RelayCommand<object>(SetCourseStyleLive, CanSetCourseTypeLive);
+            OnlineButtonCommand = new RelayCommand<object>(SetCourseTypeOnline, CanSetCourseTypeOnline);
+            ApplyFiltersCommand = new RelayCommand<object>(ApplyFilters, CanApplyFilters);
+            CancelFilterCommand = new RelayCommand<string>(CancelFilter, CanCancelFilter);
+        }
+
         private bool CanSetCourseTypeLive(object? parameter) { return true; }
         private void SetCourseStyleLive(object? parameter) { CourseTypeFilter = "Live"; }
         private bool CanSetCourseTypeOnline(object? parameter) { return true; }
@@ -117,8 +133,14 @@ namespace LanguageSchoolApp.viewModel.Courses
                 CourseTypeVisible = true;
             }
 
-            
-            _availableCoursesViewModel.UpdateCourseList(courseService.GetAllFilteredCourses(LanguageNameFilter, LanguageLevelFilter, CourseTypeFilter));
+            if (_availableCoursesViewModel != null)
+            {
+                _availableCoursesViewModel.FilterList(LanguageNameFilter, LanguageLevelFilter, CourseTypeFilter);
+            }
+            else if (_finishedCoursesViewModel != null)
+            {
+                _finishedCoursesViewModel.FilterList(LanguageNameFilter, LanguageLevelFilter, CourseTypeFilter);
+            }
         }
 
         private bool CanCancelFilter(object? parameter) { return true; }

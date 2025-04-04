@@ -102,5 +102,61 @@
     ],
     "BeginningDate": "2025-12-13T00:00:00",
     "CourseType": 0
+  },
+  "4": {
+    "Id": 4,
+    "LanguageProficiency": {
+      "LanguageName": "Italian",
+      "LanguageLevel": 0
+    },
+    "MaxParticipants": 25,
+    "ParticipantsIds": [
+      "student@gmail.com"
+    ],
+    "Duration": 2,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 1,
+        "StartTime": "13:30:00"
+      },
+      {
+        "DayOfWeek": 3,
+        "StartTime": "17:00:00"
+      },
+      {
+        "DayOfWeek": 5,
+        "StartTime": "20:30:00"
+      }
+    ],
+    "BeginningDate": "2024-10-23T00:00:00",
+    "CourseType": 0
+  },
+  "5": {
+    "Id": 5,
+    "LanguageProficiency": {
+      "LanguageName": "English",
+      "LanguageLevel": 1
+    },
+    "MaxParticipants": 25,
+    "ParticipantsIds": [
+      "student@gmail.com"
+    ],
+    "Duration": 2,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 1,
+        "StartTime": "13:30:00"
+      },
+      {
+        "DayOfWeek": 3,
+        "StartTime": "17:00:00"
+      },
+      {
+        "DayOfWeek": 5,
+        "StartTime": "20:30:00"
+      }
+    ],
+    "BeginningDate": "2024-12-13T00:00:00",
+    "CourseType": 0
   }
 }

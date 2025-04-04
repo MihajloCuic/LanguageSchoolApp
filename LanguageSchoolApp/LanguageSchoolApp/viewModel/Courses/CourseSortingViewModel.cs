@@ -13,6 +13,7 @@ namespace LanguageSchoolApp.viewModel.Courses
     {
         private readonly ICourseService courseService;
         private AvailableCoursesViewModel _availableCoursesViewModel;
+        private FinishedCoursesViewModel _finishedCoursesViewModel;
 
         private string _beginningDateSorting;
         private string _durationSorting;
@@ -93,6 +94,21 @@ namespace LanguageSchoolApp.viewModel.Courses
             ApplySortingCommand = new RelayCommand<string>(ApplySorting, CanApplySorting);
         }
 
+        public CourseSortingViewModel(FinishedCoursesViewModel finishedCoursesVM) 
+        {
+            courseService = App.ServiceProvider.GetService<ICourseService>();
+            _finishedCoursesViewModel = finishedCoursesVM;
+
+            BeginningDateSorting = "None";
+            DurationSorting = "None";
+            BeginningDatePictureAsc = false;
+            BeginningDatePictureDesc = false;
+            DurationPictureAsc = false;
+            DurationPictureDesc = false;
+
+            ApplySortingCommand = new RelayCommand<string>(ApplySorting, CanApplySorting);
+        }
+
         private bool CanApplySorting(object? parameter) { return true; }
         private void ApplySorting(string sortingType)
         {
@@ -105,7 +121,14 @@ namespace LanguageSchoolApp.viewModel.Courses
             {
                 DurationSorting = SortingType(DurationSorting, sortingType);
             }
-            _availableCoursesViewModel.UpdateCourseList(courseService.SortCourses(BeginningDateSorting, DurationSorting));
+            if (_availableCoursesViewModel != null)
+            {
+                _availableCoursesViewModel.SortList(BeginningDateSorting, DurationSorting);
+            }
+            else if (_finishedCoursesViewModel != null) 
+            {
+                _finishedCoursesViewModel.SortList(BeginningDateSorting, DurationSorting);
+            }
         }
 
         private string SortingType(string direction, string sortingType)

@@ -79,6 +79,13 @@ namespace LanguageSchoolApp.viewModel
         public string MenuItem5 { get; set; }
         public string MenuItem6 { get; set; }
 
+        public RelayCommand<object> ChangeToMenuItem1Command { get; set; }
+        public RelayCommand<object> ChangeToMenuItem2Command { get; set; }
+        public RelayCommand<object> ChangeToMenuItem3Command { get; set; }
+        public RelayCommand<object> ChangeToMenuItem4Command { get; set; }
+        public RelayCommand<object> ChangeToMenuItem5Command { get; set; }
+        public RelayCommand<object> ChangeToMenuItem6Command { get; set; }
+
         //student menu options
         public AvailableCoursesViewModel AvailableCoursesVM { get; set; }
         public ActiveCourseViewModel ActiveCourseVM { get; set; }
@@ -118,7 +125,7 @@ namespace LanguageSchoolApp.viewModel
                 ActiveCourseVM = new ActiveCourseViewModel();
                 AvailableExamsVM = new AvailableExamsViewModel();
                 StudentExamsVM = new StudentExamsViewModel();
-                FinishedCoursesVM = new FinishedCoursesViewModel();
+                FinishedCoursesVM = new FinishedCoursesViewModel(student);
                 CurrentView = AvailableCoursesVM;
 
                 MenuItem1 = "Available Courses";
@@ -161,6 +168,201 @@ namespace LanguageSchoolApp.viewModel
                 MenuItem4 = "Send Exam Results";
                 MenuItem5 = "Send Course Results";
                 MenuItem6 = "Reports";
+            }
+
+            ChangeToMenuItem1Command = new RelayCommand<object>(ChangeToMenuItem1, CanChangeToMenuItem1);
+            ChangeToMenuItem2Command = new RelayCommand<object>(ChangeToMenuItem2, CanChangeToMenuItem2);
+            ChangeToMenuItem3Command = new RelayCommand<object>(ChangeToMenuItem3, CanChangeToMenuItem3);
+            ChangeToMenuItem4Command = new RelayCommand<object>(ChangeToMenuItem4, CanChangeToMenuItem4);
+            ChangeToMenuItem5Command = new RelayCommand<object>(ChangeToMenuItem5, CanChangeToMenuItem5);
+            ChangeToMenuItem6Command = new RelayCommand<object>(ChangeToMenuItem6, CanChangeToMenuItem6);
+        }
+
+        private bool CanChangeToMenuItem1(object? parameter) 
+        {
+            if (CurrentUser is Student)
+            {
+                return !(CurrentView is AvailableCoursesViewModel);
+            }
+            if (CurrentUser is Teacher)
+            {
+                return !(CurrentView is TeacherCoursesViewModel);
+            }
+            if (CurrentUser is Director)
+            {
+                return !(CurrentView is ActiveTeachersViewModel);
+            }
+            return false;
+        }
+        private void ChangeToMenuItem1(object parameter) 
+        {
+            if (CurrentUser is Student)
+            {
+                CurrentView = AvailableCoursesVM;
+            }
+            if (CurrentUser is Teacher)
+            {
+                CurrentView = TeacherCoursesVM;
+            }
+            if (CurrentUser is Director)
+            {
+                CurrentView = ActiveTeachersVM;
+            }
+        }
+
+        private bool CanChangeToMenuItem2(object? parameter)
+        {
+            if (CurrentUser is Student)
+            {
+                return !(CurrentView is ActiveCourseViewModel);
+            }
+            if (CurrentUser is Teacher)
+            {
+                return !(CurrentView is PendingCoursesViewModel);
+            }
+            if (CurrentUser is Director)
+            {
+                return !(CurrentView is SmartCourseMakingViewModel);
+            }
+            return false;
+        }
+        private void ChangeToMenuItem2(object parameter)
+        {
+            if (CurrentUser is Student)
+            {
+                CurrentView = ActiveCourseVM;
+            }
+            if (CurrentUser is Teacher)
+            {
+                CurrentView = PendingCoursesVM;
+            }
+            if (CurrentUser is Director)
+            {
+                CurrentView = SmartCourseMakingVM;
+            }
+        }
+
+        private bool CanChangeToMenuItem3(object? parameter)
+        {
+            if (CurrentUser is Student)
+            {
+                return !(CurrentView is AvailableExamsViewModel);
+            }
+            if (CurrentUser is Teacher)
+            {
+                return !(CurrentView is ActiveCourseViewModel);
+            }
+            if (CurrentUser is Director)
+            {
+                return !(CurrentView is SmartExamMakingViewModel);
+            }
+            return false;
+        }
+        private void ChangeToMenuItem3(object parameter)
+        {
+            if (CurrentUser is Student)
+            {
+                CurrentView = AvailableExamsVM;
+            }
+            if (CurrentUser is Teacher)
+            {
+                CurrentView = ActiveCourseVM;
+            }
+            if (CurrentUser is Director)
+            {
+                CurrentView = SmartExamMakingVM;
+            }
+        }
+
+        private bool CanChangeToMenuItem4(object? parameter)
+        {
+            if (CurrentUser is Student)
+            {
+                return !(CurrentView is StudentExamsViewModel);
+            }
+            if (CurrentUser is Teacher)
+            {
+                return !(CurrentView is TeacherExamsViewModel);
+            }
+            if (CurrentUser is Director)
+            {
+                return !(CurrentView is SendExamResultsViewModel);
+            }
+            return false;
+        }
+        private void ChangeToMenuItem4(object parameter)
+        {
+            if (CurrentUser is Student)
+            {
+                CurrentView = StudentExamsVM;
+            }
+            if (CurrentUser is Teacher)
+            {
+                CurrentView = TeacherExamsVM;
+            }
+            if (CurrentUser is Director)
+            {
+                CurrentView = SendExamResultsVM;
+            }
+        }
+
+        private bool CanChangeToMenuItem5(object? parameter)
+        {
+            if (CurrentUser is Student)
+            {
+                return !(CurrentView is FinishedCoursesViewModel);
+            }
+            if (CurrentUser is Teacher)
+            {
+                return !(CurrentView is PendingExamsViewModel);
+            }
+            if (CurrentUser is Director)
+            {
+                return !(CurrentView is SendCourseResultsViewModel);
+            }
+            return false;
+        }
+        private void ChangeToMenuItem5(object parameter)
+        {
+            if (CurrentUser is Student)
+            {
+                CurrentView = FinishedCoursesVM;
+            }
+            if (CurrentUser is Teacher)
+            {
+                CurrentView = PendingExamsVM;
+            }
+            if (CurrentUser is Director)
+            {
+                CurrentView = SendCourseResultsVM;
+            }
+        }
+
+        private bool CanChangeToMenuItem6(object? parameter)
+        {
+            if (CurrentUser is Student)
+            {
+                return false;
+            }
+            if (CurrentUser is Teacher)
+            {
+                return !(CurrentView is ActiveExamViewModel);
+            }
+            if (CurrentUser is Director)
+            {
+                return !(CurrentView is ReportsViewModel);
+            }
+            return false;
+        }
+        private void ChangeToMenuItem6(object parameter)
+        {
+            if (CurrentUser is Teacher)
+            {
+                CurrentView = ActiveExamVM;
+            }
+            if (CurrentUser is Director)
+            {
+                CurrentView = ReportsVM;
             }
         }
     }
