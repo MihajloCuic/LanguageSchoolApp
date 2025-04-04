@@ -190,10 +190,10 @@ namespace LanguageSchoolApp.viewModel.Users
         public string ProfessionalDegreeStr { get; set; }
         public string Gender { get; set; }
 
-        public RelayCommand MaleCommand { get; set; }
-        public RelayCommand FemaleCommand { get; set; }
-        public RelayCommand RegisterCommand { get; set; }
-        public RelayCommand LoginCommand { get; set; }
+        public RelayCommand<object> MaleCommand { get; set; }
+        public RelayCommand<object> FemaleCommand { get; set; }
+        public RelayCommand<object> RegisterCommand { get; set; }
+        public RelayCommand<object> LoginCommand { get; set; }
         public Action CloseAction { get; set; }
 
         public RegisterViewModel() 
@@ -202,12 +202,12 @@ namespace LanguageSchoolApp.viewModel.Users
             _birthday = DateTime.Now;
             Gender = "Male";
             ProfessionalDegreeStr = "ElementarySchool";
-            RegisterCommand = new RelayCommand(Register, CanRegister);
-            LoginCommand = new RelayCommand(OpenLoginWindow, CanOpenLoginWindow);
+            RegisterCommand = new RelayCommand<object>(Register, CanRegister);
+            LoginCommand = new RelayCommand<object>(OpenLoginWindow, CanOpenLoginWindow);
 
 
-            MaleCommand = new RelayCommand(BeMale, CanBeMale);
-            FemaleCommand = new RelayCommand(BeFemale, CanBeFemale);
+            MaleCommand = new RelayCommand<object>(BeMale, CanBeMale);
+            FemaleCommand = new RelayCommand<object>(BeFemale, CanBeFemale);
         }
 
         private bool CanBeMale(object? parameter) { return true; }

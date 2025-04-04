@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LanguageSchoolApp.view.Courses"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="489" d:DesignWidth="653">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="119"/>
@@ -17,24 +17,116 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="11,0,0,191">
-                <Label Content="Filters" FontSize="20" FontFamily="Cambria" Foreground="#2E6C7B" FontWeight="Bold" Height="33"/>
-                <Image Height="19" Width="19" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\filter.png"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="11,0,0,191">
-                <Label Content="Sort by" FontSize="20" FontFamily="Cambria" Foreground="#2E6C7B" FontWeight="Bold" Height="33"/>
-                <Image Height="19" Width="19" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\up-down.png"/>
-            </StackPanel>
+            <ContentControl Content="{Binding CourseFilterVM}"/>
+            <ContentControl Grid.Row="1" Content="{Binding CourseSortingVM}"/>
         </Grid>
-        <Grid Grid.Column="1" Margin="0,29,0,0">
+        <Grid Grid.Column="1" Margin="0,10,0,0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
-            <ItemsControl ItemsSource="{Binding AvailableCourses}"
-                      Background="Transparent"
-                      BorderThickness="0">
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,4">
+                <Border CornerRadius="2"
+                        BorderThickness="0.7"
+                        BorderBrush="#7D7D7D" 
+                        Height="28"
+                        Visibility="{Binding CourseFilterVM.LanguageNameVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                        VerticalAlignment="Top"
+                        Background="#fff" 
+                        Padding="0,0,5,0" 
+                        Margin="10,0,0,0">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#000"
+                                          Direction="315"
+                                          ShadowDepth="3"
+                                          BlurRadius="5"
+                                          Opacity="0.3"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Language Name" Foreground="#7D7D7D" Grid.Column="0"/>
+                        <Button Style="{StaticResource TransparentButtonStyle}" 
+                                Grid.Column="1" 
+                                HorizontalAlignment="Left" 
+                                Height="10" Width="10"
+                                Command="{Binding CourseFilterVM.CancelFilterCommand}"
+                                CommandParameter="languageName">
+                            <Image Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\x-button.png"/>
+                        </Button>
+                    </Grid>
+                </Border>
+                <Border CornerRadius="2" 
+                        BorderBrush="#7D7D7D" 
+                        BorderThickness="0.7" 
+                        Height="28"
+                        Visibility="{Binding CourseFilterVM.LanguageLevelVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                        VerticalAlignment="Top"
+                        Background="#fff" 
+                        Padding="0,0,5,0" 
+                        Margin="10,0,0,0">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#000"
+                                          Direction="315"
+                                          ShadowDepth="3"
+                                          BlurRadius="5"
+                                          Opacity="0.3"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Language Level" Foreground="#7D7D7D" Grid.Column="0"/>
+                        <Button Style="{StaticResource TransparentButtonStyle}" 
+                                Grid.Column="1" 
+                                HorizontalAlignment="Left" 
+                                Height="10" Width="10"
+                                Command="{Binding CourseFilterVM.CancelFilterCommand}"
+                                CommandParameter="languageLevel">
+                            <Image Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\x-button.png"/>
+                        </Button>
+                    </Grid>
+                </Border>
+                <Border CornerRadius="2" 
+                        Height="28"
+                        Visibility="{Binding CourseFilterVM.CourseTypeVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                        VerticalAlignment="Top"
+                        BorderBrush="#7D7D7D" 
+                        BorderThickness="0.7" 
+                        Background="#fff" 
+                        Padding="0,0,5,0" 
+                        Margin="10,0,0,0">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#000"
+                                          Direction="315"
+                                          ShadowDepth="3"
+                                          BlurRadius="5"
+                                          Opacity="0.3"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="Course Type" Foreground="#7D7D7D" Grid.Column="0"/>
+                        <Button Style="{StaticResource TransparentButtonStyle}" 
+                                Grid.Column="1" 
+                                HorizontalAlignment="Left" 
+                                Height="10" Width="10"
+                                Command="{Binding CourseFilterVM.CancelFilterCommand}"
+                                CommandParameter="courseType">
+                            <Image Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\x-button.png"/>
+                        </Button>
+                    </Grid>
+                </Border>
+            </StackPanel>
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding AvailableCourses}"
+                          Background="Transparent"
+                          BorderThickness="0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal"/>
@@ -65,7 +157,7 @@
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
-                                    
+
                                     <TextBlock Text="Level" FontSize="13"
                                                Foreground="#2E6C7B"
                                                FontFamily="Cambria" FontWeight="Bold"
@@ -189,7 +281,7 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <Grid  Height="26" Width="120" VerticalAlignment="Bottom" Margin="0,0,0,10" Grid.Row="1">
+            <Grid Height="26" Width="120" VerticalAlignment="Bottom" Margin="0,0,0,10" Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>

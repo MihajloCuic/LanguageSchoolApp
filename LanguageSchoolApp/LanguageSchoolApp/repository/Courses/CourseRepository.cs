@@ -9,6 +9,7 @@ using LanguageSchoolApp.model.Courses;
 using System.IO;
 using LanguageSchoolApp.exceptions.Courses;
 using LanguageSchoolApp.model;
+using System.Collections.Immutable;
 
 namespace LanguageSchoolApp.repository.Courses
 {
@@ -53,6 +54,91 @@ namespace LanguageSchoolApp.repository.Courses
             }
             return foundCourses;
 
+        }
+
+        public List<Course> GetAllFilteredCourses(string languageName, LanguageLevel? languageLevel, CourseType? courseType)
+        {
+            List<Course> foundCourses = new List<Course>();
+            foreach (Course course in allCourses.Values)
+            {
+                if (!string.IsNullOrEmpty(languageName) && course.LanguageProficiency.LanguageName.ToLower() != languageName.ToLower()) 
+                {
+                    continue;
+                }
+                if (languageLevel != null && !course.LanguageProficiency.LanguageLevel.Equals(languageLevel)) 
+                {
+                    continue;
+                }
+                if (courseType != null && !course.CourseType.Equals(courseType)) 
+                {
+                    continue;
+                }
+
+                foundCourses.Add(course);
+            }
+
+            return foundCourses;
+        }
+
+        public List<Course> SortCourses(SortingDirection beginningDateSorting, SortingDirection durationSorting)
+        {
+            if (beginningDateSorting.Equals(SortingDirection.None) && durationSorting.Equals(SortingDirection.None)) 
+            {
+                return allCourses.Select(kvp => kvp.Value).ToList();
+            }
+            if (beginningDateSorting.Equals(SortingDirection.Ascending) && durationSorting.Equals(SortingDirection.None))
+            {
+                return allCourses.OrderBy(kvp => kvp.Value.BeginningDate)
+                                 .Select(kvp => kvp.Value)
+                                 .ToList();
+            }
+            if (beginningDateSorting.Equals(SortingDirection.Descending) && durationSorting.Equals(SortingDirection.None))
+            {
+                return allCourses.OrderByDescending(kvp => kvp.Value.BeginningDate)
+                                 .Select(kvp => kvp.Value)
+                                 .ToList();
+            }
+            if (beginningDateSorting.Equals(SortingDirection.None) && durationSorting.Equals(SortingDirection.Ascending))
+            {
+                return allCourses.OrderBy(kvp => kvp.Value.Duration)
+                                 .Select(kvp => kvp.Value)
+                                 .ToList();
+            }
+            if (beginningDateSorting.Equals(SortingDirection.None) && durationSorting.Equals(SortingDirection.Descending))
+            {
+                return allCourses.OrderByDescending(kvp => kvp.Value.Duration)
+                                 .Select(kvp => kvp.Value)
+                                 .ToList();
+            }
+            if (beginningDateSorting.Equals(SortingDirection.Ascending) && durationSorting.Equals(SortingDirection.Ascending)) 
+            { 
+                return allCourses.OrderBy(kvp => kvp.Value.BeginningDate)
+                                 .ThenBy(kvp => kvp.Value.Duration)
+                                 .Select(kvp => kvp.Value)
+                                 .ToList();
+            }
+            if(beginningDateSorting.Equals(SortingDirection.Ascending) && durationSorting.Equals(SortingDirection.Descending)) 
+            { 
+                return allCourses.OrderBy(kvp => kvp.Value.BeginningDate)
+                                 .ThenByDescending(kvp => kvp.Value.Duration)
+                                 .Select(kvp => kvp.Value)
+                                 .ToList();
+            }
+            if(beginningDateSorting.Equals(SortingDirection.Descending) && durationSorting.Equals(SortingDirection.Ascending)) 
+            { 
+                return allCourses.OrderByDescending(kvp => kvp.Value.BeginningDate)
+                                 .ThenBy(kvp => kvp.Value.Duration)
+                                 .Select(kvp => kvp.Value)
+                                 .ToList();
+            }
+            if(beginningDateSorting.Equals(SortingDirection.Descending) && durationSorting.Equals(SortingDirection.Descending)) 
+            { 
+                return allCourses.OrderByDescending(kvp => kvp.Value.BeginningDate)
+                                 .ThenByDescending(kvp => kvp.Value.Duration)
+                                 .Select(kvp => kvp.Value)
+                                 .ToList();
+            }
+            return new List<Course>();
         }
 
         public List<Course> CheckIfCoursesMatch(int courseId, DateTime beginningDate, CourseType courseType, List<ClassPeriod> classPeriods) 
