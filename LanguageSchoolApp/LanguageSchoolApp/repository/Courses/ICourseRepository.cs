@@ -14,6 +14,8 @@ namespace LanguageSchoolApp.repository.Courses
         Course GetCourse(int courseId);
         bool CourseExists(int courseId);
         List<Course> GetAllAvailableCourses();
+        List<Course> GetAllFilteredCourses(string languageName, LanguageLevel? languageLevel, CourseType? courseType);
+        List<Course> SortCourses(SortingDirection beginningDateSorting, SortingDirection durationSorting);
         List<Course> CheckIfCoursesMatch(int courseId, DateTime beginningDate, CourseType courseType, List<ClassPeriod> classPeriods);
         void AddCourse(Course course);
         void UpdateCourse(int courseId, Course course);

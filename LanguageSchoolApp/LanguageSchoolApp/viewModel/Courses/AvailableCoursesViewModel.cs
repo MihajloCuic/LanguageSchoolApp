@@ -8,22 +8,25 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace LanguageSchoolApp.viewModel.Courses
 {
     public class AvailableCoursesViewModel : ObservableObject
     {
         private readonly ICourseService courseService;
+        public CourseFilterViewModel CourseFilterVM { get; }
+        public CourseSortingViewModel CourseSortingVM { get; }
 
         private ObservableCollection<Course> _availableCourses;
         private List<Course> _allAvailableCourses;
         private int _pageNumber;
 
         public ObservableCollection<Course> AvailableCourses
-        { 
-            get { return  _availableCourses; }
+        {
+            get { return _availableCourses; }
             set
-            { 
+            {
                 _availableCourses = value;
                 OnPropertyChanged();
             }
@@ -31,30 +34,44 @@ namespace LanguageSchoolApp.viewModel.Courses
         public int PageNumber
         {
             get { return _pageNumber; }
-            set 
-            { 
+            set
+            {
                 _pageNumber = value;
                 OnPropertyChanged();
             }
         }
 
-        public RelayCommand ApplyCommand { get; set; }
-        public RelayCommand ScheduleCommand { get; set; }
-        public RelayCommand PreviousPageCommand { get; set; }
-        public RelayCommand NextPageCommand { get; set; }
+        public RelayCommand<object> ApplyCommand { get; set; }
+        public RelayCommand<object> ScheduleCommand { get; set; }
+        public RelayCommand<object> PreviousPageCommand { get; set; }
+        public RelayCommand<object> NextPageCommand { get; set; }
 
-        public AvailableCoursesViewModel() 
+
+        public AvailableCoursesViewModel()
         {
             courseService = App.ServiceProvider.GetService<ICourseService>();
             PageNumber = 1;
             _allAvailableCourses = courseService.GetAllAvailableCourses();
             AvailableCourses = new ObservableCollection<Course>(GetSlicedAvailableCourses());
-            
 
-            ApplyCommand = new RelayCommand(Apply, CanApply);
-            ScheduleCommand = new RelayCommand(SeeSchedule, CanSeeSchedule);
-            PreviousPageCommand = new RelayCommand(PreviousPage, CanPreviousPage);
-            NextPageCommand = new RelayCommand(NextPage, CanNextPage);
+            CourseFilterVM = new CourseFilterViewModel(this);
+            CourseSortingVM = new CourseSortingViewModel(this);
+
+
+            ApplyCommand = new RelayCommand<object>(Apply, CanApply);
+            ScheduleCommand = new RelayCommand<object>(SeeSchedule, CanSeeSchedule);
+            PreviousPageCommand = new RelayCommand<object>(PreviousPage, CanPreviousPage);
+            NextPageCommand = new RelayCommand<object>(NextPage, CanNextPage);
+        }
+
+        public void UpdateCourseList(List<Course> courseList)
+        {
+            _allAvailableCourses = courseList;
+            AvailableCourses.Clear();
+            foreach (var course in GetSlicedAvailableCourses())
+            {
+                AvailableCourses.Add(course);
+            }
         }
 
         private List<Course> GetSlicedAvailableCourses() 
@@ -63,20 +80,19 @@ namespace LanguageSchoolApp.viewModel.Courses
             return _allAvailableCourses.Skip(elementsToSkip).Take(6).ToList();
         }
 
+        private bool CanApply(object? parameter) { return true; }
         private void Apply(object? parameter) 
         { 
             //TODO: Create Course Application and Cancel Application
         }
 
-        private bool CanApply(object? parameter) { return true; }
-
+        private bool CanSeeSchedule(object? parameter) { return true; }
         private void SeeSchedule(object? parameter) 
         { 
             //TODO: Create Schedule display
         }
 
-        private bool CanSeeSchedule(object? parameter) { return true; }
-
+        private bool CanNextPage(object? parameter) { return PageNumber < _allAvailableCourses.Count / 6; }
         private void NextPage(object? parameter) 
         {
             PageNumber++;
@@ -86,11 +102,8 @@ namespace LanguageSchoolApp.viewModel.Courses
                 AvailableCourses.Add(course);
             }
         }
-        private bool CanNextPage(object? parameter) 
-        { 
-            return PageNumber < _allAvailableCourses.Count/6; 
-        }
 
+        private bool CanPreviousPage(object? parameter) { return PageNumber > 1; }
         private void PreviousPage(object? parameter) 
         { 
             PageNumber--;
@@ -99,10 +112,6 @@ namespace LanguageSchoolApp.viewModel.Courses
             {
                 AvailableCourses.Add(course);
             }
-        }
-        private bool CanPreviousPage(object? parameter) 
-        { 
-            return PageNumber > 1; 
         }
     }
 }

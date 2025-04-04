@@ -41,6 +41,28 @@ namespace LanguageSchoolApp.service.Courses
             return courseRepository.GetAllAvailableCourses();
         }
 
+        public List<Course> GetAllFilteredCourses(string languageName, string languageLevelStr, string courseTypeStr)
+        {
+            LanguageLevel? languageLevel = null;
+            if (!string.IsNullOrEmpty(languageLevelStr))
+            {
+                languageLevel = Enum.Parse<LanguageLevel>(languageLevelStr);
+            }
+            CourseType? courseType = null;
+            if (!string.IsNullOrEmpty(courseTypeStr))
+            { 
+                courseType = Enum.Parse<CourseType>(courseTypeStr);
+            }
+            return courseRepository.GetAllFilteredCourses(languageName, languageLevel, courseType);
+        }
+
+        public List<Course> SortCourses(string beginningDateSortingStr, string durationSortingStr)
+        {
+            SortingDirection beginningDateSorting = Enum.Parse<SortingDirection>(beginningDateSortingStr);
+            SortingDirection durationSorting = Enum.Parse<SortingDirection>(durationSortingStr);
+            return courseRepository.SortCourses(beginningDateSorting, durationSorting);
+        }
+
         public void CreateCourse(string languageName, string languageLevelStr, int maxParticipants, 
             int duration, List<KeyValuePair<string, string>> classPeriodsStr, string beginningDateStr, string courseTypeStr, string teacherId) 
         {

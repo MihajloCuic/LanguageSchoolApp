@@ -63,7 +63,8 @@ namespace LanguageSchoolApp.model
         Online
     }
 
-    public enum NotificationType { 
+    public enum NotificationType 
+    { 
         CourseApplicationResponse,
         PenaltyGiven,
         DropoutRequest,
@@ -71,5 +72,12 @@ namespace LanguageSchoolApp.model
         ExamResults,
         ExamAssigned,
         CourseAssigned
+    }
+
+    public enum SortingDirection 
+    { 
+        None,
+        Descending,
+        Ascending
     }
 }

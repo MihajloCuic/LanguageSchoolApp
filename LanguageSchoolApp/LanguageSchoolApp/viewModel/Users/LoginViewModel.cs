@@ -69,14 +69,14 @@ namespace LanguageSchoolApp.viewModel.Users
         }
 
 
-        public RelayCommand LoginCommand { get; set; }
-        public RelayCommand RegisterCommand { get; set; }
+        public RelayCommand<object> LoginCommand { get; set; }
+        public RelayCommand<object> RegisterCommand { get; set; }
         public Action CloseAction { get; set; }
 
         public LoginViewModel() 
         {
-            LoginCommand = new RelayCommand(Login, CanLogin);
-            RegisterCommand = new RelayCommand(OpenRegisterWindow, CanOpenRegisterWindow);
+            LoginCommand = new RelayCommand<object>(Login, CanLogin);
+            RegisterCommand = new RelayCommand<object>(OpenRegisterWindow, CanOpenRegisterWindow);
         }
 
         public bool CanLogin(object? parameter) 
