@@ -60,6 +60,26 @@ namespace LanguageSchoolApp.service.Exams
             return false;
         }
 
+        public List<Exam> GetAvailableExams(List<Course> finishedCourses)
+        { 
+            return examRepository.GetAvailableExams(finishedCourses);
+        }
+
+        public List<Exam> GetAllFilteredExams(string languageName, string languageLevelStr) 
+        { 
+            LanguageLevel? languageLevel = null;
+            if (!string.IsNullOrEmpty(languageLevelStr)) 
+            {
+                languageLevel = Enum.Parse<LanguageLevel>(languageLevelStr);
+            }
+            return examRepository.GetAllFilteredExams(languageName, languageLevel);
+        }
+        public List<Exam> SortExams(List<Exam> exams, string examDateSortingStr) 
+        { 
+            SortingDirection examDateSorting = Enum.Parse<SortingDirection>(examDateSortingStr);
+            return examRepository.SortExams(exams, examDateSorting);
+        }
+
         public void CreateExam(string languageName, string languageLevelStr, string examDateStr, int maxParticipants, Teacher teacher) 
         { 
             Validations.ValidateExam(languageName, languageLevelStr, examDateStr, maxParticipants);

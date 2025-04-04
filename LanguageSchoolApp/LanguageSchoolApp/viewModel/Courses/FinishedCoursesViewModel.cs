@@ -73,7 +73,7 @@ namespace LanguageSchoolApp.viewModel.Courses
         {
             List<int> coursesIds = _allFinishedCourses.Select(fc => fc.CourseId).ToList();
             List<Course> courses = courseService.GetAllCoursesById(coursesIds);
-            List<Course> filteredCourses = courseService.GetAllFilteredCourses(courses, languageNameFilter, languageLevelFilter, courseTypeFilter);
+            List<Course> filteredCourses = courseService.GetAllFilteredCourses(languageNameFilter, languageLevelFilter, courseTypeFilter);
             var filteredIds = filteredCourses.Select(c => c.Id).ToHashSet();
             _allFinishedCourses = _allFinishedCourses.Where(fc => filteredIds.Contains(fc.CourseId)).ToList();
         }
@@ -93,7 +93,7 @@ namespace LanguageSchoolApp.viewModel.Courses
             return _allFinishedCourses.Skip(elementsToSkip).Take(6).ToList();
         }
 
-        private bool CanNextPage(object? parameter) { return PageNumber < _allFinishedCourses.Count / 6; }
+        private bool CanNextPage(object? parameter) { return PageNumber < (double)_allFinishedCourses.Count / 6; }
         private void NextPage(object? parameter)
         {
             PageNumber++;

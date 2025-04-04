@@ -72,8 +72,8 @@ namespace LanguageSchoolApp.viewModel.Courses
         }
 
         public void FilterList(string languageNameFilter, string languageLevelFilter, string courseTypeFilter)
-        { 
-            UpdateCourseList(courseService.GetAllFilteredCourses(_allAvailableCourses, languageNameFilter, languageLevelFilter, courseTypeFilter));
+        {
+            UpdateCourseList(courseService.GetAllFilteredCourses(languageNameFilter, languageLevelFilter, courseTypeFilter));
         }
 
         public void UpdateCourseList(List<Course> courseList)
@@ -104,7 +104,7 @@ namespace LanguageSchoolApp.viewModel.Courses
             //TODO: Create Schedule display
         }
 
-        private bool CanNextPage(object? parameter) { return PageNumber < _allAvailableCourses.Count / 6; }
+        private bool CanNextPage(object? parameter) { return PageNumber < (double)_allAvailableCourses.Count / 6; }
         private void NextPage(object? parameter) 
         {
             PageNumber++;

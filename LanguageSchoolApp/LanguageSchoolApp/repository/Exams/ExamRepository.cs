@@ -1,4 +1,6 @@
 ﻿using LanguageSchoolApp.exceptions.Exams;
+using LanguageSchoolApp.model;
+using LanguageSchoolApp.model.Courses;
 using LanguageSchoolApp.model.Exams;
 using Newtonsoft.Json;
 using System;
@@ -7,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace LanguageSchoolApp.repository.Exams
 {
@@ -44,6 +47,64 @@ namespace LanguageSchoolApp.repository.Exams
                 throw new ExamException("Exam not found", ExamExceptionType.ExamNotFound);
             }
             return allExams[examId];
+        }
+
+        public List<Exam> GetAvailableExams(List<Course> finishedCourses)
+        { 
+            List<Exam> availableExams = new List<Exam>();
+            foreach (Exam exam in allExams.Values) 
+            {
+                if (!finishedCourses.Any(course => course.LanguageProficiency.Equals(exam.LanguageProficiency))) 
+                { 
+                    continue;
+                }
+                if (exam.Participants.Count >= exam.MaxParticipants) 
+                { 
+                    continue;
+                }
+                if ((exam.ExamDate - DateTime.Now).TotalDays <= 30) 
+                {
+                    continue;
+                }
+                availableExams.Add(exam);
+            }
+            return availableExams;
+        }
+
+        public List<Exam> GetAllFilteredExams(string languageName, LanguageLevel? languageLevel) 
+        {
+            List<Exam> foundExams = new List<Exam>();
+            foreach (Exam exam in allExams.Values) 
+            {
+                if (!string.IsNullOrEmpty(languageName) && exam.LanguageProficiency.LanguageName.ToLower() != languageName.ToLower()) 
+                {
+                    continue;
+                }
+                if (languageLevel != null && !exam.LanguageProficiency.LanguageLevel.Equals(languageLevel)) 
+                {
+                    continue;
+                }
+
+                foundExams.Add(exam);
+            }
+            return foundExams;
+        }
+
+        public List<Exam> SortExams(List<Exam> exams, SortingDirection examDateSorting) 
+        {
+            if (examDateSorting.Equals(SortingDirection.None))
+            {
+                return exams;
+            }
+            if (examDateSorting.Equals(SortingDirection.Ascending))
+            {
+                return exams.OrderBy(exam => exam.ExamDate).ToList();
+            }
+            if (examDateSorting.Equals(SortingDirection.Descending))
+            {
+                return exams.OrderByDescending(exam => exam.ExamDate).ToList();
+            }
+            return new List<Exam>();
         }
 
         public void CreateExam(Exam exam) 

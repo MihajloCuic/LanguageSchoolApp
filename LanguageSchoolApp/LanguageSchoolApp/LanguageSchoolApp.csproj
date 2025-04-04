@@ -12,7 +12,6 @@
     <Folder Include="assets\font\" />
     <Folder Include="service\Users\PenaltyPoint\" />
     <Folder Include="viewModel\Notifications\" />
-    <Folder Include="view\Exams\" />
     <Folder Include="view\Notifications\" />
   </ItemGroup>
 

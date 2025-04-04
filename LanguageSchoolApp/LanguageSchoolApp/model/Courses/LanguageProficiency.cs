@@ -17,5 +17,14 @@ namespace LanguageSchoolApp.model.Courses
             LanguageName = _languageName;
             LanguageLevel = _languageLevel;
         }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is not LanguageProficiency other)
+            {
+                return false;
+            }
+            return LanguageName == other.LanguageName && LanguageLevel.Equals(other.LanguageLevel);
+        }
     }
 }
