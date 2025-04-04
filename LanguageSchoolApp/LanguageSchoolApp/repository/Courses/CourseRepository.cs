@@ -63,10 +63,10 @@ namespace LanguageSchoolApp.repository.Courses
 
         }
 
-        public List<Course> GetAllFilteredCourses(List<Course> courses, string languageName, LanguageLevel? languageLevel, CourseType? courseType)
+        public List<Course> GetAllFilteredCourses(string languageName, LanguageLevel? languageLevel, CourseType? courseType)
         {
             List<Course> foundCourses = new List<Course>();
-            foreach (Course course in courses)
+            foreach (Course course in allCourses.Values)
             {
                 if (!string.IsNullOrEmpty(languageName) && course.LanguageProficiency.LanguageName.ToLower() != languageName.ToLower()) 
                 {

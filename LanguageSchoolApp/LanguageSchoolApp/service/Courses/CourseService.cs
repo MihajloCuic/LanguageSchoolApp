@@ -46,7 +46,7 @@ namespace LanguageSchoolApp.service.Courses
             return courseRepository.GetAllAvailableCourses();
         }
 
-        public List<Course> GetAllFilteredCourses(List<Course> courses, string languageName, string languageLevelStr, string courseTypeStr)
+        public List<Course> GetAllFilteredCourses(string languageName, string languageLevelStr, string courseTypeStr)
         {
             LanguageLevel? languageLevel = null;
             if (!string.IsNullOrEmpty(languageLevelStr))
@@ -58,7 +58,7 @@ namespace LanguageSchoolApp.service.Courses
             { 
                 courseType = Enum.Parse<CourseType>(courseTypeStr);
             }
-            return courseRepository.GetAllFilteredCourses(courses, languageName, languageLevel, courseType);
+            return courseRepository.GetAllFilteredCourses(languageName, languageLevel, courseType);
         }
 
         public List<Course> SortCourses(List<Course> courses, string beginningDateSortingStr, string durationSortingStr)

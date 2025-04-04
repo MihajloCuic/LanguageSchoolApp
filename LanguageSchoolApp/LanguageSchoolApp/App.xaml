@@ -6,6 +6,8 @@
              xmlns:viewUsers="clr-namespace:LanguageSchoolApp.view.Users"
              xmlns:viewModelCourses="clr-namespace:LanguageSchoolApp.viewModel.Courses"
              xmlns:viewCourses="clr-namespace:LanguageSchoolApp.view.Courses"
+             xmlns:viewModelExams="clr-namespace:LanguageSchoolApp.viewModel.Exams"
+             xmlns:viewExams="clr-namespace:LanguageSchoolApp.view.Exams"
              xmlns:converter="clr-namespace:LanguageSchoolApp.converter"
              StartupUri="view/Users/Login.xaml">
     <Application.Resources>
@@ -45,6 +47,18 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModelCourses:FinishedCoursesViewModel}">
                 <viewCourses:FinishedCoursesView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelExams:AvailableExamsViewModel}">
+                <viewExams:AvailableExamsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelExams:ExamFilterViewModel}">
+                <viewExams:ExamFilterView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelExams:ExamSortingViewModel}">
+                <viewExams:ExamSortingView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelExams:CancelExamFiltersViewModel}">
+                <viewExams:CancelExamFiltersView/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
