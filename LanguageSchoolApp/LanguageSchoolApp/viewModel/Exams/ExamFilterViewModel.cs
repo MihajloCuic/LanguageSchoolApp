@@ -13,6 +13,7 @@ namespace LanguageSchoolApp.viewModel.Exams
     {
         private readonly IExamService examService;
         private AvailableExamsViewModel _availableExamsViewModel;
+        private StudentExamsViewModel _studentExamsViewModel;
 
         private string _languageNameFilter;
         private string _languageLevelFilter;
@@ -71,6 +72,18 @@ namespace LanguageSchoolApp.viewModel.Exams
             CancelFilterCommand = new RelayCommand<string>(CancelFilters, CanCancelFilters);
         }
 
+        public ExamFilterViewModel(StudentExamsViewModel studentExamsVM) 
+        {
+            examService = App.ServiceProvider.GetService<IExamService>();
+            _studentExamsViewModel = studentExamsVM;
+
+            LanguageLevelVisible = false;
+            LanguageNameVisible = false;
+
+            ApplyFiltersCommand = new RelayCommand<object>(ApplyFilters, CanApplyFilters);
+            CancelFilterCommand = new RelayCommand<string>(CancelFilters, CanCancelFilters);
+        }
+
         private bool CanApplyFilters(object? parameter) { return true; }
         private void ApplyFilters(object? parameter)
         {
@@ -83,9 +96,13 @@ namespace LanguageSchoolApp.viewModel.Exams
                 LanguageLevelVisible = true;
             }
 
-            if (_availableExamsViewModel != null) 
+            if (_availableExamsViewModel != null)
             {
                 _availableExamsViewModel.FilterList(LanguageNameFilter, LanguageLevelFilter);
+            }
+            else if (_studentExamsViewModel != null)
+            {
+                _studentExamsViewModel.FilterList(LanguageNameFilter, LanguageLevelFilter);
             }
         }
 

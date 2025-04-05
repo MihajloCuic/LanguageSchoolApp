@@ -13,6 +13,7 @@ namespace LanguageSchoolApp.viewModel.Exams
     {
         private readonly IExamService examService;
         private AvailableExamsViewModel _availableExamsVM;
+        private StudentExamsViewModel _studentExamsVM;
 
         private string _examDateSorting;
         private bool _examDatePictureAsc;
@@ -60,14 +61,30 @@ namespace LanguageSchoolApp.viewModel.Exams
             ApplySortingCommand = new RelayCommand<object>(Apply, CanApply);
         }
 
+        public ExamSortingViewModel(StudentExamsViewModel studentExamsVM)
+        {
+            examService = App.ServiceProvider.GetService<IExamService>();
+            _studentExamsVM = studentExamsVM;
+
+            ExamDateSorting = "None";
+            ExamDatePictureAsc = false;
+            ExamDatePictureDesc = false;
+
+            ApplySortingCommand = new RelayCommand<object>(Apply, CanApply);
+        }
+
         private bool CanApply(object? parameter) { return true; }
         private void Apply(object parameter)
         {
             ExamDateSorting = SortingType(ExamDateSorting);
 
-            if (_availableExamsVM != null) 
-            { 
+            if (_availableExamsVM != null)
+            {
                 _availableExamsVM.SortList(ExamDateSorting);
+            }
+            else if (_studentExamsVM != null) 
+            {
+                _studentExamsVM.SortList(ExamDateSorting);
             }
         }
 

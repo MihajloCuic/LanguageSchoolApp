@@ -58,8 +58,7 @@ namespace LanguageSchoolApp.viewModel.Exams
             PageNumber = 1;
 
             _student = currentStudent;
-            List<Course> finishedCourses = GetFinishedCourses(currentStudent.FinishedCourses);
-            _allAvailableExams = examService.GetAvailableExams(finishedCourses);
+            _allAvailableExams = GetAvailableExams();
             AvailableExams = new ObservableCollection<Exam>(GetSlicedAvailableExams());
 
             ExamFilterVM = new ExamFilterViewModel(this);
@@ -73,7 +72,7 @@ namespace LanguageSchoolApp.viewModel.Exams
 
         public void FilterList(string languageNameFilter, string languageLevelFilter) 
         {
-            UpdateExamList(examService.GetAllFilteredExams(languageNameFilter, languageLevelFilter));
+            UpdateExamList(examService.GetAllFilteredExams(GetAvailableExams(), languageNameFilter, languageLevelFilter));
         }
 
         public void SortList(string examDateSorting)
@@ -91,10 +90,11 @@ namespace LanguageSchoolApp.viewModel.Exams
             }
         }
 
-        private List<Course> GetFinishedCourses(List<FinishedCourse> finishedCourses)
+        private List<Exam> GetAvailableExams() 
         {
-            List<int> coursesIds = finishedCourses.Select(fc => fc.CourseId).ToList();
-            return courseService.GetAllCoursesById(coursesIds);
+            List<int> coursesIds = _student.FinishedCourses.Select(fc => fc.CourseId).ToList();
+            List<Course> finishedCourses = courseService.GetAllCoursesById(coursesIds);
+            return examService.GetAvailableExams(finishedCourses);
         }
 
         private List<Exam> GetSlicedAvailableExams()
