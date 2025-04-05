@@ -26,6 +26,7 @@
             <converter:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <converter:MethodToStringConverter x:Key="MethodToStringConverter"/>
+            <converter:ExamPartValueConverter x:Key="ExamPartValueConverter"/>
 
             <DataTemplate DataType="{x:Type viewModelUsers:LoginViewModel}">
                 <viewUsers:Login/>
@@ -59,6 +60,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModelExams:CancelExamFiltersViewModel}">
                 <viewExams:CancelExamFiltersView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelExams:StudentExamsViewModel}">
+                <viewExams:StudentExamsView/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

@@ -65,14 +65,14 @@ namespace LanguageSchoolApp.service.Exams
             return examRepository.GetAvailableExams(finishedCourses);
         }
 
-        public List<Exam> GetAllFilteredExams(string languageName, string languageLevelStr) 
+        public List<Exam> GetAllFilteredExams(List<Exam> exams, string languageName, string languageLevelStr) 
         { 
             LanguageLevel? languageLevel = null;
             if (!string.IsNullOrEmpty(languageLevelStr)) 
             {
                 languageLevel = Enum.Parse<LanguageLevel>(languageLevelStr);
             }
-            return examRepository.GetAllFilteredExams(languageName, languageLevel);
+            return examRepository.GetAllFilteredExams(exams, languageName, languageLevel);
         }
         public List<Exam> SortExams(List<Exam> exams, string examDateSortingStr) 
         { 
@@ -138,6 +138,22 @@ namespace LanguageSchoolApp.service.Exams
                 int hashCode = BitConverter.ToInt32(hashBytes, 0);
                 return hashCode == int.MinValue ? 0 : Math.Abs(hashCode);
             }
+        }
+
+        private ExamResultsDTO ExamToExamResultsDTO(Exam exam, ExamResults examResults) 
+        {
+            return new ExamResultsDTO(exam.Id, exam.LanguageProficiency, examResults.TotalScore, examResults.PartialScores);
+        }
+
+        public List<ExamResultsDTO> GetExamResultsDTO(List<ExamResults> examResults)
+        { 
+            List<int> examsIds = examResults.Select(er => er.ExamId).ToList();
+            List<Exam> exams = GetAllExamsById(examsIds);
+            var examsDict = exams.ToDictionary(exam => exam.Id);
+
+            return examResults.Where(er => examsDict.ContainsKey(er.ExamId))
+                              .Select(er => ExamToExamResultsDTO(examsDict[er.ExamId], er))
+                              .ToList();
         }
     }
 }

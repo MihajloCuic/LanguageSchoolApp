@@ -11,7 +11,40 @@
         "Grade": 2
       }
     ],
-    "FinishedExamResults": [],
+    "FinishedExamResults": [
+      {
+        "ExamId": 7,
+        "LanguageProficiency":
+        {
+          "LanguageName": "English",
+          "LanguageLevel": 1
+        },
+        "TotalScore": 192,
+        "PartialScores":
+        {
+          "Reading": 50,
+          "Writing": 42,
+          "Listening": 50,
+          "Speaking": 50
+        }
+      },
+      {
+        "ExamId": 8,
+        "LanguageProficiency":
+        {
+          "LanguageName": "Italian",
+          "LanguageLevel": 0
+        },
+        "TotalScore": 123,
+        "PartialScores":
+        {
+          "Reading": 30,
+          "Writing": 12,
+          "Listening": 36,
+          "Speaking": 45
+        }
+      }
+    ],
     "EnrolledCourseId": 0,
     "PenaltyPoints": [],
     "Name": "Aleksandar",

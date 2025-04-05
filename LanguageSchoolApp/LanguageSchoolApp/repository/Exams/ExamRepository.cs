@@ -71,10 +71,10 @@ namespace LanguageSchoolApp.repository.Exams
             return availableExams;
         }
 
-        public List<Exam> GetAllFilteredExams(string languageName, LanguageLevel? languageLevel) 
+        public List<Exam> GetAllFilteredExams(List<Exam> exams, string languageName, LanguageLevel? languageLevel) 
         {
             List<Exam> foundExams = new List<Exam>();
-            foreach (Exam exam in allExams.Values) 
+            foreach (Exam exam in exams) 
             {
                 if (!string.IsNullOrEmpty(languageName) && exam.LanguageProficiency.LanguageName.ToLower() != languageName.ToLower()) 
                 {

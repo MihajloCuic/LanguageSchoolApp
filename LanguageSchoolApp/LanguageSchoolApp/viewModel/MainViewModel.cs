@@ -124,7 +124,7 @@ namespace LanguageSchoolApp.viewModel
                 AvailableCoursesVM = new AvailableCoursesViewModel();
                 ActiveCourseVM = new ActiveCourseViewModel();
                 AvailableExamsVM = new AvailableExamsViewModel(student);
-                StudentExamsVM = new StudentExamsViewModel();
+                StudentExamsVM = new StudentExamsViewModel(student);
                 FinishedCoursesVM = new FinishedCoursesViewModel(student);
                 CurrentView = AvailableCoursesVM;
 

@@ -73,7 +73,8 @@ namespace LanguageSchoolApp.viewModel.Courses
 
         public void FilterList(string languageNameFilter, string languageLevelFilter, string courseTypeFilter)
         {
-            UpdateCourseList(courseService.GetAllFilteredCourses(languageNameFilter, languageLevelFilter, courseTypeFilter));
+            List<Course> courses = courseService.GetAllAvailableCourses();
+            UpdateCourseList(courseService.GetAllFilteredCourses(courses, languageNameFilter, languageLevelFilter, courseTypeFilter));
         }
 
         public void UpdateCourseList(List<Course> courseList)

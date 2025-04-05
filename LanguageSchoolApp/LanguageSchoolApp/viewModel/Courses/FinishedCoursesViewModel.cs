@@ -15,6 +15,7 @@ namespace LanguageSchoolApp.viewModel.Courses
     public class FinishedCoursesViewModel : ObservableObject
     {
         private readonly ICourseService courseService;
+        private Student _student;
         public CourseFilterViewModel CourseFilterVM { get; }
         public CourseSortingViewModel CourseSortingVM { get; }
         public CancelCourseFiltersViewModel CancelCourseFiltersVM { get; }
@@ -49,7 +50,8 @@ namespace LanguageSchoolApp.viewModel.Courses
         {
             courseService = App.ServiceProvider.GetService<ICourseService>();
             PageNumber = 1;
-            _allFinishedCourses = courseService.GetFinishedCoursesDTO(currentStudent.FinishedCourses);
+            _student = currentStudent;
+            _allFinishedCourses = GetFinishedCourses();
             FinishedCourses = new ObservableCollection<FinishedCourseDTO>(GetSlicedFinishedCourses());
 
             CourseFilterVM = new CourseFilterViewModel(this);
@@ -67,15 +69,23 @@ namespace LanguageSchoolApp.viewModel.Courses
             List<Course> sortedCourses = courseService.SortCourses(courses, beginningDateSorting, durationSorting);
             var finishedCoursesDict = _allFinishedCourses.ToDictionary(fc => fc.CourseId);
             _allFinishedCourses = sortedCourses.Select(course => finishedCoursesDict[course.Id]).ToList();
+            UpdateCourseList();
         }
 
         public void FilterList(string languageNameFilter, string languageLevelFilter, string courseTypeFilter)
         {
-            List<int> coursesIds = _allFinishedCourses.Select(fc => fc.CourseId).ToList();
+            List<FinishedCourseDTO> finishedCourses = GetFinishedCourses();
+            List<int> coursesIds = finishedCourses.Select(fc => fc.CourseId).ToList();
             List<Course> courses = courseService.GetAllCoursesById(coursesIds);
-            List<Course> filteredCourses = courseService.GetAllFilteredCourses(languageNameFilter, languageLevelFilter, courseTypeFilter);
+            List<Course> filteredCourses = courseService.GetAllFilteredCourses(courses, languageNameFilter, languageLevelFilter, courseTypeFilter);
             var filteredIds = filteredCourses.Select(c => c.Id).ToHashSet();
-            _allFinishedCourses = _allFinishedCourses.Where(fc => filteredIds.Contains(fc.CourseId)).ToList();
+            _allFinishedCourses = finishedCourses.Where(fc => filteredIds.Contains(fc.CourseId)).ToList();
+            UpdateCourseList();
+        }
+
+        private List<FinishedCourseDTO> GetFinishedCourses()
+        { 
+            return courseService.GetFinishedCoursesDTO(_student.FinishedCourses);
         }
 
         public void UpdateCourseList() 

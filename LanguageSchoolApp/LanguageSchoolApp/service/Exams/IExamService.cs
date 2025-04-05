@@ -17,11 +17,12 @@ namespace LanguageSchoolApp.service.Exams
         Exam GetExam(int examId);
         bool CheckIfExamsMatch(int exam, List<int> teachersExams, DateTime examDate);
         List<Exam> GetAvailableExams(List<Course> finishedCourses);
-        List<Exam> GetAllFilteredExams(string languageName, string languageLevelStr);
+        List<Exam> GetAllFilteredExams(List<Exam> exams, string languageName, string languageLevelStr);
         List<Exam> SortExams(List<Exam> exams, string examDateSortingStr);
         void CreateExam(string languageName, string languageLevelStr, string examDateStr, int maxParticipants, Teacher teacher);
         void UpdateExam(int examId, string languageName, string languageLevelStr, string examDateStr, int maxParticipants, Teacher teacher);
         void DeleteExam(int examId);
         int GenerateId(LanguageProficiency languageProficiency, DateTime examDate, string teacherId);
+        List<ExamResultsDTO> GetExamResultsDTO(List<ExamResults> examResults);
     }
 }

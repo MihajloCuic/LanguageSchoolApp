@@ -68,5 +68,25 @@
     "ExamDate": "2025-06-06T12:15:00",
     "MaxParticipants": 50,
     "Participants": []
+  },
+  "7": {
+    "Id": 7,
+    "LanguageProficiency": {
+      "LanguageName": "English",
+      "LanguageLevel": 1
+    },
+    "ExamDate": "2024-06-06T12:15:00",
+    "MaxParticipants": 50,
+    "Participants": []
+  },
+  "8": {
+    "Id": 8,
+    "LanguageProficiency": {
+      "LanguageName": "Italian",
+      "LanguageLevel": 0
+    },
+    "ExamDate": "2024-11-03T21:45:00",
+    "MaxParticipants": 50,
+    "Participants": []
   }
 }

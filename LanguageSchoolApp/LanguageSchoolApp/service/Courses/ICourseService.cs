@@ -15,7 +15,7 @@ namespace LanguageSchoolApp.service.Courses
         Course GetCourse(int courseId);
         bool CourseExists(int courseId);
         List<Course> GetAllAvailableCourses();
-        List<Course> GetAllFilteredCourses(string languageName, string languageLevelStr, string courseTypeStr);
+        List<Course> GetAllFilteredCourses(List<Course> courses, string languageName, string languageLevelStr, string courseTypeStr);
         List<Course> SortCourses(List<Course> courses, string beginningDateSortingStr, string durationSortingStr);
         void CreateCourse(string languageName, string languageLevel, int maxParticipants, int duration, List<KeyValuePair<string, string>> classPeriods, string beginningDate, string courseType, string teacherId);
         void UpdateCourse(int courseId, string languageName, string languageLevel, int maxParticipants, int duration, List<KeyValuePair<string, string>> classPeriods, string beginningDate, string courseType);
