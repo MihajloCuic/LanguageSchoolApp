@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LanguageSchoolApp.view.Users"
         xmlns:viewModel="clr-namespace:LanguageSchoolApp.viewModel.Users"
+        WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
         WindowStyle="None"
         Background="Transparent"
         AllowsTransparency="True"
-        ResizeMode="NoResize"
+        ResizeMode="CanMinimize"
         Height="600" Width="920">
 
     <Window.DataContext>
