@@ -1,5 +1,4 @@
-﻿using LanguageSchoolApp.model.Courses;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -9,22 +8,22 @@ using System.Windows.Data;
 
 namespace LanguageSchoolApp.converter
 {
-    public class DateTimeToStringConverter : IValueConverter
+    public class ExamDateTimeToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is DateTime beginningDate) 
-            { 
-                return (beginningDate - DateTime.Now).TotalDays <= 7 ? "Details" : "Edit";
+            if (value is DateTime examDate)
+            {
+                return (examDate - DateTime.Now).TotalDays <= 30 ? "Details" : "Edit";
             }
             return string.Empty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is DateTime beginningDate)
+            if (value is DateTime examDate)
             {
-                return (beginningDate - DateTime.Now).TotalDays <= 7 ? "Details" : "Edit";
+                return (examDate - DateTime.Now).TotalDays <= 30 ? "Details" : "Edit";
             }
             return string.Empty;
         }

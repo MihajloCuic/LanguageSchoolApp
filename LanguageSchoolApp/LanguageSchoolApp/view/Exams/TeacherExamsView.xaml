@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="LanguageSchoolApp.view.Courses.TeacherCoursesView"
+﻿<UserControl x:Class="LanguageSchoolApp.view.Exams.TeacherExamsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:LanguageSchoolApp.view.Courses"
+             xmlns:local="clr-namespace:LanguageSchoolApp.view.Exams"
              mc:Ignorable="d" 
              d:DesignHeight="489" d:DesignWidth="653">
     <Grid>
@@ -11,13 +11,13 @@
             <ColumnDefinition Width="119"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <ContentControl Grid.Row="0" Content="{Binding FilterCoursesVM}"/>
-            <ContentControl Grid.Row="1" Content="{Binding SortCoursesVM}"/>
+            <ContentControl Grid.Row="0" Content="{Binding ExamFilterVM}"/>
+            <ContentControl Grid.Row="1" Content="{Binding ExamSortingVM}"/>
         </Grid>
         <Grid Grid.Column="1" Margin="0,10,0,0">
             <Grid.RowDefinitions>
@@ -25,10 +25,9 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <ContentControl Grid.Row="0" Content="{Binding CancelFiltersVM}" Margin="0,0,0,4"/>
-            <ItemsControl Grid.Row="1" ItemsSource="{Binding TeacherCourses}"
-                          Background="Transparent"
-                          BorderThickness="0">
+            <ContentControl Grid.Row="0" Content="{Binding CancelFilterVM}" Margin="0,0,0,4"/>
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding TeacherExams}"
+                          Background="Transparent" BorderThickness="0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal"/>
@@ -47,14 +46,24 @@
                                                   BlurRadius="10"
                                                   Opacity="0.5"/>
                             </Border.Effect>
-                            <StackPanel Orientation="Vertical">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
                                 <TextBlock Text="{Binding LanguageProficiency.LanguageName}"
                                            FontSize="18"
+                                           Grid.Row="0"
                                            FontFamily="Cambria"
                                            FontWeight="Bold"
                                            Foreground="#2E6C7B"
                                            HorizontalAlignment="Center"/>
-                                <Grid Margin="0,6,0,0">
+                                <Grid Grid.Row="1" Margin="0,18,0,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
@@ -74,20 +83,20 @@
                                                VerticalAlignment="Center"
                                                Grid.Column="1"/>
                                 </Grid>
-                                <Separator Width="134" Background="#2E6C7B" HorizontalAlignment="Stretch" Margin="0,6,0,0"/>
-                                <Grid Margin="0,2,0,0">
+                                <Separator Grid.Row="2" Width="134" Background="#2E6C7B" HorizontalAlignment="Stretch" Margin="0,6,0,0"/>
+                                <Grid Grid.Row="3" Margin="0,2,0,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Text="Duration" FontSize="13"
+                                    <TextBlock Text="Exam Date" FontSize="13"
                                                Foreground="#2E6C7B"
                                                FontFamily="Cambria" FontWeight="Bold"
                                                HorizontalAlignment="Left"
                                                VerticalAlignment="Center"
                                                Grid.Column="0"/>
-                                    <TextBlock Text="{Binding Duration}"
+                                    <TextBlock Text="{Binding ExamDate, StringFormat=\{0:dd.MM.yyyy\}}"
                                                FontFamily="Cambria"
                                                Foreground="#2E6C7B"
                                                FontSize="11" FontWeight="Bold"
@@ -95,20 +104,20 @@
                                                VerticalAlignment="Center"
                                                Grid.Column="1"/>
                                 </Grid>
-                                <Separator Width="134" Background="#2E6C7B" HorizontalAlignment="Stretch" Margin="0,6,0,0"/>
-                                <Grid Margin="0,2,0,0">
+                                <Separator Grid.Row="4" Width="134" Background="#2E6C7B" HorizontalAlignment="Stretch" Margin="0,6,0,0"/>
+                                <Grid Grid.Row="5" Margin="0,2,0,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <TextBlock Text="Schedule" FontSize="13"
+                                    <TextBlock Text="Exam Time" FontSize="13"
                                                Foreground="#2E6C7B"
                                                FontFamily="Cambria" FontWeight="Bold"
                                                HorizontalAlignment="Left"
                                                VerticalAlignment="Center"
                                                Grid.Column="0"/>
-                                    <TextBlock Text="{Binding Converter={StaticResource MethodToStringConverter}}"
+                                    <TextBlock Text="{Binding ExamDate, StringFormat=\{0:HH:mm\}}"
                                                FontFamily="Cambria"
                                                Foreground="#2E6C7B"
                                                FontSize="11" FontWeight="Bold"
@@ -116,70 +125,24 @@
                                                VerticalAlignment="Center"
                                                Grid.Column="1"/>
                                 </Grid>
-                                <Separator Width="134" Background="#2E6C7B" HorizontalAlignment="Stretch" Margin="0,6,0,0"/>
-                                <Grid Margin="0,2,0,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
 
-                                    <TextBlock Text="Begin date" FontSize="13"
-                                               Foreground="#2E6C7B"
-                                               FontFamily="Cambria" FontWeight="Bold"
-                                               HorizontalAlignment="Left"
-                                               VerticalAlignment="Center"
-                                               Grid.Column="0"/>
-                                    <TextBlock Text="{Binding BeginningDate, StringFormat=\{0:dd.MM.yyyy\}}"
-                                               FontFamily="Cambria"
-                                               Foreground="#2E6C7B"
-                                               FontSize="11" FontWeight="Bold"
-                                               HorizontalAlignment="Right"
-                                               VerticalAlignment="Center"
-                                               Grid.Column="1"/>
-                                </Grid>
-                                <Separator Width="134" Background="#2E6C7B" HorizontalAlignment="Stretch" Margin="0,6,0,0"/>
-                                <Grid Margin="0,2,0,0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <TextBlock Text="Course type" FontSize="13"
-                                               Foreground="#2E6C7B"
-                                               FontFamily="Cambria" FontWeight="Bold"
-                                               HorizontalAlignment="Left"
-                                               VerticalAlignment="Center"
-                                               Grid.Column="0"/>
-                                    <TextBlock Text="{Binding CourseType}"
-                                               FontFamily="Cambria"
-                                               Foreground="#2E6C7B"
-                                               FontSize="11" FontWeight="Bold"
-                                               HorizontalAlignment="Right"
-                                               VerticalAlignment="Center"
-                                               Grid.Column="1"/>
-                                </Grid>
-                                <StackPanel Orientation="Horizontal" Margin="0,7,0,0" HorizontalAlignment="Center">
-                                    <Button Command="{Binding DataContext.EditCommand,
-                                            RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            CommandParameter="{Binding Id}"
-                                            Content="{Binding BeginningDate, Converter={StaticResource CourseCardButtonTitleConverter}}"
-                                            Background="#2E6C7B"
-                                            Foreground="#fff"
-                                            FontFamily="Cambria Math"
-                                            Width="79"
-                                            Height="21"
-                                            FontSize="10"
-                                            FontWeight="Bold"
-                                            HorizontalAlignment="Center"
-                                            Style="{StaticResource SmallRoundedButtonStyle}"/>
-                                    <Button Command="{Binding DataContext.ScheduleCommand,
-                                            RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            Height="20" Width="20"
-                                            Style="{StaticResource TransparentButtonStyle}">
-                                        <Image Height="20" Width="20" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\calendar.png"/>
-                                    </Button>
-                                </StackPanel>
-                            </StackPanel>
+                                <Button Command="{Binding DataContext.CardButtonCommand,
+                                        RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding Id}"
+                                        Content="{Binding ExamDate, Converter={StaticResource ExamCardButtonTitleConverter}}"
+                                        Grid.Row="6"
+                                        Background="#2E6C7B"
+                                        Foreground="#fff"
+                                        FontFamily="Cambria Math"
+                                        Width="79"
+                                        Height="21"
+                                        FontSize="10"
+                                        FontWeight="Bold"
+                                        Margin="0,0,0,10"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Bottom"
+                                        Style="{StaticResource SmallRoundedButtonStyle}"/>
+                            </Grid>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
@@ -200,7 +163,7 @@
                         VerticalAlignment="Center"
                         Grid.Column="0"
                         Command="{Binding PreviousPageCommand}"/>
-                <Label Content="{Binding PageNumber}"
+                <Label  Content="{Binding PageNumber}"
                         Foreground="#2E6C7B"
                         Height="40"
                         FontWeight="Bold"

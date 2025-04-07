@@ -42,7 +42,7 @@ namespace LanguageSchoolApp.viewModel.Courses
             }
         }
 
-        public RelayCommand<object> ApplyCommand { get; set; }
+        public RelayCommand<int> ApplyCommand { get; set; }
         public RelayCommand<object> ScheduleCommand { get; set; }
         public RelayCommand<object> PreviousPageCommand { get; set; }
         public RelayCommand<object> NextPageCommand { get; set; }
@@ -60,7 +60,7 @@ namespace LanguageSchoolApp.viewModel.Courses
             CancelCourseFiltersVM = new CancelCourseFiltersViewModel(CourseFilterVM);
 
 
-            ApplyCommand = new RelayCommand<object>(Apply, CanApply);
+            ApplyCommand = new RelayCommand<int>(Apply, CanApply);
             ScheduleCommand = new RelayCommand<object>(SeeSchedule, CanSeeSchedule);
             PreviousPageCommand = new RelayCommand<object>(PreviousPage, CanPreviousPage);
             NextPageCommand = new RelayCommand<object>(NextPage, CanNextPage);
@@ -93,8 +93,8 @@ namespace LanguageSchoolApp.viewModel.Courses
             return _allAvailableCourses.Skip(elementsToSkip).Take(6).ToList();
         }
 
-        private bool CanApply(object? parameter) { return true; }
-        private void Apply(object? parameter) 
+        private bool CanApply(int courseId) { return true; }
+        private void Apply(int courseId) 
         { 
             //TODO: Create Course Application and Cancel Application
         }
