@@ -163,6 +163,7 @@
                                     <Button Command="{Binding DataContext.ApplyCommand,
                                                       RelativeSource={RelativeSource AncestorType=UserControl}}"
                                             Content="Apply"
+                                            CommandParameter="{Binding Id}"
                                             Background="#2E6C7B"
                                             Foreground="#fff"
                                             FontFamily="Cambria Math"

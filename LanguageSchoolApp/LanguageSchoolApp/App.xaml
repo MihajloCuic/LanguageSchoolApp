@@ -27,7 +27,8 @@
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
             <converter:MethodToStringConverter x:Key="MethodToStringConverter"/>
             <converter:ExamPartValueConverter x:Key="ExamPartValueConverter"/>
-            <converter:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
+            <converter:CourseDateTimeToStringConverter x:Key="CourseCardButtonTitleConverter"/>
+            <converter:ExamDateTimeToStringConverter x:Key="ExamCardButtonTitleConverter"/>
 
             <DataTemplate DataType="{x:Type viewModelUsers:LoginViewModel}">
                 <viewUsers:Login/>
@@ -67,6 +68,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModelCourses:TeacherCoursesViewModel}">
                 <viewCourses:TeacherCoursesView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelExams:TeacherExamsViewModel}">
+                <viewExams:TeacherExamsView/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

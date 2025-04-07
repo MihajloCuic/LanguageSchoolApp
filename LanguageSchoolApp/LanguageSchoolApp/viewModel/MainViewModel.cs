@@ -137,7 +137,7 @@ namespace LanguageSchoolApp.viewModel
             {
                 TeacherCoursesVM = new TeacherCoursesViewModel(teacher);
                 CreateCourseVM = new CreateCourseViewModel();
-                TeacherExamsVM = new TeacherExamsViewModel();
+                TeacherExamsVM = new TeacherExamsViewModel(teacher);
                 CreateExamVM = new CreateExamViewModel();
                 CurrentView = TeacherCoursesVM;
 
