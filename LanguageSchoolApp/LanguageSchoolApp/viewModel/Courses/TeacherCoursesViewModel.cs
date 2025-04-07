@@ -97,8 +97,16 @@ namespace LanguageSchoolApp.viewModel.Courses
         private bool CanDisplayEdit(int courseId) { return true; }
         private void DisplayEdit(int courseId)
         {
-            string str = "";
-            //TODO: Implement edit options for course
+            Course course = courseService.GetCourse(courseId);
+            if ((course.BeginningDate - DateTime.Now).TotalDays <= 7)
+            {
+                //TODO: Implement detail options for active course
+            }
+            else 
+            {
+                //TODO: Implement edit options for pending course
+            }
+
         }
 
         private bool CanDisplaySchedule(object? parameter) { return true; }

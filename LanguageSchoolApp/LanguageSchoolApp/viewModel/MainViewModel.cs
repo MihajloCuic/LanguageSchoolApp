@@ -95,11 +95,9 @@ namespace LanguageSchoolApp.viewModel
 
         //teacher menu options
         public TeacherCoursesViewModel TeacherCoursesVM { get; set; }
-        public PendingCoursesViewModel PendingCoursesVM { get; set; }
-        public ActiveCourseViewModel ActiveCoursesVM { get; set; }
+        public CreateCourseViewModel CreateCourseVM { get; set; }
         public TeacherExamsViewModel TeacherExamsVM { get; set; }
-        public PendingExamsViewModel PendingExamsVM { get; set; }
-        public ActiveExamViewModel ActiveExamVM { get; set; }
+        public CreateExamViewModel CreateExamVM { get; set; }
 
         //director menu options
         public ActiveTeachersViewModel ActiveTeachersVM { get; set; }
@@ -138,19 +136,17 @@ namespace LanguageSchoolApp.viewModel
             else if (currentUser is Teacher teacher)
             {
                 TeacherCoursesVM = new TeacherCoursesViewModel(teacher);
-                PendingCoursesVM = new PendingCoursesViewModel();
-                ActiveCoursesVM = new ActiveCourseViewModel();
+                CreateCourseVM = new CreateCourseViewModel();
                 TeacherExamsVM = new TeacherExamsViewModel();
-                PendingExamsVM = new PendingExamsViewModel();
-                ActiveExamVM = new ActiveExamViewModel();
+                CreateExamVM = new CreateExamViewModel();
                 CurrentView = TeacherCoursesVM;
 
                 MenuItem1 = "My Courses";
-                MenuItem2 = "Pending Courses";
-                MenuItem3 = "Active Courses";
-                MenuItem4 = "My Exams";
-                MenuItem5 = "Pending Exams";
-                MenuItem6 = "Active Exam";
+                MenuItem2 = "Create Course";
+                MenuItem3 = "My Exams";
+                MenuItem4 = "Create Exam";
+                MenuItem5 = "";
+                MenuItem6 = "";
             }
             else if (currentUser is Director director) 
             {
@@ -218,7 +214,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Teacher)
             {
-                return !(CurrentView is PendingCoursesViewModel);
+                return !(CurrentView is CreateCourseViewModel);
             }
             if (CurrentUser is Director)
             {
@@ -234,7 +230,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Teacher)
             {
-                CurrentView = PendingCoursesVM;
+                CurrentView = CreateCourseVM;
             }
             if (CurrentUser is Director)
             {
@@ -250,7 +246,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Teacher)
             {
-                return !(CurrentView is ActiveCourseViewModel);
+                return !(CurrentView is TeacherExamsViewModel);
             }
             if (CurrentUser is Director)
             {
@@ -266,7 +262,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Teacher)
             {
-                CurrentView = ActiveCourseVM;
+                CurrentView = TeacherExamsVM;
             }
             if (CurrentUser is Director)
             {
@@ -282,7 +278,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Teacher)
             {
-                return !(CurrentView is TeacherExamsViewModel);
+                return !(CurrentView is CreateExamViewModel);
             }
             if (CurrentUser is Director)
             {
@@ -298,7 +294,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Teacher)
             {
-                CurrentView = TeacherExamsVM;
+                CurrentView = CreateExamVM;
             }
             if (CurrentUser is Director)
             {
@@ -314,7 +310,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Teacher)
             {
-                return !(CurrentView is PendingExamsViewModel);
+                return false;
             }
             if (CurrentUser is Director)
             {
@@ -327,10 +323,6 @@ namespace LanguageSchoolApp.viewModel
             if (CurrentUser is Student)
             {
                 CurrentView = FinishedCoursesVM;
-            }
-            if (CurrentUser is Teacher)
-            {
-                CurrentView = PendingExamsVM;
             }
             if (CurrentUser is Director)
             {
@@ -346,7 +338,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Teacher)
             {
-                return !(CurrentView is ActiveExamViewModel);
+                return false;
             }
             if (CurrentUser is Director)
             {
@@ -356,10 +348,6 @@ namespace LanguageSchoolApp.viewModel
         }
         private void ChangeToMenuItem6(object parameter)
         {
-            if (CurrentUser is Teacher)
-            {
-                CurrentView = ActiveExamVM;
-            }
             if (CurrentUser is Director)
             {
                 CurrentView = ReportsVM;
