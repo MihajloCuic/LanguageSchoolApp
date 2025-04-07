@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace LanguageSchoolApp.viewModel.Courses
 {
-    public class ActiveCoursesViewModel : ObservableObject
+    public class CreateCourseViewModel : ObservableObject
     {
-        public ActiveCoursesViewModel() { }
+        public CreateCourseViewModel() { }
     }
 }

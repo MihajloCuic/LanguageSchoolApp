@@ -162,7 +162,7 @@
                                     <Button Command="{Binding DataContext.EditCommand,
                                             RelativeSource={RelativeSource AncestorType=UserControl}}"
                                             CommandParameter="{Binding Id}"
-                                            Content="Edit"
+                                            Content="{Binding BeginningDate, Converter={StaticResource DateTimeToStringConverter}}"
                                             Background="#2E6C7B"
                                             Foreground="#fff"
                                             FontFamily="Cambria Math"

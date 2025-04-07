@@ -183,5 +183,17 @@ namespace LanguageSchoolApp.service.Courses
                                   .Select(fc => CourseToFinishedCourseDTO(coursesDict[fc.CourseId], fc))
                                   .ToList();
         }
+
+        public List<Course> GetTeachersPendingCourses(List<int> allTeacherCoursesIds)
+        {
+            List<Course> allTeacherCourses = GetAllCoursesById(allTeacherCoursesIds);
+            return allTeacherCourses.Where(course => (course.BeginningDate - DateTime.Now).TotalDays >= 7).ToList();
+        }
+
+        public List<Course> GetTeacherActiveCourses(List<int> allTeacherCoursesIds)
+        {
+            List<Course> allTeacherCourses = GetAllCoursesById(allTeacherCoursesIds);
+            return allTeacherCourses.Where(course => (course.BeginningDate - DateTime.Now).TotalDays < 7).ToList();
+        }
     }
 }

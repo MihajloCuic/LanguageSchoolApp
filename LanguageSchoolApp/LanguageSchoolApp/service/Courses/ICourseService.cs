@@ -22,5 +22,7 @@ namespace LanguageSchoolApp.service.Courses
         void DeleteCourse(int courseId);
         int GenerateId(LanguageProficiency languageProficiency, DateTime beginningDate, CourseType courseType, string teacherId);
         List<FinishedCourseDTO> GetFinishedCoursesDTO(List<FinishedCourse> finishedCourses);
+        List<Course> GetTeachersPendingCourses(List<int> allTeacherCoursesIds);
+        List<Course> GetTeacherActiveCourses(List<int> allTeacherCoursesIds);
     }
 }
