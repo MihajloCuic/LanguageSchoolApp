@@ -158,5 +158,71 @@
     ],
     "BeginningDate": "2024-12-13T00:00:00",
     "CourseType": 0
+  },
+  "323451495": {
+    "Id": 323451495,
+    "LanguageProficiency": {
+      "LanguageName": "English",
+      "LanguageLevel": 1
+    },
+    "MaxParticipants": 50,
+    "ParticipantsIds": [],
+    "Duration": 3,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 3,
+        "StartTime": "07:30:00"
+      },
+      {
+        "DayOfWeek": 6,
+        "StartTime": "07:30:00"
+      },
+      {
+        "DayOfWeek": 5,
+        "StartTime": "20:00:00"
+      }
+    ],
+    "BeginningDate": "2025-07-19T00:00:00",
+    "CourseType": 0
+  },
+  "712592056": {
+    "Id": 712592056,
+    "LanguageProficiency": {
+      "LanguageName": "Serbian",
+      "LanguageLevel": 1
+    },
+    "MaxParticipants": 10,
+    "ParticipantsIds": [],
+    "Duration": 3,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 3,
+        "StartTime": "09:00:00"
+      },
+      {
+        "DayOfWeek": 5,
+        "StartTime": "18:30:00"
+      }
+    ],
+    "BeginningDate": "2025-05-04T00:00:00",
+    "CourseType": 0
+  },
+  "1057286594": {
+    "Id": 1057286594,
+    "LanguageProficiency": {
+      "LanguageName": "Serbian",
+      "LanguageLevel": 1
+    },
+    "MaxParticipants": 20,
+    "ParticipantsIds": [],
+    "Duration": 3,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 5,
+        "StartTime": "11:30:00"
+      }
+    ],
+    "BeginningDate": "2025-05-20T00:00:00",
+    "CourseType": 0
   }
 }

@@ -126,7 +126,7 @@
                      Margin="353,43,293,61"
                      Visibility="{Binding UnreadNotificationsExist, Converter={StaticResource BoolToVisibilityConverter}}"/>
 
-            <Border CornerRadius="20,0,20,0" Grid.Row="1" Grid.Column="1"
+            <Border CornerRadius="40,0,20,0" Grid.Row="1" Grid.Column="1"
                     Background="#fff">
                 <ContentControl Grid.Row="1" Grid.Column="1"
                             Content="{Binding CurrentView}"/>

@@ -72,6 +72,9 @@
             <DataTemplate DataType="{x:Type viewModelExams:TeacherExamsViewModel}">
                 <viewExams:TeacherExamsView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelCourses:CreateCourseViewModel}">
+                <viewCourses:CreateCourseView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

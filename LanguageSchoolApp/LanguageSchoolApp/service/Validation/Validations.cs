@@ -101,7 +101,7 @@ namespace LanguageSchoolApp.service.Validation
             return true;
         }
 
-        public static bool ValidateCourse(string languageName, string languageLevelStr, int maxParticipants, int duration, List<KeyValuePair<string, string>> classPeriodsStr, string beginningDateStr, string courseTypeStr)
+        public static bool ValidateCourse(string languageName, string languageLevelStr, int maxParticipants, int duration, DateTime beginningDate, string courseTypeStr)
         {
             if (String.IsNullOrEmpty(languageName) || !IsAlpha(languageName)) 
             {
@@ -115,7 +115,7 @@ namespace LanguageSchoolApp.service.Validation
             { 
                 throw new CourseException("Invalid language level format", CourseExceptionType.InvalidLanguageLevel);
             }
-            if (maxParticipants < 0) 
+            if (maxParticipants <= 0) 
             { 
                 throw new CourseException("Max participants must be greater than 0", CourseExceptionType.InvalidMaxParticipants);
             }
@@ -123,33 +123,9 @@ namespace LanguageSchoolApp.service.Validation
             {
                 throw new CourseException("Duration must be greater than 0", CourseExceptionType.InvalidDuration);
             }
-            try
+            if (beginningDate < DateTime.Now)
             {
-                foreach (KeyValuePair<string, string> classPeriodStr in classPeriodsStr)
-                {
-                    Enum.Parse<DaysOfWeek>(classPeriodStr.Key);
-                    TimeOnly.Parse(classPeriodStr.Value);
-                }
-            }
-            catch (ArgumentException)
-            {
-                throw new CourseException("Invalid class day format", CourseExceptionType.InvalidClassDay);
-            }
-            catch (FormatException) 
-            {
-                throw new CourseException("Invalid class time format", CourseExceptionType.InvalidClassTime);
-            }
-            try
-            {
-                DateTime beginningDate = DateTime.Parse(beginningDateStr);
-                if (beginningDate < DateTime.Now)
-                {
-                    throw new CourseException("Course cannot begin in past", CourseExceptionType.InvalidBeginningDate);
-                }
-            }
-            catch (FormatException) 
-            {
-                throw new CourseException("Invalid beginning date format", CourseExceptionType.InvalidBeginningDate);
+                throw new CourseException("Course cannot begin in past", CourseExceptionType.InvalidBeginningDate);
             }
             try
             { 
