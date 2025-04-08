@@ -159,70 +159,140 @@
     "BeginningDate": "2024-12-13T00:00:00",
     "CourseType": 0
   },
-  "323451495": {
-    "Id": 323451495,
-    "LanguageProficiency": {
-      "LanguageName": "English",
-      "LanguageLevel": 1
-    },
-    "MaxParticipants": 50,
-    "ParticipantsIds": [],
-    "Duration": 3,
-    "ClassPeriods": [
-      {
-        "DayOfWeek": 3,
-        "StartTime": "07:30:00"
-      },
-      {
-        "DayOfWeek": 6,
-        "StartTime": "07:30:00"
-      },
-      {
-        "DayOfWeek": 5,
-        "StartTime": "20:00:00"
-      }
-    ],
-    "BeginningDate": "2025-07-19T00:00:00",
-    "CourseType": 0
-  },
-  "712592056": {
-    "Id": 712592056,
-    "LanguageProficiency": {
-      "LanguageName": "Serbian",
-      "LanguageLevel": 1
-    },
-    "MaxParticipants": 10,
-    "ParticipantsIds": [],
-    "Duration": 3,
-    "ClassPeriods": [
-      {
-        "DayOfWeek": 3,
-        "StartTime": "09:00:00"
-      },
-      {
-        "DayOfWeek": 5,
-        "StartTime": "18:30:00"
-      }
-    ],
-    "BeginningDate": "2025-05-04T00:00:00",
-    "CourseType": 0
-  },
-  "1057286594": {
-    "Id": 1057286594,
+  "1291962207": {
+    "Id": 1291962207,
     "LanguageProficiency": {
       "LanguageName": "Serbian",
       "LanguageLevel": 1
     },
     "MaxParticipants": 20,
     "ParticipantsIds": [],
+    "Duration": 2,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 4,
+        "StartTime": "18:30:00"
+      },
+      {
+        "DayOfWeek": 2,
+        "StartTime": "18:30:00"
+      }
+    ],
+    "BeginningDate": "2025-05-07T00:00:00",
+    "CourseType": 1
+  },
+  "1469787972": {
+    "Id": 1469787972,
+    "LanguageProficiency": {
+      "LanguageName": "Bulgarian",
+      "LanguageLevel": 5
+    },
+    "MaxParticipants": 30,
+    "ParticipantsIds": [],
+    "Duration": 6,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 6,
+        "StartTime": "16:00:00"
+      },
+      {
+        "DayOfWeek": 7,
+        "StartTime": "16:00:00"
+      }
+    ],
+    "BeginningDate": "2025-08-22T00:00:00",
+    "CourseType": 1
+  },
+  "364486381": {
+    "Id": 364486381,
+    "LanguageProficiency": {
+      "LanguageName": "Romanian",
+      "LanguageLevel": 1
+    },
+    "MaxParticipants": 10,
+    "ParticipantsIds": [],
+    "Duration": 4,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 3,
+        "StartTime": "19:00:00"
+      },
+      {
+        "DayOfWeek": 1,
+        "StartTime": "20:30:00"
+      }
+    ],
+    "BeginningDate": "2025-09-20T00:00:00",
+    "CourseType": 0
+  },
+  "1627625454": {
+    "Id": 1627625454,
+    "LanguageProficiency": {
+      "LanguageName": "English",
+      "LanguageLevel": 3
+    },
+    "MaxParticipants": 30,
+    "ParticipantsIds": [],
     "Duration": 3,
     "ClassPeriods": [
       {
-        "DayOfWeek": 5,
-        "StartTime": "11:30:00"
+        "DayOfWeek": 4,
+        "StartTime": "09:00:00"
+      },
+      {
+        "DayOfWeek": 6,
+        "StartTime": "09:00:00"
+      },
+      {
+        "DayOfWeek": 7,
+        "StartTime": "09:00:00"
       }
     ],
-    "BeginningDate": "2025-05-20T00:00:00",
+    "BeginningDate": "2025-09-17T00:00:00",
+    "CourseType": 1
+  },
+  "366552599": {
+    "Id": 366552599,
+    "LanguageProficiency": {
+      "LanguageName": "Spanish",
+      "LanguageLevel": 4
+    },
+    "MaxParticipants": 30,
+    "ParticipantsIds": [],
+    "Duration": 4,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 3,
+        "StartTime": "08:00:00"
+      },
+      {
+        "DayOfWeek": 3,
+        "StartTime": "17:30:00"
+      }
+    ],
+    "BeginningDate": "2025-07-26T00:00:00",
+    "CourseType": 1
+  },
+  "1171700003": {
+    "Id": 1171700003,
+    "LanguageProficiency": {
+      "LanguageName": "Spanish",
+      "LanguageLevel": 4
+    },
+    "MaxParticipants": 30,
+    "ParticipantsIds": [],
+    "Duration": 22,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 4,
+        "StartTime": "08:00:00"
+      },
+      {
+        "DayOfWeek": 7,
+        "StartTime": "08:00:00"
+      }
+    ],
+    "BeginningDate": "2025-12-05T00:00:00",
     "CourseType": 0
   }
 }

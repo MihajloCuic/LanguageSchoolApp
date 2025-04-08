@@ -4,6 +4,7 @@ using LanguageSchoolApp.model;
 using LanguageSchoolApp.model.Courses;
 using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.service.Courses;
+using LanguageSchoolApp.service.Users.Teachers;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
@@ -13,6 +14,7 @@ namespace LanguageSchoolApp.viewModel.Courses
     public class CreateCourseViewModel : ObservableObject
     {
         private readonly ICourseService courseService;
+        private readonly ITeacherService teacherService;
         private Teacher _teacher;
         private ObservableCollection<ClassPeriodSlot> _periods;
         private List<ClassPeriod> _allPeriods;
@@ -192,9 +194,11 @@ namespace LanguageSchoolApp.viewModel.Courses
         public CreateCourseViewModel(Teacher teacher) 
         {
             courseService = App.ServiceProvider.GetService<ICourseService>();
+            teacherService = App.ServiceProvider.GetService<ITeacherService>();
             _teacher = teacher;
             PageNumber = 1;
             BeginningDate = DateTime.Now;
+            CourseType = "Online";
             _allPeriods = new List<ClassPeriod>();
             InitializePeriodsList();
 
@@ -308,13 +312,17 @@ namespace LanguageSchoolApp.viewModel.Courses
                 { 
                     throw new CourseException("Duration must be number", CourseExceptionType.InvalidDuration);
                 }
-                courseService.CreateCourse(LanguageName, LanguageLevel, maxParticipants, duration, _allPeriods, BeginningDate, CourseType, _teacher.Email);
+                Course course = courseService.CreateCourse(LanguageName, LanguageLevel, maxParticipants, duration, _allPeriods, BeginningDate, CourseType, _teacher);
+                teacherService.AddCourse(course.Id, _teacher.Email);
                 ClassPeriodError = "Success"; //TODO: Insert popup message successful course creation
             }
             catch (CourseException ex)
             {
                 switch (ex.Type) 
-                { 
+                {
+                    case CourseExceptionType.InvalidLanguageProficiency:
+                        LanguageNameError = ex.Text;
+                        break;
                     case CourseExceptionType.InvalidLanguageName:
                         LanguageNameError = ex.Text;
                         break;
