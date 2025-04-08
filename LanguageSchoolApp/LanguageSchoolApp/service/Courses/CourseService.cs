@@ -69,22 +69,11 @@ namespace LanguageSchoolApp.service.Courses
         }
 
         public void CreateCourse(string languageName, string languageLevelStr, int maxParticipants, 
-            int duration, List<KeyValuePair<string, string>> classPeriodsStr, string beginningDateStr, string courseTypeStr, string teacherId) 
+            int duration, List<ClassPeriod> classPeriods, DateTime beginningDate, string courseTypeStr, string teacherId) 
         {
-            Validations.ValidateCourse(languageName, languageLevelStr, maxParticipants, duration, classPeriodsStr, beginningDateStr, courseTypeStr);
+            Validations.ValidateCourse(languageName, languageLevelStr, maxParticipants, duration, beginningDate, courseTypeStr);
             LanguageLevel languageLevel = Enum.Parse<LanguageLevel>(languageLevelStr);
             LanguageProficiency languageProficiency = new LanguageProficiency(languageName, languageLevel);
-
-            List<ClassPeriod> classPeriods = new List<ClassPeriod>();
-            foreach (KeyValuePair<string, string> classPeriodStr in classPeriodsStr) 
-            { 
-                DaysOfWeek dayOfWeek = Enum.Parse<DaysOfWeek>(classPeriodStr.Key);
-                TimeOnly startTime = TimeOnly.Parse(classPeriodStr.Value);
-                ClassPeriod classPeriod = new ClassPeriod(dayOfWeek, startTime);
-                classPeriods.Add(classPeriod);
-            }
-
-            DateTime beginningDate = DateTime.Parse(beginningDateStr);
             CourseType courseType = Enum.Parse<CourseType>(courseTypeStr);
 
             if (courseType == CourseType.Live) 
@@ -107,22 +96,11 @@ namespace LanguageSchoolApp.service.Courses
         }
 
         public void UpdateCourse(int courseId, string languageName, string languageLevelStr, int maxParticipants, 
-            int duration, List<KeyValuePair<string, string>> classPeriodsStr, string beginningDateStr, string courseTypeStr) 
+            int duration, List<ClassPeriod> classPeriods, DateTime beginningDate, string courseTypeStr) 
         { 
-            Validations.ValidateCourse(languageName, languageLevelStr, maxParticipants, duration, classPeriodsStr, beginningDateStr, courseTypeStr);
+            Validations.ValidateCourse(languageName, languageLevelStr, maxParticipants, duration, beginningDate, courseTypeStr);
             LanguageLevel languageLevel = Enum.Parse<LanguageLevel>(languageLevelStr);
             LanguageProficiency languageProficiency = new LanguageProficiency(languageName, languageLevel);
-
-            List<ClassPeriod> classPeriods = new List<ClassPeriod>();
-            foreach (KeyValuePair<string, string> classPeriodStr in classPeriodsStr)
-            {
-                DaysOfWeek dayOfWeek = Enum.Parse<DaysOfWeek>(classPeriodStr.Key);
-                TimeOnly startTime = TimeOnly.Parse(classPeriodStr.Value);
-                ClassPeriod classPeriod = new ClassPeriod(dayOfWeek, startTime);
-                classPeriods.Add(classPeriod);
-            }
-
-            DateTime beginningDate = DateTime.Parse(beginningDateStr);
             CourseType courseType = Enum.Parse<CourseType>(courseTypeStr);
 
             if (courseType == CourseType.Live)

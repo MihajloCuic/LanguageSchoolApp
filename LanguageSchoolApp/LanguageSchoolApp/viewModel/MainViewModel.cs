@@ -136,7 +136,7 @@ namespace LanguageSchoolApp.viewModel
             else if (currentUser is Teacher teacher)
             {
                 TeacherCoursesVM = new TeacherCoursesViewModel(teacher);
-                CreateCourseVM = new CreateCourseViewModel();
+                CreateCourseVM = new CreateCourseViewModel(teacher);
                 TeacherExamsVM = new TeacherExamsViewModel(teacher);
                 CreateExamVM = new CreateExamViewModel();
                 CurrentView = TeacherCoursesVM;

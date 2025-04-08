@@ -17,8 +17,8 @@ namespace LanguageSchoolApp.service.Courses
         List<Course> GetAllAvailableCourses();
         List<Course> GetAllFilteredCourses(List<Course> courses, string languageName, string languageLevelStr, string courseTypeStr);
         List<Course> SortCourses(List<Course> courses, string beginningDateSortingStr, string durationSortingStr);
-        void CreateCourse(string languageName, string languageLevel, int maxParticipants, int duration, List<KeyValuePair<string, string>> classPeriods, string beginningDate, string courseType, string teacherId);
-        void UpdateCourse(int courseId, string languageName, string languageLevel, int maxParticipants, int duration, List<KeyValuePair<string, string>> classPeriods, string beginningDate, string courseType);
+        void CreateCourse(string languageName, string languageLevelStr, int maxParticipants, int duration, List<ClassPeriod> classPeriods, DateTime beginningDate, string courseTypeStr, string teacherId);
+        void UpdateCourse(int courseId, string languageName, string languageLevelStr, int maxParticipants, int duration, List<ClassPeriod> classPeriods, DateTime beginningDate, string courseTypeStr);
         void DeleteCourse(int courseId);
         int GenerateId(LanguageProficiency languageProficiency, DateTime beginningDate, CourseType courseType, string teacherId);
         List<FinishedCourseDTO> GetFinishedCoursesDTO(List<FinishedCourse> finishedCourses);
