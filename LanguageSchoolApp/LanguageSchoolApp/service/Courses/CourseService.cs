@@ -1,5 +1,6 @@
 ﻿using LanguageSchoolApp.model.Courses;
 using LanguageSchoolApp.model;
+using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.repository.Courses;
 using System;
 using System.Collections.Generic;
@@ -69,7 +70,7 @@ namespace LanguageSchoolApp.service.Courses
         }
 
         public void CreateCourse(string languageName, string languageLevelStr, int maxParticipants, 
-            int duration, List<ClassPeriod> classPeriods, DateTime beginningDate, string courseTypeStr, string teacherId) 
+            int duration, List<ClassPeriod> classPeriods, DateTime beginningDate, string courseTypeStr, Teacher teacher) 
         {
             Validations.ValidateCourse(languageName, languageLevelStr, maxParticipants, duration, beginningDate, courseTypeStr);
             LanguageLevel languageLevel = Enum.Parse<LanguageLevel>(languageLevelStr);
@@ -85,7 +86,7 @@ namespace LanguageSchoolApp.service.Courses
                 }
             }
 
-            int courseId = GenerateId(languageProficiency, beginningDate, courseType, teacherId);
+            int courseId = GenerateId(languageProficiency, beginningDate, courseType, teacher.Email);
             if (CourseExists(courseId)) 
             { 
                 throw new CourseException("Same course already exists", CourseExceptionType.CourseAlreadyExists);
@@ -93,6 +94,7 @@ namespace LanguageSchoolApp.service.Courses
 
             Course newCourse = new Course(courseId, languageProficiency, maxParticipants, duration, classPeriods, beginningDate, courseType);
             courseRepository.AddCourse(newCourse);
+            teacher.MyCoursesIds.Add(courseId);
         }
 
         public void UpdateCourse(int courseId, string languageName, string languageLevelStr, int maxParticipants, 

@@ -100,6 +100,7 @@ namespace LanguageSchoolApp.service.Exams
 
             Exam newExam = new Exam(examId, languageProficiency, examDate, maxParticipants);
             examRepository.CreateExam(newExam);
+            teacher.MyExamsIds.Add(examId);
         }
 
         public void UpdateExam(int examId, string languageName, string languageLevelStr, string examDateStr, int maxParticipants, Teacher teacher) 
