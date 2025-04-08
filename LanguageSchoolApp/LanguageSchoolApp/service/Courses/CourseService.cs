@@ -69,14 +69,18 @@ namespace LanguageSchoolApp.service.Courses
             return courseRepository.SortCourses(courses, beginningDateSorting, durationSorting);
         }
 
-        public void CreateCourse(string languageName, string languageLevelStr, int maxParticipants, 
+        public Course CreateCourse(string languageName, string languageLevelStr, int maxParticipants, 
             int duration, List<ClassPeriod> classPeriods, DateTime beginningDate, string courseTypeStr, Teacher teacher) 
         {
             Validations.ValidateCourse(languageName, languageLevelStr, maxParticipants, duration, beginningDate, courseTypeStr);
             LanguageLevel languageLevel = Enum.Parse<LanguageLevel>(languageLevelStr);
             LanguageProficiency languageProficiency = new LanguageProficiency(languageName, languageLevel);
-            CourseType courseType = Enum.Parse<CourseType>(courseTypeStr);
+            if (!teacher.LanguageProficiencies.Contains(languageProficiency)) 
+            {
+                throw new CourseException("You don't possess proficiency for this course", CourseExceptionType.InvalidLanguageProficiency);
+            }
 
+            CourseType courseType = Enum.Parse<CourseType>(courseTypeStr);
             if (courseType == CourseType.Live) 
             {
                 List<Course> matchingCourses = courseRepository.CheckIfCoursesMatch(-1, beginningDate, courseType, classPeriods);
@@ -94,7 +98,7 @@ namespace LanguageSchoolApp.service.Courses
 
             Course newCourse = new Course(courseId, languageProficiency, maxParticipants, duration, classPeriods, beginningDate, courseType);
             courseRepository.AddCourse(newCourse);
-            teacher.MyCoursesIds.Add(courseId);
+            return newCourse;
         }
 
         public void UpdateCourse(int courseId, string languageName, string languageLevelStr, int maxParticipants, 

@@ -16,5 +16,9 @@ namespace LanguageSchoolApp.repository.Users.Teachers
         void UpdateTeacher(string teacherId, Teacher teacher);
         void DeleteTeacher(string teacherId);
         void WriteToFile();
+        void AddCourse(int courseId, string teacherId);
+        void DeleteCourse(int courseId, string teacherId);
+        void AddExam(int examId, string teacherId);
+        void DeleteExam(int examId, string teacherId);
     }
 }

@@ -91,5 +91,25 @@ namespace LanguageSchoolApp.service.Users.Teachers
             }
             return true;
         }
+
+        public void AddCourse(int courseId, string teacherId) 
+        { 
+            teacherRepository.AddCourse(courseId, teacherId);
+        }
+
+        public void DeleteCourse(int courseId, string teacherId)
+        {
+            teacherRepository.DeleteCourse(courseId, teacherId);
+        }
+
+        public void AddExam(int examId, string teacherId) 
+        { 
+            teacherRepository.AddExam(examId, teacherId);
+        }
+
+        public void DeleteExam(int examId, string teacherId) 
+        { 
+            teacherRepository.DeleteExam(examId, teacherId);
+        }
     }
 }

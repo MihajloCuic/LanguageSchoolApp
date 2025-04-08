@@ -10,6 +10,7 @@ namespace LanguageSchoolApp.exceptions.Courses
     { 
         CourseNotFound,
         CourseAlreadyExists,
+        InvalidLanguageProficiency,
         InvalidLanguageName,
         InvalidLanguageLevel,
         InvalidMaxParticipants,

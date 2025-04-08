@@ -2,6 +2,7 @@
 using LanguageSchoolApp.model.Exams;
 using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.service.Exams;
+using LanguageSchoolApp.service.Users.Teachers;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 
@@ -10,6 +11,7 @@ namespace LanguageSchoolApp.viewModel.Exams
     public class TeacherExamsViewModel : ObservableObject
     {
         private readonly IExamService examService;
+        private readonly ITeacherService teacherService;
         private Teacher _teacher;
         public ExamFilterViewModel ExamFilterVM { get; }
         public ExamSortingViewModel ExamSortingVM { get; }
@@ -42,16 +44,17 @@ namespace LanguageSchoolApp.viewModel.Exams
         public RelayCommand<object> NextPageCommand { get; set; }
         public RelayCommand<int> CardButtonCommand { get; set; }
 
-        public TeacherExamsViewModel(Teacher teacher) 
+        public TeacherExamsViewModel(string teacherId) 
         {
             examService = App.ServiceProvider.GetService<IExamService>();
+            teacherService = App.ServiceProvider.GetService<ITeacherService>();
             ExamFilterVM = new ExamFilterViewModel(this);
             ExamSortingVM = new ExamSortingViewModel(this);
             CancelFilterVM = new CancelExamFiltersViewModel(ExamFilterVM);
 
-            _teacher = teacher;
+            _teacher = teacherService.GetTeacher(teacherId);
             PageNumber = 1;
-            _allTeacherExams = examService.GetAllExamsById(teacher.MyExamsIds);
+            _allTeacherExams = examService.GetAllExamsById(_teacher.MyExamsIds);
             TeacherExams = new ObservableCollection<Exam>(GetSlicedTeacherExams());
         
             PreviousPageCommand = new RelayCommand<object>(PreviousPage, CanPreviousPage);

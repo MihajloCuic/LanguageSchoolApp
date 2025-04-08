@@ -135,9 +135,9 @@ namespace LanguageSchoolApp.viewModel
             }
             else if (currentUser is Teacher teacher)
             {
-                TeacherCoursesVM = new TeacherCoursesViewModel(teacher);
+                TeacherCoursesVM = new TeacherCoursesViewModel(teacher.Email);
                 CreateCourseVM = new CreateCourseViewModel(teacher);
-                TeacherExamsVM = new TeacherExamsViewModel(teacher);
+                TeacherExamsVM = new TeacherExamsViewModel(teacher.Email);
                 CreateExamVM = new CreateExamViewModel();
                 CurrentView = TeacherCoursesVM;
 
@@ -198,6 +198,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Teacher)
             {
+                TeacherCoursesVM = new TeacherCoursesViewModel(CurrentUser.Email);
                 CurrentView = TeacherCoursesVM;
             }
             if (CurrentUser is Director)
@@ -262,6 +263,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Teacher)
             {
+                TeacherExamsVM = new TeacherExamsViewModel(CurrentUser.Email);
                 CurrentView = TeacherExamsVM;
             }
             if (CurrentUser is Director)

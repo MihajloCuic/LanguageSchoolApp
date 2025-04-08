@@ -80,5 +80,37 @@ namespace LanguageSchoolApp.repository.Users.Teachers
             }
             return teachers;
         }
+
+        public void AddCourse(int courseId, string teacherId)
+        {
+            Teacher teacher = GetTeacher(teacherId);
+            teacher.MyCoursesIds.Add(courseId);
+            allTeachers[teacherId] = teacher;
+            WriteToFile();
+        }
+
+        public void DeleteCourse(int courseId, string teacherId)
+        {
+            Teacher teacher = GetTeacher(teacherId);
+            teacher.MyCoursesIds.Remove(courseId);
+            allTeachers[teacherId] = teacher;
+            WriteToFile();
+        }
+
+        public void AddExam(int examId, string teacherId)
+        {
+            Teacher teacher = GetTeacher(teacherId);
+            teacher.MyExamsIds.Add(examId);
+            allTeachers[teacherId] = teacher;
+            WriteToFile();
+        }
+
+        public void DeleteExam(int examId, string teacherId)
+        {
+            Teacher teacher = GetTeacher(teacherId);
+            teacher.MyExamsIds.Remove(examId);
+            allTeachers[teacherId] = teacher;
+            WriteToFile();
+        }
     }
 }

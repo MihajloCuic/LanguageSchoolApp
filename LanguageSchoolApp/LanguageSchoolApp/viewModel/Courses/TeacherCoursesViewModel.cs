@@ -9,12 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LanguageSchoolApp.model.Users;
+using LanguageSchoolApp.service.Users.Teachers;
 
 namespace LanguageSchoolApp.viewModel.Courses
 {
     public class TeacherCoursesViewModel : ObservableObject
     {
         private readonly ICourseService courseService;
+        private readonly ITeacherService teacherService;
         public CourseFilterViewModel FilterCoursesVM { get; }
         public CourseSortingViewModel SortCoursesVM { get; }
         public CancelCourseFiltersViewModel CancelFiltersVM { get; }
@@ -48,16 +50,17 @@ namespace LanguageSchoolApp.viewModel.Courses
         public RelayCommand<object> PreviousPageCommand { get; set; }
         public RelayCommand<object> NextPageCommand { get; set; }
 
-        public TeacherCoursesViewModel(Teacher teacher) 
+        public TeacherCoursesViewModel(string teacherId) 
         { 
             courseService = App.ServiceProvider.GetService<ICourseService>();
+            teacherService = App.ServiceProvider.GetService<ITeacherService>();
             FilterCoursesVM = new CourseFilterViewModel(this);
             SortCoursesVM = new CourseSortingViewModel(this);
             CancelFiltersVM = new CancelCourseFiltersViewModel(FilterCoursesVM);
 
-            _teacher = teacher;
+            _teacher = teacherService.GetTeacher(teacherId);
             PageNumber = 1;
-            _allTeachersCourses = courseService.GetAllCoursesById(teacher.MyCoursesIds);
+            _allTeachersCourses = courseService.GetAllCoursesById(_teacher.MyCoursesIds);
             TeacherCourses = new ObservableCollection<Course>(GetSlicedAvailableCourses());
 
             EditCommand = new RelayCommand<int>(DisplayEdit, CanDisplayEdit);

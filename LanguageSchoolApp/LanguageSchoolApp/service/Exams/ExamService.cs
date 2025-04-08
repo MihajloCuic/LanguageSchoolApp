@@ -80,7 +80,7 @@ namespace LanguageSchoolApp.service.Exams
             return examRepository.SortExams(exams, examDateSorting);
         }
 
-        public void CreateExam(string languageName, string languageLevelStr, string examDateStr, int maxParticipants, Teacher teacher) 
+        public Exam CreateExam(string languageName, string languageLevelStr, string examDateStr, int maxParticipants, Teacher teacher) 
         { 
             Validations.ValidateExam(languageName, languageLevelStr, examDateStr, maxParticipants);
             LanguageLevel languageLevel = Enum.Parse<LanguageLevel>(languageLevelStr);
@@ -100,7 +100,7 @@ namespace LanguageSchoolApp.service.Exams
 
             Exam newExam = new Exam(examId, languageProficiency, examDate, maxParticipants);
             examRepository.CreateExam(newExam);
-            teacher.MyExamsIds.Add(examId);
+            return newExam;
         }
 
         public void UpdateExam(int examId, string languageName, string languageLevelStr, string examDateStr, int maxParticipants, Teacher teacher) 
