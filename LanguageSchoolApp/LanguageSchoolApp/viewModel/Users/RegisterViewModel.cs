@@ -1,6 +1,7 @@
 ﻿using LanguageSchoolApp.core;
 using LanguageSchoolApp.exceptions.Users;
 using LanguageSchoolApp.model;
+using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.service.Users.Students;
 using LanguageSchoolApp.view.Users;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,7 @@ namespace LanguageSchoolApp.viewModel.Users
     public class RegisterViewModel : ObservableObject
     {
         private readonly IStudentService studentService;
+        private Student? _student;
 
         private string _name;
         private string _surname;
@@ -202,6 +204,29 @@ namespace LanguageSchoolApp.viewModel.Users
             _birthday = DateTime.Now;
             Gender = "Male";
             ProfessionalDegreeStr = "ElementarySchool";
+            _student = null;
+            RegisterCommand = new RelayCommand<object>(Register, CanRegister);
+            LoginCommand = new RelayCommand<object>(OpenLoginWindow, CanOpenLoginWindow);
+
+
+            MaleCommand = new RelayCommand<object>(BeMale, CanBeMale);
+            FemaleCommand = new RelayCommand<object>(BeFemale, CanBeFemale);
+        }
+
+        public RegisterViewModel(Student student)
+        {
+            studentService = App.ServiceProvider.GetService<IStudentService>();
+            _student = student;
+            _birthday = _student.Birthday;
+            Gender = _student.Gender.ToString();
+            ProfessionalDegreeStr = _student.ProfessionalDegree.ToString();
+            Degree = (int)_student.ProfessionalDegree;
+            Name = _student.Name;
+            Surname = _student.Surname;
+            Email = _student.Email;
+            PhoneNumber = _student.PhoneNumber;
+            Password = _student.Password;
+            ConfirmPassword = _student.Password;
             RegisterCommand = new RelayCommand<object>(Register, CanRegister);
             LoginCommand = new RelayCommand<object>(OpenLoginWindow, CanOpenLoginWindow);
 
@@ -220,10 +245,20 @@ namespace LanguageSchoolApp.viewModel.Users
         {
             try
             {
-                studentService.CreateStudent(Name, Surname, Gender, Birthday.ToString("dd.MM.yyyy."), PhoneNumber, Email, Password, ConfirmPassword, ProfessionalDegreeStr);
-                //TODO: Add popup window which confirms creation of an account
-                Login loginWindow = new Login();
-                loginWindow.Show();
+                if (_student == null)
+                {
+                    studentService.CreateStudent(Name, Surname, Gender, Birthday.ToString("dd.MM.yyyy."), PhoneNumber, Email, Password, ConfirmPassword, ProfessionalDegreeStr);
+                    //TODO: Add popup window which confirms creation of an account
+                    Login loginWindow = new Login();
+                    loginWindow.Show();
+                }
+                else 
+                {
+                    _student = studentService.UpdateStudent(_student.Email, Name, Surname, Gender, Birthday.ToString("dd.MM.yyyy."), PhoneNumber, Password, ConfirmPassword, ProfessionalDegreeStr);
+                    MainWindow mainWindow = new MainWindow(_student);
+                    mainWindow.Show();
+                }
+
                 CloseAction();
             }
             catch (UserValidationException ex) 

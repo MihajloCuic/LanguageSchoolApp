@@ -14,14 +14,8 @@
     "FinishedExamResults": [
       {
         "ExamId": 7,
-        "LanguageProficiency":
-        {
-          "LanguageName": "English",
-          "LanguageLevel": 1
-        },
         "TotalScore": 192,
-        "PartialScores":
-        {
+        "PartialScores": {
           "Reading": 50,
           "Writing": 42,
           "Listening": 50,
@@ -30,14 +24,8 @@
       },
       {
         "ExamId": 8,
-        "LanguageProficiency":
-        {
-          "LanguageName": "Italian",
-          "LanguageLevel": 0
-        },
         "TotalScore": 123,
-        "PartialScores":
-        {
+        "PartialScores": {
           "Reading": 30,
           "Writing": 12,
           "Listening": 36,
@@ -48,10 +36,10 @@
     "EnrolledCourseId": 0,
     "PenaltyPoints": [],
     "Name": "Aleksandar",
-    "Surname": "markovic",
-    "Gender": 1,
+    "Surname": "Markovic",
+    "Gender": 0,
     "Birthday": "2001-03-13T00:00:00",
-    "PhoneNumber": "0654430598",
+    "PhoneNumber": "06188322723",
     "Email": "student@gmail.com",
     "Password": "sifra"
   },

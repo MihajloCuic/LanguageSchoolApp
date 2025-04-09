@@ -16,7 +16,7 @@ namespace LanguageSchoolApp.service.Users.Students
         Dictionary<string, Student> GetAllStudents();
         Student GetStudent(string studentId);
         void CreateStudent(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string email, string password, string confirmPassword, string professionalDegreeStr);
-        void UpdateStudent(string studentId, string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, string professionalDegreeStr);
+        Student UpdateStudent(string studentId, string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, string professionalDegreeStr);
         void DeleteStudent(string studentId);
         bool ValidateStudent(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, string professionalDegree);
     }

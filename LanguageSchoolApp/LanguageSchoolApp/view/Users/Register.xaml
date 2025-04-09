@@ -12,9 +12,6 @@
         WindowStyle="None"
         AllowsTransparency="True"
         ResizeMode="CanMinimize">
-    <Window.DataContext>
-        <viewModel:RegisterViewModel/>
-    </Window.DataContext>
 
     <Border Background="#fff"
             CornerRadius="20">
@@ -31,11 +28,13 @@
                     </Grid.RowDefinitions>
                     <Image HorizontalAlignment="Center" VerticalAlignment="Top" Width="228" Margin="0,161,0,0" Height="206" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\world_white.png"/>
                     <Label FontFamily="Cambria"
+                           x:Name="loginLabel"
                            Content="Already have an account ?"
                            Foreground="#fff" 
                            FontSize="15"
                            Margin="108,492,98,75" Grid.RowSpan="2"/>
                     <Button Content="Login" 
+                            x:Name="loginButton"
                             Grid.Row="1"
                             Height="37"
                             Width="193"
@@ -93,7 +92,8 @@
                 <Label FontFamily="Cambria" FontSize="13" Content="{Binding PhoneNumberError}" Margin="48,284,270,293" Foreground="#fa1302"/>
 
                 <Label FontFamily="Cambria" FontSize="18" Content="E-mail" Margin="284,223,164,349"/>
-                <TextBox Height="34" Width="192" 
+                <TextBox Height="34" Width="192"
+                         x:Name="emailTextBox"
                          Text="{Binding Email}" 
                          Style="{StaticResource RoundedTextBox}" 
                          Margin="284,249,34,317"/>
@@ -186,6 +186,7 @@
                     </Border.Effect>
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <RadioButton Content="Male" 
+                                     x:Name="MaleButton"
                                      FontSize="14"
                                      VerticalAlignment="Center" 
                                      Margin="0,0,36,0"
@@ -193,6 +194,7 @@
                                      Command="{Binding MaleCommand}"
                                      Style="{StaticResource CustomRadioButtonTheme}"/>
                         <RadioButton Content="Female" 
+                                     x:Name="FemaleButton"
                                      FontSize="14" 
                                      VerticalAlignment="Center"
                                      Command="{Binding FemaleCommand}"
