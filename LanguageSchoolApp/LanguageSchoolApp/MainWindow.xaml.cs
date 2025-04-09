@@ -36,11 +36,15 @@ namespace LanguageSchoolApp
         {
             InitializeComponent();
             DataContext = new MainViewModel(user);
+            if (DataContext is MainViewModel viewModel) 
+            {
+                viewModel.CloseAction = new Action(this.Close);
+            }
         }
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            App.Current.Shutdown();
         }
         private void Minimize(object sender, RoutedEventArgs e)
         {

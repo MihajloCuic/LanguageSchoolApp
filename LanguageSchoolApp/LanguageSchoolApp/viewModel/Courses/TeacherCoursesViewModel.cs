@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.service.Users.Teachers;
+using LanguageSchoolApp.view.Courses;
 
 namespace LanguageSchoolApp.viewModel.Courses
 {
@@ -46,7 +47,7 @@ namespace LanguageSchoolApp.viewModel.Courses
         }
 
         public RelayCommand<int> EditCommand { get; set; }
-        public RelayCommand<object> ScheduleCommand { get; set; }
+        public RelayCommand<List<ClassPeriod>> ScheduleCommand { get; set; }
         public RelayCommand<object> PreviousPageCommand { get; set; }
         public RelayCommand<object> NextPageCommand { get; set; }
 
@@ -64,7 +65,7 @@ namespace LanguageSchoolApp.viewModel.Courses
             TeacherCourses = new ObservableCollection<Course>(GetSlicedAvailableCourses());
 
             EditCommand = new RelayCommand<int>(DisplayEdit, CanDisplayEdit);
-            ScheduleCommand = new RelayCommand<object>(DisplaySchedule, CanDisplaySchedule);
+            ScheduleCommand = new RelayCommand<List<ClassPeriod>>(DisplaySchedule, CanDisplaySchedule);
             PreviousPageCommand = new RelayCommand<object>(PreviousPage, CanPreviousPage);
             NextPageCommand = new RelayCommand<object>(NextPage, CanNextPage);
 
@@ -112,9 +113,11 @@ namespace LanguageSchoolApp.viewModel.Courses
 
         }
 
-        private bool CanDisplaySchedule(object? parameter) { return true; }
-        private void DisplaySchedule(object? parameter) 
+        private bool CanDisplaySchedule(List<ClassPeriod> classes) { return true; }
+        private void DisplaySchedule(List<ClassPeriod> classes) 
         { 
+            CourseSchedule schedule = new CourseSchedule(classes);
+            schedule.Show();
             //TODO: Implement display of schedule
         }
 

@@ -175,6 +175,7 @@
                                             Style="{StaticResource SmallRoundedButtonStyle}"/>
                                     <Button Command="{Binding DataContext.ScheduleCommand,
                                                       RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding ClassPeriods}"
                                             Height="20" Width="20"
                                             Style="{StaticResource TransparentButtonStyle}">
                                         <Image Height="20" Width="20" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\calendar.png"/>

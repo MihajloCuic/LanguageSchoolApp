@@ -13,6 +13,7 @@ using LanguageSchoolApp.viewModel.Courses;
 using LanguageSchoolApp.viewModel.Exams;
 using LanguageSchoolApp.viewModel.Users;
 using LanguageSchoolApp.viewModel.Reports;
+using LanguageSchoolApp.view.Users;
 
 namespace LanguageSchoolApp.viewModel
 {
@@ -107,6 +108,9 @@ namespace LanguageSchoolApp.viewModel
         public SendCourseResultsViewModel SendCourseResultsVM { get; set; }
         public ReportsViewModel ReportsVM { get; set; }
 
+        public RelayCommand<object> LogoutCommand { get; set; }
+        public Action CloseAction { get; set; }
+
         public MainViewModel(User currentUser) 
         {
             _currentUser = currentUser;
@@ -172,6 +176,7 @@ namespace LanguageSchoolApp.viewModel
             ChangeToMenuItem4Command = new RelayCommand<object>(ChangeToMenuItem4, CanChangeToMenuItem4);
             ChangeToMenuItem5Command = new RelayCommand<object>(ChangeToMenuItem5, CanChangeToMenuItem5);
             ChangeToMenuItem6Command = new RelayCommand<object>(ChangeToMenuItem6, CanChangeToMenuItem6);
+            LogoutCommand = new RelayCommand<object>(Logout, CanLogout);
         }
 
         private bool CanChangeToMenuItem1(object? parameter) 
@@ -354,6 +359,14 @@ namespace LanguageSchoolApp.viewModel
             {
                 CurrentView = ReportsVM;
             }
+        }
+
+        private bool CanLogout(object? parameter) { return CurrentUser != null; }
+        private void Logout(object? parameter)
+        {
+            Login login = new Login();
+            login.Show();
+            CloseAction();
         }
     }
 }

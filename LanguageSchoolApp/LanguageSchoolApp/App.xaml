@@ -75,6 +75,9 @@
             <DataTemplate DataType="{x:Type viewModelCourses:CreateCourseViewModel}">
                 <viewCourses:CreateCourseView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelCourses:CourseScheduleViewModel}">
+                <viewCourses:CourseSchedule/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

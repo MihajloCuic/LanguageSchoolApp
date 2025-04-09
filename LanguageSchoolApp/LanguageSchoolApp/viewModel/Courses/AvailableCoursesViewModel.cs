@@ -1,6 +1,7 @@
 ﻿using LanguageSchoolApp.core;
 using LanguageSchoolApp.model.Courses;
 using LanguageSchoolApp.service.Courses;
+using LanguageSchoolApp.view.Courses;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,7 @@ namespace LanguageSchoolApp.viewModel.Courses
         }
 
         public RelayCommand<int> ApplyCommand { get; set; }
-        public RelayCommand<object> ScheduleCommand { get; set; }
+        public RelayCommand<List<ClassPeriod>> ScheduleCommand { get; set; }
         public RelayCommand<object> PreviousPageCommand { get; set; }
         public RelayCommand<object> NextPageCommand { get; set; }
 
@@ -61,7 +62,7 @@ namespace LanguageSchoolApp.viewModel.Courses
 
 
             ApplyCommand = new RelayCommand<int>(Apply, CanApply);
-            ScheduleCommand = new RelayCommand<object>(SeeSchedule, CanSeeSchedule);
+            ScheduleCommand = new RelayCommand<List<ClassPeriod>>(SeeSchedule, CanSeeSchedule);
             PreviousPageCommand = new RelayCommand<object>(PreviousPage, CanPreviousPage);
             NextPageCommand = new RelayCommand<object>(NextPage, CanNextPage);
         }
@@ -99,9 +100,11 @@ namespace LanguageSchoolApp.viewModel.Courses
             //TODO: Create Course Application and Cancel Application
         }
 
-        private bool CanSeeSchedule(object? parameter) { return true; }
-        private void SeeSchedule(object? parameter) 
+        private bool CanSeeSchedule(List<ClassPeriod> classes) { return true; }
+        private void SeeSchedule(List<ClassPeriod> classes) 
         { 
+            CourseSchedule schedule = new CourseSchedule(classes);
+            schedule.Show();
             //TODO: Create Schedule display
         }
 
