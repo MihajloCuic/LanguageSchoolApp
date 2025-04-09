@@ -41,7 +41,7 @@ namespace LanguageSchoolApp.service.Users.Students
             studentRepository.AddStudent(newStudent);
         }
 
-        public void UpdateStudent(string studentId, string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, string professionalDegreeStr) 
+        public Student UpdateStudent(string studentId, string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, string professionalDegreeStr) 
         { 
             ValidateStudent(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword, professionalDegreeStr);
             Student student = GetStudent(studentId);
@@ -53,6 +53,7 @@ namespace LanguageSchoolApp.service.Users.Students
             student.Password = password;
             student.ProfessionalDegree = Enum.Parse<ProfessionalDegree>(professionalDegreeStr);
             studentRepository.UpdateStudent(studentId, student);
+            return student;
         }
 
         public void DeleteStudent(string studentId) 

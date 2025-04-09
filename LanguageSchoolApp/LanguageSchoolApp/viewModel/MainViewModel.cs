@@ -109,6 +109,7 @@ namespace LanguageSchoolApp.viewModel
         public ReportsViewModel ReportsVM { get; set; }
 
         public RelayCommand<object> LogoutCommand { get; set; }
+        public RelayCommand<object> EditUserProfileCommand { get; set; }
         public Action CloseAction { get; set; }
 
         public MainViewModel(User currentUser) 
@@ -177,6 +178,7 @@ namespace LanguageSchoolApp.viewModel
             ChangeToMenuItem5Command = new RelayCommand<object>(ChangeToMenuItem5, CanChangeToMenuItem5);
             ChangeToMenuItem6Command = new RelayCommand<object>(ChangeToMenuItem6, CanChangeToMenuItem6);
             LogoutCommand = new RelayCommand<object>(Logout, CanLogout);
+            EditUserProfileCommand = new RelayCommand<object>(EditUserProfile, CanEditUserProfile);
         }
 
         private bool CanChangeToMenuItem1(object? parameter) 
@@ -367,6 +369,25 @@ namespace LanguageSchoolApp.viewModel
             Login login = new Login();
             login.Show();
             CloseAction();
+        }
+
+        private bool CanEditUserProfile(object? parameter) { return CurrentUser != null; }
+        private void EditUserProfile(object? parameter)
+        {
+            if (CurrentUser is Student student)
+            { 
+                Register editProfile = new Register(student);
+                editProfile.Show();
+                CloseAction();
+            }
+            else if (CurrentUser is Teacher teacher) 
+            { 
+                //TODO: Implement teacher edit
+            }
+            else if (CurrentUser is Director director) 
+            { 
+                //TODO: Implement director edit
+            }
         }
     }
 }

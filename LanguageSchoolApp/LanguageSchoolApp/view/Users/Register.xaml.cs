@@ -1,4 +1,6 @@
-﻿using LanguageSchoolApp.viewModel.Users;
+﻿using LanguageSchoolApp.model.Users;
+using LanguageSchoolApp.viewModel.Users;
+using LanguageSchoolApp.model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +25,40 @@ namespace LanguageSchoolApp.view.Users
         public Register()
         {
             InitializeComponent();
+            DataContext = new RegisterViewModel();
             if (DataContext is RegisterViewModel viewModel) 
+            {
+                viewModel.CloseAction = new Action(this.Close);
+            }
+        }
+
+        public Register(Student student) 
+        {
+            InitializeComponent();
+            if (student.Gender.Equals(Gender.Male))
+            {
+                RadioButton maleRadioButton = (RadioButton)FindName("MaleButton");
+                RadioButton femaleRadioButton = (RadioButton)FindName("FemaleButton");
+                maleRadioButton.IsChecked = true;
+                femaleRadioButton.IsChecked = false;
+            }
+            else 
+            {
+                RadioButton maleRadioButton = (RadioButton)FindName("MaleButton");
+                RadioButton femaleRadioButton = (RadioButton)FindName("FemaleButton");
+                maleRadioButton.IsChecked = false;
+                femaleRadioButton.IsChecked = true;
+            }
+
+            Label loginLabel = (Label)FindName("loginLabel");
+            Button loginButton = (Button)FindName("loginButton");
+            TextBox emailTextBox = (TextBox)FindName("emailTextBox");
+            loginLabel.Visibility = Visibility.Hidden;
+            loginButton.Visibility = Visibility.Hidden;
+            emailTextBox.IsEnabled = false;
+
+            DataContext = new RegisterViewModel(student);
+            if (DataContext is RegisterViewModel viewModel)
             {
                 viewModel.CloseAction = new Action(this.Close);
             }
