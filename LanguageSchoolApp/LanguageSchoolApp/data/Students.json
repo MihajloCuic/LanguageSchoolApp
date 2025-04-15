@@ -33,7 +33,7 @@
         }
       }
     ],
-    "EnrolledCourseId": 0,
+    "EnrolledCourseId": -1,
     "PenaltyPoints": [],
     "Name": "Aleksandar",
     "Surname": "Markovic",

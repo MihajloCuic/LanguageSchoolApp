@@ -55,6 +55,9 @@ namespace LanguageSchoolApp
 
             services.AddSingleton<ICourseApplicationRepository, CourseApplicationRepository>();
             services.AddSingleton<ICourseApplicationService, CourseApplicationService>();
+
+            services.AddSingleton<IExamApplicationRepository, ExamApplicationRepository>();
+            services.AddSingleton<IExamApplicationService, ExamApplicationService>();
         }
     }
 

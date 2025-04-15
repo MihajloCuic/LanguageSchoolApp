@@ -1,1 +1,14 @@
-{}
+{
+  "1556265921": {
+    "Id": 1556265921,
+    "StudentId": "student@gmail.com",
+    "ExamId": 1390667643,
+    "Acceptance": 0
+  },
+  "1006935165": {
+    "Id": 1006935165,
+    "StudentId": "student@gmail.com",
+    "ExamId": 2,
+    "Acceptance": 0
+  }
+}

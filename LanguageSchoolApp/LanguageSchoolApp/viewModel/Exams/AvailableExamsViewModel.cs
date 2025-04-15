@@ -4,13 +4,10 @@ using LanguageSchoolApp.model.Exams;
 using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.model.Courses;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
+using LanguageSchoolApp.view;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LanguageSchoolApp.service.Courses;
+using LanguageSchoolApp.exceptions.Exams;
 
 namespace LanguageSchoolApp.viewModel.Exams
 {
@@ -18,7 +15,9 @@ namespace LanguageSchoolApp.viewModel.Exams
     {
         private readonly IExamService examService;
         private readonly ICourseService courseService;
-        private Student _student;
+        private readonly IExamApplicationService applicationService;
+        private readonly Student _student;
+        private string _studentId;
 
         public ExamFilterViewModel ExamFilterVM { get; }
         public ExamSortingViewModel ExamSortingVM { get; }
@@ -46,6 +45,15 @@ namespace LanguageSchoolApp.viewModel.Exams
                 OnPropertyChanged();
             }
         }
+        public string StudentId
+        { 
+            get { return _studentId; }
+            set
+            { 
+                _studentId = value;
+                OnPropertyChanged();
+            }
+        }
 
         public RelayCommand<int> ApplyCommand { get; set; }
         public RelayCommand<object> PreviousPageCommand { get; set; }
@@ -55,9 +63,11 @@ namespace LanguageSchoolApp.viewModel.Exams
         {
             examService = App.ServiceProvider.GetService<IExamService>();
             courseService = App.ServiceProvider.GetService<ICourseService>();
+            applicationService = App.ServiceProvider.GetService<IExamApplicationService>();
             PageNumber = 1;
 
             _student = currentStudent;
+            StudentId = currentStudent.Email;
             _allAvailableExams = GetAvailableExams();
             AvailableExams = new ObservableCollection<Exam>(GetSlicedAvailableExams());
 
@@ -125,10 +135,36 @@ namespace LanguageSchoolApp.viewModel.Exams
             }
         }
 
-        private bool CanApply(int examId) { return true; }
-        private void Apply(int examId)
+        private bool CanApply(int examId) 
         { 
-            //TODO: Implement appllication to exams
+            Exam exam = examService.GetExam(examId);
+            return (exam.ExamDate - DateTime.Now).TotalDays >= 10; 
+        }
+        private void Apply(int examId)
+        {
+            Exam exam = examService.GetExam(examId);
+            try
+            {
+                int examApplicationId = applicationService.GenerateId(StudentId, examId);
+                if (applicationService.ExamApplicationExists(examApplicationId))
+                {
+                    applicationService.DeleteExamApplication(examApplicationId);
+                    PopupMessageView popup = new PopupMessageView("SUCCESS", $"You successfully withdrew from {exam.LanguageProficiency.LanguageName} {exam.LanguageProficiency.LanguageLevel.ToString()} !");
+                    popup.Show();
+                }
+                else
+                { 
+                    applicationService.CreateExamApplication(StudentId, examId);
+                    PopupMessageView popup = new PopupMessageView("SUCCESS", $"You successfully signed up for {exam.LanguageProficiency.LanguageName} {exam.LanguageProficiency.LanguageLevel.ToString()} !");
+                    popup.Show();
+                }
+                UpdateExamList(_allAvailableExams); //trigger update button content
+            }
+            catch (ExamApplicationException ex)
+            {
+                PopupMessageView popup = new PopupMessageView("ERROR", ex.Text);
+                popup.Show();
+            }
         }
     }
 }
