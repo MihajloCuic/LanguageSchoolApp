@@ -12,6 +12,7 @@ namespace LanguageSchoolApp.service.Users.Teachers
     {
         Dictionary<string, Teacher> GetAllTeachers();
         Teacher GetTeacher(string teacherId);
+        Teacher GetTeacherByCourseId(int courseId);
         void CreateTeacher(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string email, string password, string confirmPassword, List<KeyValuePair<string, string>> languageProficienciesStr);
         void UpdateTeacher(string teacherId, string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, List<KeyValuePair<string, string>> languageProficienciesStr);
         void DeleteTeacher(string teacherId);

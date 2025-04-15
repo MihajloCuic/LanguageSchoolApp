@@ -11,18 +11,15 @@ namespace LanguageSchoolApp.model.Users
         public int Id { get; set; }
         public PenaltyReason Reason { get; set; }
         public DateTime ReceivedDate { get; set; }
+        public bool Deleted { get; set; }
 
         public PenaltyPoint() { }
 
-        public PenaltyPoint(string _studentId, PenaltyReason _reason, DateTime _receivedDate) { 
-            Id = GenerateId(_studentId, _receivedDate, _reason);
+        public PenaltyPoint(int _id, PenaltyReason _reason, DateTime _receivedDate) {
+            Id = _id;
             Reason = _reason;
             ReceivedDate = _receivedDate;
-        }
-
-        private int GenerateId(string studentId, DateTime receivedDate, PenaltyReason reason) {
-            string combined = studentId + receivedDate.ToString("ddMMyyyy") + reason.ToString();
-            return combined.GetHashCode();
+            Deleted = false;
         }
     }
 }

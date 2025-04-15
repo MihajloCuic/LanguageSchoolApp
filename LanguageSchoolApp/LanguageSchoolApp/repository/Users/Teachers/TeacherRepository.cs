@@ -35,6 +35,11 @@ namespace LanguageSchoolApp.repository.Users.Teachers
             return allTeachers[teacherId];
         }
 
+        public Teacher GetTeacherByCourseId(int courseId)
+        { 
+            return allTeachers.Where(teacher => teacher.Value.MyCoursesIds.Contains(courseId)).Select(teacher => teacher.Value).First();
+        }
+
         public void AddTeacher(Teacher teacher)
         { 
             allTeachers.Add(teacher.Email, teacher);

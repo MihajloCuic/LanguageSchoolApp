@@ -6,7 +6,9 @@
       "LanguageLevel": 3
     },
     "MaxParticipants": 25,
-    "ParticipantsIds": [],
+    "ParticipantsIds": [
+      "student@gmail.com"
+    ],
     "Duration": 5,
     "ClassPeriods": [
       {
@@ -22,7 +24,7 @@
         "StartTime": "20:30:00"
       }
     ],
-    "BeginningDate": "2025-12-13T00:00:00",
+    "BeginningDate": "2025-03-29T00:00:00",
     "CourseType": 0
   },
   "1": {

@@ -6,12 +6,14 @@ using LanguageSchoolApp.repository.Courses;
 using LanguageSchoolApp.repository.Exams;
 using LanguageSchoolApp.repository.Notifications;
 using LanguageSchoolApp.repository.Users.Directors;
+using LanguageSchoolApp.repository.Users.PenaltyPoints;
 using LanguageSchoolApp.repository.Users.Students;
 using LanguageSchoolApp.repository.Users.Teachers;
 using LanguageSchoolApp.service.Courses;
 using LanguageSchoolApp.service.Exams;
 using LanguageSchoolApp.service.Notifications;
 using LanguageSchoolApp.service.Users.Directors;
+using LanguageSchoolApp.service.Users.PenaltyPoints;
 using LanguageSchoolApp.service.Users.Students;
 using LanguageSchoolApp.service.Users.Teachers;
 using Microsoft.Extensions.DependencyInjection;
@@ -58,6 +60,9 @@ namespace LanguageSchoolApp
 
             services.AddSingleton<IExamApplicationRepository, ExamApplicationRepository>();
             services.AddSingleton<IExamApplicationService, ExamApplicationService>();
+
+            services.AddSingleton<IPenaltyPointsRepository, PenaltyPointRepository>();
+            services.AddSingleton<IPenaltyPointService, PenaltyPointService>();
         }
     }
 

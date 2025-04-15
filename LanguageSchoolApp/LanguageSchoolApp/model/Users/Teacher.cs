@@ -10,7 +10,7 @@ namespace LanguageSchoolApp.model.Users
 {
     public class Teacher : User
     {
-        public double Grade { get; set; }
+        public List<int> MyGrades { get; set; }
         public List<int> MyCoursesIds {  get; set; }
         public List<int> MyExamsIds { get; set; }
         public List<LanguageProficiency> LanguageProficiencies { get; set; }
@@ -19,10 +19,10 @@ namespace LanguageSchoolApp.model.Users
 
         public Teacher(string _name, string _surname, Gender _gender,
                     DateTime _birthday, string _phoneNumber, string _email,
-                    string _password, double _grade, List<int> _myCoursesIds, List<int> _myExamsIds,
+                    string _password, List<int> _myGrades, List<int> _myCoursesIds, List<int> _myExamsIds,
                     List<LanguageProficiency> _languageProficiencies)
         :base(_name, _surname, _gender, _birthday, _phoneNumber, _email, _password) { 
-            Grade = _grade;
+            MyGrades = _myGrades;
             MyCoursesIds = _myCoursesIds;
             MyExamsIds = _myExamsIds;
             LanguageProficiencies = _languageProficiencies;
@@ -32,10 +32,24 @@ namespace LanguageSchoolApp.model.Users
                     DateTime _birthday, string _phoneNumber, string _email,
                     string _password, List<LanguageProficiency> _languageProficiencies) 
         :base(_name, _surname, _gender, _birthday, _phoneNumber, _email, _password) { 
-            Grade = 0.0;
+            MyGrades = new List<int>();
             MyCoursesIds = new List<int>();
             MyExamsIds = new List<int>();
             LanguageProficiencies = _languageProficiencies;
+        }
+
+        public double CalculateAverageGrade()
+        {
+            int sum = 0;
+            foreach (int grade in MyGrades) 
+            { 
+                sum += grade;
+            }
+            if (MyGrades.Count == 0)
+            {
+                return 0.0;
+            }
+            return (double)sum / MyGrades.Count;
         }
     }
 }

@@ -1,0 +1,413 @@
+﻿<UserControl x:Class="LanguageSchoolApp.view.Courses.ActiveCourseView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LanguageSchoolApp.view.Courses"
+             mc:Ignorable="d" 
+             d:DesignHeight="489" d:DesignWidth="653">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Margin="27,28,27,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="279"/>
+                <ColumnDefinition Width="31"/>
+                <ColumnDefinition Width="289"/>
+            </Grid.ColumnDefinitions>
+            <Border CornerRadius="20"
+                    Background="#fff"
+                    BorderThickness="1">
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="#000" Opacity="0.10"/>
+                </Border.BorderBrush>
+                <Border.Effect>
+                    <DropShadowEffect Color="#000"
+                      Direction="315"
+                      ShadowDepth="5"
+                      BlurRadius="10"
+                      Opacity="0.5"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Content="{Binding LanguageProficiency}"
+                           Margin="14,19,0,0"
+                           FontSize="24"
+                           FontFamily="Cambria"
+                           FontWeight="Bold"
+                           Grid.Row="0"/>
+                    <WrapPanel Orientation="Vertical"
+                               Grid.Row="1"
+                               Margin="14,0,0,0">
+                        <WrapPanel Orientation="Horizontal">
+                            <Label Content="Beginning Date:"
+                                   FontSize="15"
+                                   FontFamily="Cambria"/>
+                            <Label Content="{Binding BeginningDate, StringFormat=\{0:dd.MM.yyyy\}}"
+                                   FontSize="15"
+                                   FontFamily="Cambria"/>
+                        </WrapPanel>
+                        <WrapPanel Orientation="Horizontal">
+                            <Label Content="Duration:"
+                                   FontSize="15"
+                                   FontFamily="Cambria"/>
+                            <Label Content="{Binding Duration}"
+                                   FontSize="15"
+                                   FontFamily="Cambria"/>
+                        </WrapPanel>
+                        <WrapPanel Orientation="Horizontal">
+                            <Label Content="Course Type:"
+                                   FontSize="15"
+                                   FontFamily="Cambria"/>
+                            <Label Content="{Binding CourseType}"
+                                   FontSize="15"
+                                   FontFamily="Cambria"/>
+                        </WrapPanel>
+                    </WrapPanel>
+                    <Button Style="{StaticResource RoundedButtonStyle}"
+                            Content="Drop out"
+                            HorizontalAlignment="Right"
+                            Margin="0,13,29,22"
+                            Background="red"
+                            Foreground="#fff"
+                            FontFamily="Cambria"
+                            FontSize="12"
+                            Padding="20,0,20,0"
+                            Grid.Row="2"
+                            FontWeight="SemiBold"/>
+                </Grid>
+            </Border>
+            <Border Grid.Column="2"
+                    CornerRadius="20"
+                    Background="#fff"
+                    BorderThickness="1">
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="#000" Opacity="0.10"/>
+                </Border.BorderBrush>
+                <Border.Effect>
+                    <DropShadowEffect Color="#000"
+                      Direction="315"
+                      ShadowDepth="5"
+                      BlurRadius="10"
+                      Opacity="0.5"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Teacher"
+                           FontFamily="Cambria"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           Margin="0,20,0,0"/>
+                    <WrapPanel Orientation="Vertical" Margin="23,5,0,0" Grid.Row="1">
+                        <WrapPanel Orientation="Horizontal">
+                            <Label Content="Name:"
+                                   FontFamily="Cambria"
+                                   FontSize="15"/>
+                            <Label Content="{Binding TeacherName}"
+                                   FontFamily="Cambria"
+                                   FontSize="15"/>
+                        </WrapPanel>
+                        <WrapPanel Orientation="Horizontal">
+                            <Label Content="Surname:"
+                                   FontFamily="Cambria"
+                                   FontSize="15"/>
+                            <Label Content="{Binding TeacherSurname}"
+                                   FontFamily="Cambria"
+                                   FontSize="15"/>
+                        </WrapPanel>
+                        <WrapPanel Orientation="Horizontal">
+                            <Label Content="Average Grade:"
+                                   FontFamily="Cambria"
+                                   FontSize="15"/>
+                            <Label Content="{Binding AverageGrade}"
+                                   FontFamily="Cambria"
+                                   FontSize="15"/>
+                        </WrapPanel>
+                    </WrapPanel>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Margin="23,25,5,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                               Text="Grade Teacher:"
+                                               FontFamily="Cambria"
+                                               FontSize="12"
+                                               VerticalAlignment="Center"/>
+                                <TextBox Grid.Column="1"
+                                         Text="{Binding TeachersGrade}"
+                                         Height="23"
+                                         Width="24"
+                                         VerticalContentAlignment="Bottom"
+                                         HorizontalContentAlignment="Right"
+                                         BorderThickness="0"
+                                         Background="Transparent"
+                                         VerticalAlignment="Center"/>
+                            </Grid>
+                            <Border BorderBrush="#000" Grid.Row="1" Width="101"
+                                    HorizontalAlignment="Left"
+                                    BorderThickness="0,0,0,1" Margin="0,0,0,24"/>
+                        </Grid>
+
+                        <Button Grid.Column="1"
+                                Content="Confirm"
+                                Style="{StaticResource RoundedButtonStyle}"
+                                Background="#2E6C7B"
+                                Foreground="#fff"
+                                FontFamily="Cambria"
+                                HorizontalAlignment="Right"
+                                FontSize="12"
+                                Height="34"
+                                Padding="20,0,20,0"
+                                Margin="0,0,20,0"/>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1" Margin="27,24,27,28">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="404"/>
+                <ColumnDefinition Width="31"/>
+                <ColumnDefinition Width="164"/>
+            </Grid.ColumnDefinitions>
+            <Border CornerRadius="20"
+                    Background="#fff"
+                    BorderThickness="1">
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="#000" Opacity="0.10"/>
+                </Border.BorderBrush>
+                <Border.Effect>
+                    <DropShadowEffect Color="#000"
+                      Direction="315"
+                      ShadowDepth="5"
+                      BlurRadius="10"
+                      Opacity="0.5"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Schedule"
+                           FontFamily="Cambria"
+                           FontSize="20"
+                           FontWeight="Medium"
+                           HorizontalAlignment="Center"/>
+                    <Border BorderThickness="0,1,0,1" Grid.Row="1">
+                        <Border.BorderBrush>
+                            <SolidColorBrush Color="#000" Opacity="0.10"/>
+                        </Border.BorderBrush>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Content="Monday"
+                                   FontFamily="Cambria"
+                                   FontSize="9"
+                                   HorizontalAlignment="Center"/>
+                            <Label Content="Tuesday"
+                                   Grid.Column="1"
+                                   FontFamily="Cambria"
+                                   FontSize="9"
+                                   HorizontalAlignment="Center"/>
+                            <Label Content="Wednesday"
+                                   Grid.Column="2"
+                                   FontFamily="Cambria"
+                                   FontSize="9"
+                                   HorizontalAlignment="Center"/>
+                            <Label Content="Thursday"
+                                   Grid.Column="3"
+                                   FontFamily="Cambria"
+                                   FontSize="9"
+                                   HorizontalAlignment="Center"/>
+                            <Label Content="Friday"
+                                   Grid.Column="4"
+                                   FontFamily="Cambria"
+                                   FontSize="9"
+                                   HorizontalAlignment="Center"/>
+                            <Label Content="Saturday"
+                                   Grid.Column="5"
+                                   FontFamily="Cambria"
+                                   FontSize="9"
+                                   HorizontalAlignment="Center"/>
+                            <Label Content="Sunday"
+                                   Grid.Column="6"
+                                   FontFamily="Cambria"
+                                   FontSize="9"
+                                   HorizontalAlignment="Center"/>
+                        </Grid>
+                    </Border>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <ItemsControl Grid.Column="0" HorizontalAlignment="Center" ItemsSource="{Binding MondayClasses}"
+                                      Background="Transparent" BorderThickness="0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Label FontFamily="Cambria" HorizontalAlignment="Center" FontSize="9" Content="{Binding StartTime, StringFormat=\{0:HXPath:mMode\}}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <ItemsControl Grid.Column="1" HorizontalAlignment="Center" ItemsSource="{Binding MondayClasses}"
+                                      Background="Transparent" BorderThickness="0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Label FontFamily="Cambria" HorizontalAlignment="Center" FontSize="9" Content="{Binding StartTime, StringFormat=\{0:HXPath:mMode\}}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <ItemsControl Grid.Column="2" HorizontalAlignment="Center" ItemsSource="{Binding TuesdayClasses}"
+                                      Background="Transparent" BorderThickness="0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Label FontFamily="Cambria" HorizontalAlignment="Center" FontSize="9" Content="{Binding StartTime, StringFormat=\{0:HXPath:mMode\}}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <ItemsControl Grid.Column="3" HorizontalAlignment="Center" ItemsSource="{Binding WednesdayClasses}"
+                                      Background="Transparent" BorderThickness="0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Label FontFamily="Cambria" HorizontalAlignment="Center" FontSize="9" Content="{Binding StartTime, StringFormat=\{0:HXPath:mMode\}}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <ItemsControl Grid.Column="4" HorizontalAlignment="Center" ItemsSource="{Binding ThursdayClasses}"
+                                      Background="Transparent" BorderThickness="0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Label FontFamily="Cambria" HorizontalAlignment="Center" FontSize="9" Content="{Binding StartTime, StringFormat=\{0:HXPath:mMode\}}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <ItemsControl Grid.Column="5" HorizontalAlignment="Center" ItemsSource="{Binding SaturdayClasses}"
+                                      Background="Transparent" BorderThickness="0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Label FontFamily="Cambria" HorizontalAlignment="Center" FontSize="9" Content="{Binding StartTime, StringFormat=\{0:HXPath:mMode\}}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                        <ItemsControl Grid.Column="6" HorizontalAlignment="Center" ItemsSource="{Binding SundayClasses}"
+                                      Background="Transparent" BorderThickness="0">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Label FontFamily="Cambria" HorizontalAlignment="Center" FontSize="9" Content="{Binding StartTime, StringFormat=\{0:HXPath:mMode\}}"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </Grid>
+            </Border>
+            <Border CornerRadius="20"
+                    Grid.Column="2"
+                    Background="#fff"
+                    BorderThickness="1">
+                <Border.BorderBrush>
+                    <SolidColorBrush Color="#000" Opacity="0.10"/>
+                </Border.BorderBrush>
+                <Border.Effect>
+                    <DropShadowEffect Color="#000"
+                                   Direction="315"
+                                   ShadowDepth="5"
+                                   BlurRadius="10"
+                                   Opacity="0.5"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Penalty Points" FontFamily="Cambria" FontSize="15" HorizontalAlignment="Center"
+                           Margin="0,10,0,0"/>
+                    <Border BorderBrush="#000" Width="112"
+                            HorizontalAlignment="Center"
+                            BorderThickness="0,0,0,1"/>
+                    <ItemsControl Grid.Row="1" Margin="14,17,14,10" ItemsSource="{Binding PenaltyPoints}"
+                                  BorderThickness="0" Background="Transparent">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Label Content="{Binding Reason}" HorizontalAlignment="Center" FontFamily="Cambria" FontSize="12"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -11,11 +11,49 @@ using LanguageSchoolApp.model.Users;
 
 namespace LanguageSchoolApp.repository.Users.PenaltyPoints
 {
-    public class PenaltyPointRepository
+    public class PenaltyPointRepository : IPenaltyPointsRepository
     {
-        public static readonly string filename = Path.Combine("..", "..", "..", "data", "PenaltyPoints.json");
+        private static readonly string filename = Path.Combine("..", "..", "..", "data", "PenaltyPoints.json");
+        private readonly Dictionary<int, PenaltyPoint> allPenaltyPoints;
 
-        public static void WriteToFile(Dictionary<int, PenaltyPoint> allPenaltyPoints)
+        public PenaltyPointRepository() 
+        {
+            allPenaltyPoints = ReadFromFile();
+        }
+
+        public Dictionary<int, PenaltyPoint> GetAllPenaltyPoints()
+        { 
+            return allPenaltyPoints; 
+        }
+
+        public List<PenaltyPoint> GetAllPenaltyPointsByIds(List<int> penaltyPointsIds)
+        { 
+            return allPenaltyPoints.Where(penaltyPoint => penaltyPointsIds.Contains(penaltyPoint.Value.Id)).Select(penaltyPoint => penaltyPoint.Value).ToList();
+        }
+
+        public PenaltyPoint GetPenaltyPoint(int id)
+        {
+            return allPenaltyPoints[id];
+        }
+
+        public bool PenaltyPointExists(int id)
+        { 
+            return allPenaltyPoints.ContainsKey(id);
+        }
+
+        public void CreatePenaltyPoint(PenaltyPoint penaltyPoint)
+        {
+            allPenaltyPoints.Add(penaltyPoint.Id, penaltyPoint);
+            WriteToFile();
+        }
+
+        public void UpdatePenaltyPoint(PenaltyPoint penaltyPoint) 
+        {
+            allPenaltyPoints[penaltyPoint.Id] = penaltyPoint;
+            WriteToFile();
+        }
+
+        public  void WriteToFile()
         {
             try
             {
@@ -30,17 +68,17 @@ namespace LanguageSchoolApp.repository.Users.PenaltyPoints
 
         public static Dictionary<int, PenaltyPoint> ReadFromFile()
         {
-            Dictionary<int, PenaltyPoint> allPenaltyPoints = new Dictionary<int, PenaltyPoint>();
+            Dictionary<int, PenaltyPoint> penaltyPoints = new Dictionary<int, PenaltyPoint>();
             try
             {
                 string data = File.ReadAllText(filename);
-                allPenaltyPoints = JsonConvert.DeserializeObject<Dictionary<int, PenaltyPoint>>(data);
+                penaltyPoints = JsonConvert.DeserializeObject<Dictionary<int, PenaltyPoint>>(data);
             }
             catch (IOException e)
             {
                 throw new Exception(e.Message);
             }
-            return allPenaltyPoints;
+            return penaltyPoints;
         }
     }
 }

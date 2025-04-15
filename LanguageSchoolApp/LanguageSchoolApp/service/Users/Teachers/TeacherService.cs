@@ -31,6 +31,11 @@ namespace LanguageSchoolApp.service.Users.Teachers
             return teacherRepository.GetTeacher(teacherId);
         }
 
+        public Teacher GetTeacherByCourseId(int courseId) 
+        { 
+            return teacherRepository.GetTeacherByCourseId(courseId);
+        }
+
         public void CreateTeacher(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string email, string password, string confirmPassword, List<KeyValuePair<string, string>> languageProficienciesStr) 
         {
             ValidateTeacher(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword, languageProficienciesStr);
