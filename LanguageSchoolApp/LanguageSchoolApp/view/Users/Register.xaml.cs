@@ -25,6 +25,8 @@ namespace LanguageSchoolApp.view.Users
         public Register()
         {
             InitializeComponent();
+            Button confirmButton = (Button)FindName("ConfirmButton");
+            confirmButton.Content = "Register";
             DataContext = new RegisterViewModel();
             if (DataContext is RegisterViewModel viewModel) 
             {
@@ -35,6 +37,8 @@ namespace LanguageSchoolApp.view.Users
         public Register(Student student) 
         {
             InitializeComponent();
+            Button confirmButton = (Button)FindName("ConfirmButton");
+            confirmButton.Content = "Confirm";
             if (student.Gender.Equals(Gender.Male))
             {
                 RadioButton maleRadioButton = (RadioButton)FindName("MaleButton");

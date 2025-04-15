@@ -203,7 +203,7 @@
                 </Border>
                 <Label FontFamily="Cambria" FontSize="13" Content="{Binding GenderError}" Margin="48,532,270,45" Foreground="#fa1302"/>
 
-                <Button Content="Register"
+                <Button x:Name="ConfirmButton"
                         Background="#2E6C7B"
                         Foreground="#fff"
                         FontFamily="Cambria Math"
