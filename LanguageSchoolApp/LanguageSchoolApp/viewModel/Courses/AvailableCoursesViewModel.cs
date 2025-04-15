@@ -112,10 +112,9 @@ namespace LanguageSchoolApp.viewModel.Courses
         }
 
         private bool CanApply(int courseId) { return _student.EnrolledCourseId == -1; }
-        private async void Apply(int courseId) 
+        private void Apply(int courseId) 
         {
             Course course = courseService.GetCourse(courseId);
-            //TODO: Create Popup that tells user he applied or withdrew his course application
             try
             {
                 int courseApplicationId = courseApplicationService.GenerateId(StudentId, courseId);
@@ -131,7 +130,7 @@ namespace LanguageSchoolApp.viewModel.Courses
                     PopupMessageView popupMessage = new PopupMessageView("SUCCESS", $"You successfully signed up for {course.LanguageProficiency.LanguageName} {course.LanguageProficiency.LanguageLevel.ToString()} !");
                     popupMessage.Show();
                 }
-                UpdateCourseList(_allAvailableCourses); //update button content
+                UpdateCourseList(_allAvailableCourses); // trigger update button content
             }
             catch (CourseApplicationException ex)
             {

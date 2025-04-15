@@ -173,7 +173,8 @@
                                             HorizontalAlignment="Center"
                                             Style="{StaticResource SmallRoundedButtonStyle}">
                                         <Button.Content>
-                                            <MultiBinding Converter="{StaticResource StudentAppliedToStringConverter}">
+                                            <MultiBinding Converter="{StaticResource StudentAppliedToStringConverter}"
+                                                          ConverterParameter="course">
                                                 <Binding Path="DataContext.StudentId"
                                                          RelativeSource="{RelativeSource AncestorType=UserControl}"/>
                                                 <Binding Path="Id"/>

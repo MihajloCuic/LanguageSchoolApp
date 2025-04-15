@@ -125,11 +125,10 @@
                                                VerticalAlignment="Center"
                                                Grid.Column="1"/>
                                 </Grid>
-                                
+
                                 <Button Command="{Binding DataContext.ApplyCommand,
                                         RelativeSource={RelativeSource AncestorType=UserControl}}"
                                         CommandParameter="{Binding Id}"
-                                        Content="Apply"
                                         Grid.Row="6"
                                         Background="#2E6C7B"
                                         Foreground="#fff"
@@ -141,7 +140,16 @@
                                         Margin="0,0,0,10"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Bottom"
-                                        Style="{StaticResource SmallRoundedButtonStyle}"/>  
+                                        Style="{StaticResource SmallRoundedButtonStyle}">
+                                    <Button.Content>
+                                        <MultiBinding Converter="{StaticResource StudentAppliedToStringConverter}"
+                                                      ConverterParameter="exam">
+                                            <Binding Path="DataContext.StudentId"
+                                                     RelativeSource="{RelativeSource AncestorType=UserControl}"/>
+                                            <Binding Path="Id"/>
+                                        </MultiBinding>
+                                    </Button.Content>
+                                </Button>
                             </Grid>
                         </Border>
                     </DataTemplate>

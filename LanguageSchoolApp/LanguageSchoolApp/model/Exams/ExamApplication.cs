@@ -10,14 +10,18 @@ namespace LanguageSchoolApp.model.Exams
 {
     public class ExamApplication
     {
-        public Student Student {  get; set; }
-        public Exam Exam { get; set; }
+        public int Id { get; set; }
+        public string StudentId {  get; set; }
+        public int ExamId { get; set; }
+        public AcceptationType Acceptance { get; set; }
 
         public ExamApplication() { }
 
-        public ExamApplication(Student _student, Exam _exam) { 
-            Student = _student;
-            Exam = _exam;
+        public ExamApplication(int _id, string _studentId, int _examId, AcceptationType _acceptance) { 
+            Id = _id;
+            StudentId = _studentId;
+            ExamId = _examId;
+            Acceptance = _acceptance;
         }
     }
 }
