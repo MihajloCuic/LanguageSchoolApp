@@ -125,7 +125,7 @@ namespace LanguageSchoolApp.viewModel
             if (currentUser is Student student)
             {
                 AvailableCoursesVM = new AvailableCoursesViewModel(student);
-                ActiveCourseVM = new ActiveCourseViewModel();
+                ActiveCourseVM = new ActiveCourseViewModel(student);
                 AvailableExamsVM = new AvailableExamsViewModel(student);
                 StudentExamsVM = new StudentExamsViewModel(student);
                 FinishedCoursesVM = new FinishedCoursesViewModel(student);
@@ -216,9 +216,9 @@ namespace LanguageSchoolApp.viewModel
 
         private bool CanChangeToMenuItem2(object? parameter)
         {
-            if (CurrentUser is Student)
+            if (CurrentUser is Student student)
             {
-                return !(CurrentView is ActiveCourseViewModel);
+                return !(CurrentView is ActiveCourseViewModel) && student.EnrolledCourseId != -1;
             }
             if (CurrentUser is Teacher)
             {
