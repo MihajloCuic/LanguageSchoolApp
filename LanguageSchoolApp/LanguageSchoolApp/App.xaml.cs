@@ -52,6 +52,9 @@ namespace LanguageSchoolApp
 
             services.AddSingleton<INotificationRepository, NotificationRepository>();
             services.AddSingleton<INotificationService, NotificationService>();
+
+            services.AddSingleton<ICourseApplicationRepository, CourseApplicationRepository>();
+            services.AddSingleton<ICourseApplicationService, CourseApplicationService>();
         }
     }
 

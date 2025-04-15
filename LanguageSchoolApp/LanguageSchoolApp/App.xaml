@@ -29,6 +29,7 @@
             <converter:ExamPartValueConverter x:Key="ExamPartValueConverter"/>
             <converter:CourseDateTimeToStringConverter x:Key="CourseCardButtonTitleConverter"/>
             <converter:ExamDateTimeToStringConverter x:Key="ExamCardButtonTitleConverter"/>
+            <converter:StudentAppliedToStringConverter x:Key="StudentAppliedToStringConverter"/>
 
             <DataTemplate DataType="{x:Type viewModelUsers:LoginViewModel}">
                 <viewUsers:Login/>

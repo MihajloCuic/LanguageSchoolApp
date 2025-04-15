@@ -80,4 +80,11 @@ namespace LanguageSchoolApp.model
         Descending,
         Ascending
     }
+
+    public enum AcceptationType
+    { 
+        Pending,
+        Accepted,
+        Denied
+    }
 }

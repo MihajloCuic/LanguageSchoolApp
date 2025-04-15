@@ -124,7 +124,7 @@ namespace LanguageSchoolApp.viewModel
 
             if (currentUser is Student student)
             {
-                AvailableCoursesVM = new AvailableCoursesViewModel();
+                AvailableCoursesVM = new AvailableCoursesViewModel(student);
                 ActiveCourseVM = new ActiveCourseViewModel();
                 AvailableExamsVM = new AvailableExamsViewModel(student);
                 StudentExamsVM = new StudentExamsViewModel(student);
