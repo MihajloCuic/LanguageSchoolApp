@@ -1,0 +1,43 @@
+﻿<Window x:Class="LanguageSchoolApp.view.PopupMessageView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LanguageSchoolApp.view"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="CanMinimize"
+        Title="PopupMessageView" Height="150" Width="200">
+    <Border CornerRadius="20"
+            Background="#fff"
+            BorderThickness="1">
+        <Border.BorderBrush>
+            <SolidColorBrush Color="#000" Opacity="0.15"/>
+        </Border.BorderBrush>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Border x:Name="RectangleBorder" CornerRadius="20,20,0,0" BorderThickness="0">
+                <Rectangle/>
+            </Border>
+            <Label x:Name="TitleLabel" FontFamily="Cambria" 
+                   FontWeight="Bold" FontSize="18" 
+                   HorizontalAlignment="Center" Grid.Row="1"/>
+            <TextBlock x:Name="MessageContentTB"
+                       Width="130"
+                       HorizontalAlignment="Center"
+                       FontFamily="Cambria"
+                       FontSize="12"
+                       Grid.Row="2"
+                       Margin="0,18,0,0"
+                       TextWrapping="Wrap"
+                       TextAlignment="Center"/>
+        </Grid>
+    </Border>
+</Window>
