@@ -1,6 +1,9 @@
 ﻿using LanguageSchoolApp.core;
+using LanguageSchoolApp.exceptions.Courses;
 using LanguageSchoolApp.model.Courses;
+using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.service.Courses;
+using LanguageSchoolApp.view;
 using LanguageSchoolApp.view.Courses;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -16,6 +19,8 @@ namespace LanguageSchoolApp.viewModel.Courses
     public class AvailableCoursesViewModel : ObservableObject
     {
         private readonly ICourseService courseService;
+        private readonly ICourseApplicationService courseApplicationService;
+        private Student _student;
         public CourseFilterViewModel CourseFilterVM { get; }
         public CourseSortingViewModel CourseSortingVM { get; }
         public CancelCourseFiltersViewModel CancelCourseFiltersVM { get; }
@@ -23,6 +28,7 @@ namespace LanguageSchoolApp.viewModel.Courses
         private ObservableCollection<Course> _availableCourses;
         private List<Course> _allAvailableCourses;
         private int _pageNumber;
+        private string _studentId;
 
         public ObservableCollection<Course> AvailableCourses
         {
@@ -42,6 +48,15 @@ namespace LanguageSchoolApp.viewModel.Courses
                 OnPropertyChanged();
             }
         }
+        public string StudentId
+        { 
+            get { return _studentId; }
+            set
+            { 
+                _studentId = value;
+                OnPropertyChanged();
+            }
+        }
 
         public RelayCommand<int> ApplyCommand { get; set; }
         public RelayCommand<List<ClassPeriod>> ScheduleCommand { get; set; }
@@ -49,17 +64,19 @@ namespace LanguageSchoolApp.viewModel.Courses
         public RelayCommand<object> NextPageCommand { get; set; }
 
 
-        public AvailableCoursesViewModel()
+        public AvailableCoursesViewModel(Student student)
         {
             courseService = App.ServiceProvider.GetService<ICourseService>();
+            courseApplicationService = App.ServiceProvider.GetService<ICourseApplicationService>();
             PageNumber = 1;
+            _student = student;
+            StudentId = student.Email;
             _allAvailableCourses = courseService.GetAllAvailableCourses();
             AvailableCourses = new ObservableCollection<Course>(GetSlicedAvailableCourses());
 
             CourseFilterVM = new CourseFilterViewModel(this);
             CourseSortingVM = new CourseSortingViewModel(this);
             CancelCourseFiltersVM = new CancelCourseFiltersViewModel(CourseFilterVM);
-
 
             ApplyCommand = new RelayCommand<int>(Apply, CanApply);
             ScheduleCommand = new RelayCommand<List<ClassPeriod>>(SeeSchedule, CanSeeSchedule);
@@ -94,10 +111,33 @@ namespace LanguageSchoolApp.viewModel.Courses
             return _allAvailableCourses.Skip(elementsToSkip).Take(6).ToList();
         }
 
-        private bool CanApply(int courseId) { return true; }
-        private void Apply(int courseId) 
-        { 
-            //TODO: Create Course Application and Cancel Application
+        private bool CanApply(int courseId) { return _student.EnrolledCourseId == -1; }
+        private async void Apply(int courseId) 
+        {
+            Course course = courseService.GetCourse(courseId);
+            //TODO: Create Popup that tells user he applied or withdrew his course application
+            try
+            {
+                int courseApplicationId = courseApplicationService.GenerateId(StudentId, courseId);
+                if (courseApplicationService.CourseApplicationExists(courseApplicationId))
+                {
+                    courseApplicationService.DeleteCourseApplication(courseApplicationId);
+                    PopupMessageView popupMessage = new PopupMessageView("SUCCESS", $"You successfully withdrew from {course.LanguageProficiency.LanguageName} {course.LanguageProficiency.LanguageLevel.ToString()} !");
+                    popupMessage.Show();
+                }
+                else
+                {
+                    courseApplicationService.CreateCourseApplication(StudentId, courseId);
+                    PopupMessageView popupMessage = new PopupMessageView("SUCCESS", $"You successfully signed up for {course.LanguageProficiency.LanguageName} {course.LanguageProficiency.LanguageLevel.ToString()} !");
+                    popupMessage.Show();
+                }
+                UpdateCourseList(_allAvailableCourses); //update button content
+            }
+            catch (CourseApplicationException ex)
+            {
+                PopupMessageView popupMessage = new PopupMessageView("ERROR", ex.Text);
+                popupMessage.Show();
+            }
         }
 
         private bool CanSeeSchedule(List<ClassPeriod> classes) { return true; }
@@ -105,7 +145,6 @@ namespace LanguageSchoolApp.viewModel.Courses
         { 
             CourseSchedule schedule = new CourseSchedule(classes);
             schedule.Show();
-            //TODO: Create Schedule display
         }
 
         private bool CanNextPage(object? parameter) { return PageNumber < (double)_allAvailableCourses.Count / 6; }
