@@ -1,5 +1,6 @@
 ﻿using LanguageSchoolApp.exceptions.Users;
 using LanguageSchoolApp.model;
+using LanguageSchoolApp.service.Courses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +9,19 @@ using System.Threading.Tasks;
 using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.repository.Users.Students;
 using LanguageSchoolApp.service.Validation;
+using LanguageSchoolApp.model.Courses;
 
 namespace LanguageSchoolApp.service.Users.Students
 {
     public class StudentService : IStudentService
     {
         private readonly IStudentRepository studentRepository;
+        private readonly ICourseApplicationService courseApplicationService;
 
-        public StudentService(IStudentRepository _studentRepository)
+        public StudentService(IStudentRepository _studentRepository, ICourseApplicationService _courseApplicationService)
         {
             studentRepository = _studentRepository;
+            courseApplicationService = _courseApplicationService;
         }
 
         public Dictionary<string, Student> GetAllStudents() 
@@ -74,6 +78,32 @@ namespace LanguageSchoolApp.service.Users.Students
                 throw new UserValidationException("Professional Degree is not valid", UserValidationExceptionType.InvalidProfessionalDegree);
             }
             return true;
+        }
+
+        public void WithdrawStudentFromCourse(string studentId)
+        { 
+            Student student = GetStudent(studentId);
+            student.EnrolledCourseId = -1;
+            studentRepository.UpdateStudent(studentId, student);
+
+            List<CourseApplication> studentsPendingApplications = courseApplicationService.GetCourseApplicationsByStudentId(studentId);
+            foreach (CourseApplication application in studentsPendingApplications)
+            { 
+                courseApplicationService.UnpauseCourseApplication(application.Id);
+            }
+        }
+
+        public void EnrollStudentToCourse(string studentId, int courseId) 
+        {
+            Student student = GetStudent(studentId);
+            student.EnrolledCourseId = courseId;
+            studentRepository.UpdateStudent(studentId , student);
+
+            List<CourseApplication> studentPendingApplications = courseApplicationService.GetCourseApplicationsByStudentId(studentId);
+            foreach (CourseApplication application in studentPendingApplications)
+            {
+                courseApplicationService.PauseCourseApplication(application.Id);
+            }
         }
     }
 }

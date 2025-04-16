@@ -165,6 +165,15 @@ namespace LanguageSchoolApp.repository.Courses
             WriteToFile();
         }
 
+        public void DeleteAllCoursesByIds(List<int> courseIds)
+        {
+            foreach (int id in courseIds)
+            {
+                allCourses.Remove(id);
+            }
+            WriteToFile();
+        }
+
         public void WriteToFile() 
         {
             try {

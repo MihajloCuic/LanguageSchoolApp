@@ -22,6 +22,7 @@ namespace LanguageSchoolApp.service.Exams
         Exam CreateExam(string languageName, string languageLevelStr, string examDateStr, int maxParticipants, Teacher teacher);
         void UpdateExam(int examId, string languageName, string languageLevelStr, string examDateStr, int maxParticipants, Teacher teacher);
         void DeleteExam(int examId);
+        void DeleteAllExamsByIds(List<int> examIds);
         int GenerateId(LanguageProficiency languageProficiency, DateTime examDate, string teacherId);
         List<ExamResultsDTO> GetExamResultsDTO(List<ExamResults> examResults);
     }

@@ -131,7 +131,7 @@
                             <Label Content="Average Grade:"
                                    FontFamily="Cambria"
                                    FontSize="15"/>
-                            <Label Content="{Binding AverageGrade}"
+                            <Label Content="{Binding AverageGrade, StringFormat={}{0:F2}}"
                                    FontFamily="Cambria"
                                    FontSize="15"/>
                         </WrapPanel>
@@ -156,7 +156,8 @@
                                                FontFamily="Cambria"
                                                FontSize="12"
                                                VerticalAlignment="Center"/>
-                                <TextBox Grid.Column="1"
+                                <TextBox x:Name="TeachersGradeTextBox"
+                                         Grid.Column="1"
                                          Text="{Binding TeachersGrade}"
                                          Height="14"
                                          Width="24"
@@ -171,8 +172,9 @@
                                     BorderThickness="0,0,0,1" Margin="0,4,0,0"/>
                         </Grid>
 
-                        <Button
+                        <Button x:Name="GradeTeacherButton"
                                 Content="Confirm"
+                                Command="{Binding GradeTeacherCommand}"
                                 Style="{StaticResource RoundedButtonStyle}"
                                 Background="#2E6C7B"
                                 Foreground="#fff"

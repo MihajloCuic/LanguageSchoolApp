@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LanguageSchoolApp.model;
 
 namespace LanguageSchoolApp.repository.Courses
 {
@@ -26,7 +27,7 @@ namespace LanguageSchoolApp.repository.Courses
 
         public List<CourseApplication> GetAllCourseApplicationsByStudentId(string studentId)
         { 
-            return allCourseApplications.Where(courseApplication => courseApplication.Value.StudentId == studentId).Select(courseApplication => courseApplication.Value).ToList();
+            return allCourseApplications.Where(courseApplication => courseApplication.Value.StudentId == studentId && courseApplication.Value.Acceptance == AcceptationType.Pending).Select(courseApplication => courseApplication.Value).ToList();
         }
 
         public List<CourseApplication> GetAllCourseApplicationsByCourseId(int courseId)

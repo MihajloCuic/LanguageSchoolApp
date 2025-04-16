@@ -1,6 +1,15 @@
 {
   "teacher@gmail.com": {
-    "MyGrades": [],
+    "MyGrades": [
+      10,
+      7,
+      4,
+      8,
+      2,
+      10,
+      5,
+      10
+    ],
     "MyCoursesIds": [
       952824467,
       1,

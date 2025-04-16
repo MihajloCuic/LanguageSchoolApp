@@ -13,6 +13,7 @@ namespace LanguageSchoolApp.repository.Users.Teachers
         Dictionary<string, Teacher> GetAllTeachers();
         Teacher GetTeacher(string teacherId);
         Teacher GetTeacherByCourseId(int courseId);
+        bool TeacherExists(string teacherId);
         void AddTeacher(Teacher teacher);
         void UpdateTeacher(string teacherId, Teacher teacher);
         void DeleteTeacher(string teacherId);

@@ -19,5 +19,7 @@ namespace LanguageSchoolApp.service.Users.Students
         Student UpdateStudent(string studentId, string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, string professionalDegreeStr);
         void DeleteStudent(string studentId);
         bool ValidateStudent(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, string professionalDegree);
+        void WithdrawStudentFromCourse(string studentId);
+        void EnrollStudentToCourse(string studentId, int courseId);
     }
 }
