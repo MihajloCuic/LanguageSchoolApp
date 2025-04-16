@@ -72,6 +72,7 @@
                     </WrapPanel>
                     <Button Style="{StaticResource RoundedButtonStyle}"
                             Content="Drop out"
+                            Command="{Binding DropoutCommand}"
                             HorizontalAlignment="Right"
                             Margin="0,13,29,22"
                             Background="red"
@@ -157,7 +158,7 @@
                                                VerticalAlignment="Center"/>
                                 <TextBox Grid.Column="1"
                                          Text="{Binding TeachersGrade}"
-                                         Height="23"
+                                         Height="14"
                                          Width="24"
                                          VerticalContentAlignment="Bottom"
                                          HorizontalContentAlignment="Right"
@@ -165,22 +166,22 @@
                                          Background="Transparent"
                                          VerticalAlignment="Center"/>
                             </Grid>
-                            <Border BorderBrush="#000" Grid.Row="1" Width="101"
+                            <Border BorderBrush="#000" Width="101"
                                     HorizontalAlignment="Left"
-                                    BorderThickness="0,0,0,1" Margin="0,0,0,24"/>
+                                    BorderThickness="0,0,0,1" Margin="0,4,0,0"/>
                         </Grid>
 
-                        <Button Grid.Column="1"
+                        <Button
                                 Content="Confirm"
                                 Style="{StaticResource RoundedButtonStyle}"
                                 Background="#2E6C7B"
                                 Foreground="#fff"
                                 FontFamily="Cambria"
-                                HorizontalAlignment="Right"
+                                HorizontalAlignment="Left"
                                 FontSize="12"
                                 Height="34"
                                 Padding="20,0,20,0"
-                                Margin="0,0,20,0"/>
+                                Margin="185,14,0,25"/>
                     </Grid>
                 </Grid>
             </Border>

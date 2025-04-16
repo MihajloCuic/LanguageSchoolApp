@@ -46,7 +46,8 @@ namespace LanguageSchoolApp.model
     {
         MissedClass,
         ClassDisturbance,
-        AssignmentMissed
+        AssignmentMissed,
+        CourseDropout
     }
 
     public enum ExamPart
@@ -86,5 +87,13 @@ namespace LanguageSchoolApp.model
         Pending,
         Accepted,
         Denied
+    }
+
+    public enum DropoutReason
+    { 
+        Other,
+        CourseDifficult,
+        NotInterested,
+        InadequateTeachingStyle
     }
 }

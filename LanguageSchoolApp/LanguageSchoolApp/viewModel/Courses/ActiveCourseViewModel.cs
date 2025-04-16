@@ -7,6 +7,7 @@ using LanguageSchoolApp.service.Users.Teachers;
 using System.Collections.ObjectModel;
 using LanguageSchoolApp.service.Users.PenaltyPoints;
 using LanguageSchoolApp.model;
+using LanguageSchoolApp.view.Courses;
 
 namespace LanguageSchoolApp.viewModel.Courses
 {
@@ -237,8 +238,15 @@ namespace LanguageSchoolApp.viewModel.Courses
             AverageGrade = teacher.CalculateAverageGrade();
         }
 
-        public bool CanDropout(object? parameter) { return true; }
-        public void Dropout(object? parameter) { }
+        public bool CanDropout(object? parameter) 
+        { 
+            return (DateTime.Now - course.BeginningDate).TotalDays >= 7; 
+        }
+        public void Dropout(object? parameter) 
+        { 
+            DropoutFormView dropoutForm = new DropoutFormView(student.Email, course.Id);
+            dropoutForm.Show();
+        }
 
         public bool CanGradeTeacher(object? parameter) 
         {

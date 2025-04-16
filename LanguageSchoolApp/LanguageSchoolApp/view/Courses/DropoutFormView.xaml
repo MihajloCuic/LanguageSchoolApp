@@ -1,0 +1,137 @@
+﻿<Window x:Class="LanguageSchoolApp.view.Courses.DropoutFormView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LanguageSchoolApp.view.Courses"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        ResizeMode="CanMinimize"
+        Title="DropoutFormView" Height="345" Width="430">
+    <Border CornerRadius="20"
+            Background="#fff"
+            BorderThickness="1">
+        <Border.BorderBrush>
+            <SolidColorBrush Color="#000" Opacity="0.05"/>
+        </Border.BorderBrush>
+        <Grid Margin="0,16,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button Content="X"
+                    Background="Transparent"
+                    Grid.Column="1"
+                    BorderThickness="0"
+                    Height="26"
+                    FontSize="20"
+                    FontWeight="Bold"
+                    Width="17"
+                    Click="Exit"
+                    Style="{StaticResource TransparentButtonStyle}" Margin="175,0,22,0"/>
+            <Label Content="Dropout Form"
+                   FontFamily="Cambria"
+                   Grid.Row="1"
+                   HorizontalAlignment="Center"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   Grid.ColumnSpan="2"/>
+            <Border Grid.Row="2"
+                    BorderThickness="0"
+                    CornerRadius="20"
+                    Background="#fff"
+                    Margin="30,29,0,0">
+                <Border.Effect>
+                    <DropShadowEffect Color="#000"
+                                      Direction="315"
+                                      ShadowDepth="5"
+                                      BlurRadius="10"
+                                      Opacity="0.5"/>
+                </Border.Effect>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="Reason" FontFamily="Cambria" FontSize="16" HorizontalAlignment="Center"/>
+                    <StackPanel Grid.Row="1" Margin="17,17,0,0">
+                        <RadioButton Content="Course difficult"
+                                     FontFamily="Cambria"
+                                     FontSize="12"
+                                     Command="{Binding DropoutReasonCommand}"
+                                     CommandParameter="CourseDifficult"
+                                     IsChecked="True"
+                                     Margin="0,0,0,8"
+                                     Style="{StaticResource CustomRadioButtonTheme}"/>
+                        <RadioButton Content="Not interested"
+                                     FontFamily="Cambria"
+                                     FontSize="12"
+                                     Command="{Binding DropoutReasonCommand}"
+                                     CommandParameter="NotInterested"
+                                     Margin="0,0,0,8"
+                                     Style="{StaticResource CustomRadioButtonTheme}"/>
+                        <RadioButton Content="Inadequate teaching style"
+                                     FontFamily="Cambria"
+                                     FontSize="12"
+                                     Command="{Binding DropoutReasonCommand}"
+                                     CommandParameter="InadequateTeachingStyle"
+                                     Margin="0,0,0,8"
+                                     Style="{StaticResource CustomRadioButtonTheme}"/>
+                        <RadioButton Content="Other"
+                                     FontFamily="Cambria"
+                                     FontSize="12"
+                                     Command="{Binding DropoutReasonCommand}"
+                                     CommandParameter="Other"
+                                     Margin="0,0,0,34"
+                                     Style="{StaticResource CustomRadioButtonTheme}"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <Grid Grid.Row="2"
+                  Grid.Column="1"
+                  Margin="40,29,30,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Content="Please tell us more" 
+                       FontFamily="Cambria"
+                       FontSize="16"
+                       Margin="5,0,0,0"/>
+                <Border Background="#fff"
+                        Grid.Row="1"
+                        BorderThickness="0">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#000"
+                                          Direction="315"
+                                          ShadowDepth="5"
+                                          BlurRadius="10"
+                                          Opacity="0.5"/>
+                    </Border.Effect>
+                    <TextBox BorderThickness="0" Text="{Binding ReasonDetails}"
+                             FontFamily="Cambria" FontSize="12" Padding="5"/>
+                </Border>
+            </Grid>
+            <Button Content="Confirm"
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    Background="#2E6C7B"
+                    Foreground="#fff"
+                    FontFamily="Cambria Math"
+                    FontSize="14"
+                    Height="32"
+                    Width="120"
+                    Style="{StaticResource RoundedButtonStyle}" 
+                    Command="{Binding DropoutRequestCommand}"/>
+        </Grid>
+    </Border>
+</Window>
