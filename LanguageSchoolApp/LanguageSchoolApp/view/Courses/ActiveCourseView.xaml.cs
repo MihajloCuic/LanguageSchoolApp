@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LanguageSchoolApp.viewModel.Courses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,24 @@ namespace LanguageSchoolApp.view.Courses
         public ActiveCourseView()
         {
             InitializeComponent();
+            Loaded += ActiveCourseView_Loaded;
+        }
+
+        private void ActiveCourseView_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (DataContext is ActiveCourseViewModel activeCourseViewModel)
+            {
+                activeCourseViewModel.DisableTeacherGradingAction = new Action(DisableTeacherGrading);
+            }
+        }
+
+        private void DisableTeacherGrading()
+        {
+            TextBox gradeTeacherTextBox = (TextBox)FindName("TeachersGradeTextBox");
+            Button gradeTeacherButton = (Button)FindName("GradeTeacherButton");
+
+            gradeTeacherButton.IsEnabled = false;
+            gradeTeacherTextBox.IsEnabled = false;
         }
     }
 }

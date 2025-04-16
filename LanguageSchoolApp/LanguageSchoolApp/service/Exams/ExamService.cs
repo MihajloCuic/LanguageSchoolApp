@@ -11,6 +11,8 @@ using LanguageSchoolApp.model;
 using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.exceptions.Exams;
 using System.Security.Cryptography;
+using LanguageSchoolApp.exceptions.Courses;
+using LanguageSchoolApp.repository.Courses;
 
 namespace LanguageSchoolApp.service.Exams
 {
@@ -128,6 +130,18 @@ namespace LanguageSchoolApp.service.Exams
                 throw new ExamException("Exam not found", ExamExceptionType.ExamNotFound);
             }
             examRepository.DeleteExam(examId);
+        }
+
+        public void DeleteAllExamsByIds(List<int> examIds)
+        {
+            foreach (int id in examIds)
+            {
+                if (!ExamExists(id))
+                {
+                    throw new ExamException($" Exam with id {id} not found !", ExamExceptionType.ExamNotFound);
+                }
+                examRepository.DeleteAllExamsByIds(examIds);
+            }
         }
 
         public int GenerateId(LanguageProficiency languageProficiency, DateTime examDate, string teacherId)

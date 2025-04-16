@@ -7,6 +7,10 @@ using LanguageSchoolApp.service.Users.Teachers;
 using System.Collections.ObjectModel;
 using LanguageSchoolApp.service.Users.PenaltyPoints;
 using LanguageSchoolApp.model;
+using LanguageSchoolApp.view.Courses;
+using LanguageSchoolApp.view;
+using LanguageSchoolApp.exceptions.Users;
+using LanguageSchoolApp.service.Users.Students;
 
 namespace LanguageSchoolApp.viewModel.Courses
 {
@@ -15,6 +19,7 @@ namespace LanguageSchoolApp.viewModel.Courses
         private readonly ICourseService courseService;
         private readonly ITeacherService teacherService;
         private readonly IPenaltyPointService penaltyPointService;
+        private readonly IStudentService studentService;
         private readonly Course course;
         private readonly Teacher teacher;
         private readonly Student student;
@@ -188,23 +193,25 @@ namespace LanguageSchoolApp.viewModel.Courses
 
         public RelayCommand<object> DropoutCommand { get; set; }
         public RelayCommand<object> GradeTeacherCommand { get; set; }
+        public Action DisableTeacherGradingAction { get; set; }
 
         public ActiveCourseViewModel(Student _student) 
         { 
             courseService = App.ServiceProvider.GetService<ICourseService>();
             teacherService = App.ServiceProvider.GetService<ITeacherService>();
             penaltyPointService = App.ServiceProvider.GetService<IPenaltyPointService>();
+            studentService = App.ServiceProvider.GetService<IStudentService>();
 
-            course = courseService.GetCourse(_student.EnrolledCourseId);
             student = _student;
-            teacher = teacherService.GetTeacherByCourseId(_student.EnrolledCourseId);
+            course = courseService.GetCourse(student.EnrolledCourseId);
+            teacher = teacherService.GetTeacherByCourseId(student.EnrolledCourseId);
             _allClasses = course.ClassPeriods;
 
             SetSchedule();
             SetCourseInfo();
             SetTeacherInfo();
 
-            List<PenaltyPoint> penaltyPoints = penaltyPointService.GetAllPenaltyPointsByIds(_student.PenaltyPoints);
+            List<PenaltyPoint> penaltyPoints = penaltyPointService.GetAllPenaltyPointsByIds(student.PenaltyPoints);
             PenaltyPoints = new ObservableCollection<PenaltyPoint>(penaltyPoints);
 
             DropoutCommand = new RelayCommand<object>(Dropout, CanDropout);
@@ -237,22 +244,51 @@ namespace LanguageSchoolApp.viewModel.Courses
             AverageGrade = teacher.CalculateAverageGrade();
         }
 
-        public bool CanDropout(object? parameter) { return true; }
-        public void Dropout(object? parameter) { }
+        public bool CanDropout(object? parameter) 
+        { 
+            return (DateTime.Now - course.BeginningDate).TotalDays >= 7; 
+        }
+        public void Dropout(object? parameter) 
+        { 
+            DropoutFormView dropoutForm = new DropoutFormView(student.Email, course.Id);
+            dropoutForm.Show();
+        }
 
         public bool CanGradeTeacher(object? parameter) 
         {
-            if (TeachersGrade == null)
-            {
-                return false;
-            }
-            if (!int.TryParse(TeachersGrade, out _givenGrade) || _givenGrade < 1 || _givenGrade > 10)
-            {
-                return false;
-            }
             //Need to add condition that checks if course is finished
             return true;
         }
-        public void GradeTeacher(object? parameter) { }
+        public void GradeTeacher(object? parameter) 
+        {
+            if (string.IsNullOrEmpty(TeachersGrade))
+            {
+                PopupMessageView invalidGradeError = new PopupMessageView("ERROR", "Please enter grade !");
+                invalidGradeError.Show();
+                return;
+            }
+            if (!int.TryParse(TeachersGrade, out _givenGrade))
+            {
+                PopupMessageView invalidGradeError = new PopupMessageView("ERROR", "Grade must be number between 1-10 !");
+                invalidGradeError.Show();
+                TeachersGrade = "";
+                return;
+            }
+            try
+            {
+                teacherService.GradeTeacher(_givenGrade, teacher.Email);
+                PopupMessageView successPopup = new PopupMessageView("SUCCESS", "Teacher graded successfully !");
+                successPopup.Show();
+                SetTeacherInfo();
+                studentService.WithdrawStudentFromCourse(student.Email);
+                DisableTeacherGradingAction();
+            }
+            catch (UserException ex)
+            {
+                PopupMessageView errorPopup = new PopupMessageView("ERROR", ex.Text);
+                errorPopup.Show();
+                TeachersGrade = "";
+            }
+        }
     }
 }

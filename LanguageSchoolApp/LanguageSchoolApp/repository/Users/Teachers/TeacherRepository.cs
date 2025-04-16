@@ -40,6 +40,11 @@ namespace LanguageSchoolApp.repository.Users.Teachers
             return allTeachers.Where(teacher => teacher.Value.MyCoursesIds.Contains(courseId)).Select(teacher => teacher.Value).First();
         }
 
+        public bool TeacherExists(string teacherId)
+        { 
+            return allTeachers.ContainsKey(teacherId);
+        }
+
         public void AddTeacher(Teacher teacher)
         { 
             allTeachers.Add(teacher.Email, teacher);

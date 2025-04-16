@@ -21,6 +21,7 @@ namespace LanguageSchoolApp.repository.Courses
         void AddCourse(Course course);
         void UpdateCourse(int courseId, Course course);
         void DeleteCourse(int courseId);
+        void DeleteAllCoursesByIds(List<int> courseIds);
         void WriteToFile();
     }
 }

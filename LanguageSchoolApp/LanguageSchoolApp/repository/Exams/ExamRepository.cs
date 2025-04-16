@@ -125,6 +125,15 @@ namespace LanguageSchoolApp.repository.Exams
             WriteToFile();
         }
 
+        public void DeleteAllExamsByIds(List<int> examIds)
+        {
+            foreach (int id in examIds)
+            {
+                allExams.Remove(id);
+            }
+            WriteToFile();
+        }
+
         public void WriteToFile()
         {
             try

@@ -22,6 +22,7 @@ namespace LanguageSchoolApp.repository.Exams
         void CreateExam(Exam exam);
         void UpdateExam(int examId, Exam exam);
         void DeleteExam(int examId);
+        void DeleteAllExamsByIds(List<int> examIds);
         void WriteToFile();
     }
 }

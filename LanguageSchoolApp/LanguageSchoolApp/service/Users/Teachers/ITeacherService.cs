@@ -13,6 +13,7 @@ namespace LanguageSchoolApp.service.Users.Teachers
         Dictionary<string, Teacher> GetAllTeachers();
         Teacher GetTeacher(string teacherId);
         Teacher GetTeacherByCourseId(int courseId);
+        bool TeacherExists(string teacherId);
         void CreateTeacher(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string email, string password, string confirmPassword, List<KeyValuePair<string, string>> languageProficienciesStr);
         void UpdateTeacher(string teacherId, string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, List<KeyValuePair<string, string>> languageProficienciesStr);
         void DeleteTeacher(string teacherId);
@@ -21,5 +22,6 @@ namespace LanguageSchoolApp.service.Users.Teachers
         void DeleteCourse(int courseId, string teacherId);
         void AddExam(int examId, string teacherId);
         void DeleteExam(int examId, string teacherId);
+        void GradeTeacher(int grade, string teacherId);
     }
 }

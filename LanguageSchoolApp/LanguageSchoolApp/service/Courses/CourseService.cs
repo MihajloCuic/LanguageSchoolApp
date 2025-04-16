@@ -138,6 +138,18 @@ namespace LanguageSchoolApp.service.Courses
             courseRepository.DeleteCourse(courseId);
         }
 
+        public void DeleteAllCoursesByIds(List<int> courseIds)
+        {
+            foreach (int id in courseIds) 
+            {
+                if (!CourseExists(id)) 
+                {
+                    throw new CourseException($" Course with id {id} not found !", CourseExceptionType.CourseNotFound);
+                }
+                courseRepository.DeleteAllCoursesByIds(courseIds);
+            }
+        }
+
         public int GenerateId(LanguageProficiency languageProficiency, DateTime beginningDate, CourseType courseType, string teacherId)
         {
             string combination = teacherId + languageProficiency.LanguageName +

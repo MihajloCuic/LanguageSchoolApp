@@ -9,16 +9,22 @@ using LanguageSchoolApp.exceptions.Users;
 using LanguageSchoolApp.model;
 using LanguageSchoolApp.model.Courses;
 using LanguageSchoolApp.service.Validation;
+using LanguageSchoolApp.service.Courses;
+using LanguageSchoolApp.service.Exams;
 
 namespace LanguageSchoolApp.service.Users.Teachers
 {
     public class TeacherService : ITeacherService
     {
         private readonly ITeacherRepository teacherRepository;
+        private readonly ICourseService courseService;
+        private readonly IExamService examService;
 
-        public TeacherService(ITeacherRepository _teacherRepository)
+        public TeacherService(ITeacherRepository _teacherRepository, ICourseService _courseService, IExamService _examService)
         {
             teacherRepository = _teacherRepository;
+            courseService = _courseService;
+            examService = _examService;
         }
 
         public Dictionary<string, Teacher> GetAllTeachers() 
@@ -29,6 +35,11 @@ namespace LanguageSchoolApp.service.Users.Teachers
         public Teacher GetTeacher(string teacherId) 
         {
             return teacherRepository.GetTeacher(teacherId);
+        }
+
+        public bool TeacherExists(string teacherId)
+        { 
+            return teacherRepository.TeacherExists(teacherId);
         }
 
         public Teacher GetTeacherByCourseId(int courseId) 
@@ -56,6 +67,10 @@ namespace LanguageSchoolApp.service.Users.Teachers
         public void UpdateTeacher(string teacherId, string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, List<KeyValuePair<string, string>> languageProficienciesStr) 
         { 
             ValidateTeacher(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword, languageProficienciesStr);
+            if (TeacherExists(teacherId))
+            {
+                throw new UserException("Teacher not found !", UserExceptionType.UserNotFound);
+            }
             Teacher teacher = GetTeacher(teacherId);
             teacher.Name = name;
             teacher.Surname = surname;
@@ -76,7 +91,13 @@ namespace LanguageSchoolApp.service.Users.Teachers
         
         public void DeleteTeacher(string teacherId) 
         {
-            GetTeacher(teacherId); //checks if teacher exists else throws exception
+            if (TeacherExists(teacherId))
+            {
+                throw new UserException("Teacher not found !", UserExceptionType.UserNotFound);
+            }
+            Teacher teacher = GetTeacher(teacherId);
+            courseService.DeleteAllCoursesByIds(teacher.MyCoursesIds);
+            examService.DeleteAllExamsByIds(teacher.MyExamsIds);
             teacherRepository.DeleteTeacher(teacherId);
         }
         
@@ -115,6 +136,22 @@ namespace LanguageSchoolApp.service.Users.Teachers
         public void DeleteExam(int examId, string teacherId) 
         { 
             teacherRepository.DeleteExam(examId, teacherId);
+        }
+
+        public void GradeTeacher(int grade, string teacherId)
+        {
+            if (!TeacherExists(teacherId))
+            { 
+                throw new UserException("Teacher not found !", UserExceptionType.UserNotFound);
+            }
+            if (grade < 1 || grade > 10)
+            {
+                throw new UserException("Grade must be between 1-10 !", UserExceptionType.InvalidGrade);
+            }
+
+            Teacher teacher = GetTeacher(teacherId);
+            teacher.MyGrades.Add(grade);
+            teacherRepository.UpdateTeacher(teacherId, teacher);
         }
     }
 }

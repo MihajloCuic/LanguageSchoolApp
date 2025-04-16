@@ -14,12 +14,14 @@ using LanguageSchoolApp.viewModel.Exams;
 using LanguageSchoolApp.viewModel.Users;
 using LanguageSchoolApp.viewModel.Reports;
 using LanguageSchoolApp.view.Users;
+using LanguageSchoolApp.service.Users.Students;
 
 namespace LanguageSchoolApp.viewModel
 {
     public class MainViewModel : ObservableObject
     {
         private readonly INotificationService _notificationService;
+        private readonly IStudentService _studentService;
 
         private object _currentView;
         private User _currentUser;
@@ -118,6 +120,7 @@ namespace LanguageSchoolApp.viewModel
             _username = currentUser.Name;
 
             _notificationService = App.ServiceProvider.GetService<INotificationService>();
+            _studentService = App.ServiceProvider.GetService<IStudentService>();
             List<Notification> unreadNotificationsList = _notificationService.GetUnreadNotificationsByReceiver(CurrentUser.Email);
             UnreadNotifications = new ObservableCollection<Notification>(unreadNotificationsList);
             UnreadNotificationsExist = unreadNotificationsList.Count > 0;
@@ -125,7 +128,10 @@ namespace LanguageSchoolApp.viewModel
             if (currentUser is Student student)
             {
                 AvailableCoursesVM = new AvailableCoursesViewModel(student);
-                ActiveCourseVM = new ActiveCourseViewModel(student);
+                if (student.EnrolledCourseId != -1)
+                {
+                    ActiveCourseVM = new ActiveCourseViewModel(student);
+                }
                 AvailableExamsVM = new AvailableExamsViewModel(student);
                 StudentExamsVM = new StudentExamsViewModel(student);
                 FinishedCoursesVM = new FinishedCoursesViewModel(student);
@@ -232,8 +238,14 @@ namespace LanguageSchoolApp.viewModel
         }
         private void ChangeToMenuItem2(object parameter)
         {
-            if (CurrentUser is Student)
+            if (CurrentUser is Student student)
             {
+                student = _studentService.GetStudent(student.Email);
+                if (student.EnrolledCourseId == -1)
+                {
+                    return;
+                }
+                ActiveCourseVM = new ActiveCourseViewModel(student);
                 CurrentView = ActiveCourseVM;
             }
             if (CurrentUser is Teacher)

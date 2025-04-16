@@ -63,6 +63,9 @@ namespace LanguageSchoolApp
 
             services.AddSingleton<IPenaltyPointsRepository, PenaltyPointRepository>();
             services.AddSingleton<IPenaltyPointService, PenaltyPointService>();
+
+            services.AddSingleton<ICourseDropoutRequestRepository, CourseDropoutRequestRepository>();
+            services.AddSingleton<ICourseDropoutRequestService, CourseDropoutRequestService>();
         }
     }
 

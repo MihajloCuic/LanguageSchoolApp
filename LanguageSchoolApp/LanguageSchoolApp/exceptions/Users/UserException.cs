@@ -9,7 +9,8 @@ namespace LanguageSchoolApp.exceptions.Users
     public enum UserExceptionType 
     {
         UserNotFound,
-        InvalidLoginInput
+        InvalidLoginInput,
+        InvalidGrade
     }
     public class UserException : Exception
     {
