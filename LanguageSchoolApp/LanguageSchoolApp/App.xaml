@@ -85,6 +85,18 @@
             <DataTemplate DataType="{x:Type viewModelCourses:DropoutFormViewModel}">
                 <viewCourses:DropoutFormView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelCourses:ActiveCourseDetailsViewModel}">
+                <viewCourses:ActiveCourseDetailsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelCourses:ActiveCourseTeacherDetailsViewModel}">
+                <viewCourses:ActiveCourseTeacherDetailsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelCourses:ActiveCourseScheduleViewModel}">
+                <viewCourses:ActiveCourseScheduleView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelCourses:ActiveCoursePenaltyPointsViewModel}">
+                <viewCourses:ActiveCoursePenaltyPointsView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

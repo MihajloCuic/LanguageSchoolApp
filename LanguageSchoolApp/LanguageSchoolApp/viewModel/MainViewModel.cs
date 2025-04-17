@@ -205,8 +205,10 @@ namespace LanguageSchoolApp.viewModel
         }
         private void ChangeToMenuItem1(object parameter) 
         {
-            if (CurrentUser is Student)
+            if (CurrentUser is Student student)
             {
+                student = _studentService.GetStudent(student.Email);
+                AvailableCoursesVM = new AvailableCoursesViewModel(student);
                 CurrentView = AvailableCoursesVM;
             }
             if (CurrentUser is Teacher)
