@@ -49,7 +49,7 @@ namespace LanguageSchoolApp.model.Users
             {
                 return 0.0;
             }
-            return (double)sum / MyGrades.Count;
+            return Math.Round((double)sum / MyGrades.Count, 2);
         }
     }
 }

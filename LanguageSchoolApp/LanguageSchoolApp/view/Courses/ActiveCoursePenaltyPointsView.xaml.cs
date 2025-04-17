@@ -1,5 +1,4 @@
-﻿using LanguageSchoolApp.viewModel.Courses;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +16,11 @@ using System.Windows.Shapes;
 namespace LanguageSchoolApp.view.Courses
 {
     /// <summary>
-    /// Interaction logic for ActiveCourseView.xaml
+    /// Interaction logic for ActiveCoursePenaltyPointsView.xaml
     /// </summary>
-    public partial class ActiveCourseView : UserControl
+    public partial class ActiveCoursePenaltyPointsView : UserControl
     {
-        public ActiveCourseView()
+        public ActiveCoursePenaltyPointsView()
         {
             InitializeComponent();
         }
