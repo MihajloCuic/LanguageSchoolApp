@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.service.Users.Teachers;
 using LanguageSchoolApp.view.Courses;
+using LanguageSchoolApp.view;
 
 namespace LanguageSchoolApp.viewModel.Courses
 {
@@ -47,6 +48,7 @@ namespace LanguageSchoolApp.viewModel.Courses
         }
 
         public Action<int> SwitchToActiveCourseView { get; set; }
+        public Action<int> SwitchToEditCourseView { get; set; }
         public RelayCommand<int> EditCommand { get; set; }
         public RelayCommand<List<ClassPeriod>> ScheduleCommand { get; set; }
         public RelayCommand<object> PreviousPageCommand { get; set; }
@@ -103,15 +105,20 @@ namespace LanguageSchoolApp.viewModel.Courses
         private void DisplayEdit(int courseId)
         {
             Course course = courseService.GetCourse(courseId);
-            if ((course.BeginningDate - DateTime.Now).TotalDays <= 7)
+            if (DateTime.Now > course.BeginningDate) 
             {
                 SwitchToActiveCourseView(courseId);
             }
+            else if ((course.BeginningDate - DateTime.Now).TotalDays <= 7)
+            {
+                //TODO: Implement starting course
+                PopupMessageView popup = new PopupMessageView("SUCCESS", "Starting course not implemented yet !");
+                popup.Show();
+            }
             else 
             {
-                //TODO: Implement edit options for pending course
+                SwitchToEditCourseView(courseId);
             }
-
         }
 
         private bool CanDisplaySchedule(List<ClassPeriod> classes) { return true; }
