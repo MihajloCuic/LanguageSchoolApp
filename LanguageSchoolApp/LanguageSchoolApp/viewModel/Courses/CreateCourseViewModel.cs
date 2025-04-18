@@ -5,6 +5,7 @@ using LanguageSchoolApp.model.Courses;
 using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.service.Courses;
 using LanguageSchoolApp.service.Users.Teachers;
+using LanguageSchoolApp.view;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
@@ -16,6 +17,7 @@ namespace LanguageSchoolApp.viewModel.Courses
         private readonly ICourseService courseService;
         private readonly ITeacherService teacherService;
         private Teacher _teacher;
+        private Course course;
         private ObservableCollection<ClassPeriodSlot> _periods;
         private List<ClassPeriod> _allPeriods;
         private int _pageNumber;
@@ -28,12 +30,15 @@ namespace LanguageSchoolApp.viewModel.Courses
         private string _maxParticipants;
         private string _duration;
 
+        private bool _isOnlineChecked;
+        private bool _isLiveChecked;
+
         private string _languageNameError;
         private string _languageLevelError;
         private string _beginningDateError;
         private string _maxParticipantsError;
         private string _durationError;
-        private string _courseTypeError;
+        private string _courseTypeParamError;
         private string _classPeriodError;
 
         public ObservableCollection<ClassPeriodSlot> Periods
@@ -117,7 +122,26 @@ namespace LanguageSchoolApp.viewModel.Courses
                 OnPropertyChanged();
             }
         }
-        public string CourseType { get; set; }
+        public string CourseTypeParam { get; set; }
+
+        public bool IsOnlineChecked
+        {
+            get { return _isOnlineChecked; }
+            set
+            {
+                _isOnlineChecked = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsLiveChecked
+        {
+            get { return _isLiveChecked; }
+            set
+            {
+                _isLiveChecked = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string LanguageNameError
         { 
@@ -164,12 +188,12 @@ namespace LanguageSchoolApp.viewModel.Courses
                 OnPropertyChanged();
             }
         }
-        public string CourseTypeError
+        public string CourseTypeParamError
         { 
-            get { return _courseTypeError; }
+            get { return _courseTypeParamError; }
             set
             { 
-                _courseTypeError = value;
+                _courseTypeParamError = value;
                 OnPropertyChanged();
             }
         }
@@ -198,8 +222,49 @@ namespace LanguageSchoolApp.viewModel.Courses
             _teacher = teacher;
             PageNumber = 1;
             BeginningDate = DateTime.Now;
-            CourseType = "Online";
+            CourseTypeParam = "Online";
+            IsOnlineChecked = true;
+            IsLiveChecked = false;
             _allPeriods = new List<ClassPeriod>();
+            InitializePeriodsList();
+
+            SetErrorFields();
+
+            AddClassPeriodCommand = new RelayCommand<object>(AddClassPeriod, CanAddClassPeriod);
+            DeleteItemCommand = new RelayCommand<ClassPeriod>(DeleteItem, CanDeleteItem);
+            OnlineCommand = new RelayCommand<object>(IsOnline, CanBeOnline);
+            LiveCommand = new RelayCommand<object>(IsLive, CanBeLive);
+            PreviousPageCommand = new RelayCommand<object>(PreviousPage, CanPreviousPage);
+            NextPageCommand = new RelayCommand<object>(NextPage, CanNextPage);
+            SubmitCommand = new RelayCommand<object>(Submit, CanSubmit);
+        }
+
+        public CreateCourseViewModel(Teacher teacher, int _courseId)
+        {
+            courseService = App.ServiceProvider.GetService<ICourseService>();
+            teacherService = App.ServiceProvider.GetService<ITeacherService>();
+            
+            _teacher = teacher;
+            course = courseService.GetCourse(_courseId);
+
+            PageNumber = 1;
+            LanguageName = course.LanguageProficiency.LanguageName;
+            LanguageLevel = course.LanguageProficiency.LanguageLevel.ToString();
+            BeginningDate = course.BeginningDate;
+            MaxParticipants = course.MaxParticipants.ToString();
+            Duration = course.Duration.ToString();
+            CourseTypeParam = course.CourseType.ToString();
+            if (course.CourseType.Equals(CourseType.Online))
+            {
+                IsOnlineChecked = true;
+                IsLiveChecked = false;
+            }
+            else 
+            {
+                IsOnlineChecked = false;
+                IsLiveChecked = true;
+            }
+            _allPeriods = course.ClassPeriods;
             InitializePeriodsList();
 
             SetErrorFields();
@@ -290,9 +355,9 @@ namespace LanguageSchoolApp.viewModel.Courses
         }
 
         private bool CanBeOnline(object? parameter) { return true; }
-        private void IsOnline(object? parameter) { CourseType = "Online"; }
+        private void IsOnline(object? parameter) { CourseTypeParam = "Online"; }
         private bool CanBeLive(object? parameter) { return true; }
-        private void IsLive(object? parameter) { CourseType = "Live"; }
+        private void IsLive(object? parameter) { CourseTypeParam = "Live"; }
 
         private bool CanSubmit(object? parameter) 
         {
@@ -312,9 +377,19 @@ namespace LanguageSchoolApp.viewModel.Courses
                 { 
                     throw new CourseException("Duration must be number", CourseExceptionType.InvalidDuration);
                 }
-                Course course = courseService.CreateCourse(LanguageName, LanguageLevel, maxParticipants, duration, _allPeriods, BeginningDate, CourseType, _teacher);
-                teacherService.AddCourse(course.Id, _teacher.Email);
-                ClassPeriodError = "Success"; //TODO: Insert popup message successful course creation
+                if (course == null)
+                {
+                    Course newCourse = courseService.CreateCourse(LanguageName, LanguageLevel, maxParticipants, duration, _allPeriods, BeginningDate, CourseTypeParam, _teacher);
+                    teacherService.AddCourse(course.Id, _teacher.Email);
+                    PopupMessageView successPopup = new PopupMessageView("SUCCESS", "Course created successfully !");
+                    successPopup.Show();
+                }
+                else
+                { 
+                    courseService.UpdateCourse(course.Id, LanguageName, LanguageLevel, maxParticipants, duration, _allPeriods, BeginningDate, CourseTypeParam);
+                    PopupMessageView successPopup = new PopupMessageView("SUCCESS", "Course updated successfully !");
+                    successPopup.Show();
+                }
             }
             catch (CourseException ex)
             {
@@ -339,7 +414,7 @@ namespace LanguageSchoolApp.viewModel.Courses
                         DurationError = ex.Text;
                         break;
                     case CourseExceptionType.InvalidCourseType:
-                        CourseTypeError = ex.Text;
+                        CourseTypeParamError = ex.Text;
                         break;
                     case CourseExceptionType.ClassroomsFull:
                         ClassPeriodError = ex.Text;
@@ -359,7 +434,7 @@ namespace LanguageSchoolApp.viewModel.Courses
             BeginningDateError = "";
             MaxParticipantsError = "";
             DurationError = "";
-            CourseTypeError = "";
+            CourseTypeParamError = "";
             ClassPeriodError = "";
         }
     }

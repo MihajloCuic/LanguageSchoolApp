@@ -7,7 +7,9 @@
     },
     "MaxParticipants": 25,
     "ParticipantsIds": [
-      "filipruzic2003@gmail.com", "jelena@gmail.com", "student@gmail.com"
+      "filipruzic2003@gmail.com",
+      "jelena@gmail.com",
+      "student@gmail.com"
     ],
     "Duration": 5,
     "ClassPeriods": [
@@ -33,7 +35,7 @@
       "LanguageName": "Spanish",
       "LanguageLevel": 1
     },
-    "MaxParticipants": 25,
+    "MaxParticipants": 30,
     "ParticipantsIds": [],
     "Duration": 3,
     "ClassPeriods": [
@@ -48,10 +50,14 @@
       {
         "DayOfWeek": 5,
         "StartTime": "20:30:00"
+      },
+      {
+        "DayOfWeek": 4,
+        "StartTime": "20:00:00"
       }
     ],
-    "BeginningDate": "2025-05-10T00:00:00",
-    "CourseType": 0
+    "BeginningDate": "2025-05-09T00:00:00",
+    "CourseType": 1
   },
   "2": {
     "Id": 2,
@@ -202,7 +208,7 @@
         "StartTime": "16:00:00"
       }
     ],
-    "BeginningDate": "2025-08-22T00:00:00",
+    "BeginningDate": "2025-04-22T00:00:00",
     "CourseType": 1
   },
   "364486381": {
