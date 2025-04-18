@@ -32,5 +32,10 @@ namespace LanguageSchoolApp.view.Courses
                 viewModel.CloseAction = new Action(this.Close);
             }
         }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

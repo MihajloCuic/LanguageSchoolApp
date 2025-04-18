@@ -60,9 +60,8 @@
                 </WrapPanel>
             </WrapPanel>
             <Button Style="{StaticResource RoundedButtonStyle}"
-                    Content="Drop out"
-                    Visibility="{Binding ButtonVisibility}"
-                    Command="{Binding DropoutCommand}"
+                    Content="{Binding ButtonContent}"
+                    Command="{Binding Command}"
                     HorizontalAlignment="Right"
                     Margin="0,13,29,22"
                     Background="red"

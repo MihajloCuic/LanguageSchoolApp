@@ -1,26 +1,26 @@
 {
-  "1470842278": {
-    "Id": 1470842278,
+  "980506160": {
+    "Id": 980506160,
     "StudentId": "filipruzic2003@gmail.com",
     "CourseId": 952824467,
     "Reason": 0,
-    "Details": "I can't make time for course",
+    "Details": "I can't make time for this course. I am to buisy",
     "Pending": true
   },
-  "133736185": {
-    "Id": 133736185,
-    "StudentId": "student@gmail.com",
-    "CourseId": 952824467,
-    "Reason": 2,
-    "Details": "This class is boring",
-    "Pending": true
-  },
-  "1856825606": {
-    "Id": 1856825606,
+  "1659326851": {
+    "Id": 1659326851,
     "StudentId": "jelena@gmail.com",
     "CourseId": 952824467,
+    "Reason": 1,
+    "Details": "This course is too difficult for me. I want to try easier one because I can't keep up in this one.",
+    "Pending": true
+  },
+  "1049665626": {
+    "Id": 1049665626,
+    "StudentId": "student@gmail.com",
+    "CourseId": 952824467,
     "Reason": 3,
-    "Details": "I don't like how teacher teaches.",
+    "Details": "I don't like how this teacher tries to transfer knowledge onto us",
     "Pending": true
   }
 }

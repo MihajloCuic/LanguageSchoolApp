@@ -24,13 +24,13 @@ namespace LanguageSchoolApp.viewModel.Courses
         private string _duration;
         private string _courseType;
 
-        private Visibility _buttonVisibility = Visibility.Visible;
-        public Visibility ButtonVisibility
-        { 
-            get { return _buttonVisibility; }
+        private string _buttonContent;
+        public string ButtonContent
+        {
+            get { return _buttonContent; }
             set
             {
-                _buttonVisibility = value; 
+                _buttonContent = value;
                 OnPropertyChanged();
             }
         }
@@ -72,7 +72,7 @@ namespace LanguageSchoolApp.viewModel.Courses
             }
         }
 
-        public RelayCommand<object> DropoutCommand { get; set; }
+        public RelayCommand<object> Command { get; set; }
 
         public ActiveCourseDetailsViewModel(Student _student) 
         {
@@ -82,7 +82,8 @@ namespace LanguageSchoolApp.viewModel.Courses
             course = courseService.GetCourse(student.EnrolledCourseId);
             SetCourseInfo();
 
-            DropoutCommand = new RelayCommand<object>(Dropout, CanDropout);
+            ButtonContent = "Drop out";
+            Command = new RelayCommand<object>(Dropout, CanDropout);
         }
 
         public ActiveCourseDetailsViewModel(Teacher teacher, int courseId)
@@ -91,7 +92,8 @@ namespace LanguageSchoolApp.viewModel.Courses
 
             course = courseService.GetCourse(courseId);
             SetCourseInfo();
-            ButtonVisibility = Visibility.Hidden;
+            ButtonContent = "End Course";
+            Command = new RelayCommand<object>(FinishCourse, CanFinishCourse);
         }
 
         private void SetCourseInfo()
@@ -110,6 +112,15 @@ namespace LanguageSchoolApp.viewModel.Courses
         {
             DropoutFormView dropoutForm = new DropoutFormView(student.Email, course.Id);
             dropoutForm.Show();
+        }
+
+        public bool CanFinishCourse(object? parameter) 
+        {
+            return DateTime.Now >= course.BeginningDate.AddDays(7 * course.Duration);
+        }
+        public void FinishCourse(object? parameter) 
+        { 
+            //TODO: Add opening of special window or change this user control with new uc where teacher grades students and end course
         }
     }
 }
