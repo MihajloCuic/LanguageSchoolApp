@@ -21,5 +21,7 @@ namespace LanguageSchoolApp.service.Courses
         List<FinishedCourseDTO> GetFinishedCoursesDTO(List<FinishedCourse> finishedCourses);
         List<Course> GetTeachersPendingCourses(List<int> allTeacherCoursesIds);
         List<Course> GetTeacherActiveCourses(List<int> allTeacherCoursesIds);
+        void RemoveStudentFromCourse(string studentId, int courseId);
+        void AddStudentToCourse(string studentId, int courseId);
     }
 }

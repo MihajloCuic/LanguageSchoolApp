@@ -11,7 +11,7 @@ namespace LanguageSchoolApp.service.Courses
     public interface ICourseDropoutRequestService
     {
         Dictionary<int, CourseDropoutRequest> GetAllDropoutRequests();
-        List<CourseDropoutRequest> GetAllRequestsByCourseId(int courseId);
+        List<CourseDropoutRequest> GetAllPendingRequestsByCourseId(int courseId);
         CourseDropoutRequest GetRequest(int id);
         bool DropoutRequestExists(int id);
         void CreateDropoutRequest(string studentId, int courseId, DropoutReason reason, string details);

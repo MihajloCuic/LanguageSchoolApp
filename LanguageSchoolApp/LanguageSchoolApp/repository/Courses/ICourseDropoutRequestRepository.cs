@@ -10,7 +10,7 @@ namespace LanguageSchoolApp.repository.Courses
     public interface ICourseDropoutRequestRepository
     {
         Dictionary<int, CourseDropoutRequest> GetAllDropoutRequests();
-        List<CourseDropoutRequest> GetAllRequestsByCourseId(int courseId);
+        List<CourseDropoutRequest> GetAllPendingRequestsByCourseId(int courseId);
         CourseDropoutRequest GetRequest(int id);
         bool DropoutRequestExists(int id);
         void CreateDropoutRequest(CourseDropoutRequest courseDropoutRequest);

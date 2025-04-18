@@ -25,9 +25,9 @@ namespace LanguageSchoolApp.service.Courses
             return repository.GetAllDropoutRequests();
         }
 
-        public List<CourseDropoutRequest> GetAllRequestsByCourseId(int courseId) 
+        public List<CourseDropoutRequest> GetAllPendingRequestsByCourseId(int courseId) 
         { 
-            return repository.GetAllRequestsByCourseId(courseId);
+            return repository.GetAllPendingRequestsByCourseId(courseId);
         }
 
         public CourseDropoutRequest GetRequest(int id) 

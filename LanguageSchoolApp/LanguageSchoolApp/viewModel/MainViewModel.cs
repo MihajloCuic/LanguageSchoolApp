@@ -147,6 +147,7 @@ namespace LanguageSchoolApp.viewModel
             else if (currentUser is Teacher teacher)
             {
                 TeacherCoursesVM = new TeacherCoursesViewModel(teacher.Email);
+                TeacherCoursesVM.SwitchToActiveCourseView = SwitchToActiveCourseView;
                 CreateCourseVM = new CreateCourseViewModel(teacher);
                 TeacherExamsVM = new TeacherExamsViewModel(teacher.Email);
                 CreateExamVM = new CreateExamViewModel();
@@ -187,6 +188,15 @@ namespace LanguageSchoolApp.viewModel
             EditUserProfileCommand = new RelayCommand<object>(EditUserProfile, CanEditUserProfile);
         }
 
+        private void SwitchToActiveCourseView(int courseId)
+        {
+            if (CurrentUser is Teacher teacher)
+            { 
+                ActiveCourseVM = new ActiveCourseViewModel(teacher, courseId);
+                CurrentView = ActiveCourseVM;
+            }
+        }
+
         private bool CanChangeToMenuItem1(object? parameter) 
         {
             if (CurrentUser is Student)
@@ -214,6 +224,7 @@ namespace LanguageSchoolApp.viewModel
             if (CurrentUser is Teacher)
             {
                 TeacherCoursesVM = new TeacherCoursesViewModel(CurrentUser.Email);
+                TeacherCoursesVM.SwitchToActiveCourseView = SwitchToActiveCourseView;
                 CurrentView = TeacherCoursesVM;
             }
             if (CurrentUser is Director)
