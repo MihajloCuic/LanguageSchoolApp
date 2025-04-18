@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace LanguageSchoolApp.viewModel.Courses
 {
@@ -22,6 +23,17 @@ namespace LanguageSchoolApp.viewModel.Courses
         private DateTime _beginningDate;
         private string _duration;
         private string _courseType;
+
+        private Visibility _buttonVisibility = Visibility.Visible;
+        public Visibility ButtonVisibility
+        { 
+            get { return _buttonVisibility; }
+            set
+            {
+                _buttonVisibility = value; 
+                OnPropertyChanged();
+            }
+        }
 
         public string LanguageProficiency
         {
@@ -71,6 +83,15 @@ namespace LanguageSchoolApp.viewModel.Courses
             SetCourseInfo();
 
             DropoutCommand = new RelayCommand<object>(Dropout, CanDropout);
+        }
+
+        public ActiveCourseDetailsViewModel(Teacher teacher, int courseId)
+        {
+            courseService = App.ServiceProvider.GetService<ICourseService>();
+
+            course = courseService.GetCourse(courseId);
+            SetCourseInfo();
+            ButtonVisibility = Visibility.Hidden;
         }
 
         private void SetCourseInfo()

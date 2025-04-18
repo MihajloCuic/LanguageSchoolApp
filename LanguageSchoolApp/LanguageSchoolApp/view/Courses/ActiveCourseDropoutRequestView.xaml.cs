@@ -1,5 +1,4 @@
-﻿using LanguageSchoolApp.viewModel.Courses;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +16,11 @@ using System.Windows.Shapes;
 namespace LanguageSchoolApp.view.Courses
 {
     /// <summary>
-    /// Interaction logic for ActiveCourseDetailsView.xaml
+    /// Interaction logic for ActiveCourseDropoutRequestView.xaml
     /// </summary>
-    public partial class ActiveCourseDetailsView : UserControl
+    public partial class ActiveCourseDropoutRequestView : UserControl
     {
-        public ActiveCourseDetailsView()
+        public ActiveCourseDropoutRequestView()
         {
             InitializeComponent();
         }

@@ -26,6 +26,16 @@ namespace LanguageSchoolApp.repository.Users.Students
             return allStudents;
         }
 
+        public List<Student> GetAllStudentsByIds(List<string> ids)
+        { 
+            return allStudents.Where(student => ids.Contains(student.Key)).Select(student => student.Value).ToList();
+        }
+
+        public bool StudentExists(string studentId) 
+        { 
+            return allStudents.ContainsKey(studentId);
+        }
+
         public void AddStudent(Student student)
         {
             allStudents.Add(student.Email, student);

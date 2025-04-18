@@ -11,19 +11,26 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace LanguageSchoolApp.view.Courses
 {
     /// <summary>
-    /// Interaction logic for ActiveCourseDetailsView.xaml
+    /// Interaction logic for HandleDropoutRequestView.xaml
     /// </summary>
-    public partial class ActiveCourseDetailsView : UserControl
+    public partial class HandleDropoutRequestView : Window
     {
-        public ActiveCourseDetailsView()
+        public HandleDropoutRequestView()
         {
             InitializeComponent();
+        }
+
+        public void SetAction()
+        {
+            if (DataContext is HandleDropoutRequestViewModel viewModel)
+            {
+                viewModel.CloseAction = new Action(this.Close);
+            }
         }
     }
 }

@@ -191,5 +191,27 @@ namespace LanguageSchoolApp.service.Courses
             List<Course> allTeacherCourses = GetAllCoursesById(allTeacherCoursesIds);
             return allTeacherCourses.Where(course => (course.BeginningDate - DateTime.Now).TotalDays < 7).ToList();
         }
+
+        public void RemoveStudentFromCourse(string studentId, int courseId) 
+        {
+            if (!CourseExists(courseId)) 
+            { 
+                throw new CourseException("Course not found !", CourseExceptionType.CourseNotFound);
+            }
+            Course course = GetCourse(courseId);
+            course.ParticipantsIds.Remove(studentId);
+            courseRepository.UpdateCourse(courseId, course);
+        }
+
+        public void AddStudentToCourse(string studentId, int courseId)
+        {
+            if (!CourseExists(courseId))
+            {
+                throw new CourseException("Course not found !", CourseExceptionType.CourseNotFound);
+            }
+            Course course = GetCourse(courseId);
+            course.ParticipantsIds.Add(studentId);
+            courseRepository.UpdateCourse(courseId, course);
+        }
     }
 }

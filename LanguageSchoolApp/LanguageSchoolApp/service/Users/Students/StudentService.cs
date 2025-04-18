@@ -10,6 +10,10 @@ using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.repository.Users.Students;
 using LanguageSchoolApp.service.Validation;
 using LanguageSchoolApp.model.Courses;
+using LanguageSchoolApp.repository.Exams;
+using LanguageSchoolApp.service.Exams;
+using LanguageSchoolApp.model.Exams;
+using LanguageSchoolApp.service.Users.PenaltyPoints;
 
 namespace LanguageSchoolApp.service.Users.Students
 {
@@ -17,11 +21,15 @@ namespace LanguageSchoolApp.service.Users.Students
     {
         private readonly IStudentRepository studentRepository;
         private readonly ICourseApplicationService courseApplicationService;
+        private readonly IExamApplicationService examApplicationService;
+        private readonly ICourseService courseService;
 
-        public StudentService(IStudentRepository _studentRepository, ICourseApplicationService _courseApplicationService)
+        public StudentService(IStudentRepository _studentRepository, ICourseApplicationService _courseApplicationService, IExamApplicationService _examApplicationService, ICourseService _courseService)
         {
             studentRepository = _studentRepository;
             courseApplicationService = _courseApplicationService;
+            examApplicationService = _examApplicationService;
+            courseService = _courseService;
         }
 
         public Dictionary<string, Student> GetAllStudents() 
@@ -29,9 +37,19 @@ namespace LanguageSchoolApp.service.Users.Students
             return studentRepository.GetAllStudents();
         }
 
+        public List<Student> GetAllStudentsByIds(List<string> ids)
+        { 
+            return studentRepository.GetAllStudentsByIds(ids);
+        }
+
         public Student GetStudent(string studentId)
         { 
             return studentRepository.GetStudent(studentId);
+        }
+
+        public bool StudentExists(string studentId)
+        { 
+            return studentRepository.StudentExists(studentId);
         }
 
         public void CreateStudent(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string email, string password, string confirmPassword, string professionalDegreeStr) 
@@ -48,6 +66,10 @@ namespace LanguageSchoolApp.service.Users.Students
         public Student UpdateStudent(string studentId, string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, string professionalDegreeStr) 
         { 
             ValidateStudent(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword, professionalDegreeStr);
+            if (!StudentExists(studentId))
+            {
+                throw new UserException("Student not found !", UserExceptionType.UserNotFound);
+            }
             Student student = GetStudent(studentId);
             student.Name = name;
             student.Surname = surname;
@@ -62,7 +84,10 @@ namespace LanguageSchoolApp.service.Users.Students
 
         public void DeleteStudent(string studentId) 
         {
-            GetStudent(studentId); //checks if user exists else throws exception "user not found"
+            if (!StudentExists(studentId))
+            {
+                throw new UserException("Student not found !", UserExceptionType.UserNotFound);
+            }
             studentRepository.DeleteStudent(studentId);
         }
 
@@ -83,9 +108,9 @@ namespace LanguageSchoolApp.service.Users.Students
         public void WithdrawStudentFromCourse(string studentId)
         { 
             Student student = GetStudent(studentId);
+            courseService.RemoveStudentFromCourse(studentId, student.EnrolledCourseId);
             student.EnrolledCourseId = -1;
             studentRepository.UpdateStudent(studentId, student);
-
             List<CourseApplication> studentsPendingApplications = courseApplicationService.GetCourseApplicationsByStudentId(studentId);
             foreach (CourseApplication application in studentsPendingApplications)
             { 
@@ -98,12 +123,66 @@ namespace LanguageSchoolApp.service.Users.Students
             Student student = GetStudent(studentId);
             student.EnrolledCourseId = courseId;
             studentRepository.UpdateStudent(studentId , student);
-
+            courseService.AddStudentToCourse(studentId , courseId);
             List<CourseApplication> studentPendingApplications = courseApplicationService.GetCourseApplicationsByStudentId(studentId);
             foreach (CourseApplication application in studentPendingApplications)
             {
                 courseApplicationService.PauseCourseApplication(application.Id);
             }
+        }
+
+        private void WithdrawAllCourseApplications(string studentId)
+        { 
+            List<CourseApplication> studentPendingApplications = courseApplicationService.GetCourseApplicationsByStudentId(studentId);
+            foreach (CourseApplication application in studentPendingApplications)
+            { 
+                courseApplicationService.DeleteCourseApplication(application.Id);
+            }
+        }
+
+        public void WithdrawAllExamApplications(string studentId)
+        {
+            List<ExamApplication> studentPendingApplications = examApplicationService.GetAllExamApplicationsByStudentId(studentId);
+            foreach (ExamApplication application in studentPendingApplications)
+            {
+                examApplicationService.DeleteExamApplication(application.Id);
+            }
+        }
+
+        public void AssignStudentPenaltyPoint(string studentId, int penaltyPointId)
+        {
+            if (!StudentExists(studentId))
+            { 
+                throw new UserException("Student not found !", UserExceptionType.UserNotFound);
+            }
+            Student student = GetStudent(studentId);
+            student.PenaltyPoints.Add(penaltyPointId);
+            if (student.PenaltyPoints.Count == 3)
+            {
+                student.Blocked = true;
+                student.EnrolledCourseId = -1;
+                WithdrawAllCourseApplications(studentId);
+                WithdrawAllExamApplications(studentId);
+            }
+
+            studentRepository.UpdateStudent(studentId , student);
+        }
+
+        public void DeleteStudentPenaltyPoint(string studentId, int penaltyPointId)
+        {
+            if (!StudentExists(studentId))
+            {
+                throw new UserException("Student not found !", UserExceptionType.UserNotFound);
+            }
+
+            Student student = GetStudent(studentId);
+            student.PenaltyPoints.Remove(penaltyPointId);
+
+            if (student.Blocked == true && student.PenaltyPoints.Count < 3)
+            {
+                student.Blocked = false;
+            }
+            studentRepository.UpdateStudent(studentId, student);
         }
     }
 }

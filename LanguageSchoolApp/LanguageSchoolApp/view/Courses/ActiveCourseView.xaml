@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="289"/>
             </Grid.ColumnDefinitions>
             <ContentControl Content="{Binding CourseDetailsVM}"/>
-            <ContentControl Grid.Column="2" Content="{Binding TeacherDetailsVM}"/>
+            <ContentControl Grid.Column="2" Content="{Binding TeacherBubbleVM}"/>
         </Grid>
         <Grid Grid.Row="1" Margin="27,24,27,28">
             <Grid.ColumnDefinitions>
@@ -27,7 +27,7 @@
                 <ColumnDefinition Width="164"/>
             </Grid.ColumnDefinitions>
             <ContentControl Content="{Binding CourseScheduleVM}"/>
-            <ContentControl Grid.Column="2" Content="{Binding PenaltyPointsVM}"/>
+            <ContentControl Grid.Column="2" Content="{Binding CurrentPenaltyPointView}"/>
         </Grid>
     </Grid>
 </UserControl>

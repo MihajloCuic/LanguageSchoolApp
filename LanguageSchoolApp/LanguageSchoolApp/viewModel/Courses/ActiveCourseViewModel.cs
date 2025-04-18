@@ -16,9 +16,9 @@ namespace LanguageSchoolApp.viewModel.Courses
         private readonly ITeacherService teacherService;
 
         public ActiveCourseDetailsViewModel CourseDetailsVM { get; }
-        public ActiveCourseTeacherDetailsViewModel TeacherDetailsVM { get; }
         public ActiveCourseScheduleViewModel CourseScheduleVM { get; }
-        public ActiveCoursePenaltyPointsViewModel PenaltyPointsVM { get; }
+        public object TeacherBubbleVM { get; }
+        public object CurrentPenaltyPointView { get; }
 
         public ActiveCourseViewModel(Student student) 
         { 
@@ -29,9 +29,23 @@ namespace LanguageSchoolApp.viewModel.Courses
             Teacher teacher = teacherService.GetTeacherByCourseId(student.EnrolledCourseId);
 
             CourseDetailsVM = new ActiveCourseDetailsViewModel(student);
-            TeacherDetailsVM = new ActiveCourseTeacherDetailsViewModel(student, teacher);
             CourseScheduleVM = new ActiveCourseScheduleViewModel(course);
-            PenaltyPointsVM = new ActiveCoursePenaltyPointsViewModel(student);
+            TeacherBubbleVM = new ActiveCourseTeacherDetailsViewModel(student, teacher);
+            CurrentPenaltyPointView = new ActiveCoursePenaltyPointsViewModel(student);
+        }
+
+        public ActiveCourseViewModel(Teacher _teacher, int courseId)
+        {
+            courseService = App.ServiceProvider.GetService<ICourseService>();
+            teacherService = App.ServiceProvider.GetService<ITeacherService>();
+
+            Course course = courseService.GetCourse(courseId);
+            Teacher teacher = _teacher;
+
+            CourseDetailsVM = new ActiveCourseDetailsViewModel(teacher, courseId);
+            CourseScheduleVM = new ActiveCourseScheduleViewModel(course);
+            TeacherBubbleVM = new ActiveCourseDropoutRequestViewModel(courseId);
+            CurrentPenaltyPointView = new ActiveCourseAssignPenaltyPointViewModel(course);
         }
     }
 }

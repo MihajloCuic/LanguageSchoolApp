@@ -46,6 +46,7 @@ namespace LanguageSchoolApp.viewModel.Courses
             }
         }
 
+        public Action<int> SwitchToActiveCourseView { get; set; }
         public RelayCommand<int> EditCommand { get; set; }
         public RelayCommand<List<ClassPeriod>> ScheduleCommand { get; set; }
         public RelayCommand<object> PreviousPageCommand { get; set; }
@@ -104,7 +105,7 @@ namespace LanguageSchoolApp.viewModel.Courses
             Course course = courseService.GetCourse(courseId);
             if ((course.BeginningDate - DateTime.Now).TotalDays <= 7)
             {
-                //TODO: Implement detail options for active course
+                SwitchToActiveCourseView(courseId);
             }
             else 
             {
@@ -118,7 +119,6 @@ namespace LanguageSchoolApp.viewModel.Courses
         { 
             CourseSchedule schedule = new CourseSchedule(classes);
             schedule.Show();
-            //TODO: Implement display of schedule
         }
 
         private bool CanNextPage(object? parameter) { return PageNumber < (double)_allTeachersCourses.Count / 6; }

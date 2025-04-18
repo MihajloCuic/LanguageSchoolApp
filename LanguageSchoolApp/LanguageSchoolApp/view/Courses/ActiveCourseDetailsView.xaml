@@ -60,17 +60,18 @@
                 </WrapPanel>
             </WrapPanel>
             <Button Style="{StaticResource RoundedButtonStyle}"
-                Content="Drop out"
-                Command="{Binding DropoutCommand}"
-                HorizontalAlignment="Right"
-                Margin="0,13,29,22"
-                Background="red"
-                Foreground="#fff"
-                FontFamily="Cambria"
-                FontSize="12"
-                Padding="20,0,20,0"
-                Grid.Row="2"
-                FontWeight="SemiBold"/>
+                    Content="Drop out"
+                    Visibility="{Binding ButtonVisibility}"
+                    Command="{Binding DropoutCommand}"
+                    HorizontalAlignment="Right"
+                    Margin="0,13,29,22"
+                    Background="red"
+                    Foreground="#fff"
+                    FontFamily="Cambria"
+                    FontSize="12"
+                    Padding="20,0,20,0"
+                    Grid.Row="2"
+                    FontWeight="SemiBold"/>
         </Grid>
     </Border>
 </UserControl>
