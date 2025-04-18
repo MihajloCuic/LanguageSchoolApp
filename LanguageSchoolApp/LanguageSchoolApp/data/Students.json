@@ -33,7 +33,7 @@
         }
       }
     ],
-    "EnrolledCourseId": -1,
+    "EnrolledCourseId": 952824467,
     "PenaltyPoints": [
       478904544,
       1186469178
@@ -66,7 +66,7 @@
     "ProfessionalDegree": 3,
     "FinishedCourses": [],
     "FinishedExamResults": [],
-    "EnrolledCourseId": -1,
+    "EnrolledCourseId": 952824467,
     "PenaltyPoints": [
       720895496
     ],
@@ -101,8 +101,8 @@
     "EnrolledCourseId": 952824467,
     "PenaltyPoints": [],
     "Blocked": false,
-    "Name": "filip",
-    "Surname": "ruzic",
+    "Name": "Filip",
+    "Surname": "Ruzic",
     "Gender": 0,
     "Birthday": "2003-07-16T00:00:00",
     "PhoneNumber": "0692009803",

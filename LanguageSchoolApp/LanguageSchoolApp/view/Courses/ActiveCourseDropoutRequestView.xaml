@@ -31,7 +31,7 @@
                 <ItemsControl ItemsSource="{Binding DropoutRequests}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Button Style="{StaticResource TransparentButtonStyle}" MaxWidth="259"
+                            <Button Style="{StaticResource TransparentButtonStyle}" MaxWidth="259" Margin="0,0,0,5"
                                     Command="{Binding DataContext.HandleDropoutRequestCommand,
                                     RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ItemsControl}}}"
                                     CommandParameter="{Binding Id}">
