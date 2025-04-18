@@ -16,6 +16,7 @@ namespace LanguageSchoolApp.model.Users
         public List<ExamResults> FinishedExamResults { get; set; }
         public int EnrolledCourseId { get; set; }
         public List<int> PenaltyPoints { get; set; }
+        public bool Blocked { get; set; }
 
         public Student() { }
 
@@ -24,13 +25,15 @@ namespace LanguageSchoolApp.model.Users
                     string _password, ProfessionalDegree _professionalDegree,
                     List<FinishedCourse> _finishedCourses, int _enrolledCourseId,
                     List<ExamResults> _finishedExamResults,
-                    List<int> _penaltyPoints)
-        :base(_name, _surname, _gender, _birthday, _phoneNumber, _email, _password) {
+                    List<int> _penaltyPoints, bool _blocked)
+        : base(_name, _surname, _gender, _birthday, _phoneNumber, _email, _password)
+        {
             ProfessionalDegree = _professionalDegree;
             FinishedCourses = _finishedCourses;
             FinishedExamResults = _finishedExamResults;
             EnrolledCourseId = _enrolledCourseId;
             PenaltyPoints = _penaltyPoints;
+            Blocked = _blocked;
         }
 
         public Student(string _name, string _surname, Gender _gender,
@@ -42,7 +45,7 @@ namespace LanguageSchoolApp.model.Users
             FinishedExamResults = new List<ExamResults>();
             EnrolledCourseId = -1;
             PenaltyPoints = new List<int>();
-
+            Blocked = false;
         }
     }
 }
