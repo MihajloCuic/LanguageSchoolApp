@@ -1,6 +1,7 @@
 ﻿using LanguageSchoolApp.core;
 using LanguageSchoolApp.exceptions.Users;
 using LanguageSchoolApp.model.Users;
+using LanguageSchoolApp.service.Courses;
 using LanguageSchoolApp.service.Users.Students;
 using LanguageSchoolApp.service.Users.Teachers;
 using LanguageSchoolApp.view;
@@ -12,6 +13,7 @@ namespace LanguageSchoolApp.viewModel.Courses
     {
         private readonly ITeacherService teacherService;
         private readonly IStudentService studentService;
+        private readonly ICourseService courseService;
         private Student student;
         private Teacher teacher;
 
@@ -20,6 +22,8 @@ namespace LanguageSchoolApp.viewModel.Courses
         private double _averageGrade;
         private string _teachersGrade;
         private int _givenGrade;
+
+        private bool _isCourseFinished;
 
         public string TeacherName
         {
@@ -57,6 +61,15 @@ namespace LanguageSchoolApp.viewModel.Courses
                 OnPropertyChanged();
             }
         }
+        public bool IsCourseFinished
+        { 
+            get { return _isCourseFinished; }
+            set
+            {
+                _isCourseFinished = value;
+                OnPropertyChanged();
+            }
+        }
 
         public RelayCommand<object> GradeTeacherCommand { get; set; }
         public Action DisableTeacherGradingAction { get; set; }
@@ -65,10 +78,13 @@ namespace LanguageSchoolApp.viewModel.Courses
         { 
             teacherService = App.ServiceProvider.GetService<ITeacherService>();
             studentService = App.ServiceProvider.GetService<IStudentService>();
+            courseService = App.ServiceProvider.GetService<ICourseService>();
 
             student = _student;
             teacher = _teacher;
             SetTeacherInfo();
+
+            IsCourseFinished = courseService.IsFinished(student.EnrolledCourseId);
 
             GradeTeacherCommand = new RelayCommand<object>(GradeTeacher, CanGradeTeacher);
         }

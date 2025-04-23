@@ -16,6 +16,6 @@ namespace LanguageSchoolApp.service.Courses
         bool DropoutRequestExists(int id);
         void CreateDropoutRequest(string studentId, int courseId, DropoutReason reason, string details);
         void ProcessDropoutRequest(int requestId);
-        int GenerateId(string studentId, int courseId, DropoutReason reason);
+        int GenerateId(string studentId, int courseId);
     }
 }

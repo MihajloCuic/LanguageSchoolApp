@@ -17,7 +17,7 @@
                 <ColumnDefinition Width="31"/>
                 <ColumnDefinition Width="289"/>
             </Grid.ColumnDefinitions>
-            <ContentControl Content="{Binding CourseDetailsVM}"/>
+            <ContentControl Content="{Binding CourseBubbleVM}"/>
             <ContentControl Grid.Column="2" Content="{Binding TeacherBubbleVM}"/>
         </Grid>
         <Grid Grid.Row="1" Margin="27,24,27,28">

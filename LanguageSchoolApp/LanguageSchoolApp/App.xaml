@@ -31,6 +31,7 @@
             <converter:ExamDateTimeToStringConverter x:Key="ExamCardButtonTitleConverter"/>
             <converter:StudentAppliedToStringConverter x:Key="StudentAppliedToStringConverter"/>
             <converter:StudentIdToNameConverter x:Key="StudentIdToNameConverter"/>
+            <converter:InvertBoolToVisibilityConverter x:Key="InvertBoolToVisibilityConverter"/>
 
             <DataTemplate DataType="{x:Type viewModelUsers:LoginViewModel}">
                 <viewUsers:Login/>
@@ -103,6 +104,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModelCourses:ActiveCourseDropoutRequestViewModel}">
                 <viewCourses:ActiveCourseDropoutRequestView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelCourses:FinishActiveCourseViewModel}">
+                <viewCourses:FinishActiveCourseView/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

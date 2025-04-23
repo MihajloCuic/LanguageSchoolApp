@@ -17,6 +17,7 @@ namespace LanguageSchoolApp.model.Courses
         public List<ClassPeriod> ClassPeriods { get; set; }
         public DateTime BeginningDate { get; set; }
         public CourseType CourseType { get; set; }
+        public bool IsFinished { get; set; }
 
         public Course() { }
 
@@ -31,10 +32,11 @@ namespace LanguageSchoolApp.model.Courses
             BeginningDate = _beginningDate;
             CourseType = _courseType;
             ParticipantsIds = new List<string> ();
+            IsFinished = false;
         }
 
         public Course(int _id, LanguageProficiency _languageProficiency, int _maxParticipants,
-            int _duration, List<ClassPeriod> _classPeriods, DateTime _beginningDate, CourseType _courseType, List<string> _participantsIds)
+            int _duration, List<ClassPeriod> _classPeriods, DateTime _beginningDate, CourseType _courseType, List<string> _participantsIds, bool _isFinished)
         {
             Id = _id;
             LanguageProficiency = _languageProficiency;
@@ -44,6 +46,7 @@ namespace LanguageSchoolApp.model.Courses
             BeginningDate = _beginningDate;
             CourseType = _courseType;
             ParticipantsIds = _participantsIds;
+            IsFinished = _isFinished;
         }
 
         public string ClassPeriodsToString() 

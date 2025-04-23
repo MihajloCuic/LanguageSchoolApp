@@ -17,6 +17,7 @@ namespace LanguageSchoolApp.viewModel.Courses
     {
         private readonly ICourseService courseService;
         private readonly Course course;
+        private readonly Teacher teacher;
         private readonly Student student;
 
         private string _languageProficiency;
@@ -24,13 +25,13 @@ namespace LanguageSchoolApp.viewModel.Courses
         private string _duration;
         private string _courseType;
 
-        private Visibility _buttonVisibility = Visibility.Visible;
-        public Visibility ButtonVisibility
-        { 
-            get { return _buttonVisibility; }
+        private string _buttonContent;
+        public string ButtonContent
+        {
+            get { return _buttonContent; }
             set
             {
-                _buttonVisibility = value; 
+                _buttonContent = value;
                 OnPropertyChanged();
             }
         }
@@ -72,7 +73,8 @@ namespace LanguageSchoolApp.viewModel.Courses
             }
         }
 
-        public RelayCommand<object> DropoutCommand { get; set; }
+        public RelayCommand<object> Command { get; set; }
+        public Action<Course, Teacher> EndCourseAction { get; set; }
 
         public ActiveCourseDetailsViewModel(Student _student) 
         {
@@ -82,16 +84,18 @@ namespace LanguageSchoolApp.viewModel.Courses
             course = courseService.GetCourse(student.EnrolledCourseId);
             SetCourseInfo();
 
-            DropoutCommand = new RelayCommand<object>(Dropout, CanDropout);
+            ButtonContent = "Drop out";
+            Command = new RelayCommand<object>(Dropout, CanDropout);
         }
 
-        public ActiveCourseDetailsViewModel(Teacher teacher, int courseId)
+        public ActiveCourseDetailsViewModel(Teacher _teacher, int courseId)
         {
             courseService = App.ServiceProvider.GetService<ICourseService>();
-
+            teacher = _teacher;
             course = courseService.GetCourse(courseId);
             SetCourseInfo();
-            ButtonVisibility = Visibility.Hidden;
+            ButtonContent = "End Course";
+            Command = new RelayCommand<object>(FinishCourse, CanFinishCourse);
         }
 
         private void SetCourseInfo()
@@ -110,6 +114,16 @@ namespace LanguageSchoolApp.viewModel.Courses
         {
             DropoutFormView dropoutForm = new DropoutFormView(student.Email, course.Id);
             dropoutForm.Show();
+        }
+
+        public bool CanFinishCourse(object? parameter) 
+        {
+            //return DateTime.Now >= course.BeginningDate.AddDays(7 * course.Duration);
+            return true;
+        }
+        public void FinishCourse(object? parameter) 
+        {
+            EndCourseAction(course, teacher);
         }
     }
 }

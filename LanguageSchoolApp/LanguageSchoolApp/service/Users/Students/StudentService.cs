@@ -184,5 +184,19 @@ namespace LanguageSchoolApp.service.Users.Students
             }
             studentRepository.UpdateStudent(studentId, student);
         }
+
+        public GradedStudent GradeStudent(string studentId, int grade)
+        {
+            if (!StudentExists(studentId)) 
+            {
+                throw new UserException("Student not found !", UserExceptionType.UserNotFound);
+            }
+            Student student = GetStudent(studentId);
+            FinishedCourse finishedCourse = new FinishedCourse(student.EnrolledCourseId, grade);
+            student.FinishedCourses.Add(finishedCourse);
+            studentRepository.UpdateStudent(studentId, student);
+
+            return new GradedStudent(studentId, student.Name + " " + student.Surname, grade);
+        }
     }
 }

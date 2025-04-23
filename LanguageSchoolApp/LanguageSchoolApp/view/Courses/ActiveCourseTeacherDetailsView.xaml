@@ -57,7 +57,7 @@
                        FontSize="15"/>
                 </WrapPanel>
             </WrapPanel>
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="2" Visibility="{Binding IsCourseFinished, Converter={StaticResource BoolToVisibilityConverter}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>

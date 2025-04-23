@@ -42,7 +42,7 @@ namespace LanguageSchoolApp.service.Courses
 
         public void CreateDropoutRequest(string studentId, int courseId, DropoutReason reason, string details) 
         { 
-            int requestId = GenerateId(studentId, courseId, reason);
+            int requestId = GenerateId(studentId, courseId);
             if (DropoutRequestExists(requestId)) 
             {
                 throw new CourseDropoutRequestException("Request already exists", CourseDropoutRequestExceptionType.DropoutRequestExists);
@@ -64,9 +64,9 @@ namespace LanguageSchoolApp.service.Courses
             repository.EditDropoutRequest(request);
         }
 
-        public int GenerateId(string studentId, int courseId, DropoutReason reason) 
+        public int GenerateId(string studentId, int courseId) 
         { 
-            string combination = studentId + courseId.ToString() + reason.ToString();
+            string combination = studentId + courseId.ToString();
             using (SHA256 sha256 = SHA256.Create())
             {
                 byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(combination));

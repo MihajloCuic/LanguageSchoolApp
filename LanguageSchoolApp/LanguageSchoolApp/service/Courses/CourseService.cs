@@ -213,5 +213,26 @@ namespace LanguageSchoolApp.service.Courses
             course.ParticipantsIds.Add(studentId);
             courseRepository.UpdateCourse(courseId, course);
         }
+
+        public void FinishCourse(int courseId)
+        {
+            if (!CourseExists(courseId))
+            {
+                throw new CourseException("Course not found !", CourseExceptionType.CourseNotFound);
+            }
+            Course course = GetCourse(courseId);
+            course.IsFinished = true;
+            courseRepository.UpdateCourse(courseId, course);
+        }
+
+        public bool IsFinished(int courseId)
+        {
+            if (!CourseExists(courseId))
+            {
+                throw new CourseException("Course not found !", CourseExceptionType.CourseNotFound);
+            }
+            Course course = GetCourse(courseId);
+            return course.IsFinished;
+        }
     }
 }

@@ -194,6 +194,7 @@ namespace LanguageSchoolApp.viewModel
             if (CurrentUser is Teacher teacher)
             { 
                 ActiveCourseVM = new ActiveCourseViewModel(teacher, courseId);
+                ActiveCourseVM.SwitchToTeacherCourses = SwitchToTeacherCourses;
                 CurrentView = ActiveCourseVM;
             }
         }
@@ -205,6 +206,14 @@ namespace LanguageSchoolApp.viewModel
                 CreateCourseVM = new CreateCourseViewModel(teacher, courseId);
                 CurrentView = CreateCourseVM;
             }
+        }
+
+        private void SwitchToTeacherCourses(string teacherId)
+        {
+            TeacherCoursesVM = new TeacherCoursesViewModel(CurrentUser.Email);
+            TeacherCoursesVM.SwitchToActiveCourseView = SwitchToActiveCourseView;
+            TeacherCoursesVM.SwitchToEditCourseView = SwitchToEditCourseView;
+            CurrentView = TeacherCoursesVM;
         }
 
         private bool CanChangeToMenuItem1(object? parameter) 
