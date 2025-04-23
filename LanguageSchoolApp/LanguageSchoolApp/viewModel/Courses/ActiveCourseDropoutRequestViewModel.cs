@@ -4,16 +4,17 @@ using LanguageSchoolApp.service.Courses;
 using LanguageSchoolApp.view.Courses;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace LanguageSchoolApp.viewModel.Courses
 {
     public class ActiveCourseDropoutRequestViewModel : ObservableObject
     {
         private readonly ICourseDropoutRequestService courseDropoutRequestService;
-
+        private readonly ICourseService courseService;
         private List<CourseDropoutRequest> courseDropoutRequests;
         private ObservableCollection<CourseDropoutRequest> dropoutRequests;
-        private int courseId;
+        private readonly Course course;
 
         public ObservableCollection<CourseDropoutRequest> DropoutRequests
         { 
@@ -27,10 +28,11 @@ namespace LanguageSchoolApp.viewModel.Courses
 
         public RelayCommand<int> HandleDropoutRequestCommand { get; set; }
 
-        public ActiveCourseDropoutRequestViewModel(int _courseId) 
+        public ActiveCourseDropoutRequestViewModel(int courseId) 
         { 
             courseDropoutRequestService = App.ServiceProvider.GetService<ICourseDropoutRequestService>();
-            courseId = _courseId;
+            courseService = App.ServiceProvider.GetService<ICourseService>();
+            course = courseService.GetCourse(courseId);
             courseDropoutRequests = courseDropoutRequestService.GetAllPendingRequestsByCourseId(courseId);
             DropoutRequests = new ObservableCollection<CourseDropoutRequest>(courseDropoutRequests);
             HandleDropoutRequestCommand = new RelayCommand<int>(HandleDropoutRequest, CanHandleDropoutRequest);
@@ -38,7 +40,7 @@ namespace LanguageSchoolApp.viewModel.Courses
 
         private void UpdateDropoutRequests()
         { 
-            courseDropoutRequests = courseDropoutRequestService.GetAllPendingRequestsByCourseId(courseId);
+            courseDropoutRequests = courseDropoutRequestService.GetAllPendingRequestsByCourseId(course.Id);
             DropoutRequests.Clear();
             foreach (var course in courseDropoutRequests) 
             { 
@@ -46,7 +48,10 @@ namespace LanguageSchoolApp.viewModel.Courses
             }
         }
 
-        private bool CanHandleDropoutRequest(int requestId) { return true; }
+        private bool CanHandleDropoutRequest(int requestId)
+        { 
+            return DateTime.Now <= course.BeginningDate.AddDays(7 * course.Duration);
+        }
         private void HandleDropoutRequest(int requestId) 
         {
             HandleDropoutRequestView window = new HandleDropoutRequestView();

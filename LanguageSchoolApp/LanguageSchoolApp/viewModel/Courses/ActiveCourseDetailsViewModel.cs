@@ -108,7 +108,7 @@ namespace LanguageSchoolApp.viewModel.Courses
 
         public bool CanDropout(object? parameter)
         {
-            return (DateTime.Now - course.BeginningDate).TotalDays >= 7;
+            return (DateTime.Now - course.BeginningDate).TotalDays >= 7 && DateTime.Now <= course.BeginningDate.AddDays(7 * course.Duration);
         }
         public void Dropout(object? parameter)
         {
@@ -118,8 +118,7 @@ namespace LanguageSchoolApp.viewModel.Courses
 
         public bool CanFinishCourse(object? parameter) 
         {
-            //return DateTime.Now >= course.BeginningDate.AddDays(7 * course.Duration);
-            return true;
+            return DateTime.Now >= course.BeginningDate.AddDays(7 * course.Duration);
         }
         public void FinishCourse(object? parameter) 
         {

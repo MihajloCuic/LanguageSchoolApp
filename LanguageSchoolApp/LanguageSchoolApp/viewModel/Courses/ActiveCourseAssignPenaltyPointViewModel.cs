@@ -19,6 +19,7 @@ namespace LanguageSchoolApp.viewModel.Courses
     {
         private readonly IPenaltyPointService penaltyPointService;
         private readonly IStudentService studentService;
+        private readonly Course course;
         private List<Student> students;
         private Array reasons;
         private string selectedStudentId;
@@ -63,17 +64,21 @@ namespace LanguageSchoolApp.viewModel.Courses
 
         public RelayCommand<object> AssignPenaltyPointCommand { get; set; }
 
-        public ActiveCourseAssignPenaltyPointViewModel(Course course)
+        public ActiveCourseAssignPenaltyPointViewModel(Course _course)
         {
             penaltyPointService = App.ServiceProvider.GetService<IPenaltyPointService>();
             studentService = App.ServiceProvider.GetService<IStudentService>();
+            course = _course;
             students = studentService.GetAllStudentsByIds(course.ParticipantsIds);
             Reasons = Enum.GetValues(typeof(PenaltyReason));
 
             AssignPenaltyPointCommand = new RelayCommand<object>(AssignPenaltyPoint, CanAssignPenaltyPoint);
         }
 
-        private bool CanAssignPenaltyPoint(object? parameter) { return true; }
+        private bool CanAssignPenaltyPoint(object? parameter) 
+        { 
+            return DateTime.Now <= course.BeginningDate.AddDays(7 * course.Duration);
+        }
         private void AssignPenaltyPoint(object? parameter)
         {
             if (string.IsNullOrEmpty(SelectedStudentId))
