@@ -13,6 +13,12 @@ namespace LanguageSchoolApp.converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         { 
+            bool isEmpty = string.IsNullOrEmpty(value as string);
+            bool invert = parameter != null && parameter.ToString() == "invert";
+            if(invert)
+            { 
+                isEmpty = !isEmpty; 
+            }
             return string.IsNullOrEmpty(value as string) ? Visibility.Collapsed : Visibility.Visible;
         }
 

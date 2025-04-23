@@ -29,6 +29,11 @@ namespace LanguageSchoolApp.repository.Courses
             return allDropoutRequests.Where(req => req.Value.CourseId == courseId && req.Value.Pending == true).Select(req => req.Value).ToList();
         }
 
+        public List<CourseDropoutRequest> GetAllDropoutRequestsByStudentId(string studentId)
+        {
+            return allDropoutRequests.Where(req => req.Value.StudentId == studentId).Select(req => req.Value).ToList();
+        }
+
         public CourseDropoutRequest GetRequest(int id)
         { 
             return allDropoutRequests[id];

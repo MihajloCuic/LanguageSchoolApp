@@ -49,6 +49,7 @@ namespace LanguageSchoolApp.viewModel.Courses
 
         public Action<int> SwitchToActiveCourseView { get; set; }
         public Action<int> SwitchToEditCourseView { get; set; }
+        public Action<int> SwitchToStartCourseView { get; set; }
         public RelayCommand<int> EditCommand { get; set; }
         public RelayCommand<List<ClassPeriod>> ScheduleCommand { get; set; }
         public RelayCommand<object> PreviousPageCommand { get; set; }
@@ -111,9 +112,7 @@ namespace LanguageSchoolApp.viewModel.Courses
             }
             else if ((course.BeginningDate - DateTime.Now).TotalDays <= 7)
             {
-                //TODO: Implement starting course
-                PopupMessageView popup = new PopupMessageView("SUCCESS", "Starting course not implemented yet !");
-                popup.Show();
+                SwitchToStartCourseView(courseId);
             }
             else 
             {

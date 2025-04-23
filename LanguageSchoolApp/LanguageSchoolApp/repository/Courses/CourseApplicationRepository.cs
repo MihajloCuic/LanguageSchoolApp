@@ -32,7 +32,7 @@ namespace LanguageSchoolApp.repository.Courses
 
         public List<CourseApplication> GetAllCourseApplicationsByCourseId(int courseId)
         { 
-            return allCourseApplications.Where(courseApplication => courseApplication.Value.CourseId == courseId).Select(courseApplication => courseApplication.Value).ToList();
+            return allCourseApplications.Where(courseApplication => courseApplication.Value.CourseId == courseId && courseApplication.Value.Acceptance == AcceptationType.Pending).Select(courseApplication => courseApplication.Value).ToList();
         }
 
         public CourseApplication GetCourseApplication(int id)

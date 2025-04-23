@@ -98,6 +98,7 @@ namespace LanguageSchoolApp.viewModel
 
         //teacher menu options
         public TeacherCoursesViewModel TeacherCoursesVM { get; set; }
+        public StartCourseViewModel StartCourseVM { get; set; }
         public CreateCourseViewModel CreateCourseVM { get; set; }
         public TeacherExamsViewModel TeacherExamsVM { get; set; }
         public CreateExamViewModel CreateExamVM { get; set; }
@@ -149,6 +150,7 @@ namespace LanguageSchoolApp.viewModel
                 TeacherCoursesVM = new TeacherCoursesViewModel(teacher.Email);
                 TeacherCoursesVM.SwitchToActiveCourseView = SwitchToActiveCourseView;
                 TeacherCoursesVM.SwitchToEditCourseView = SwitchToEditCourseView;
+                TeacherCoursesVM.SwitchToStartCourseView = SwitchToStartCourseView;
                 CreateCourseVM = new CreateCourseViewModel(teacher);
                 TeacherExamsVM = new TeacherExamsViewModel(teacher.Email);
                 CreateExamVM = new CreateExamViewModel();
@@ -199,6 +201,15 @@ namespace LanguageSchoolApp.viewModel
             }
         }
 
+        private void SwitchToStartCourseView(int courseId)
+        {
+            if (CurrentUser is Teacher teacher)
+            {
+                StartCourseVM = new StartCourseViewModel(courseId, teacher.Email);
+                StartCourseVM.SwitchToTeacherCourses = SwitchToTeacherCourses;
+                CurrentView = StartCourseVM;
+            }
+        }
         private void SwitchToEditCourseView(int courseId)
         {
             if (CurrentUser is Teacher teacher)
@@ -213,6 +224,7 @@ namespace LanguageSchoolApp.viewModel
             TeacherCoursesVM = new TeacherCoursesViewModel(CurrentUser.Email);
             TeacherCoursesVM.SwitchToActiveCourseView = SwitchToActiveCourseView;
             TeacherCoursesVM.SwitchToEditCourseView = SwitchToEditCourseView;
+            TeacherCoursesVM.SwitchToStartCourseView = SwitchToStartCourseView;
             CurrentView = TeacherCoursesVM;
         }
 

@@ -3,27 +3,62 @@
     "Id": 1049665626,
     "StudentId": "student@gmail.com",
     "CourseId": 952824467,
-    "Paused": false,
+    "Paused": true,
     "Acceptance": 0
   },
   "547656008": {
     "Id": 547656008,
     "StudentId": "student@gmail.com",
     "CourseId": 1291962207,
-    "Paused": false,
+    "Paused": true,
     "Acceptance": 0
   },
   "723148165": {
     "Id": 723148165,
     "StudentId": "student@gmail.com",
     "CourseId": 1,
-    "Paused": false,
+    "Paused": true,
     "Acceptance": 0
   },
   "1792788136": {
     "Id": 1792788136,
     "StudentId": "student@gmail.com",
     "CourseId": 364486381,
+    "Paused": true,
+    "Acceptance": 0
+  },
+  "572073127": {
+    "Id": 572073127,
+    "StudentId": "filipruzic2003@gmail.com",
+    "CourseId": 1469787972,
+    "Paused": false,
+    "Acceptance": 0
+  },
+  "1692002518": {
+    "Id": 1692002518,
+    "StudentId": "student@gmail.com",
+    "CourseId": 1469787972,
+    "Paused": true,
+    "Acceptance": 1
+  },
+  "465365314": {
+    "Id": 465365314,
+    "StudentId": "jelena@gmail.com",
+    "CourseId": 1469787972,
+    "Paused": false,
+    "Acceptance": 2
+  },
+  "787976884": {
+    "Id": 787976884,
+    "StudentId": "zoran@gmail.com",
+    "CourseId": 1469787972,
+    "Paused": true,
+    "Acceptance": 1
+  },
+  "2054768073": {
+    "Id": 2054768073,
+    "StudentId": "petar@gmail.com",
+    "CourseId": 1469787972,
     "Paused": false,
     "Acceptance": 0
   }
