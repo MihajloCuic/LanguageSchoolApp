@@ -11,6 +11,7 @@ namespace LanguageSchoolApp.repository.Courses
     {
         Dictionary<int, CourseDropoutRequest> GetAllDropoutRequests();
         List<CourseDropoutRequest> GetAllPendingRequestsByCourseId(int courseId);
+        List<CourseDropoutRequest> GetAllDropoutRequestsByStudentId(string studentId);
         CourseDropoutRequest GetRequest(int id);
         bool DropoutRequestExists(int id);
         void CreateDropoutRequest(CourseDropoutRequest courseDropoutRequest);

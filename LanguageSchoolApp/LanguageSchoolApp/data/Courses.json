@@ -6,10 +6,7 @@
       "LanguageLevel": 3
     },
     "MaxParticipants": 25,
-    "ParticipantsIds": [
-      "jelena@gmail.com",
-      "student@gmail.com"
-    ],
+    "ParticipantsIds": [],
     "Duration": 5,
     "ClassPeriods": [
       {
@@ -141,7 +138,7 @@
     ],
     "BeginningDate": "2024-10-23T00:00:00",
     "CourseType": 0,
-    "IsFinished": false
+    "IsFinished": true
   },
   "5": {
     "Id": 5,
@@ -202,7 +199,10 @@
       "LanguageLevel": 5
     },
     "MaxParticipants": 30,
-    "ParticipantsIds": [],
+    "ParticipantsIds": [
+      "student@gmail.com",
+      "zoran@gmail.com"
+    ],
     "Duration": 6,
     "ClassPeriods": [
       {
@@ -214,7 +214,7 @@
         "StartTime": "16:00:00"
       }
     ],
-    "BeginningDate": "2025-05-01T00:00:00",
+    "BeginningDate": "2025-04-28T00:00:00",
     "CourseType": 1,
     "IsFinished": false
   },

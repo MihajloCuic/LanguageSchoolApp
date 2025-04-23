@@ -162,7 +162,7 @@
                                     <Button Command="{Binding DataContext.EditCommand,
                                             RelativeSource={RelativeSource AncestorType=UserControl}}"
                                             CommandParameter="{Binding Id}"
-                                            Visibility="{Binding IsFinished, Converter={StaticResource InvertBoolToVisibilityConverter}}"
+                                            Visibility="{Binding IsFinished, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"
                                             Content="{Binding BeginningDate, Converter={StaticResource CourseCardButtonTitleConverter}}"
                                             Background="#2E6C7B"
                                             Foreground="#fff"

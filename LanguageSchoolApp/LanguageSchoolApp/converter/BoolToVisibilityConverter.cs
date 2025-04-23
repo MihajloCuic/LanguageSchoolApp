@@ -13,7 +13,13 @@ namespace LanguageSchoolApp.converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (bool)value ? Visibility.Visible : Visibility.Collapsed;
+            bool visible = (bool)value;
+            bool invert = parameter != null && parameter.ToString().ToLower() == "invert";
+            if (invert) 
+            { 
+                visible = !visible;
+            }
+            return visible ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

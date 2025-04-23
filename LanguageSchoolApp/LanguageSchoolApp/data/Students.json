@@ -13,6 +13,10 @@
       {
         "CourseId": 952824467,
         "Grade": 4
+      },
+      {
+        "CourseId": 1469787972,
+        "Grade": 10
       }
     ],
     "FinishedExamResults": [
@@ -37,7 +41,7 @@
         }
       }
     ],
-    "EnrolledCourseId": 952824467,
+    "EnrolledCourseId": 1469787972,
     "PenaltyPoints": [
       478904544,
       1186469178
@@ -55,7 +59,7 @@
     "ProfessionalDegree": 0,
     "FinishedCourses": [],
     "FinishedExamResults": [],
-    "EnrolledCourseId": -1,
+    "EnrolledCourseId": 1469787972,
     "PenaltyPoints": [],
     "Blocked": false,
     "Name": "Zoran",
@@ -75,7 +79,7 @@
       }
     ],
     "FinishedExamResults": [],
-    "EnrolledCourseId": 952824467,
+    "EnrolledCourseId": -1,
     "PenaltyPoints": [
       720895496
     ],
