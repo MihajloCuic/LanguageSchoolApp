@@ -23,5 +23,7 @@ namespace LanguageSchoolApp.service.Courses
         List<Course> GetTeacherActiveCourses(List<int> allTeacherCoursesIds);
         void RemoveStudentFromCourse(string studentId, int courseId);
         void AddStudentToCourse(string studentId, int courseId);
+        void FinishCourse(int courseId);
+        bool IsFinished(int courseId);
     }
 }

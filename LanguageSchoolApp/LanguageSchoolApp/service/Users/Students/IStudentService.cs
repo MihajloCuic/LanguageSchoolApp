@@ -25,5 +25,6 @@ namespace LanguageSchoolApp.service.Users.Students
         void EnrollStudentToCourse(string studentId, int courseId);
         void AssignStudentPenaltyPoint(string studentId, int penaltyPointId);
         void DeleteStudentPenaltyPoint(string studentId, int penaltyPointId);
+        GradedStudent GradeStudent(string studentId, int grade);
     }
 }

@@ -9,6 +9,10 @@
       {
         "CourseId": 5,
         "Grade": 2
+      },
+      {
+        "CourseId": 952824467,
+        "Grade": 4
       }
     ],
     "FinishedExamResults": [
@@ -64,7 +68,12 @@
   },
   "jelena@gmail.com": {
     "ProfessionalDegree": 3,
-    "FinishedCourses": [],
+    "FinishedCourses": [
+      {
+        "CourseId": 952824467,
+        "Grade": 4
+      }
+    ],
     "FinishedExamResults": [],
     "EnrolledCourseId": 952824467,
     "PenaltyPoints": [
@@ -96,9 +105,14 @@
   },
   "filipruzic2003@gmail.com": {
     "ProfessionalDegree": 1,
-    "FinishedCourses": [],
+    "FinishedCourses": [
+      {
+        "CourseId": 952824467,
+        "Grade": 5
+      }
+    ],
     "FinishedExamResults": [],
-    "EnrolledCourseId": 952824467,
+    "EnrolledCourseId": -1,
     "PenaltyPoints": [],
     "Blocked": false,
     "Name": "Filip",

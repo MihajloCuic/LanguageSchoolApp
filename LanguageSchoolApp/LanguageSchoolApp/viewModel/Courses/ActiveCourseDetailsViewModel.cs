@@ -17,6 +17,7 @@ namespace LanguageSchoolApp.viewModel.Courses
     {
         private readonly ICourseService courseService;
         private readonly Course course;
+        private readonly Teacher teacher;
         private readonly Student student;
 
         private string _languageProficiency;
@@ -73,6 +74,7 @@ namespace LanguageSchoolApp.viewModel.Courses
         }
 
         public RelayCommand<object> Command { get; set; }
+        public Action<Course, Teacher> EndCourseAction { get; set; }
 
         public ActiveCourseDetailsViewModel(Student _student) 
         {
@@ -86,10 +88,10 @@ namespace LanguageSchoolApp.viewModel.Courses
             Command = new RelayCommand<object>(Dropout, CanDropout);
         }
 
-        public ActiveCourseDetailsViewModel(Teacher teacher, int courseId)
+        public ActiveCourseDetailsViewModel(Teacher _teacher, int courseId)
         {
             courseService = App.ServiceProvider.GetService<ICourseService>();
-
+            teacher = _teacher;
             course = courseService.GetCourse(courseId);
             SetCourseInfo();
             ButtonContent = "End Course";
@@ -116,11 +118,12 @@ namespace LanguageSchoolApp.viewModel.Courses
 
         public bool CanFinishCourse(object? parameter) 
         {
-            return DateTime.Now >= course.BeginningDate.AddDays(7 * course.Duration);
+            //return DateTime.Now >= course.BeginningDate.AddDays(7 * course.Duration);
+            return true;
         }
         public void FinishCourse(object? parameter) 
-        { 
-            //TODO: Add opening of special window or change this user control with new uc where teacher grades students and end course
+        {
+            EndCourseAction(course, teacher);
         }
     }
 }
