@@ -153,7 +153,8 @@ namespace LanguageSchoolApp.viewModel.Exams
             Level = exam.LanguageProficiency.LanguageLevel.ToString();
             ExamDate = exam.ExamDate.ToString("dd.MM.yyyy.");
             ExamTime = exam.ExamDate.ToString("HH:mm");
-            _allStudents = studentService.GetAllStudentsByIds(exam.Participants);
+            List<Student> unfilteredStudents = studentService.GetAllStudentsByIds(exam.Participants);
+            _allStudents = unfilteredStudents.Where(student => !student.FinishedExamResults.Any(result => result.ExamId == examId)).ToList();
             Students = new ObservableCollection<Student>(_allStudents);
 
             SelectStudentCommand = new RelayCommand<string>(SelectStudent, CanSelectStudent);
