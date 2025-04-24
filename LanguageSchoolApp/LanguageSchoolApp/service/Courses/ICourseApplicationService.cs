@@ -20,6 +20,7 @@ namespace LanguageSchoolApp.service.Courses
         void PauseCourseApplication(int id);
         void UnpauseCourseApplication(int id);
         void DeleteCourseApplication(int id);
+        void DeleteAllCourseApplicationsByIds(List<int> ids);
         int GenerateId(string studentId, int courseId);
     }
 }

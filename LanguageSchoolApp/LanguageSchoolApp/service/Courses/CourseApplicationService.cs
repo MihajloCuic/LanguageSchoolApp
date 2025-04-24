@@ -105,6 +105,14 @@ namespace LanguageSchoolApp.service.Courses
             courseApplicationRepository.DeleteCourseApplication(id);
         }
 
+        public void DeleteAllCourseApplicationsByIds(List<int> ids)
+        {
+            foreach (int id in ids)
+            { 
+                DeleteCourseApplication(id);
+            }
+        }
+
         public int GenerateId(string studentId, int courseId) 
         {
             string combination = studentId + courseId.ToString();
