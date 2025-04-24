@@ -157,7 +157,7 @@ namespace LanguageSchoolApp.service.Exams
 
         private ExamResultsDTO ExamToExamResultsDTO(Exam exam, ExamResults examResults) 
         {
-            return new ExamResultsDTO(exam.Id, exam.LanguageProficiency, examResults.TotalScore, examResults.PartialScores);
+            return new ExamResultsDTO(exam.Id, exam.LanguageProficiency, examResults.TotalScore, examResults.PartialScores, examResults.Passed);
         }
 
         public List<ExamResultsDTO> GetExamResultsDTO(List<ExamResults> examResults)

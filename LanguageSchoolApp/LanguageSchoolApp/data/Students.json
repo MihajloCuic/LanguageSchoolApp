@@ -29,7 +29,7 @@
           "Listening": 40,
           "Speaking": 50
         },
-        "Passed": false
+        "Passed": true
       },
       {
         "ExamId": 8,

@@ -54,6 +54,7 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="0">
@@ -68,7 +69,7 @@
                                                FontFamily="Cambria" FontWeight="Bold"
                                                Foreground="#2E6C7B"/>
                                 </StackPanel>
-                                <Grid Grid.Row="1" Margin="0,20,0,0">
+                                <Grid Grid.Row="1" Margin="0,10,0,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
@@ -141,7 +142,7 @@
                                                Grid.Column="1"/>
                                 </Grid>
                                 <Separator Grid.Row="5" Width="134" Background="#2E6C7B" HorizontalAlignment="Stretch" Margin="0,6,0,0"/>
-                                <Grid Grid.Row="6" Margin="0,10,0,0">
+                                <Grid Grid.Row="6" Margin="0,5,0,0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="*"/>
@@ -159,6 +160,12 @@
                                                VerticalAlignment="Center"
                                                Grid.Column="1"/>
                                 </Grid>
+                                <TextBlock Text="{Binding Passed, Converter={StaticResource ExamResultsPassedToStringConverter}}"
+                                           FontSize="11" FontWeight="Bold"
+                                           FontFamily="Cambria" Foreground="#2E6C7B"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"
+                                           Grid.Row="7"/>
                             </Grid>
                         </Border>
                     </DataTemplate>

@@ -32,6 +32,7 @@
             <converter:StudentAppliedToStringConverter x:Key="StudentAppliedToStringConverter"/>
             <converter:StudentIdToNameConverter x:Key="StudentIdToNameConverter"/>
             <converter:CourseIdToCourseProficiencyConverter x:Key="CourseIdToCourseProficiencyConverter"/>
+            <converter:ExamResultsPassedToStringConverter x:Key="ExamResultsPassedToStringConverter"/>
 
             <DataTemplate DataType="{x:Type viewModelUsers:LoginViewModel}">
                 <viewUsers:Login/>
