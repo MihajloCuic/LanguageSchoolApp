@@ -290,28 +290,5 @@
     "BeginningDate": "2025-07-26T00:00:00",
     "CourseType": 1,
     "IsFinished": false
-  },
-  "1171700003": {
-    "Id": 1171700003,
-    "LanguageProficiency": {
-      "LanguageName": "Spanish",
-      "LanguageLevel": 4
-    },
-    "MaxParticipants": 30,
-    "ParticipantsIds": [],
-    "Duration": 22,
-    "ClassPeriods": [
-      {
-        "DayOfWeek": 4,
-        "StartTime": "08:00:00"
-      },
-      {
-        "DayOfWeek": 7,
-        "StartTime": "08:00:00"
-      }
-    ],
-    "BeginningDate": "2025-12-05T00:00:00",
-    "CourseType": 0,
-    "IsFinished": false
   }
 }

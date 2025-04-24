@@ -7,7 +7,8 @@
     },
     "ExamDate": "2025-12-10T11:30:00",
     "MaxParticipants": 10,
-    "Participants": []
+    "Participants": [],
+    "IsFinished": false
   },
   "1": {
     "Id": 1,
@@ -17,7 +18,8 @@
     },
     "ExamDate": "2025-06-12T11:30:00",
     "MaxParticipants": 25,
-    "Participants": []
+    "Participants": [],
+    "IsFinished": false
   },
   "2": {
     "Id": 2,
@@ -27,7 +29,8 @@
     },
     "ExamDate": "2025-07-19T11:30:00",
     "MaxParticipants": 17,
-    "Participants": []
+    "Participants": [],
+    "IsFinished": false
   },
   "3": {
     "Id": 3,
@@ -35,9 +38,10 @@
       "LanguageName": "Italian",
       "LanguageLevel": 0
     },
-    "ExamDate": "2025-10-06T11:00:00",
-    "MaxParticipants": 20,
-    "Participants": []
+    "ExamDate": "2025-10-06T22:00:00",
+    "MaxParticipants": 10,
+    "Participants": [],
+    "IsFinished": false
   },
   "4": {
     "Id": 4,
@@ -47,7 +51,8 @@
     },
     "ExamDate": "2025-12-12T09:30:00",
     "MaxParticipants": 25,
-    "Participants": []
+    "Participants": [],
+    "IsFinished": false
   },
   "5": {
     "Id": 5,
@@ -57,17 +62,8 @@
     },
     "ExamDate": "2025-11-03T21:45:00",
     "MaxParticipants": 5,
-    "Participants": []
-  },
-  "6": {
-    "Id": 6,
-    "LanguageProficiency": {
-      "LanguageName": "English",
-      "LanguageLevel": 1
-    },
-    "ExamDate": "2025-06-06T12:15:00",
-    "MaxParticipants": 50,
-    "Participants": []
+    "Participants": [],
+    "IsFinished": false
   },
   "7": {
     "Id": 7,
@@ -77,7 +73,8 @@
     },
     "ExamDate": "2024-06-06T12:15:00",
     "MaxParticipants": 50,
-    "Participants": []
+    "Participants": [],
+    "IsFinished": true
   },
   "8": {
     "Id": 8,
@@ -87,6 +84,18 @@
     },
     "ExamDate": "2024-11-03T21:45:00",
     "MaxParticipants": 50,
-    "Participants": []
+    "Participants": [],
+    "IsFinished": true
+  },
+  "1962345531": {
+    "Id": 1962345531,
+    "LanguageProficiency": {
+      "LanguageName": "Serbian",
+      "LanguageLevel": 1
+    },
+    "ExamDate": "2025-06-13T09:00:00",
+    "MaxParticipants": 30,
+    "Participants": [],
+    "IsFinished": false
   }
 }

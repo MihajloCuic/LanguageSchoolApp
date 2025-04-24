@@ -43,6 +43,7 @@ namespace LanguageSchoolApp.viewModel.Exams
         public RelayCommand<object> PreviousPageCommand { get; set; }
         public RelayCommand<object> NextPageCommand { get; set; }
         public RelayCommand<int> CardButtonCommand { get; set; }
+        public Action<int> SwitchToEditExamView { get; set; }
 
         public TeacherExamsViewModel(string teacherId) 
         {
@@ -120,7 +121,8 @@ namespace LanguageSchoolApp.viewModel.Exams
                 //TODO: Implement active exam
             }
             else 
-            { 
+            {
+                SwitchToEditExamView(examId);
                 //TODO: Implement pending exam
             }
         }
