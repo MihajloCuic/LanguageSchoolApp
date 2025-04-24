@@ -25,5 +25,8 @@ namespace LanguageSchoolApp.service.Exams
         void DeleteAllExamsByIds(List<int> examIds);
         int GenerateId(LanguageProficiency languageProficiency, DateTime examDate, string teacherId);
         List<ExamResultsDTO> GetExamResultsDTO(List<ExamResults> examResults);
+        void SignupStudentToExam(int examId, string studentId);
+        void WithdrawStudentFromExam(int examId, string studentId);
+        void FinishExam(int examId);
     }
 }

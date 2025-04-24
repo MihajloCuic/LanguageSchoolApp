@@ -198,5 +198,16 @@ namespace LanguageSchoolApp.service.Users.Students
 
             return new GradedStudent(studentId, student.Name + " " + student.Surname, grade);
         }
+
+        public void GradeStudentsExam(string studentId, ExamResults examResults)
+        {
+            if (!StudentExists(studentId))
+            {
+                throw new UserException("Student not found !", UserExceptionType.UserNotFound);
+            }
+            Student student = GetStudent(studentId);
+            student.FinishedExamResults.Add(examResults);
+            studentRepository.UpdateStudent(studentId, student);
+        }
     }
 }

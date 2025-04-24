@@ -136,9 +136,21 @@ namespace LanguageSchoolApp.viewModel.Exams
         }
 
         private bool CanApply(int examId) 
-        { 
-            Exam exam = examService.GetExam(examId);
-            return (exam.ExamDate - DateTime.Now).TotalDays >= 10; 
+        {
+            try
+            {
+                if (!examService.ExamExists(examId))
+                {
+                    throw new ExamException("Exam not found !", ExamExceptionType.ExamNotFound);
+                }
+                Exam exam = examService.GetExam(examId);
+                return (exam.ExamDate - DateTime.Now).TotalDays >= 10;
+            }
+            catch (ExamException) 
+            {
+                return false;
+            }
+
         }
         private void Apply(int examId)
         {

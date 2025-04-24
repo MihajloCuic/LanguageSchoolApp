@@ -10,10 +10,12 @@ namespace LanguageSchoolApp.service.Exams
     public class ExamApplicationService : IExamApplicationService
     {
         private readonly IExamApplicationRepository examApplicationRepository;
+        private readonly IExamService examService;
 
-        public ExamApplicationService(IExamApplicationRepository _examApplicationRepository)
+        public ExamApplicationService(IExamApplicationRepository _examApplicationRepository, IExamService _examService)
         { 
             examApplicationRepository = _examApplicationRepository;
+            examService = _examService;
         }
 
         public Dictionary<int, ExamApplication> GetAllExamApplications() 
@@ -48,30 +50,9 @@ namespace LanguageSchoolApp.service.Exams
             { 
                 throw new ExamApplicationException("Exam application already exists", ExamApplicationExceptionType.ExamApplicationAlreadyExists);
             }
-            ExamApplication examApplication = new ExamApplication(examApplicationId, studentId, examId, AcceptationType.Pending);
+            ExamApplication examApplication = new ExamApplication(examApplicationId, studentId, examId, AcceptationType.Accepted);
             examApplicationRepository.CreateExamApplication(examApplication);
-        }
-
-        public void AcceptExamApplication(int id)
-        { 
-            if(!ExamApplicationExists(id))
-            {
-                throw new ExamApplicationException("Exam application not found", ExamApplicationExceptionType.ExamApplicationNotFound);
-            }
-            ExamApplication examApplication = GetExamApplication(id);
-            examApplication.Acceptance = AcceptationType.Accepted;
-            examApplicationRepository.UpdateExamApplication(examApplication);
-        }
-
-        public void DenyExamApplication(int id)
-        {
-            if (!ExamApplicationExists(id))
-            {
-                throw new ExamApplicationException("Exam application not found", ExamApplicationExceptionType.ExamApplicationNotFound);
-            }
-            ExamApplication examApplication = GetExamApplication(id);
-            examApplication.Acceptance = AcceptationType.Denied;
-            examApplicationRepository.UpdateExamApplication(examApplication);
+            examService.SignupStudentToExam(examId, studentId);
         }
 
         public void DeleteExamApplication(int id) 
@@ -80,7 +61,8 @@ namespace LanguageSchoolApp.service.Exams
             { 
                 throw new ExamApplicationException("Exam application not found", ExamApplicationExceptionType.ExamApplicationNotFound);
             }
-
+            ExamApplication application = GetExamApplication(id);
+            examService.WithdrawStudentFromExam(application.ExamId, application.StudentId);
             examApplicationRepository.DeleteExamApplication(id);
         }
 

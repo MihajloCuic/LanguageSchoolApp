@@ -14,6 +14,7 @@ namespace LanguageSchoolApp.viewModel.Exams
     {
         private readonly IExamService examService;
         private readonly ITeacherService teacherService;
+        private readonly IExamApplicationService examApplicationService;
         private readonly Teacher teacher;
         private Exam exam;
 
@@ -150,6 +151,7 @@ namespace LanguageSchoolApp.viewModel.Exams
         { 
             examService = App.ServiceProvider.GetService<IExamService>();
             teacherService = App.ServiceProvider.GetService<ITeacherService>();
+            examApplicationService = App.ServiceProvider.GetService<IExamApplicationService>();
 
             teacher = _teacher;
             ExamDate = DateTime.Now;
@@ -235,6 +237,8 @@ namespace LanguageSchoolApp.viewModel.Exams
             try
             {
                 examService.DeleteExam(exam.Id);
+                List<ExamApplication> examApplications = examApplicationService.GetAllExamApplicationsByExamId(exam.Id);
+                examApplicationService.DeleteAllExamApplicationsByIds(examApplications.Select(x => x.ExamId).ToList());
                 PopupMessageView successPopup = new PopupMessageView("SUCCESS", "Exam deleted successfully !");
                 successPopup.Show();
                 SwitchToTeacherExams();
