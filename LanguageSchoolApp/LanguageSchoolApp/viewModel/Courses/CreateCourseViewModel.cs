@@ -1,14 +1,18 @@
 ﻿using LanguageSchoolApp.core;
 using LanguageSchoolApp.exceptions.Courses;
+using LanguageSchoolApp.exceptions.Exams;
 using LanguageSchoolApp.model;
 using LanguageSchoolApp.model.Courses;
+using LanguageSchoolApp.model.Exams;
 using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.service.Courses;
+using LanguageSchoolApp.service.Exams;
 using LanguageSchoolApp.service.Users.Teachers;
 using LanguageSchoolApp.view;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace LanguageSchoolApp.viewModel.Courses
 {
@@ -40,6 +44,17 @@ namespace LanguageSchoolApp.viewModel.Courses
         private string _durationError;
         private string _courseTypeParamError;
         private string _classPeriodError;
+
+        private Visibility _deleteButtonVisible;
+        public Visibility DeleteButtonVisible
+        {
+            get { return _deleteButtonVisible; }
+            set
+            {
+                _deleteButtonVisible = value;
+                OnPropertyChanged();
+            }
+        }
 
         public ObservableCollection<ClassPeriodSlot> Periods
         { 
@@ -214,6 +229,8 @@ namespace LanguageSchoolApp.viewModel.Courses
         public RelayCommand<object> OnlineCommand { get; set; }
         public RelayCommand<object> LiveCommand { get; set; }
         public RelayCommand<object> SubmitCommand { get; set; }
+        public RelayCommand<object> DeleteCommand { get; set; }
+        public Action<string> SwitchToTeacherCoursesView { get; set; }
 
         public CreateCourseViewModel(Teacher teacher) 
         {
@@ -225,6 +242,7 @@ namespace LanguageSchoolApp.viewModel.Courses
             CourseTypeParam = "Online";
             IsOnlineChecked = true;
             IsLiveChecked = false;
+            DeleteButtonVisible = Visibility.Collapsed;
             _allPeriods = new List<ClassPeriod>();
             InitializePeriodsList();
 
@@ -254,6 +272,7 @@ namespace LanguageSchoolApp.viewModel.Courses
             MaxParticipants = course.MaxParticipants.ToString();
             Duration = course.Duration.ToString();
             CourseTypeParam = course.CourseType.ToString();
+            DeleteButtonVisible = Visibility.Visible;
             if (course.CourseType.Equals(CourseType.Online))
             {
                 IsOnlineChecked = true;
@@ -276,6 +295,7 @@ namespace LanguageSchoolApp.viewModel.Courses
             PreviousPageCommand = new RelayCommand<object>(PreviousPage, CanPreviousPage);
             NextPageCommand = new RelayCommand<object>(NextPage, CanNextPage);
             SubmitCommand = new RelayCommand<object>(Submit, CanSubmit);
+            DeleteCommand = new RelayCommand<object>(Delete, CanDelete);
         }
 
         private void InitializePeriodsList()
@@ -380,7 +400,7 @@ namespace LanguageSchoolApp.viewModel.Courses
                 if (course == null)
                 {
                     Course newCourse = courseService.CreateCourse(LanguageName, LanguageLevel, maxParticipants, duration, _allPeriods, BeginningDate, CourseTypeParam, _teacher);
-                    teacherService.AddCourse(course.Id, _teacher.Email);
+                    teacherService.AddCourse(newCourse.Id, _teacher.Email);
                     PopupMessageView successPopup = new PopupMessageView("SUCCESS", "Course created successfully !");
                     successPopup.Show();
                 }
@@ -424,6 +444,23 @@ namespace LanguageSchoolApp.viewModel.Courses
                         break;
 
                 }
+            }
+        }
+
+        private bool CanDelete(object? parameter) { return true; }
+        private void Delete(object? parameter)
+        {
+            try
+            {
+                courseService.DeleteCourse(course.Id);
+                PopupMessageView successPopup = new PopupMessageView("SUCCESS", "Course deleted successfully !");
+                successPopup.Show();
+                SwitchToTeacherCoursesView(_teacher.Email);
+            }
+            catch (CourseException ex)
+            {
+                PopupMessageView errorPopup = new PopupMessageView("ERROR", ex.Text);
+                errorPopup.Show();
             }
         }
 

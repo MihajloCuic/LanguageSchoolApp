@@ -381,11 +381,22 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <Button Content="Submit" Grid.Row="2" Grid.Column="1" 
-                    Command="{Binding SubmitCommand}"
-                    Height="32" Width="120" Foreground="#fff" Background="#2E6C7B"
-                    FontSize="12" VerticalAlignment="Bottom"
-                    Style="{StaticResource RoundedButtonStyle}"/>
+            <WrapPanel Grid.Row="2" Grid.Column="1">
+                <Button Content="Delete"  
+                        Command="{Binding DeleteCommand}" FontFamily="Cambria"
+                        Visibility="{Binding DeleteButtonVisible}"
+                        Height="32" Width="120" 
+                        Foreground="#fff" Background="Red"
+                        FontSize="12" VerticalAlignment="Bottom"
+                        Margin="0,0,0,10"
+                        Style="{StaticResource RoundedButtonStyle}"/>
+                <Button Content="Submit"
+                        Command="{Binding SubmitCommand}" FontFamily="Cambria"
+                        Height="32" Width="120" Foreground="#fff" Background="#2E6C7B"
+                        FontSize="12" VerticalAlignment="Bottom"
+                        Style="{StaticResource RoundedButtonStyle}"/>
+            </WrapPanel>
+            
             <Grid Height="26" Width="120" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="3" Margin="130,0,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>

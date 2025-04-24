@@ -154,13 +154,17 @@ namespace LanguageSchoolApp.service.Validation
             }
             try
             {
-                DateTime.Parse(examDateStr);
+                DateTime examDate = DateTime.Parse(examDateStr);
+                if ((examDate - DateTime.Now).TotalDays <= 30)
+                { 
+                    throw new ExamException("Exam date must be at least 31 day from today !", ExamExceptionType.InvalidExamDate);
+                }
             }
             catch (FormatException) 
             {
                 throw new ExamException("Invalid exam date format", ExamExceptionType.InvalidExamDate);
             }
-            if (maxParticipants < 0) 
+            if (maxParticipants <= 0) 
             {
                 throw new ExamException("Max participants must be greater than 0", ExamExceptionType.InvalidMaxParticipants);
             }

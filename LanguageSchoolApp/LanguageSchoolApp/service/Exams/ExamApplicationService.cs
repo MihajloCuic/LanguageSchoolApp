@@ -84,6 +84,18 @@ namespace LanguageSchoolApp.service.Exams
             examApplicationRepository.DeleteExamApplication(id);
         }
 
+        public void DeleteAllExamApplicationsByIds(List<int> ids)
+        {
+            foreach (int id in ids) 
+            {
+                if (!ExamApplicationExists(id))
+                {
+                    throw new ExamApplicationException($"Exam application with id {id} not found !", ExamApplicationExceptionType.ExamApplicationNotFound);
+                }
+                DeleteExamApplication(id);
+            }
+        }
+
         public int GenerateId(string studentId, int examId) 
         { 
             string combination = studentId + examId.ToString();

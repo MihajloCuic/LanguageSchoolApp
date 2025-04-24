@@ -54,6 +54,8 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="{Binding LanguageProficiency.LanguageName}"
@@ -125,12 +127,34 @@
                                                VerticalAlignment="Center"
                                                Grid.Column="1"/>
                                 </Grid>
+                                <Separator Grid.Row="6" Width="134" Background="#2E6C7B" HorizontalAlignment="Stretch" Margin="0,6,0,0"/>
+                                <Grid Grid.Row="7" Margin="0,2,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Text="Max Participants" FontSize="13"
+                                               Foreground="#2E6C7B"
+                                               FontFamily="Cambria" FontWeight="Bold"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Center"
+                                               Grid.Column="0"/>
+                                    <TextBlock Text="{Binding MaxParticipants}"
+                                               FontFamily="Cambria"
+                                               Foreground="#2E6C7B"
+                                               FontSize="11" FontWeight="Bold"
+                                               HorizontalAlignment="Right"
+                                               VerticalAlignment="Center"
+                                               Grid.Column="1"/>
+                                </Grid>
 
                                 <Button Command="{Binding DataContext.CardButtonCommand,
                                         RelativeSource={RelativeSource AncestorType=UserControl}}"
                                         CommandParameter="{Binding Id}"
+                                        Visibility="{Binding IsFinished, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=Invert}"
                                         Content="{Binding ExamDate, Converter={StaticResource ExamCardButtonTitleConverter}}"
-                                        Grid.Row="6"
+                                        Grid.Row="8"
                                         Background="#2E6C7B"
                                         Foreground="#fff"
                                         FontFamily="Cambria Math"

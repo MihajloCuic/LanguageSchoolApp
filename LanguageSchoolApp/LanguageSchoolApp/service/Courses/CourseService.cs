@@ -16,10 +16,12 @@ namespace LanguageSchoolApp.service.Courses
     public class CourseService : ICourseService
     {
         private readonly ICourseRepository courseRepository;
+        private readonly ICourseApplicationService courseApplicationService;
 
-        public CourseService(ICourseRepository repository)
+        public CourseService(ICourseRepository repository, ICourseApplicationService _courseApplicationService)
         {
             courseRepository = repository;
+            courseApplicationService = _courseApplicationService;
         }
 
         public Dictionary<int, Course> GetAllCourses()
@@ -136,6 +138,9 @@ namespace LanguageSchoolApp.service.Courses
                 throw new CourseException("Course not found", CourseExceptionType.CourseNotFound);
             }
             courseRepository.DeleteCourse(courseId);
+
+            List<CourseApplication> courseApplications = courseApplicationService.GetAllCourseApplicationsByCourseId(courseId);
+            courseApplicationService.DeleteAllCourseApplicationsByIds(courseApplications.Select(c => c.Id).ToList());
         }
 
         public void DeleteAllCoursesByIds(List<int> courseIds)
@@ -146,7 +151,7 @@ namespace LanguageSchoolApp.service.Courses
                 {
                     throw new CourseException($" Course with id {id} not found !", CourseExceptionType.CourseNotFound);
                 }
-                courseRepository.DeleteAllCoursesByIds(courseIds);
+                DeleteCourse(id);
             }
         }
 

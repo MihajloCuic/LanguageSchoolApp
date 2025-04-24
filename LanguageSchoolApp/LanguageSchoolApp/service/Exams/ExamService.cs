@@ -19,10 +19,12 @@ namespace LanguageSchoolApp.service.Exams
     public class ExamService : IExamService
     {
         private readonly IExamRepository examRepository;
+        private readonly IExamApplicationService examApplicationService;
 
-        public ExamService(IExamRepository _examRepository)
+        public ExamService(IExamRepository _examRepository, IExamApplicationService _examApplicationService)
         { 
             examRepository = _examRepository;
+            examApplicationService = _examApplicationService;
         }
 
         public Dictionary<int, Exam> GetAllExams() 
@@ -114,7 +116,7 @@ namespace LanguageSchoolApp.service.Exams
 
             if (CheckIfExamsMatch(examId, teacher.MyExamsIds, examDate)) 
             {
-                throw new ExamException("Tacher is busy than", ExamExceptionType.TeacherIsBusy);
+                throw new ExamException("Teacher is busy than", ExamExceptionType.TeacherIsBusy);
             }
             Exam exam = GetExam(examId);
             exam.LanguageProficiency = languageProficiency;
@@ -130,6 +132,9 @@ namespace LanguageSchoolApp.service.Exams
                 throw new ExamException("Exam not found", ExamExceptionType.ExamNotFound);
             }
             examRepository.DeleteExam(examId);
+
+            List<ExamApplication> examApplications = examApplicationService.GetAllExamApplicationsByExamId(examId);
+            examApplicationService.DeleteAllExamApplicationsByIds(examApplications.Select(x => x.ExamId).ToList());
         }
 
         public void DeleteAllExamsByIds(List<int> examIds)
@@ -140,7 +145,7 @@ namespace LanguageSchoolApp.service.Exams
                 {
                     throw new ExamException($" Exam with id {id} not found !", ExamExceptionType.ExamNotFound);
                 }
-                examRepository.DeleteAllExamsByIds(examIds);
+               DeleteExam(id);
             }
         }
 
