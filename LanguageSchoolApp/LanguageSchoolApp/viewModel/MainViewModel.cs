@@ -102,6 +102,7 @@ namespace LanguageSchoolApp.viewModel
         public CreateCourseViewModel CreateCourseVM { get; set; }
         public TeacherExamsViewModel TeacherExamsVM { get; set; }
         public CreateExamViewModel CreateExamVM { get; set; }
+        public GradeExamsViewModel GradeExamsVM { get; set; }
 
         //director menu options
         public ActiveTeachersViewModel ActiveTeachersVM { get; set; }
@@ -154,6 +155,7 @@ namespace LanguageSchoolApp.viewModel
                 CreateCourseVM = new CreateCourseViewModel(teacher);
                 TeacherExamsVM = new TeacherExamsViewModel(teacher.Email);
                 TeacherExamsVM.SwitchToEditExamView = SwitchToEditExamView;
+                TeacherExamsVM.SwitchToFinishExamView = SwitchToFinishExamView;
                 CreateExamVM = new CreateExamViewModel(teacher);
                 CurrentView = TeacherCoursesVM;
 
@@ -239,10 +241,21 @@ namespace LanguageSchoolApp.viewModel
             }
         }
 
+        private void SwitchToFinishExamView(int examId)
+        {
+            if (CurrentUser is Teacher teacher)
+            {
+                GradeExamsVM = new GradeExamsViewModel(examId);
+                GradeExamsVM.SwitchToTeacherExamView = SwitchToTeacherExams;
+                CurrentView = GradeExamsVM;
+            }
+        }
+
         private void SwitchToTeacherExams()
         { 
             TeacherExamsVM = new TeacherExamsViewModel(CurrentUser.Email);
             TeacherExamsVM.SwitchToEditExamView = SwitchToEditExamView;
+            TeacherExamsVM.SwitchToFinishExamView = SwitchToFinishExamView;
             CurrentView = TeacherExamsVM;
         }
 
@@ -347,6 +360,7 @@ namespace LanguageSchoolApp.viewModel
             {
                 TeacherExamsVM = new TeacherExamsViewModel(CurrentUser.Email);
                 TeacherExamsVM.SwitchToEditExamView = SwitchToEditExamView;
+                TeacherExamsVM.SwitchToFinishExamView = SwitchToFinishExamView;
                 CurrentView = TeacherExamsVM;
             }
             if (CurrentUser is Director)

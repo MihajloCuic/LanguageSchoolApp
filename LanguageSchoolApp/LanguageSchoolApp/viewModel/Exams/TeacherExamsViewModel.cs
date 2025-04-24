@@ -5,6 +5,7 @@ using LanguageSchoolApp.service.Exams;
 using LanguageSchoolApp.service.Users.Teachers;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
+using LanguageSchoolApp.exceptions.Exams;
 
 namespace LanguageSchoolApp.viewModel.Exams
 {
@@ -44,6 +45,7 @@ namespace LanguageSchoolApp.viewModel.Exams
         public RelayCommand<object> NextPageCommand { get; set; }
         public RelayCommand<int> CardButtonCommand { get; set; }
         public Action<int> SwitchToEditExamView { get; set; }
+        public Action<int> SwitchToFinishExamView { get; set; }
 
         public TeacherExamsViewModel(string teacherId) 
         {
@@ -112,11 +114,30 @@ namespace LanguageSchoolApp.viewModel.Exams
             }
         }
 
-        private bool CanCardButton(int examId) { return true; }
+        private bool CanCardButton(int examId) 
+        {
+            try
+            {
+                if (!examService.ExamExists(examId))
+                {
+                    throw new ExamException("Exam not found !", ExamExceptionType.ExamNotFound);
+                }
+                Exam exam = examService.GetExam(examId);
+                return (exam.ExamDate - DateTime.Now).TotalDays >= 30 || DateTime.Now > exam.ExamDate;
+            }
+            catch (ExamException)
+            { 
+                return false;
+            }
+        }
         private void CardButton(int examId) 
         { 
             Exam exam = examService.GetExam(examId);
-            if ((exam.ExamDate - DateTime.Now).TotalDays <= 30)
+            if (exam.ExamDate < DateTime.Now) 
+            { 
+                SwitchToFinishExamView(examId);
+            }
+            else if ((exam.ExamDate - DateTime.Now).TotalDays <= 30)
             {
                 //TODO: Implement active exam
             }

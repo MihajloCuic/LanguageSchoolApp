@@ -8,6 +8,7 @@ using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 using LanguageSchoolApp.model.Users;
+using LanguageSchoolApp.model.Exams;
 
 namespace LanguageSchoolApp.service.Users.Students
 {
@@ -26,5 +27,6 @@ namespace LanguageSchoolApp.service.Users.Students
         void AssignStudentPenaltyPoint(string studentId, int penaltyPointId);
         void DeleteStudentPenaltyPoint(string studentId, int penaltyPointId);
         GradedStudent GradeStudent(string studentId, int grade);
+        void GradeStudentsExam(string studentId, ExamResults examResults);
     }
 }

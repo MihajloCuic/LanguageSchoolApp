@@ -27,9 +27,13 @@
       "LanguageName": "English",
       "LanguageLevel": 1
     },
-    "ExamDate": "2025-07-19T11:30:00",
+    "ExamDate": "2024-04-10T11:30:00",
     "MaxParticipants": 17,
-    "Participants": [],
+    "Participants": [
+      "student@gmail.com",
+      "filipruzic2003@gmail.com",
+      "jelena@gmail.com"
+    ],
     "IsFinished": false
   },
   "3": {

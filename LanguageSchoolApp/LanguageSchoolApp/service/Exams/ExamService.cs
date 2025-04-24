@@ -19,12 +19,10 @@ namespace LanguageSchoolApp.service.Exams
     public class ExamService : IExamService
     {
         private readonly IExamRepository examRepository;
-        private readonly IExamApplicationService examApplicationService;
 
-        public ExamService(IExamRepository _examRepository, IExamApplicationService _examApplicationService)
+        public ExamService(IExamRepository _examRepository)
         { 
             examRepository = _examRepository;
-            examApplicationService = _examApplicationService;
         }
 
         public Dictionary<int, Exam> GetAllExams() 
@@ -132,9 +130,6 @@ namespace LanguageSchoolApp.service.Exams
                 throw new ExamException("Exam not found", ExamExceptionType.ExamNotFound);
             }
             examRepository.DeleteExam(examId);
-
-            List<ExamApplication> examApplications = examApplicationService.GetAllExamApplicationsByExamId(examId);
-            examApplicationService.DeleteAllExamApplicationsByIds(examApplications.Select(x => x.ExamId).ToList());
         }
 
         public void DeleteAllExamsByIds(List<int> examIds)
@@ -174,6 +169,42 @@ namespace LanguageSchoolApp.service.Exams
             return examResults.Where(er => examsDict.ContainsKey(er.ExamId))
                               .Select(er => ExamToExamResultsDTO(examsDict[er.ExamId], er))
                               .ToList();
+        }
+
+        public void SignupStudentToExam(int examId, string studentId)
+        {
+            if (!ExamExists(examId))
+            { 
+                throw new ExamException("Exam not found !", ExamExceptionType.ExamNotFound);
+            }
+
+            Exam exam = GetExam(examId);
+            exam.Participants.Add(studentId);
+            examRepository.UpdateExam(examId, exam);
+        }
+
+        public void WithdrawStudentFromExam(int examId, string studentId) 
+        {
+            if (!ExamExists(examId))
+            {
+                throw new ExamException("Exam not found !", ExamExceptionType.ExamNotFound);
+            }
+
+            Exam exam = GetExam(examId);
+            exam.Participants.Remove(studentId);
+            examRepository.UpdateExam(examId, exam);
+        }
+
+        public void FinishExam(int examId) 
+        {
+            if (!ExamExists(examId))
+            {
+                throw new ExamException("Exam not found !", ExamExceptionType.ExamNotFound);
+            }
+
+            Exam exam = GetExam(examId);
+            exam.IsFinished = true;
+            examRepository.UpdateExam(examId , exam);
         }
     }
 }

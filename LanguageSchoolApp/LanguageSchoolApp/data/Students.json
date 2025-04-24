@@ -28,7 +28,8 @@
           "Writing": 52,
           "Listening": 40,
           "Speaking": 50
-        }
+        },
+        "Passed": false
       },
       {
         "ExamId": 8,
@@ -38,7 +39,19 @@
           "Writing": 12,
           "Listening": 36,
           "Speaking": 45
-        }
+        },
+        "Passed": false
+      },
+      {
+        "ExamId": 2,
+        "TotalScore": 163,
+        "PartialScores": {
+          "Reading": 46,
+          "Writing": 34,
+          "Listening": 33,
+          "Speaking": 50
+        },
+        "Passed": true
       }
     ],
     "EnrolledCourseId": 1469787972,

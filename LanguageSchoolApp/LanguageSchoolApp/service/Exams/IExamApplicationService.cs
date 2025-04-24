@@ -15,8 +15,6 @@ namespace LanguageSchoolApp.service.Exams
         List<ExamApplication> GetAllExamApplicationsByExamId(int examId);
         bool ExamApplicationExists(int id);
         void CreateExamApplication(string studentId, int examId);
-        void AcceptExamApplication(int id);
-        void DenyExamApplication(int id);
         void DeleteExamApplication(int id);
         void DeleteAllExamApplicationsByIds(List<int> ids);
         int GenerateId(string studentId, int examId);
