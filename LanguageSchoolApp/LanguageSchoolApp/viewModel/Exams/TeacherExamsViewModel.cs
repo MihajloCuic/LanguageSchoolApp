@@ -46,6 +46,7 @@ namespace LanguageSchoolApp.viewModel.Exams
         public RelayCommand<int> CardButtonCommand { get; set; }
         public Action<int> SwitchToEditExamView { get; set; }
         public Action<int> SwitchToFinishExamView { get; set; }
+        public Action<int> SwitchToStartExamView { get; set; }
 
         public TeacherExamsViewModel(string teacherId) 
         {
@@ -116,19 +117,20 @@ namespace LanguageSchoolApp.viewModel.Exams
 
         private bool CanCardButton(int examId) 
         {
-            try
-            {
-                if (!examService.ExamExists(examId))
-                {
-                    throw new ExamException("Exam not found !", ExamExceptionType.ExamNotFound);
-                }
-                Exam exam = examService.GetExam(examId);
-                return (exam.ExamDate - DateTime.Now).TotalDays >= 30 || DateTime.Now > exam.ExamDate;
-            }
-            catch (ExamException)
-            { 
-                return false;
-            }
+            return true;
+            //try
+            //{
+            //    if (!examService.ExamExists(examId))
+            //    {
+            //        throw new ExamException("Exam not found !", ExamExceptionType.ExamNotFound);
+            //    }
+            //    Exam exam = examService.GetExam(examId);
+            //    return (exam.ExamDate - DateTime.Now).TotalDays >= 30 || DateTime.Now > exam.ExamDate;
+            //}
+            //catch (ExamException)
+            //{ 
+            //    return false;
+            //}
         }
         private void CardButton(int examId) 
         { 
@@ -139,6 +141,7 @@ namespace LanguageSchoolApp.viewModel.Exams
             }
             else if ((exam.ExamDate - DateTime.Now).TotalDays <= 30)
             {
+                SwitchToStartExamView(examId);
                 //TODO: Implement active exam
             }
             else 

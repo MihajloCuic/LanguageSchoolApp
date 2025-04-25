@@ -17,6 +17,10 @@
       {
         "CourseId": 1469787972,
         "Grade": 10
+      },
+      {
+        "CourseId": 1007840634,
+        "Grade": 10
       }
     ],
     "FinishedExamResults": [
@@ -70,7 +74,12 @@
   },
   "zoran@gmail.com": {
     "ProfessionalDegree": 0,
-    "FinishedCourses": [],
+    "FinishedCourses": [
+      {
+        "CourseId": 1007840634,
+        "Grade": 7
+      }
+    ],
     "FinishedExamResults": [],
     "EnrolledCourseId": 1469787972,
     "PenaltyPoints": [],
@@ -89,9 +98,25 @@
       {
         "CourseId": 952824467,
         "Grade": 4
+      },
+      {
+        "CourseId": 1007840634,
+        "Grade": 2
       }
     ],
-    "FinishedExamResults": [],
+    "FinishedExamResults": [
+      {
+        "ExamId": 2,
+        "TotalScore": 170,
+        "PartialScores": {
+          "Reading": 50,
+          "Writing": 40,
+          "Listening": 30,
+          "Speaking": 50
+        },
+        "Passed": true
+      }
+    ],
     "EnrolledCourseId": -1,
     "PenaltyPoints": [
       720895496
@@ -126,9 +151,25 @@
       {
         "CourseId": 952824467,
         "Grade": 5
+      },
+      {
+        "CourseId": 1007840634,
+        "Grade": 8
       }
     ],
-    "FinishedExamResults": [],
+    "FinishedExamResults": [
+      {
+        "ExamId": 2,
+        "TotalScore": 194,
+        "PartialScores": {
+          "Reading": 56,
+          "Writing": 50,
+          "Listening": 38,
+          "Speaking": 50
+        },
+        "Passed": true
+      }
+    ],
     "EnrolledCourseId": -1,
     "PenaltyPoints": [],
     "Blocked": false,

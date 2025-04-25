@@ -34,7 +34,7 @@
       "filipruzic2003@gmail.com",
       "jelena@gmail.com"
     ],
-    "IsFinished": false
+    "IsFinished": true
   },
   "3": {
     "Id": 3,
@@ -97,9 +97,14 @@
       "LanguageName": "Serbian",
       "LanguageLevel": 1
     },
-    "ExamDate": "2025-06-13T09:00:00",
+    "ExamDate": "2025-05-13T09:00:00",
     "MaxParticipants": 30,
-    "Participants": [],
+    "Participants": [
+      "student@gmail.com",
+      "zoran@gmail.com",
+      "jelena@gmail.com",
+      "filipruzic2003@gmail.com"
+    ],
     "IsFinished": false
   }
 }

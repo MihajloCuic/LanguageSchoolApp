@@ -10,5 +10,29 @@
     "StudentId": "student@gmail.com",
     "ExamId": 2,
     "Acceptance": 0
+  },
+  "2096490875": {
+    "Id": 2096490875,
+    "StudentId": "student@gmail.com",
+    "ExamId": 1962345531,
+    "Acceptance": 1
+  },
+  "12853321": {
+    "Id": 12853321,
+    "StudentId": "zoran@gmail.com",
+    "ExamId": 1962345531,
+    "Acceptance": 1
+  },
+  "1534073725": {
+    "Id": 1534073725,
+    "StudentId": "jelena@gmail.com",
+    "ExamId": 1962345531,
+    "Acceptance": 1
+  },
+  "1589882356": {
+    "Id": 1589882356,
+    "StudentId": "filipruzic2003@gmail.com",
+    "ExamId": 1962345531,
+    "Acceptance": 1
   }
 }

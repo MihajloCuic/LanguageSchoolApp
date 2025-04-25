@@ -103,6 +103,7 @@ namespace LanguageSchoolApp.viewModel
         public TeacherExamsViewModel TeacherExamsVM { get; set; }
         public CreateExamViewModel CreateExamVM { get; set; }
         public GradeExamsViewModel GradeExamsVM { get; set; }
+        public StartExamViewModel StartExamVM { get; set; } 
 
         //director menu options
         public ActiveTeachersViewModel ActiveTeachersVM { get; set; }
@@ -156,6 +157,7 @@ namespace LanguageSchoolApp.viewModel
                 TeacherExamsVM = new TeacherExamsViewModel(teacher.Email);
                 TeacherExamsVM.SwitchToEditExamView = SwitchToEditExamView;
                 TeacherExamsVM.SwitchToFinishExamView = SwitchToFinishExamView;
+                TeacherExamsVM.SwitchToStartExamView = SwitchToStartExamView;
                 CreateExamVM = new CreateExamViewModel(teacher);
                 CurrentView = TeacherCoursesVM;
 
@@ -221,7 +223,6 @@ namespace LanguageSchoolApp.viewModel
                 CurrentView = CreateCourseVM;
             }
         }
-
         private void SwitchToTeacherCourses(string teacherId)
         {
             TeacherCoursesVM = new TeacherCoursesViewModel(CurrentUser.Email);
@@ -240,7 +241,6 @@ namespace LanguageSchoolApp.viewModel
                 CurrentView = CreateExamVM;
             }
         }
-
         private void SwitchToFinishExamView(int examId)
         {
             if (CurrentUser is Teacher teacher)
@@ -250,12 +250,20 @@ namespace LanguageSchoolApp.viewModel
                 CurrentView = GradeExamsVM;
             }
         }
-
+        private void SwitchToStartExamView(int examId)
+        {
+            if (CurrentUser is Teacher teacher)
+            { 
+                StartExamVM = new StartExamViewModel(examId);
+                CurrentView = StartExamVM;
+            }
+        }
         private void SwitchToTeacherExams()
         { 
             TeacherExamsVM = new TeacherExamsViewModel(CurrentUser.Email);
             TeacherExamsVM.SwitchToEditExamView = SwitchToEditExamView;
             TeacherExamsVM.SwitchToFinishExamView = SwitchToFinishExamView;
+            TeacherExamsVM.SwitchToStartExamView = SwitchToStartExamView;
             CurrentView = TeacherExamsVM;
         }
 
@@ -361,6 +369,7 @@ namespace LanguageSchoolApp.viewModel
                 TeacherExamsVM = new TeacherExamsViewModel(CurrentUser.Email);
                 TeacherExamsVM.SwitchToEditExamView = SwitchToEditExamView;
                 TeacherExamsVM.SwitchToFinishExamView = SwitchToFinishExamView;
+                TeacherExamsVM.SwitchToStartExamView = SwitchToStartExamView;
                 CurrentView = TeacherExamsVM;
             }
             if (CurrentUser is Director)
