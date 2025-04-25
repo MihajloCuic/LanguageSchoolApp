@@ -290,5 +290,32 @@
     "BeginningDate": "2025-07-26T00:00:00",
     "CourseType": 1,
     "IsFinished": false
+  },
+  "1007840634": {
+    "Id": 1007840634,
+    "LanguageProficiency": {
+      "LanguageName": "Serbian",
+      "LanguageLevel": 1
+    },
+    "MaxParticipants": 20,
+    "ParticipantsIds": ["student@gmail.com", "zoran@gmail.com", "jelena@gmail.com", "filipruzic2003@gmail.com"],
+    "Duration": 4,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 1,
+        "StartTime": "20:00:00"
+      },
+      {
+        "DayOfWeek": 3,
+        "StartTime": "20:00:00"
+      },
+      {
+        "DayOfWeek": 5,
+        "StartTime": "19:00:00"
+      }
+    ],
+    "BeginningDate": "2024-06-06T00:00:00",
+    "CourseType": 0,
+    "IsFinished": false
   }
 }

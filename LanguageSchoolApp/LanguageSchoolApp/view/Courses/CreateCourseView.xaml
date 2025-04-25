@@ -198,7 +198,7 @@
                                      Style="{StaticResource CustomRadioButtonTheme}"/>
                     </StackPanel>
                 </Border>
-                <Label Content="{Binding CourseTypeError}"
+                <Label Content="{Binding CourseTypeParamError}"
                        Foreground="Red"
                        Grid.Row="2"
                        FontFamily="Cambria"

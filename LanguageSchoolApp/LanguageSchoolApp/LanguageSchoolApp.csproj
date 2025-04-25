@@ -9,10 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="world_white_8Fs_icon.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="assets\font\" />
     <Folder Include="viewModel\Notifications\" />
     <Folder Include="view\Notifications\" />
