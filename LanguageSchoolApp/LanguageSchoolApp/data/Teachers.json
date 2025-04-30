@@ -50,20 +50,100 @@
     ],
     "LanguageProficiencies": [
       {
-        "LanguageName": "English",
+        "LanguageName": "english",
         "LanguageLevel": 3
       },
       {
-        "LanguageName": "Spanish",
+        "LanguageName": "spanish",
         "LanguageLevel": 4
       }
     ],
-    "Name": "name",
-    "Surname": "surname",
+    "Name": "Aleksandra",
+    "Surname": "Marinkovljevic",
     "Gender": 1,
     "Birthday": "2002-04-18T00:00:00",
     "PhoneNumber": "064832295",
     "Email": "teacher@gmail.com",
     "Password": "password"
+  },
+  "mirkoTeacher@gmail.com": {
+    "MyGrades": [],
+    "MyCoursesIds": [],
+    "MyExamsIds": [],
+    "LanguageProficiencies": [
+      {
+        "LanguageName": "english",
+        "LanguageLevel": 0
+      },
+      {
+        "LanguageName": "english",
+        "LanguageLevel": 1
+      },
+      {
+        "LanguageName": "english",
+        "LanguageLevel": 2
+      },
+      {
+        "LanguageName": "english",
+        "LanguageLevel": 3
+      },
+      {
+        "LanguageName": "spanish",
+        "LanguageLevel": 0
+      },
+      {
+        "LanguageName": "spanish",
+        "LanguageLevel": 1
+      },
+      {
+        "LanguageName": "spanish",
+        "LanguageLevel": 2
+      },
+      {
+        "LanguageName": "spanish",
+        "LanguageLevel": 3
+      },
+      {
+        "LanguageName": "spanish",
+        "LanguageLevel": 4
+      }
+    ],
+    "Name": "Miroslav",
+    "Surname": "Panakaptijevic",
+    "Gender": 0,
+    "Birthday": "1975-12-09T00:00:00",
+    "PhoneNumber": "0693280012",
+    "Email": "mirkoTeacher@gmail.com",
+    "Password": "sifra"
+  },
+  "dejanadejanic1998@gmail.com": {
+    "MyGrades": [],
+    "MyCoursesIds": [],
+    "MyExamsIds": [],
+    "LanguageProficiencies": [
+      
+    ],
+    "Name": "Dejana",
+    "Surname": "Dejanic",
+    "Gender": 1,
+    "Birthday": "1998-03-04T00:00:00",
+    "PhoneNumber": "0613284439",
+    "Email": "dejanadejanic1998@gmail.com",
+    "Password": "sifra"
+  },
+  "marinkomadzgalj1983@gmail.com": {
+    "MyGrades": [],
+    "MyCoursesIds": [],
+    "MyExamsIds": [],
+    "LanguageProficiencies": [
+      
+    ],
+    "Name": "Marinko",
+    "Surname": "Madzgalj",
+    "Gender": 0,
+    "Birthday": "1983-10-10T00:00:00",
+    "PhoneNumber": "0653390606",
+    "Email": "marinkomadzgalj1983@gmail.com",
+    "Password": "sifra"
   }
 }

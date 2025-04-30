@@ -14,7 +14,7 @@ namespace LanguageSchoolApp.model.Courses
         public LanguageProficiency() { }
 
         public LanguageProficiency(string _languageName, LanguageLevel _languageLevel) { 
-            LanguageName = _languageName;
+            LanguageName = _languageName.ToLower();
             LanguageLevel = _languageLevel;
         }
 

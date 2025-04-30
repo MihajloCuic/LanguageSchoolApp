@@ -1,13 +1,9 @@
-﻿using LanguageSchoolApp.model.Courses;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LanguageSchoolApp.exceptions.Users;
+using LanguageSchoolApp.model;
+using LanguageSchoolApp.model.Courses;
 using LanguageSchoolApp.model.Users;
-using LanguageSchoolApp.exceptions.Users;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace LanguageSchoolApp.repository.Users.Teachers
 {
@@ -121,6 +117,72 @@ namespace LanguageSchoolApp.repository.Users.Teachers
             teacher.MyExamsIds.Remove(examId);
             allTeachers[teacherId] = teacher;
             WriteToFile();
+        }
+
+        public List<Teacher> FilteredTeachers(string languageName, LanguageLevel languageLevel, int grade) 
+        {
+            List<Teacher> filteredTeachers = new List<Teacher>();
+            LanguageProficiency proficiency = new LanguageProficiency();
+            if (!string.IsNullOrEmpty(languageName)) 
+            { 
+                proficiency.LanguageName = languageName.ToLower();
+                proficiency.LanguageLevel = languageLevel;
+            }
+            foreach (Teacher teacher in allTeachers.Values)
+            {
+                if (!string.IsNullOrEmpty(languageName) && !teacher.LanguageProficiencies.Contains(proficiency))
+                {
+                    continue;
+                }
+                if (grade != -1 && teacher.CalculateAverageGrade() <= grade)
+                {
+                    continue;
+                }
+                filteredTeachers.Add(teacher);
+            }
+            return filteredTeachers;
+        }
+
+        public List<Teacher> SortTeachers(List<Teacher> teachers, SortingDirection name, SortingDirection grade) 
+        {
+
+            if (name.Equals(SortingDirection.None) && grade.Equals(SortingDirection.None))
+            {
+                return teachers;
+            }
+            if (name.Equals(SortingDirection.Ascending) && grade.Equals(SortingDirection.None))
+            {
+                return teachers.OrderBy(teacher => teacher.Name).ToList();
+            }
+            if (name.Equals(SortingDirection.Descending) && grade.Equals(SortingDirection.None))
+            {
+                return teachers.OrderByDescending(teacher => teacher.Name).ToList();
+            }
+            if (name.Equals(SortingDirection.None) && grade.Equals(SortingDirection.Ascending))
+            {
+                return teachers.OrderBy(teacher => teacher.CalculateAverageGrade()).ToList();
+            }
+            if (name.Equals(SortingDirection.None) && grade.Equals(SortingDirection.Descending))
+            {
+                return teachers.OrderByDescending(teacher => teacher.CalculateAverageGrade()).ToList();
+            }
+            if (name.Equals(SortingDirection.Ascending) && grade.Equals(SortingDirection.Ascending))
+            {
+                return teachers.OrderBy(teacher => teacher.Name).ThenBy(teacher => teacher.CalculateAverageGrade()).ToList();
+            }
+            if (name.Equals(SortingDirection.Ascending) && grade.Equals(SortingDirection.Descending))
+            {
+                return teachers.OrderBy(teacher => teacher.Name).ThenByDescending(teacher => teacher.CalculateAverageGrade()).ToList();
+            }
+            if (name.Equals(SortingDirection.Descending) && grade.Equals(SortingDirection.Ascending))
+            {
+                return teachers.OrderByDescending(teacher => teacher.Name).ThenBy(teacher => teacher.CalculateAverageGrade()).ToList();
+            }
+            if (name.Equals(SortingDirection.Descending) && grade.Equals(SortingDirection.Descending))
+            {
+                return teachers.OrderByDescending(teacher => teacher.Name).ThenByDescending(teacher => teacher.CalculateAverageGrade()).ToList();
+            }
+            return new List<Teacher>();
         }
     }
 }

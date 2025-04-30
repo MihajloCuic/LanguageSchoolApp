@@ -1,4 +1,5 @@
 ﻿using LanguageSchoolApp.model.Courses;
+using LanguageSchoolApp.model.Users;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,18 +14,26 @@ namespace LanguageSchoolApp.converter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Course item)
+            if (value is Course course)
             {
-                return item.ClassPeriodsToString();
+                return course.ClassPeriodsToString();
+            }
+            else if (value is Teacher teacher)
+            {
+                return teacher.CalculateAverageGrade().ToString();
             }
             return string.Empty;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Course item)
+            if (value is Course course)
             {
-                return item.ClassPeriodsToString();
+                return course.ClassPeriodsToString();
+            }
+            else if (value is Teacher teacher)
+            {
+                return teacher.CalculateAverageGrade().ToString();
             }
             return string.Empty;
         }

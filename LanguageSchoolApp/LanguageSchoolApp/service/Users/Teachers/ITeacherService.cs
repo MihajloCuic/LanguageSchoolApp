@@ -1,10 +1,11 @@
-﻿using System;
+﻿using LanguageSchoolApp.model;
+using LanguageSchoolApp.model.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
-using LanguageSchoolApp.model.Users;
 
 namespace LanguageSchoolApp.service.Users.Teachers
 {
@@ -23,5 +24,7 @@ namespace LanguageSchoolApp.service.Users.Teachers
         void AddExam(int examId, string teacherId);
         void DeleteExam(int examId, string teacherId);
         void GradeTeacher(int grade, string teacherId);
+        List<Teacher> SortTeachers(List<Teacher> teachers, string name, string grade);
+        List<Teacher> FilteredTeachers(string languageName, LanguageLevel languageLevel, int grade);
     }
 }

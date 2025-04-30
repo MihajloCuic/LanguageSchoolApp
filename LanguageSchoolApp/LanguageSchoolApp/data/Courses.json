@@ -2,7 +2,7 @@
   "952824467": {
     "Id": 952824467,
     "LanguageProficiency": {
-      "LanguageName": "English",
+      "LanguageName": "english",
       "LanguageLevel": 3
     },
     "MaxParticipants": 25,
@@ -29,7 +29,7 @@
   "1": {
     "Id": 1,
     "LanguageProficiency": {
-      "LanguageName": "Spanish",
+      "LanguageName": "spanish",
       "LanguageLevel": 1
     },
     "MaxParticipants": 30,
@@ -60,7 +60,7 @@
   "2": {
     "Id": 2,
     "LanguageProficiency": {
-      "LanguageName": "Italian",
+      "LanguageName": "italian",
       "LanguageLevel": 0
     },
     "MaxParticipants": 25,
@@ -87,7 +87,7 @@
   "3": {
     "Id": 3,
     "LanguageProficiency": {
-      "LanguageName": "English",
+      "LanguageName": "english",
       "LanguageLevel": 1
     },
     "MaxParticipants": 25,
@@ -114,7 +114,7 @@
   "4": {
     "Id": 4,
     "LanguageProficiency": {
-      "LanguageName": "Italian",
+      "LanguageName": "italian",
       "LanguageLevel": 0
     },
     "MaxParticipants": 25,
@@ -143,7 +143,7 @@
   "5": {
     "Id": 5,
     "LanguageProficiency": {
-      "LanguageName": "English",
+      "LanguageName": "english",
       "LanguageLevel": 1
     },
     "MaxParticipants": 25,
@@ -172,7 +172,7 @@
   "1291962207": {
     "Id": 1291962207,
     "LanguageProficiency": {
-      "LanguageName": "Serbian",
+      "LanguageName": "serbian",
       "LanguageLevel": 1
     },
     "MaxParticipants": 20,
@@ -195,7 +195,7 @@
   "1469787972": {
     "Id": 1469787972,
     "LanguageProficiency": {
-      "LanguageName": "Bulgarian",
+      "LanguageName": "bulgarian",
       "LanguageLevel": 5
     },
     "MaxParticipants": 30,
@@ -221,7 +221,7 @@
   "364486381": {
     "Id": 364486381,
     "LanguageProficiency": {
-      "LanguageName": "Romanian",
+      "LanguageName": "romanian",
       "LanguageLevel": 1
     },
     "MaxParticipants": 10,
@@ -244,7 +244,7 @@
   "1627625454": {
     "Id": 1627625454,
     "LanguageProficiency": {
-      "LanguageName": "English",
+      "LanguageName": "english",
       "LanguageLevel": 3
     },
     "MaxParticipants": 30,
@@ -271,7 +271,7 @@
   "366552599": {
     "Id": 366552599,
     "LanguageProficiency": {
-      "LanguageName": "Spanish",
+      "LanguageName": "spanish",
       "LanguageLevel": 4
     },
     "MaxParticipants": 30,
@@ -294,7 +294,7 @@
   "1007840634": {
     "Id": 1007840634,
     "LanguageProficiency": {
-      "LanguageName": "Serbian",
+      "LanguageName": "serbian",
       "LanguageLevel": 1
     },
     "MaxParticipants": 20,

@@ -179,8 +179,8 @@ namespace LanguageSchoolApp.viewModel
                 CurrentView = ActiveTeachersVM;
 
                 MenuItem1 = "Active Teachers";
-                MenuItem2 = "Smart Course Making";
-                MenuItem3 = "Smart Exam Making";
+                MenuItem2 = "Smart Course";
+                MenuItem3 = "Smart Exam";
                 MenuItem4 = "Send Exam Results";
                 MenuItem5 = "Send Course Results";
                 MenuItem6 = "Reports";
