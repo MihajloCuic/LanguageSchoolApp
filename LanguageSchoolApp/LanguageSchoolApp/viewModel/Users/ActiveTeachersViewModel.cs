@@ -4,6 +4,7 @@ using LanguageSchoolApp.model;
 using LanguageSchoolApp.service.Users.Teachers;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
+using LanguageSchoolApp.view.Users;
 
 namespace LanguageSchoolApp.viewModel.Users
 {
@@ -38,9 +39,11 @@ namespace LanguageSchoolApp.viewModel.Users
             }
         }
 
+        public RelayCommand<object> AddTeacherCommand { get; set; }
         public RelayCommand<string> EditCommand { get; set; }
         public RelayCommand<object> PreviousPageCommand { get; set; }
         public RelayCommand<object> NextPageCommand { get; set; }
+        public Action<string> OpenEditWindowAction { get; set; }
 
         public ActiveTeachersViewModel()
         {
@@ -85,7 +88,10 @@ namespace LanguageSchoolApp.viewModel.Users
         }
 
         private bool CanEdit(string teacherId) { return true; }
-        private void Edit(string teacherId) { }
+        private void Edit(string teacherId) 
+        { 
+            OpenEditWindowAction(teacherId);
+        }
 
         private bool CanNextPage(object? parameter) { return PageNumber < (double)allTeachers.Count / 6; }
         private void NextPage(object? parameter)

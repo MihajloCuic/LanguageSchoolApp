@@ -37,16 +37,63 @@ namespace LanguageSchoolApp.view.Users
         public Register(Student student) 
         {
             InitializeComponent();
+            SetupPage(student.Gender, true);
+
+            DataContext = new RegisterViewModel(student);
+            if (DataContext is RegisterViewModel viewModel)
+            {
+                viewModel.CloseAction = new Action(this.Close);
+            }
+        }
+
+        public Register(Teacher teacher)
+        {
+            InitializeComponent();
+            SetupPage(teacher.Gender, false);
+
+            DataContext = new RegisterViewModel(teacher);
+            if (DataContext is RegisterViewModel viewModel)
+            {
+                viewModel.CloseAction = new Action(this.Close);
+            }
+        }
+
+        public Register(Teacher teacher, Director director)
+        {
+            InitializeComponent();
+            SetupPage(teacher.Gender, false);
+
+            DataContext = new RegisterViewModel(teacher, director);
+            if (DataContext is RegisterViewModel viewModel)
+            {
+                viewModel.CloseAction = new Action(this.Close);
+            }
+        }
+
+        public Register(Director director)
+        {
+            InitializeComponent();
+            SetupPage(director.Gender, false);
+
+            DataContext = new RegisterViewModel(director);
+            if (DataContext is RegisterViewModel viewModel)
+            {
+                viewModel.CloseAction = new Action(this.Close);
+            }
+        }
+
+        private void SetupPage(Gender gender, bool isStudent) 
+        {
             Button confirmButton = (Button)FindName("ConfirmButton");
             confirmButton.Content = "Confirm";
-            if (student.Gender.Equals(Gender.Male))
+            if (gender.Equals(Gender.Male))
             {
                 RadioButton maleRadioButton = (RadioButton)FindName("MaleButton");
                 RadioButton femaleRadioButton = (RadioButton)FindName("FemaleButton");
                 maleRadioButton.IsChecked = true;
                 femaleRadioButton.IsChecked = false;
             }
-            else 
+            else
             {
                 RadioButton maleRadioButton = (RadioButton)FindName("MaleButton");
                 RadioButton femaleRadioButton = (RadioButton)FindName("FemaleButton");
@@ -61,10 +108,12 @@ namespace LanguageSchoolApp.view.Users
             loginButton.Visibility = Visibility.Hidden;
             emailTextBox.IsEnabled = false;
 
-            DataContext = new RegisterViewModel(student);
-            if (DataContext is RegisterViewModel viewModel)
+            if (!isStudent)
             {
-                viewModel.CloseAction = new Action(this.Close);
+                Label degreeLabel = (Label)FindName("degreeLabel");
+                ComboBox degreeComboBox = (ComboBox)FindName("degreeComboBox");
+                degreeLabel.Visibility = Visibility.Collapsed;
+                degreeComboBox.Visibility = Visibility.Collapsed;
             }
         }
 

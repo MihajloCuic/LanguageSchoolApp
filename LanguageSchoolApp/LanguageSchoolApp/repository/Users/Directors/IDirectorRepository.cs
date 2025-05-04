@@ -11,7 +11,7 @@ namespace LanguageSchoolApp.repository.Users.Directors
     public interface IDirectorRepository
     {
         Director GetDirector();
-        void UpdateDirector(string name, string surname, Gender gender, DateTime birthday, string phoneNumber, string email, string password);
+        Director UpdateDirector(string name, string surname, Gender gender, DateTime birthday, string phoneNumber, string email, string password);
         void WriteToFile();
     }
 }

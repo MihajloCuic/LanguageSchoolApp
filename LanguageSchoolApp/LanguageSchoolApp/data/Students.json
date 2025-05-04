@@ -180,5 +180,20 @@
     "PhoneNumber": "0692009803",
     "Email": "filipruzic2003@gmail.com",
     "Password": "sifra"
+  },
+  "zeljkozeljanovic@gmail.com": {
+    "ProfessionalDegree": 5,
+    "FinishedCourses": [],
+    "FinishedExamResults": [],
+    "EnrolledCourseId": -1,
+    "PenaltyPoints": [],
+    "Blocked": false,
+    "Name": "Zeljko",
+    "Surname": "Zeljanovic",
+    "Gender": 0,
+    "Birthday": "1980-07-19T00:00:00",
+    "PhoneNumber": "0683233878",
+    "Email": "zeljkozeljanovic@gmail.com",
+    "Password": "sifra"
   }
 }

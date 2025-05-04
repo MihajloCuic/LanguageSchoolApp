@@ -99,20 +99,37 @@
                          Margin="284,249,34,317"/>
                 <Label FontFamily="Cambria" FontSize="13" Content="{Binding EmailError}" Margin="284,284,34,293" Foreground="#fa1302"/>
 
-                <Label FontFamily="Cambria" FontSize="18" Content="Professional degree" Margin="48,391,298,178"/>
-                <ComboBox Margin="48,417,270,149"
-                          SelectedIndex="{Binding Degree}"
-                          Height="34"
-                          Width="192"
-                          Style="{StaticResource ComboboxStyle}">
-                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">Elementary School</ComboBoxItem>
-                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">High School</ComboBoxItem>
-                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">Vocational School</ComboBoxItem>
-                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">Colage</ComboBoxItem>
-                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">Master</ComboBoxItem>
-                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">Doctorate</ComboBoxItem>
-                </ComboBox>
-                <Label FontFamily="Cambria" FontSize="13" Content="{Binding ProfessionalDegreeError}" Margin="48,451,270,126" Foreground="#fa1302"/>
+                <Label FontFamily="Cambria" FontSize="18" Content="Gender" Margin="48,391,393,178"/>
+                <Border CornerRadius="10"
+                        Background="#fff"
+                        Height="34" Width="192" Margin="48,417,270,149">
+                    <Border.Effect>
+                        <DropShadowEffect Color="#000"
+                          Direction="315"
+                          ShadowDepth="5"
+                          BlurRadius="10"
+                          Opacity="0.3"/>
+                    </Border.Effect>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <RadioButton Content="Male" 
+                                     x:Name="MaleButton"
+                                     FontSize="14"
+                                     VerticalAlignment="Center" 
+                                     Margin="0,0,36,0"
+                                     IsChecked="True"
+                                     Command="{Binding GenderCommand}"
+                                     CommandParameter="Male"
+                                     Style="{StaticResource CustomRadioButtonTheme}"/>
+                        <RadioButton Content="Female" 
+                                     x:Name="FemaleButton"
+                                     FontSize="14" 
+                                     VerticalAlignment="Center"
+                                     Command="{Binding GenderCommand}"
+                                     CommandParameter="Female"
+                                     Style="{StaticResource CustomRadioButtonTheme}"/>
+                    </StackPanel>
+                </Border>
+                <Label FontFamily="Cambria" FontSize="13" Content="{Binding GenderError}" Margin="48,451,270,126" Foreground="#fa1302"/>
 
                 <DatePicker HorizontalAlignment="Left" 
                             Margin="48,333,0,0" 
@@ -173,35 +190,20 @@
                     FontSize="10"
                     Margin="401,455,31,117"/>
 
-                <Label FontFamily="Cambria" FontSize="18" Content="Gender" Margin="48,472,393,100"/>
-                <Border CornerRadius="10"
-                        Background="#fff"
-                        Height="34" Width="192" Margin="48,498,270,68">
-                    <Border.Effect>
-                        <DropShadowEffect Color="#000"
-                                          Direction="315"
-                                          ShadowDepth="5"
-                                          BlurRadius="10"
-                                          Opacity="0.3"/>
-                    </Border.Effect>
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <RadioButton Content="Male" 
-                                     x:Name="MaleButton"
-                                     FontSize="14"
-                                     VerticalAlignment="Center" 
-                                     Margin="0,0,36,0"
-                                     IsChecked="True"
-                                     Command="{Binding MaleCommand}"
-                                     Style="{StaticResource CustomRadioButtonTheme}"/>
-                        <RadioButton Content="Female" 
-                                     x:Name="FemaleButton"
-                                     FontSize="14" 
-                                     VerticalAlignment="Center"
-                                     Command="{Binding FemaleCommand}"
-                                     Style="{StaticResource CustomRadioButtonTheme}"/>
-                    </StackPanel>
-                </Border>
-                <Label FontFamily="Cambria" FontSize="13" Content="{Binding GenderError}" Margin="48,532,270,45" Foreground="#fa1302"/>
+                <Label x:Name="degreeLabel" FontFamily="Cambria" FontSize="18" Content="Professional degree" Margin="48,472,298,94"/>
+                <ComboBox x:Name="degreeComboBox" Margin="48,498,270,68"
+                          SelectedIndex="{Binding Degree}"
+                          Height="34"
+                          Width="192"
+                          Style="{StaticResource ComboboxStyle}">
+                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">Elementary School</ComboBoxItem>
+                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">High School</ComboBoxItem>
+                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">Vocational School</ComboBoxItem>
+                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">Colage</ComboBoxItem>
+                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">Master</ComboBoxItem>
+                    <ComboBoxItem Style="{StaticResource ComboBoxItemStyle}">Doctorate</ComboBoxItem>
+                </ComboBox>
+                <Label FontFamily="Cambria" FontSize="13" Content="{Binding ProfessionalDegreeError}" Margin="48,532,270,45" Foreground="#fa1302"/>
 
                 <Button x:Name="ConfirmButton"
                         Background="#2E6C7B"

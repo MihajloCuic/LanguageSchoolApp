@@ -64,10 +64,10 @@ namespace LanguageSchoolApp.service.Users.Teachers
             teacherRepository.AddTeacher(newTeacher);
         }
 
-        public void UpdateTeacher(string teacherId, string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, List<KeyValuePair<string, string>> languageProficienciesStr) 
+        public Teacher UpdateTeacher(string teacherId, string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword) 
         { 
-            ValidateTeacher(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword, languageProficienciesStr);
-            if (TeacherExists(teacherId))
+            ValidateTeacher(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword, null);
+            if (!TeacherExists(teacherId))
             {
                 throw new UserException("Teacher not found !", UserExceptionType.UserNotFound);
             }
@@ -78,20 +78,14 @@ namespace LanguageSchoolApp.service.Users.Teachers
             teacher.Birthday = DateTime.Parse(birthdayStr);
             teacher.PhoneNumber = phoneNumber;
             teacher.Password = password;
-            List<LanguageProficiency> languageProficiencies = new List<LanguageProficiency>();
-            foreach (KeyValuePair<string, string> langProficiency in languageProficienciesStr)
-            {
-                LanguageLevel languageLevel = Enum.Parse<LanguageLevel>(langProficiency.Value);
-                LanguageProficiency languageProficiency = new LanguageProficiency(langProficiency.Key, languageLevel);
-                languageProficiencies.Add(languageProficiency);
-            }
-            teacher.LanguageProficiencies = languageProficiencies;
+            
             teacherRepository.UpdateTeacher(teacherId, teacher);
+            return teacher;
         }
         
         public void DeleteTeacher(string teacherId) 
         {
-            if (TeacherExists(teacherId))
+            if (!TeacherExists(teacherId))
             {
                 throw new UserException("Teacher not found !", UserExceptionType.UserNotFound);
             }
@@ -101,9 +95,10 @@ namespace LanguageSchoolApp.service.Users.Teachers
             teacherRepository.DeleteTeacher(teacherId);
         }
         
-        public bool ValidateTeacher(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, List<KeyValuePair<string, string>> languageProficienciesStr) 
+        public bool ValidateTeacher(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, List<KeyValuePair<string, string>>? languageProficienciesStr) 
         {
             Validations.ValidateUser(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword);
+            if (languageProficienciesStr == null) return true;
             try
             {
                 foreach (KeyValuePair<string, string> langProficiency in languageProficienciesStr) 
@@ -164,6 +159,16 @@ namespace LanguageSchoolApp.service.Users.Teachers
         public List<Teacher> FilteredTeachers(string languageName, LanguageLevel languageLevel, int grade)
         { 
             return teacherRepository.FilteredTeachers(languageName, languageLevel, grade);
+        }
+
+        public void AddProficiencies(string teacherId, List<LanguageProficiency> languageProficiencies) 
+        {
+            if (!TeacherExists(teacherId))
+            { 
+                throw new UserException("Teacher not found !", UserExceptionType.UserNotFound);
+            }
+            Teacher teacher = GetTeacher(teacherId);
+            teacher.LanguageProficiencies = languageProficiencies;
         }
     }
 }
