@@ -110,39 +110,39 @@ namespace LanguageSchoolApp.viewModel.Users
             string newDirection = "";
             if (direction == "None" && sortingType == "name")
             {
-                NamePictureDesc = Visibility.Visible;
-                NamePictureAsc = Visibility.Hidden;
-                newDirection = "Descending";
-            }
-            if (direction == "None" && sortingType == "grade")
-            {
-                GradePictureDesc = Visibility.Visible;
-                GradePictureAsc = Visibility.Hidden;
-                newDirection = "Descending";
-            }
-            if (direction == "Descending" && sortingType == "name")
-            {
                 NamePictureDesc = Visibility.Hidden;
                 NamePictureAsc = Visibility.Visible;
                 newDirection = "Ascending";
             }
-            if (direction == "Descending" && sortingType == "grade")
+            if (direction == "None" && sortingType == "grade")
             {
                 GradePictureDesc = Visibility.Hidden;
                 GradePictureAsc = Visibility.Visible;
                 newDirection = "Ascending";
             }
-            if (direction == "Ascending" && sortingType == "name")
+            if (direction == "Descending" && sortingType == "name")
             {
                 NamePictureDesc = Visibility.Hidden;
                 NamePictureAsc = Visibility.Hidden;
                 newDirection = "None";
             }
-            if (direction == "Ascending" && sortingType == "grade")
+            if (direction == "Descending" && sortingType == "grade")
             {
                 GradePictureDesc = Visibility.Hidden;
                 GradePictureAsc = Visibility.Hidden;
                 newDirection = "None";
+            }
+            if (direction == "Ascending" && sortingType == "name")
+            {
+                NamePictureDesc = Visibility.Visible;
+                NamePictureAsc = Visibility.Hidden;
+                newDirection = "Descending";
+            }
+            if (direction == "Ascending" && sortingType == "grade")
+            {
+                GradePictureDesc = Visibility.Visible;
+                GradePictureAsc = Visibility.Hidden;
+                newDirection = "Descending";
             }
             return newDirection;
         }
