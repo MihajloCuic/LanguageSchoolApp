@@ -1,4 +1,5 @@
-﻿using LanguageSchoolApp.model.Users;
+﻿using LanguageSchoolApp.model;
+using LanguageSchoolApp.model.Users;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -22,5 +23,7 @@ namespace LanguageSchoolApp.repository.Users.Teachers
         void DeleteCourse(int courseId, string teacherId);
         void AddExam(int examId, string teacherId);
         void DeleteExam(int examId, string teacherId);
+        List<Teacher> FilteredTeachers(string languageName, LanguageLevel languageLevel, int grade);
+        List<Teacher> SortTeachers(List<Teacher> teachers, SortingDirection name, SortingDirection grade);
     }
 }

@@ -1,13 +1,14 @@
 ﻿using LanguageSchoolApp.core;
-using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.model;
+using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.service.Users.Teachers;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.ObjectModel;
 
+
 namespace LanguageSchoolApp.viewModel.Users
 {
-    public class ActiveTeachersViewModel : ObservableObject
+    public class AllTeachersViewModel : ObservableObject
     {
         private readonly ITeacherService teacherService;
 
@@ -38,54 +39,29 @@ namespace LanguageSchoolApp.viewModel.Users
             }
         }
 
-        public RelayCommand<string> EditCommand { get; set; }
         public RelayCommand<object> PreviousPageCommand { get; set; }
         public RelayCommand<object> NextPageCommand { get; set; }
 
-        public ActiveTeachersViewModel()
+        public AllTeachersViewModel()
         {
             teacherService = App.ServiceProvider.GetService<ITeacherService>();
             PageNumber = 1;
-            Filters = new TeacherFiltersViewModel(this);
-            CancelFilters = new CancelTeacherFiltersViewModel(Filters);
-            Sorting = new SortingTeachersViewModel(this);
 
             allTeachers = teacherService.GetAllTeachers().Select(teacher => teacher.Value).ToList();
             Teachers = new ObservableCollection<Teacher>(GetSlicedTeachersList());
 
             PreviousPageCommand = new RelayCommand<object>(PreviousPage, CanPreviousPage);
             NextPageCommand = new RelayCommand<object>(NextPage, CanNextPage);
-            EditCommand = new RelayCommand<string>(Edit, CanEdit);
         }
 
-        public List<Teacher> GetSlicedTeachersList()
+        public List<Teacher> GetSlicedTeachersList() 
         {
-            int elementsToSkip = (PageNumber - 1) * 6;
+            int elementsToSkip = PageNumber * 6;
             return allTeachers.Skip(elementsToSkip).Take(6).ToList();
         }
 
-        public void FilterTeachers(string languageName, LanguageLevel languageLevel, int grade) 
-        {
-            UpdateTeachersList(teacherService.FilteredTeachers(languageName, languageLevel, grade));
-        }
-
-        public void SortList(string name, string grade) 
-        {
-            UpdateTeachersList(teacherService.SortTeachers(allTeachers, name, grade));
-        }
-
-        private void UpdateTeachersList(List<Teacher> newTeachersList) 
-        {
-            allTeachers = newTeachersList;
-            Teachers.Clear();
-            foreach (var teacher in GetSlicedTeachersList())
-            { 
-                Teachers.Add(teacher);
-            }
-        }
-
-        private bool CanEdit(string teacherId) { return true; }
-        private void Edit(string teacherId) { }
+        public void FilterTeachers(string languageName, LanguageLevel languageLevel, int grade) { }
+        public void SortList(string name, string grade) { }
 
         private bool CanNextPage(object? parameter) { return PageNumber < (double)allTeachers.Count / 6; }
         private void NextPage(object? parameter)

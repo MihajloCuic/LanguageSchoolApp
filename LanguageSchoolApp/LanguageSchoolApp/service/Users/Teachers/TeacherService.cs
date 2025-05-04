@@ -153,5 +153,17 @@ namespace LanguageSchoolApp.service.Users.Teachers
             teacher.MyGrades.Add(grade);
             teacherRepository.UpdateTeacher(teacherId, teacher);
         }
+
+        public List<Teacher> SortTeachers(List<Teacher> teachers, string name, string grade) 
+        { 
+            SortingDirection nameDirection = Enum.Parse<SortingDirection>(name);
+            SortingDirection gradeDirection = Enum.Parse<SortingDirection>(grade);
+            return teacherRepository.SortTeachers(teachers, nameDirection, gradeDirection);
+        }
+
+        public List<Teacher> FilteredTeachers(string languageName, LanguageLevel languageLevel, int grade)
+        { 
+            return teacherRepository.FilteredTeachers(languageName, languageLevel, grade);
+        }
     }
 }

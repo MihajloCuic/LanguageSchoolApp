@@ -121,6 +121,18 @@
             <DataTemplate DataType="{x:Type viewModelExams:StartExamViewModel}">
                 <viewExams:StartExamView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelUsers:ActiveTeachersViewModel}">
+                <viewUsers:AllTeachersView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelUsers:TeacherFiltersViewModel}">
+                <viewUsers:TeacherFiltersView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelUsers:CancelTeacherFiltersViewModel}">
+                <viewUsers:CancelTeacherFiltersView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelUsers:SortingTeachersViewModel}">
+                <viewUsers:SortingTeachersView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

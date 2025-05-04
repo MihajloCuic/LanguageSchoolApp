@@ -118,19 +118,6 @@ namespace LanguageSchoolApp.viewModel.Exams
         private bool CanCardButton(int examId) 
         {
             return true;
-            //try
-            //{
-            //    if (!examService.ExamExists(examId))
-            //    {
-            //        throw new ExamException("Exam not found !", ExamExceptionType.ExamNotFound);
-            //    }
-            //    Exam exam = examService.GetExam(examId);
-            //    return (exam.ExamDate - DateTime.Now).TotalDays >= 30 || DateTime.Now > exam.ExamDate;
-            //}
-            //catch (ExamException)
-            //{ 
-            //    return false;
-            //}
         }
         private void CardButton(int examId) 
         { 
@@ -142,12 +129,10 @@ namespace LanguageSchoolApp.viewModel.Exams
             else if ((exam.ExamDate - DateTime.Now).TotalDays <= 30)
             {
                 SwitchToStartExamView(examId);
-                //TODO: Implement active exam
             }
             else 
             {
                 SwitchToEditExamView(examId);
-                //TODO: Implement pending exam
             }
         }
     }
