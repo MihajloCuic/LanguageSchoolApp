@@ -19,7 +19,8 @@ namespace LanguageSchoolApp.exceptions.Users
         InvalidPhoneFormat,
         InvalidBirthdayInput,
         InvalidProfessionalDegree,
-        InvalidLanguageProficiencyLevel
+        InvalidLanguageProficiencyLevel,
+        InvalidProficiency
     }
     public class UserValidationException : Exception
     {

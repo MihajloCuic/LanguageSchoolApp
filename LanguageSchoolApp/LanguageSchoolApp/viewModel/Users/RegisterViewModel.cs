@@ -2,15 +2,23 @@
 using LanguageSchoolApp.exceptions.Users;
 using LanguageSchoolApp.model;
 using LanguageSchoolApp.model.Users;
+using LanguageSchoolApp.service.Users.Directors;
 using LanguageSchoolApp.service.Users.Students;
+using LanguageSchoolApp.service.Users.Teachers;
+using LanguageSchoolApp.view;
 using LanguageSchoolApp.view.Users;
 using Microsoft.Extensions.DependencyInjection;
+using System.Windows;
 
 namespace LanguageSchoolApp.viewModel.Users
 {
     public class RegisterViewModel : ObservableObject
     {
         private readonly IStudentService studentService;
+        private readonly ITeacherService teacherService;
+        private readonly IDirectorService directorService;
+        private Director? _director;
+        private Teacher? _teacher;
         private Student? _student;
 
         private string _name;
@@ -31,6 +39,28 @@ namespace LanguageSchoolApp.viewModel.Users
         private string _confirmPasswordError;
         private string _professionalDegreeError;
         private string _genderError;
+
+        private Visibility _deleteBtnVisibility = Visibility.Hidden;
+        private bool _isDeleteBtnEnabled = false;
+
+        public Visibility DeleteBtnVisibility
+        {
+            get { return _deleteBtnVisibility; }
+            set
+            {
+                _deleteBtnVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsDeleteBtnEnabled
+        {
+            get { return _isDeleteBtnEnabled; }
+            set
+            {
+                _isDeleteBtnEnabled = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string Name
         {
@@ -192,10 +222,10 @@ namespace LanguageSchoolApp.viewModel.Users
         public string ProfessionalDegreeStr { get; set; }
         public string Gender { get; set; }
 
-        public RelayCommand<object> MaleCommand { get; set; }
-        public RelayCommand<object> FemaleCommand { get; set; }
+        public RelayCommand<string> GenderCommand { get; set; }
         public RelayCommand<object> RegisterCommand { get; set; }
         public RelayCommand<object> LoginCommand { get; set; }
+        public RelayCommand<object> DeleteTeacherCommand { get; set; }
         public Action CloseAction { get; set; }
 
         public RegisterViewModel() 
@@ -205,18 +235,19 @@ namespace LanguageSchoolApp.viewModel.Users
             Gender = "Male";
             ProfessionalDegreeStr = "ElementarySchool";
             _student = null;
+            _teacher = null;
+            _director = null;
             RegisterCommand = new RelayCommand<object>(Register, CanRegister);
             LoginCommand = new RelayCommand<object>(OpenLoginWindow, CanOpenLoginWindow);
-
-
-            MaleCommand = new RelayCommand<object>(BeMale, CanBeMale);
-            FemaleCommand = new RelayCommand<object>(BeFemale, CanBeFemale);
+            GenderCommand = new RelayCommand<string>(SetGender, CanSetGender);
         }
 
         public RegisterViewModel(Student student)
         {
             studentService = App.ServiceProvider.GetService<IStudentService>();
             _student = student;
+            _teacher = null;
+            _director = null;
             _birthday = _student.Birthday;
             Gender = _student.Gender.ToString();
             ProfessionalDegreeStr = _student.ProfessionalDegree.ToString();
@@ -227,36 +258,146 @@ namespace LanguageSchoolApp.viewModel.Users
             PhoneNumber = _student.PhoneNumber;
             Password = _student.Password;
             ConfirmPassword = _student.Password;
+
             RegisterCommand = new RelayCommand<object>(Register, CanRegister);
             LoginCommand = new RelayCommand<object>(OpenLoginWindow, CanOpenLoginWindow);
-
-
-            MaleCommand = new RelayCommand<object>(BeMale, CanBeMale);
-            FemaleCommand = new RelayCommand<object>(BeFemale, CanBeFemale);
+            GenderCommand = new RelayCommand<string>(SetGender, CanSetGender);
         }
 
-        private bool CanBeMale(object? parameter) { return true; }
-        private void BeMale(object? parameter) { Gender = "Male"; }
-        private bool CanBeFemale(object? parameter) { return true; }
-        private void BeFemale(object? parameter) { Gender = "Female"; }
+        public RegisterViewModel(Teacher teacher) 
+        {
+            teacherService = App.ServiceProvider.GetService<ITeacherService>();
+            _teacher = teacher;
+            _student = null;
+            _director = null;
+            _birthday = teacher.Birthday;
+            Gender = teacher.Gender.ToString();
+            Name = teacher.Name;
+            Surname = teacher.Surname;
+            Email = teacher.Email;
+            PhoneNumber = teacher.PhoneNumber;
+            Password= teacher.Password;
+            ConfirmPassword = teacher.Password;
+
+            RegisterCommand = new RelayCommand<object>(Register, CanRegister);
+            LoginCommand = new RelayCommand<object>(OpenLoginWindow, CanOpenLoginWindow);
+            GenderCommand = new RelayCommand<string>(SetGender, CanSetGender);
+        }
+
+        public RegisterViewModel(Teacher teacher, Director director)
+        {
+            teacherService = App.ServiceProvider.GetService<ITeacherService>();
+            _teacher = teacher;
+            _student = null;
+            _director = director;
+            _birthday = teacher.Birthday;
+            Gender = teacher.Gender.ToString();
+            Name = teacher.Name;
+            Surname = teacher.Surname;
+            Email = teacher.Email;
+            PhoneNumber = teacher.PhoneNumber;
+            Password = teacher.Password;
+            ConfirmPassword = teacher.Password;
+
+            DeleteBtnVisibility = Visibility.Visible;
+            IsDeleteBtnEnabled = true;
+
+            RegisterCommand = new RelayCommand<object>(Register, CanRegister);
+            LoginCommand = new RelayCommand<object>(OpenLoginWindow, CanOpenLoginWindow);
+            GenderCommand = new RelayCommand<string>(SetGender, CanSetGender);
+            DeleteTeacherCommand = new RelayCommand<object>(DeleteTeacher, CanDeleteTeacher);
+        }
+
+        public RegisterViewModel(Director director)
+        {
+            directorService = App.ServiceProvider.GetService<IDirectorService>();
+            _teacher = null;
+            _student = null;
+            _director = director;
+            _birthday = director.Birthday;
+            Gender = director.Gender.ToString();
+            Name = director.Name;
+            Surname = director.Surname;
+            Email = director.Email;
+            PhoneNumber = director.PhoneNumber;
+            Password = director.Password;
+            ConfirmPassword = director.Password;
+
+            RegisterCommand = new RelayCommand<object>(Register, CanRegister);
+            LoginCommand = new RelayCommand<object>(OpenLoginWindow, CanOpenLoginWindow);
+            GenderCommand = new RelayCommand<string>(SetGender, CanSetGender);
+        }
+
+        private bool CanSetGender(string gender) { return true; }
+        private void SetGender(string gender) { Gender = gender; }
+
+        private bool CanDeleteTeacher(object? parameter) { return _teacher != null; }
+        private void DeleteTeacher(object? parameter) 
+        {
+            try
+            {
+                if (_teacher == null)
+                { 
+                    throw new UserException("Teacher not found !", UserExceptionType.UserNotFound);
+                }
+                teacherService.DeleteTeacher(_teacher.Email);
+                PopupMessageView successMessage = new PopupMessageView("SUCCESS", "Teacher deleted successfully !");
+                successMessage.Show();
+                MainWindow mainWindow = new MainWindow(_director);
+                mainWindow.Show();
+                CloseAction();
+            }
+            catch (UserException ex)
+            {
+                PopupMessageView errorMessage = new PopupMessageView("ERROR", ex.Text);
+                errorMessage.Show();
+            }
+        }
 
         private bool CanRegister(object? parameter) { return true; }
         private void Register(object? parameter)
         {
             try
             {
-                if (_student == null)
-                {
-                    studentService.CreateStudent(Name, Surname, Gender, Birthday.ToString("dd.MM.yyyy."), PhoneNumber, Email, Password, ConfirmPassword, ProfessionalDegreeStr);
-                    //TODO: Add popup window which confirms creation of an account
-                    Login loginWindow = new Login();
-                    loginWindow.Show();
-                }
-                else 
+                if (_student != null)
                 {
                     _student = studentService.UpdateStudent(_student.Email, Name, Surname, Gender, Birthday.ToString("dd.MM.yyyy."), PhoneNumber, Password, ConfirmPassword, ProfessionalDegreeStr);
+                    PopupMessageView successMessage = new PopupMessageView("SUCCESS", "Account edited successfully !");
+                    successMessage.Show();
                     MainWindow mainWindow = new MainWindow(_student);
                     mainWindow.Show();
+                }
+                else if (_teacher != null)
+                {
+                    _teacher = teacherService.UpdateTeacher(_teacher.Email, Name, Surname, Gender, Birthday.ToString("dd.MM.yyyy."), PhoneNumber, Password, ConfirmPassword);
+                    PopupMessageView successMessage = new PopupMessageView("SUCCESS", "Account edited successfully !");
+                    successMessage.Show();
+                    if (_director != null)
+                    {
+                        MainWindow mainWindow = new MainWindow(_director);
+                        mainWindow.Show();
+                    }
+                    else 
+                    {
+                        MainWindow mainWindow = new MainWindow(_teacher);
+                        mainWindow.Show();
+                    }
+                }
+                else if (_director != null)
+                { 
+                    _director = directorService.UpdateDirector(Name, Surname, Gender, Birthday.ToString("dd.MM.yyyy."), PhoneNumber, Email, Password, ConfirmPassword);
+                    PopupMessageView successMessage = new PopupMessageView("SUCCESS", "Account edited successfully !");
+                    successMessage.Show();
+                    MainWindow mainWindow = new MainWindow(_director);
+                    mainWindow.Show();
+                }
+                else
+                {
+                    studentService.CreateStudent(Name, Surname, Gender, Birthday.ToString("dd.MM.yyyy."), PhoneNumber, Email, Password, ConfirmPassword, ProfessionalDegreeStr);
+                    PopupMessageView successMessage = new PopupMessageView("SUCCESS", "Account created successfully !");
+                    successMessage.Show();
+                    Login loginWindow = new Login();
+                    loginWindow.Show();
                 }
 
                 CloseAction();

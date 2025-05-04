@@ -26,7 +26,7 @@ namespace LanguageSchoolApp.repository.Users.Directors
             return director;
         }
 
-        public void UpdateDirector(string name, string surname, Gender gender, DateTime birthday, string phoneNumber, string email, string password)
+        public Director UpdateDirector(string name, string surname, Gender gender, DateTime birthday, string phoneNumber, string email, string password)
         {
             director.Name = name;
             director.Surname = surname;
@@ -36,6 +36,7 @@ namespace LanguageSchoolApp.repository.Users.Directors
             director.Email = email;
             director.Password = password;
             WriteToFile();
+            return director;
         }
 
         public void WriteToFile()

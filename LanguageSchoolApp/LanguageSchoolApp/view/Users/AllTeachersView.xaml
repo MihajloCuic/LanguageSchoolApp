@@ -27,10 +27,15 @@
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <ContentControl Content="{Binding Filters}"/>
-            <ContentControl Content="{Binding Sorting}" Grid.Row="1"/>
+            <ContentControl Content="{Binding Sorting}" Grid.Row="1" Margin="0,15,0,0"/>
+            <Button Style="{StaticResource RoundedButtonStyle}" Content="Add Teacher"
+                    Height="34" Grid.Row="2" Margin="10,0,0,0"
+                    Command="{Binding AddTeacherCommand}"
+                    Foreground="#fff" Background="#2E6C7B" FontSize="12" FontFamily="Cambria"/>
         </Grid>
         <Grid Grid.Column="1" Margin="0,10,0,0">
             <Grid.RowDefinitions>

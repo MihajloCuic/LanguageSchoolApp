@@ -64,7 +64,7 @@
     "Birthday": "2002-04-18T00:00:00",
     "PhoneNumber": "064832295",
     "Email": "teacher@gmail.com",
-    "Password": "password"
+    "Password": "sifra"
   },
   "mirkoTeacher@gmail.com": {
     "MyGrades": [],
@@ -111,7 +111,7 @@
     "Name": "Miroslav",
     "Surname": "Panakaptijevic",
     "Gender": 0,
-    "Birthday": "1975-12-09T00:00:00",
+    "Birthday": "1975-11-18T00:00:00",
     "PhoneNumber": "0693280012",
     "Email": "mirkoTeacher@gmail.com",
     "Password": "sifra"
@@ -120,9 +120,7 @@
     "MyGrades": [],
     "MyCoursesIds": [],
     "MyExamsIds": [],
-    "LanguageProficiencies": [
-      
-    ],
+    "LanguageProficiencies": [],
     "Name": "Dejana",
     "Surname": "Dejanic",
     "Gender": 1,
@@ -135,9 +133,7 @@
     "MyGrades": [],
     "MyCoursesIds": [],
     "MyExamsIds": [],
-    "LanguageProficiencies": [
-      
-    ],
+    "LanguageProficiencies": [],
     "Name": "Marinko",
     "Surname": "Madzgalj",
     "Gender": 0,
