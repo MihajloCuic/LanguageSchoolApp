@@ -1,0 +1,318 @@
+﻿<UserControl x:Class="LanguageSchoolApp.view.Users.CreateTeacherView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LanguageSchoolApp.view.Users"
+             mc:Ignorable="d" 
+             d:DesignHeight="489" d:DesignWidth="653">
+    <Grid Margin="0,14,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel>
+            <TextBlock Text="Name" FontSize="18" FontFamily="Cambria" Margin="20,0,0,0"/>
+            <TextBox Text="{Binding Name}" Style="{StaticResource RoundedTextBox}" Height="34" Width="192"/>
+            <TextBlock Text="{Binding NameError}" FontSize="10" FontFamily="Cambria" Foreground="Red" Visibility="Hidden"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="Surname" FontSize="18" FontFamily="Cambria" Margin="20,0,0,0"/>
+            <TextBox Text="{Binding Surname}" Style="{StaticResource RoundedTextBox}" Height="34" Width="192"/>
+            <TextBlock Text="{Binding SurnameError}" FontSize="10" FontFamily="Cambria" Foreground="Red" Visibility="Hidden"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2">
+            <TextBlock Text="E-mail" FontSize="18" FontFamily="Cambria" Margin="20,0,0,0"/>
+            <TextBox Text="{Binding Email}" Style="{StaticResource RoundedTextBox}" Height="34" Width="192"/>
+            <TextBlock Text="{Binding EmailError}" FontSize="10" FontFamily="Cambria" Foreground="Red" Visibility="Hidden"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Phone Number" FontSize="18" FontFamily="Cambria" Margin="20,0,0,0"/>
+            <TextBox Text="{Binding PhoneNumber}" Style="{StaticResource RoundedTextBox}" Height="34" Width="192"/>
+            <TextBlock Text="{Binding PhoneNumberError}" FontSize="10" FontFamily="Cambria" Foreground="Red" Visibility="Hidden"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <TextBlock Text="Date of Birth" FontSize="18" FontFamily="Cambria" Margin="20,0,0,0"/>
+            <DatePicker SelectedDate="{Binding Birthday}" Height="34" Width="192"/>
+            <TextBlock Text="{Binding BirthdayError}" FontSize="10" FontFamily="Cambria" Foreground="Red" Visibility="Hidden"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="3">
+            <TextBlock FontFamily="Cambria" FontSize="18" Text="Password" Margin="20,0,0,0"/>
+            <TextBox x:Name="PTextBox" 
+                     Height="34" Width="192" 
+                     Visibility="Collapsed" 
+                     Text="{Binding Password}" 
+                     Style="{StaticResource RoundedTextBox}"/>
+            <PasswordBox x:Name="PPasswordBox" 
+                         Visibility="Visible" 
+                         PasswordChar="●"
+                         Height="34" Width="192" 
+                         PasswordChanged="PasswordChanged"
+                         Style="{StaticResource RoundedPasswordBox}"/>
+            <Grid Margin="0,3,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock FontFamily="Cambria" FontSize="13" Text="{Binding PasswordError}" Foreground="#fa1302"/>
+                <StackPanel Orientation="Horizontal" Grid.Column="1">
+                    <CheckBox x:Name="ShowPasswordCheckBox"
+                              Checked="ShowPassword"
+                              Unchecked="HidePassword"/>
+                    <TextBlock Text="Show password" 
+                               FontFamily="Cambria"
+                               FontSize="10" Margin="3,0,18,0"
+                               HorizontalAlignment="Right"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="2">
+            <TextBlock Text="Gender" FontSize="18" FontFamily="Cambria" Margin="20,0,0,0"/>
+            <Border CornerRadius="10"
+                    Background="#fff"
+                    Height="34" Width="192">
+                <Border.Effect>
+                    <DropShadowEffect Color="#000"
+                                      Direction="315"
+                                      ShadowDepth="5"
+                                      BlurRadius="10"
+                                      Opacity="0.3"/>
+                </Border.Effect>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <RadioButton Content="Male" 
+                                 x:Name="MaleButton"
+                                 FontSize="14"
+                                 VerticalAlignment="Center" 
+                                 Margin="0,0,36,0"
+                                 IsChecked="True"
+                                 Command="{Binding GenderCommand}"
+                                 CommandParameter="Male"
+                                 Style="{StaticResource CustomRadioButtonTheme}"/>
+                    <RadioButton Content="Female" 
+                                 x:Name="FemaleButton"
+                                 FontSize="14" 
+                                 VerticalAlignment="Center"
+                                 Command="{Binding GenderCommand}"
+                                 CommandParameter="Female"
+                                 Style="{StaticResource CustomRadioButtonTheme}"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="3">
+            <TextBlock FontFamily="Cambria" FontSize="18" Text="Confirm Password" Margin="20,0,0,0"/>
+            <TextBox x:Name="CPTextBox" 
+                     Height="34" Width="192" 
+                     Visibility="Collapsed" 
+                     Text="{Binding Password}" 
+                     Style="{StaticResource RoundedTextBox}"/>
+            <PasswordBox x:Name="CPPasswordBox" 
+                         Visibility="Visible" 
+                         PasswordChar="●"
+                         Height="34" Width="192" 
+                         PasswordChanged="ConfirmPasswordChanged"
+                         Style="{StaticResource RoundedPasswordBox}"/>
+            <Grid Margin="0,3,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock FontFamily="Cambria" FontSize="13" Text="{Binding ConfirmPasswordError}" Foreground="#fa1302"/>
+                <StackPanel Orientation="Horizontal" Grid.Column="1">
+                    <CheckBox x:Name="ShowPasswordCheckBox_Copy"
+                              Checked="ShowConfirmPassword"
+                              Unchecked="HideConfirmPassword"/>
+                    <TextBlock Text="Show password" 
+                               FontFamily="Cambria"
+                               FontSize="10" Margin="3,0,18,0"
+                               HorizontalAlignment="Right"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <Grid Grid.Row="3" Grid.ColumnSpan="3" Margin="15,0,13,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
+            <WrapPanel Margin="0,0,0,10">
+                <TextBlock Text="Proficiences" FontSize="20" FontFamily="Cambria" FontWeight="Bold"/>
+                <TextBlock Text="{Binding Error}"
+                           Foreground="Red"
+                           Grid.Row="2"
+                           VerticalAlignment="Center"
+                           FontFamily="Cambria"
+                           FontWeight="Thin"
+                           FontSize="10"
+                           Margin="20,0,0,0"/>
+            </WrapPanel>
+            <StackPanel Grid.Row="1" Orientation="Horizontal">
+                <TextBox Text="{Binding LanguageName}" Style="{StaticResource RoundedTextBox}" Height="34" Width="192"/>
+                <ComboBox Style="{StaticResource ComboboxStyle}"
+                          Height="34" Width="70"
+                          Margin="20,0,0,0"
+                          SelectedValue="{Binding ProficiencyLevel}"
+                          SelectedValuePath="Content">
+                    <ComboBoxItem>A1</ComboBoxItem>
+                    <ComboBoxItem>A2</ComboBoxItem>
+                    <ComboBoxItem>B1</ComboBoxItem>
+                    <ComboBoxItem>B2</ComboBoxItem>
+                    <ComboBoxItem>C1</ComboBoxItem>
+                    <ComboBoxItem>C2</ComboBoxItem>
+                </ComboBox>
+                <Border Margin="14,0,0,0"
+                        Background="#2E6C7B" CornerRadius="50"
+                        BorderThickness="0"
+                        Height="34" Width="34">
+                    <Button Style="{StaticResource TransparentButtonStyle}"
+                            Command="{Binding AddProficiencyCommand}">
+                        <Image Height="16" Width="16" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\add.png"/>
+                    </Button>
+                </Border>
+            </StackPanel>
+            <ItemsControl Grid.Row="2" ItemsSource="{Binding Proficiencies}"
+                          Margin="0,24,0,0"
+                          BorderThickness="0" Background="Transparent">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border CornerRadius="5"
+                                Background="#fff"
+                                Margin="0,0,13,9">
+                            <Border.Effect>
+                                <DropShadowEffect Color="#000"
+                                                  Direction="315"
+                                                  ShadowDepth="5"
+                                                  BlurRadius="10"
+                                                  Opacity="0.3"/>
+                            </Border.Effect>
+                            <Grid Height="23" Width="184">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Content=""
+                                       Grid.ColumnSpan="3"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       FontSize="13">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding HasData}" Value="False">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+
+                                <Grid Grid.ColumnSpan="3">
+                                    <Grid.Style>
+                                        <Style TargetType="Grid">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding HasData}" Value="True">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Grid.Style>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <WrapPanel Orientation="Horizontal" Margin="31,0,0,0">
+                                        <Label Content="{Binding Proficiency.LanguageName}"
+                                               Foreground="#000"
+                                               FontSize="13"
+                                               FontFamily="Cambria"
+                                               Padding="0,4,0,4"/>
+                                        <Label Content="{Binding Proficiency.LanguageLevel}"
+                                               Grid.Column="1"
+                                               Foreground="#000"
+                                               FontSize="13"
+                                               FontFamily="Cambria"/>
+                                    </WrapPanel>
+                                    <Button Style="{StaticResource TransparentButtonStyle}"
+                                            Command="{Binding DataContext.DeleteItemCommand,
+                                                      RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                            CommandParameter="{Binding Proficiency}"
+                                            Visibility="{Binding HasData, Converter={StaticResource BoolToVisibilityConverter}}"
+                                            Grid.Column="1"
+                                            Margin="0,0,10,0"
+                                            HorizontalAlignment="Right">
+                                        <Image Height="13" Width="13" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\minus.png"/>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <Button Grid.Column="1"
+                    Grid.Row="2"
+                    VerticalAlignment="Bottom"
+                    FontSize="15"
+                    Content="Submit"
+                    FontFamily="Cambria"
+                    Command="{Binding SubmitCommand}"
+                    Style="{StaticResource RoundedButtonStyle}"
+                    Height="34" Foreground="#fff" Background="#2E6C7B"/>
+            <Grid Height="26" Width="120" HorizontalAlignment="Left" VerticalAlignment="Bottom" Grid.Row="3" Margin="130,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource TransparentButtonStyle}"
+                        Content="&lt;"
+                        Foreground="#2E6C7B"
+                        Height="34"
+                        Width="24"
+                        FontWeight="Bold"
+                        FontSize="24"
+                        VerticalAlignment="Center"
+                        Grid.Column="0"
+                        Command="{Binding PreviousPageCommand}"/>
+                <Label Content="{Binding PageNumber}"
+                        Foreground="#2E6C7B"
+                        Height="40"
+                        FontWeight="Bold"
+                        FontSize="24"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Grid.Column="1"
+                        Background="Transparent"/>
+                <Button Style="{StaticResource TransparentButtonStyle}"
+                        Content=">"
+                        Foreground="#2E6C7B"
+                        Height="34"
+                        Width="24"
+                        FontWeight="Bold"
+                        FontSize="24"
+                        VerticalAlignment="Center"
+                        Grid.Column="2"
+                        Command="{Binding NextPageCommand}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

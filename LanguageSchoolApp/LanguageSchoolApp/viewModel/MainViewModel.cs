@@ -1,11 +1,6 @@
 ﻿using LanguageSchoolApp.core;
 using LanguageSchoolApp.model.Notifications;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.service.Notifications;
 using Microsoft.Extensions.DependencyInjection;
@@ -15,7 +10,6 @@ using LanguageSchoolApp.viewModel.Users;
 using LanguageSchoolApp.viewModel.Reports;
 using LanguageSchoolApp.view.Users;
 using LanguageSchoolApp.service.Users.Students;
-using LanguageSchoolApp.repository.Users.Teachers;
 using LanguageSchoolApp.service.Users.Teachers;
 
 namespace LanguageSchoolApp.viewModel
@@ -110,6 +104,7 @@ namespace LanguageSchoolApp.viewModel
 
         //director menu options
         public ActiveTeachersViewModel ActiveTeachersVM { get; set; }
+        public CreateTeacherViewModel CreateTeacherVM { get; set; }
         public SmartCourseMakingViewModel SmartCourseMakingVM { get; set; }
         public SmartExamMakingViewModel SmartExamMakingVM { get; set; }
         public SendExamResultsViewModel SendExamResultsVM { get; set; }
@@ -176,6 +171,7 @@ namespace LanguageSchoolApp.viewModel
             {
                 ActiveTeachersVM = new ActiveTeachersViewModel();
                 ActiveTeachersVM.OpenEditWindowAction = EditTeacher;
+                ActiveTeachersVM.OpenCreateTeacherView = OpenCreateTeacherView;
                 SmartCourseMakingVM = new SmartCourseMakingViewModel();
                 SmartExamMakingVM = new SmartExamMakingViewModel();
                 SendExamResultsVM = new SendExamResultsViewModel();
@@ -502,6 +498,24 @@ namespace LanguageSchoolApp.viewModel
             Register editTeacherView = new Register(_teacherService.GetTeacher(teacherId), (Director)CurrentUser);
             editTeacherView.Show();
             CloseAction();
+        }
+
+        private void OpenCreateTeacherView()
+        {
+            CreateTeacherVM = new CreateTeacherViewModel();
+            CreateTeacherVM.CloseAction = CloseCreateTeacherView;
+            CurrentView = CreateTeacherVM;
+        }
+
+        private void CloseCreateTeacherView()
+        {
+            if (CurrentUser is Director director)
+            {
+                ActiveTeachersVM = new ActiveTeachersViewModel();
+                ActiveTeachersVM.OpenEditWindowAction = EditTeacher;
+                ActiveTeachersVM.OpenCreateTeacherView = OpenCreateTeacherView;
+                CurrentView = ActiveTeachersVM;
+            }
         }
     }
 }

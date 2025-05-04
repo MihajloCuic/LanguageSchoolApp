@@ -16,10 +16,9 @@ namespace LanguageSchoolApp.service.Users.Teachers
         Teacher GetTeacher(string teacherId);
         Teacher GetTeacherByCourseId(int courseId);
         bool TeacherExists(string teacherId);
-        void CreateTeacher(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string email, string password, string confirmPassword, List<KeyValuePair<string, string>> languageProficienciesStr);
+        void CreateTeacher(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string email, string password, string confirmPassword, List<LanguageProficiency> languageProficienciesStr);
         Teacher UpdateTeacher(string teacherId, string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword);
         void DeleteTeacher(string teacherId);
-        bool ValidateTeacher(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, List<KeyValuePair<string, string>>? languageProficienciesStr);
         void AddCourse(int courseId, string teacherId);
         void DeleteCourse(int courseId, string teacherId);
         void AddExam(int examId, string teacherId);

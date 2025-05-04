@@ -44,6 +44,7 @@ namespace LanguageSchoolApp.viewModel.Users
         public RelayCommand<object> PreviousPageCommand { get; set; }
         public RelayCommand<object> NextPageCommand { get; set; }
         public Action<string> OpenEditWindowAction { get; set; }
+        public Action OpenCreateTeacherView { get; set; }
 
         public ActiveTeachersViewModel()
         {
@@ -59,6 +60,7 @@ namespace LanguageSchoolApp.viewModel.Users
             PreviousPageCommand = new RelayCommand<object>(PreviousPage, CanPreviousPage);
             NextPageCommand = new RelayCommand<object>(NextPage, CanNextPage);
             EditCommand = new RelayCommand<string>(Edit, CanEdit);
+            AddTeacherCommand = new RelayCommand<object>(AddTeacher, CanAddTeacher);
         }
 
         public List<Teacher> GetSlicedTeachersList()
@@ -113,6 +115,12 @@ namespace LanguageSchoolApp.viewModel.Users
             {
                 Teachers.Add(course);
             }
+        }
+
+        private bool CanAddTeacher(object? parameter) { return true; }
+        private void AddTeacher(object? parameter) 
+        {
+            OpenCreateTeacherView();
         }
     }
 }

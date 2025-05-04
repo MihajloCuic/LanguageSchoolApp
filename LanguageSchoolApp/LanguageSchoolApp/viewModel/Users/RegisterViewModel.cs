@@ -8,6 +8,7 @@ using LanguageSchoolApp.service.Users.Teachers;
 using LanguageSchoolApp.view;
 using LanguageSchoolApp.view.Users;
 using Microsoft.Extensions.DependencyInjection;
+using System.Windows;
 
 namespace LanguageSchoolApp.viewModel.Users
 {
@@ -38,6 +39,28 @@ namespace LanguageSchoolApp.viewModel.Users
         private string _confirmPasswordError;
         private string _professionalDegreeError;
         private string _genderError;
+
+        private Visibility _deleteBtnVisibility = Visibility.Hidden;
+        private bool _isDeleteBtnEnabled = false;
+
+        public Visibility DeleteBtnVisibility
+        {
+            get { return _deleteBtnVisibility; }
+            set
+            {
+                _deleteBtnVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsDeleteBtnEnabled
+        {
+            get { return _isDeleteBtnEnabled; }
+            set
+            {
+                _isDeleteBtnEnabled = value;
+                OnPropertyChanged();
+            }
+        }
 
         public string Name
         {
@@ -202,6 +225,7 @@ namespace LanguageSchoolApp.viewModel.Users
         public RelayCommand<string> GenderCommand { get; set; }
         public RelayCommand<object> RegisterCommand { get; set; }
         public RelayCommand<object> LoginCommand { get; set; }
+        public RelayCommand<object> DeleteTeacherCommand { get; set; }
         public Action CloseAction { get; set; }
 
         public RegisterViewModel() 
@@ -275,9 +299,13 @@ namespace LanguageSchoolApp.viewModel.Users
             Password = teacher.Password;
             ConfirmPassword = teacher.Password;
 
+            DeleteBtnVisibility = Visibility.Visible;
+            IsDeleteBtnEnabled = true;
+
             RegisterCommand = new RelayCommand<object>(Register, CanRegister);
             LoginCommand = new RelayCommand<object>(OpenLoginWindow, CanOpenLoginWindow);
             GenderCommand = new RelayCommand<string>(SetGender, CanSetGender);
+            DeleteTeacherCommand = new RelayCommand<object>(DeleteTeacher, CanDeleteTeacher);
         }
 
         public RegisterViewModel(Director director)
@@ -302,6 +330,29 @@ namespace LanguageSchoolApp.viewModel.Users
 
         private bool CanSetGender(string gender) { return true; }
         private void SetGender(string gender) { Gender = gender; }
+
+        private bool CanDeleteTeacher(object? parameter) { return _teacher != null; }
+        private void DeleteTeacher(object? parameter) 
+        {
+            try
+            {
+                if (_teacher == null)
+                { 
+                    throw new UserException("Teacher not found !", UserExceptionType.UserNotFound);
+                }
+                teacherService.DeleteTeacher(_teacher.Email);
+                PopupMessageView successMessage = new PopupMessageView("SUCCESS", "Teacher deleted successfully !");
+                successMessage.Show();
+                MainWindow mainWindow = new MainWindow(_director);
+                mainWindow.Show();
+                CloseAction();
+            }
+            catch (UserException ex)
+            {
+                PopupMessageView errorMessage = new PopupMessageView("ERROR", ex.Text);
+                errorMessage.Show();
+            }
+        }
 
         private bool CanRegister(object? parameter) { return true; }
         private void Register(object? parameter)

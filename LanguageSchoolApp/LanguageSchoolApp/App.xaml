@@ -133,6 +133,9 @@
             <DataTemplate DataType="{x:Type viewModelUsers:SortingTeachersViewModel}">
                 <viewUsers:SortingTeachersView/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelUsers:CreateTeacherViewModel}">
+                <viewUsers:CreateTeacherView/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

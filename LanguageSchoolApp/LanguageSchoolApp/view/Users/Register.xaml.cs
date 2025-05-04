@@ -74,7 +74,7 @@ namespace LanguageSchoolApp.view.Users
         {
             InitializeComponent();
             SetupPage(director.Gender, false);
-
+          
             DataContext = new RegisterViewModel(director);
             if (DataContext is RegisterViewModel viewModel)
             {

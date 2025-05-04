@@ -69,14 +69,14 @@
                        FontFamily="Cambria"
                        FontWeight="Bold"
                        VerticalAlignment="Top"/>
-                
+
                 <Label FontFamily="Cambria" FontSize="18" Content="Name" Margin="48,140,400,432"/>
                 <TextBox Height="34" Width="192" 
                          Text="{Binding Name}" 
                          Style="{StaticResource RoundedTextBox}" 
                          Margin="48,166,270,400"/>
                 <Label FontFamily="Cambria" FontSize="13" Content="{Binding NameError}" Margin="48,200,270,377" Foreground="#fa1302"/>
-                
+
                 <Label FontFamily="Cambria" FontSize="18" Content="Surname" Margin="284,140,143,432"/>
                 <TextBox Height="34" Width="192" 
                          Text="{Binding Surname}" 
@@ -138,7 +138,7 @@
                             VerticalAlignment="Top"/>
                 <Label FontFamily="Cambria" FontSize="13" Content="{Binding BirthdayError}" Margin="48,367,270,210" Foreground="#fa1302"/>
                 <Label FontFamily="Cambria" FontSize="18" Content="Date of birth" Margin="48,307,353,265"/>
-                
+
                 <Label FontFamily="Cambria" FontSize="18" Content="Password" Margin="284,307,130,265"/>
                 <TextBox x:Name="PTextBox" 
                          Height="34" Width="192" 
@@ -213,6 +213,9 @@
                         Style="{StaticResource RoundedButtonStyle}" 
                         Margin="348,518,31,41"
                         Command="{Binding RegisterCommand}"/>
+                <Button Visibility="{Binding DeleteBtnVisibility}" IsEnabled="{Binding IsDeleteBtnEnabled}" Style="{StaticResource TransparentButtonStyle}" Margin="308,526,172,46" Command="{Binding DeleteTeacherCommand}">
+                    <Image Height="30" Width="30" Source="/assets/images/trashcan.png" />
+                </Button>
             </Grid>
         </Grid>
     </Border>

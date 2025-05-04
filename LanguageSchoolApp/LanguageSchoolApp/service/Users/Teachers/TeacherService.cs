@@ -47,18 +47,15 @@ namespace LanguageSchoolApp.service.Users.Teachers
             return teacherRepository.GetTeacherByCourseId(courseId);
         }
 
-        public void CreateTeacher(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string email, string password, string confirmPassword, List<KeyValuePair<string, string>> languageProficienciesStr) 
+        public void CreateTeacher(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string email, string password, string confirmPassword, List<LanguageProficiency> languageProficiencies) 
         {
-            ValidateTeacher(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword, languageProficienciesStr);
+            Validations.ValidateUser(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword);
             Validations.ValidateEmail(email);
             Gender gender = Enum.Parse<Gender>(genderStr);
             DateTime birthday = DateTime.Parse(birthdayStr);
-            List<LanguageProficiency> languageProficiencies = new List<LanguageProficiency>();
-            foreach (KeyValuePair<string, string> langProficiency in languageProficienciesStr)
+            if (languageProficiencies.Count == 0) 
             {
-                LanguageLevel languageLevel = Enum.Parse<LanguageLevel>(langProficiency.Value);
-                LanguageProficiency languageProficiency = new LanguageProficiency(langProficiency.Key, languageLevel);
-                languageProficiencies.Add(languageProficiency);
+                throw new UserValidationException("Teacher has to have at least one proficiency !", UserValidationExceptionType.InvalidProficiency);
             }
             Teacher newTeacher = new Teacher(name, surname, gender, birthday, phoneNumber, email, password, languageProficiencies);
             teacherRepository.AddTeacher(newTeacher);
@@ -66,7 +63,7 @@ namespace LanguageSchoolApp.service.Users.Teachers
 
         public Teacher UpdateTeacher(string teacherId, string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword) 
         { 
-            ValidateTeacher(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword, null);
+            Validations.ValidateUser(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword);
             if (!TeacherExists(teacherId))
             {
                 throw new UserException("Teacher not found !", UserExceptionType.UserNotFound);
@@ -93,24 +90,6 @@ namespace LanguageSchoolApp.service.Users.Teachers
             courseService.DeleteAllCoursesByIds(teacher.MyCoursesIds);
             examService.DeleteAllExamsByIds(teacher.MyExamsIds);
             teacherRepository.DeleteTeacher(teacherId);
-        }
-        
-        public bool ValidateTeacher(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string password, string confirmPassword, List<KeyValuePair<string, string>>? languageProficienciesStr) 
-        {
-            Validations.ValidateUser(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword);
-            if (languageProficienciesStr == null) return true;
-            try
-            {
-                foreach (KeyValuePair<string, string> langProficiency in languageProficienciesStr) 
-                {
-                    LanguageLevel languageLevel = Enum.Parse<LanguageLevel>(langProficiency.Value);
-                }
-            }
-            catch(ArgumentException) 
-            {
-                throw new UserValidationException("Proficiency level is not valid!", UserValidationExceptionType.InvalidLanguageProficiencyLevel);
-            }
-            return true;
         }
 
         public void AddCourse(int courseId, string teacherId) 
