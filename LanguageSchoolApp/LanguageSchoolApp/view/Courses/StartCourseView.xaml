@@ -139,7 +139,7 @@
                                 BorderThickness="0">
                             <Button Style="{StaticResource TransparentButtonStyle}"
                                     Command="{Binding AcceptCommand}">
-                                <Image Height="15" Width="15" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\check.png"/>
+                                <Image Height="15" Width="15" Source="/assets/images/check.png"/>
                             </Button>
                         </Border>
                         <Border Background="#FF5757"  
@@ -149,7 +149,7 @@
                                 BorderThickness="0">
                             <Button Style="{StaticResource TransparentButtonStyle}"
                                     Command="{Binding RejectCommand}">
-                                <Image Height="20" Width="20" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\close.png"/>
+                                <Image Height="20" Width="20" Source="/assets/images/close.png"/>
                             </Button>
                         </Border>
                     </WrapPanel>

@@ -40,7 +40,7 @@
                         Height="10" Width="10"
                         Command="{Binding CourseFilterVM.CancelFilterCommand}"
                         CommandParameter="languageName">
-                    <Image Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\x-button.png"/>
+                    <Image Source="/assets/images/x-button.png"/>
                 </Button>
             </Grid>
         </Border>
@@ -73,7 +73,7 @@
                         Height="10" Width="10"
                         Command="{Binding CourseFilterVM.CancelFilterCommand}"
                         CommandParameter="languageLevel">
-                    <Image Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\x-button.png"/>
+                    <Image Source="/assets/images/x-button.png"/>
                 </Button>
             </Grid>
         </Border>
@@ -106,7 +106,7 @@
                         Height="10" Width="10"
                         Command="{Binding CourseFilterVM.CancelFilterCommand}"
                         CommandParameter="courseType">
-                    <Image Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\x-button.png"/>
+                    <Image Source="/assets/images/x-button.png"/>
                 </Button>
             </Grid>
         </Border>

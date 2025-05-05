@@ -75,7 +75,7 @@
                         Height="18" Width="18">
                     <Button Style="{StaticResource TransparentButtonStyle}"
                             Command="{Binding GradeStudentCommand}">
-                        <Image Height="9" Width="9" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\add.png"/>
+                        <Image Height="9" Width="9" Source="/assets/images/add.png"/>
                     </Button>
                 </Border>
             </WrapPanel>

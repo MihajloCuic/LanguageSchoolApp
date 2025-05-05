@@ -154,7 +154,7 @@
                             Margin="15,0,0,0">
                         <Button Style="{StaticResource TransparentButtonStyle}"
                                 Command="{Binding GradeStudentCommand}">
-                            <Image Height="15" Width="15" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\check.png"/>
+                            <Image Height="15" Width="15" Source="/assets/images/check.png"/>
                         </Button>
                     </Border>
                     

@@ -85,7 +85,7 @@
             <StackPanel Orientation="Horizontal" Margin="20,385,10,41" Grid.Row="1">
                 <Ellipse HorizontalAlignment="Left" Height="51"  Grid.Row="1"  VerticalAlignment="Center" Width="51">
                     <Ellipse.Fill>
-                        <ImageBrush ImageSource="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\user.png"/>
+                        <ImageBrush ImageSource="/assets/images/user.png"/>
                     </Ellipse.Fill>
                 </Ellipse>
                 <Label Content="{Binding Username}" VerticalAlignment="Center" FontFamily="Cambria" Foreground="#fff" FontSize="22"/>
@@ -102,13 +102,13 @@
                 <StackPanel Orientation="Vertical">
                     <Button Style="{StaticResource TransparentButtonStyle}"
                             Command="{Binding EditUserProfileCommand}">
-                        <Image Margin="0,0,0,10" Height="24" Width="24" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\cog-wheel-silhouette.png"/>
+                        <Image Margin="0,0,0,10" Height="24" Width="24" Source="/assets/images/cog-wheel-silhouette.png"/>
                     </Button>
                     <Button Style="{StaticResource TransparentButtonStyle}"
                             Command="{Binding LogoutCommand}">
                         <Image Height="24" Width="24" 
                                Margin="3,0,0,0"
-                               Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\logout.png"/>
+                               Source="/assets/images/logout.png"/>
                     </Button>
                 </StackPanel>
             </StackPanel>
@@ -122,7 +122,7 @@
                      Style="{StaticResource TextBoxSearch}"/>
             <Button Style="{StaticResource TransparentButtonStyle}"
                     Grid.Column="1" Height="24" Margin="339,43,290,44">
-                <Image Height="24" Width="24" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\bell.png" RenderTransformOrigin="1.021,0.604"/>
+                <Image Height="24" Width="24" Source="/assets/images/bell.png" RenderTransformOrigin="1.021,0.604"/>
             </Button>
             <Ellipse Height="7" Fill="Red" Width="7" Grid.Column="1" 
                      Margin="353,43,293,61"

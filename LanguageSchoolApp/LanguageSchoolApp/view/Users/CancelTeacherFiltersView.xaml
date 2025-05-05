@@ -40,7 +40,7 @@
                          Height="10" Width="10"
                          Command="{Binding TeacherFilterVM.CancelFilterCommand}"
                          CommandParameter="languageProficiency">
-                    <Image Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\x-button.png"/>
+                    <Image Source="/assets/images/x-button.png"/>
                 </Button>
             </Grid>
         </Border>
@@ -73,7 +73,7 @@
                          Height="10" Width="10"
                          Command="{Binding TeacherFilterVM.CancelFilterCommand}"
                          CommandParameter="grade">
-                    <Image Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\x-button.png"/>
+                    <Image Source="/assets/images/x-button.png"/>
                 </Button>
             </Grid>
         </Border>

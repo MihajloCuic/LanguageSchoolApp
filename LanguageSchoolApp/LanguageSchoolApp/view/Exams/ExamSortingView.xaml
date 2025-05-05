@@ -9,7 +9,7 @@
     <Grid>
         <StackPanel Orientation="Horizontal" Margin="11,0,0,191">
             <Label Content="Sort by" FontSize="20" FontFamily="Cambria" Foreground="#2E6C7B" FontWeight="Bold" Height="33"/>
-            <Image Height="19" Width="19" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\up-down.png"/>
+            <Image Height="19" Width="19" Source="/assets/images/up-down.png"/>
         </StackPanel>
         <Grid Margin="10,55,0,0">
             <Grid.ColumnDefinitions>
@@ -35,12 +35,12 @@
                    VerticalAlignment="Top"
                    Height="15" Width="15"
                    Visibility="{Binding ExamDatePictureAsc, Converter={StaticResource BoolToVisibilityConverter}}"
-                   Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\down-arrow.png"/>
+                   Source="/assets/images/down-arrow.png"/>
             <Image Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center"
                    VerticalAlignment="Top"
                    Height="15" Width="15"
                    Visibility="{Binding ExamDatePictureDesc, Converter={StaticResource BoolToVisibilityConverter}}"
-                   Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\up-arrow.png"/>
+                   Source="/assets/images/up-arrow.png"/>
         </Grid>
     </Grid>
 </UserControl>
