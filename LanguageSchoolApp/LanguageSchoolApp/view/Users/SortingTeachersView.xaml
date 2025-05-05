@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <WrapPanel Orientation="Horizontal" Margin="0,11,0,0" HorizontalAlignment="Center">
             <TextBlock Text="Sorting" FontSize="20" FontFamily="Cambria" FontWeight="Bold" Foreground="#2e6c7b" Margin="0,0,5,0"/>
-            <Image Height="19" Width="19" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\up-down.png"/>
+            <Image Height="19" Width="19" Source="/assets/images/up-down.png"/>
         </WrapPanel>
         <Grid Grid.Row="1" Margin="15,15,0,0">
             <Grid.ColumnDefinitions>
@@ -35,11 +35,11 @@
             <Image Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"
                    Height="15" Width="15"
                    Visibility="{Binding NamePictureDesc}"
-                   Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\down-arrow.png"/>
+                   Source="/assets/images/down-arrow.png"/>
             <Image Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left"
                     Height="15" Width="15"
                     Visibility="{Binding NamePictureAsc}"
-                    Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\up-arrow.png"/>
+                    Source="/assets/images/up-arrow.png"/>
             <Button Style="{StaticResource TransparentButtonStyle}" 
                     Content="Grade" Foreground="#2e6c7b" 
                     Grid.Row="1"
@@ -53,11 +53,11 @@
             <Image Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"
                    Height="15" Width="15" VerticalAlignment="Top"
                    Visibility="{Binding GradePictureDesc}"
-                   Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\down-arrow.png"/>
+                   Source="/assets/images/down-arrow.png"/>
             <Image Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"
                    Height="15" Width="15" VerticalAlignment="Top"
                    Visibility="{Binding GradePictureAsc}"
-                   Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\up-arrow.png"/>
+                   Source="/assets/images/up-arrow.png"/>
         </Grid>
         <WrapPanel Grid.Row="2" Orientation="Horizontal">
 

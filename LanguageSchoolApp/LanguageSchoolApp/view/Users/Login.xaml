@@ -30,7 +30,7 @@
                         <RowDefinition Height="5*"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Image HorizontalAlignment="Center" VerticalAlignment="Top" Width="228" Margin="0,161,0,0" Height="206" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\world_white.png"/>
+                    <Image HorizontalAlignment="Center" VerticalAlignment="Top" Width="228" Margin="0,161,0,0" Height="206" Source="/assets/images/world_white.png"/>
                     <Label FontFamily="Cambria"
                            Content="Register your account"
                            Foreground="#fff" 

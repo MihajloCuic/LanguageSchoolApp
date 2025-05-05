@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,11,0,0">
             <TextBlock Text="Filters" FontSize="20" FontFamily="Cambria" FontWeight="Bold" Foreground="#2E6C7B"/>
-            <Image Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\filter.png" Height="19" Width="19"/>
+            <Image Source="/assets/images/filter.png" Height="19" Width="19"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" Margin="5,15,0,0" Grid.Row="1">
             <TextBlock Text="Proficiency" FontSize="12" FontFamily="Cambria" FontWeight="SemiBold" Foreground="#2e6c7b"/>

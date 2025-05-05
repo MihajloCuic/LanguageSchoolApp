@@ -9,7 +9,7 @@
     <Grid>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Margin="11,0,0,191">
             <Label Content="Filters" FontSize="20" FontFamily="Cambria" Foreground="#2E6C7B" FontWeight="Bold" Height="33"/>
-            <Image Height="19" Width="19" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\filter.png"/>
+            <Image Height="19" Width="19" Source="/assets/images/filter.png"/>
         </StackPanel>
         <Label Content="Language Name" FontWeight="SemiBold" Foreground="#2E6C7B" FontSize="12" HorizontalAlignment="Center" Margin="0,53,0,146" Width="99"/>
         <TextBox Width="85" Height="20" 

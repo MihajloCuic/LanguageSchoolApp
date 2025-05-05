@@ -178,7 +178,7 @@
                                             CommandParameter="{Binding ClassPeriods}"
                                             Height="20" Width="20"
                                             Style="{StaticResource TransparentButtonStyle}">
-                                        <Image Height="20" Width="20" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\calendar.png"/>
+                                        <Image Height="20" Width="20" Source="/assets/images/calendar.png"/>
                                     </Button>
                                 </StackPanel>
                             </StackPanel>

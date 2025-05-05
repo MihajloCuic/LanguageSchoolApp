@@ -180,7 +180,7 @@
                                             <Button Click="FlipButtonClick"
                                                     Height="20" Width="20" Margin="2,0,0,0"
                                                     Style="{StaticResource TransparentButtonStyle}">
-                                                <Image Height="20" Width="20" Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\info.png"/>
+                                                <Image Height="20" Width="20" Source="/assets/images/info.png"/>
                                             </Button>
                                         </StackPanel>
                                     </StackPanel>

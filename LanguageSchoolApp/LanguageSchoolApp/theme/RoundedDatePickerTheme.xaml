@@ -3,7 +3,7 @@
     <!-- Calendar Icon Template -->
     <ControlTemplate x:Key="CalendarButtonTemplate" TargetType="Button">
         <Grid>
-            <Image Source="C:\Users\Mihajlo\Desktop\Faks\projekti\LanguageSchoolApp\LanguageSchoolApp\LanguageSchoolApp\assets\images\calendar.png"
+            <Image Source="/assets/images/calendar.png"
                    Width="16"
                    Height="16"
                    HorizontalAlignment="Center"
