@@ -141,5 +141,83 @@
     "PhoneNumber": "0653390606",
     "Email": "marinkomadzgalj1983@gmail.com",
     "Password": "sifra"
+  },
+  "anja.mirinkovic@gmail.com": {
+    "MyGrades": [],
+    "MyCoursesIds": [],
+    "MyExamsIds": [],
+    "LanguageProficiencies": [
+      {
+        "LanguageName": "english",
+        "LanguageLevel": 3
+      },
+      {
+        "LanguageName": "bulgarian",
+        "LanguageLevel": 1
+      },
+      {
+        "LanguageName": "mandarin",
+        "LanguageLevel": 5
+      },
+      {
+        "LanguageName": "german",
+        "LanguageLevel": 3
+      },
+      {
+        "LanguageName": "german",
+        "LanguageLevel": 1
+      },
+      {
+        "LanguageName": "english",
+        "LanguageLevel": 2
+      },
+      {
+        "LanguageName": "english",
+        "LanguageLevel": 1
+      },
+      {
+        "LanguageName": "english",
+        "LanguageLevel": 0
+      },
+      {
+        "LanguageName": "bulgarian",
+        "LanguageLevel": 0
+      },
+      {
+        "LanguageName": "mandarin",
+        "LanguageLevel": 4
+      },
+      {
+        "LanguageName": "mandarin",
+        "LanguageLevel": 3
+      },
+      {
+        "LanguageName": "mandarin",
+        "LanguageLevel": 2
+      },
+      {
+        "LanguageName": "mandarin",
+        "LanguageLevel": 1
+      },
+      {
+        "LanguageName": "mandarin",
+        "LanguageLevel": 0
+      },
+      {
+        "LanguageName": "german",
+        "LanguageLevel": 2
+      },
+      {
+        "LanguageName": "german",
+        "LanguageLevel": 0
+      }
+    ],
+    "Name": "Anja",
+    "Surname": "Mirinkovic",
+    "Gender": 1,
+    "Birthday": "1994-12-04T00:00:00",
+    "PhoneNumber": "0623387676",
+    "Email": "anja.mirinkovic@gmail.com",
+    "Password": "sifra"
   }
 }
