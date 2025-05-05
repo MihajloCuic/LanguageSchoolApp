@@ -26,6 +26,5 @@ namespace LanguageSchoolApp.service.Users.Teachers
         void GradeTeacher(int grade, string teacherId);
         List<Teacher> SortTeachers(List<Teacher> teachers, string name, string grade);
         List<Teacher> FilteredTeachers(string languageName, LanguageLevel languageLevel, int grade);
-        void AddProficiencies(string teacherId, List<LanguageProficiency> languageProficiencies);
     }
 }

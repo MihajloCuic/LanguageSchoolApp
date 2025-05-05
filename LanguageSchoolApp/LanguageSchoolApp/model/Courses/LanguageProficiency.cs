@@ -26,5 +26,10 @@ namespace LanguageSchoolApp.model.Courses
             }
             return LanguageName == other.LanguageName && LanguageLevel.Equals(other.LanguageLevel);
         }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(LanguageName, LanguageLevel);
+        }
     }
 }

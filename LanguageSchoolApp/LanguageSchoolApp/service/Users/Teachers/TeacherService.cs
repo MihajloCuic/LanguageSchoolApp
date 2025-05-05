@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LanguageSchoolApp.repository.Users.Teachers;
-using LanguageSchoolApp.model.Users;
-using LanguageSchoolApp.exceptions.Users;
+﻿using LanguageSchoolApp.exceptions.Users;
 using LanguageSchoolApp.model;
 using LanguageSchoolApp.model.Courses;
-using LanguageSchoolApp.service.Validation;
+using LanguageSchoolApp.model.Users;
+using LanguageSchoolApp.repository.Users.Teachers;
 using LanguageSchoolApp.service.Courses;
 using LanguageSchoolApp.service.Exams;
+using LanguageSchoolApp.service.Validation;
+using System.Collections.Generic;
 
 namespace LanguageSchoolApp.service.Users.Teachers
 {
@@ -57,7 +53,8 @@ namespace LanguageSchoolApp.service.Users.Teachers
             {
                 throw new UserValidationException("Teacher has to have at least one proficiency !", UserValidationExceptionType.InvalidProficiency);
             }
-            Teacher newTeacher = new Teacher(name, surname, gender, birthday, phoneNumber, email, password, languageProficiencies);
+            List<LanguageProficiency> proficiencies = AddProficiencies(languageProficiencies);
+            Teacher newTeacher = new Teacher(name, surname, gender, birthday, phoneNumber, email, password, proficiencies);
             teacherRepository.AddTeacher(newTeacher);
         }
 
@@ -140,14 +137,27 @@ namespace LanguageSchoolApp.service.Users.Teachers
             return teacherRepository.FilteredTeachers(languageName, languageLevel, grade);
         }
 
-        public void AddProficiencies(string teacherId, List<LanguageProficiency> languageProficiencies) 
+        private List<LanguageProficiency> AddProficiencies(List<LanguageProficiency> languageProficiencies) 
         {
-            if (!TeacherExists(teacherId))
+            HashSet<LanguageProficiency> uniqueProficiencies = new HashSet<LanguageProficiency>();
+
+            foreach (LanguageProficiency proficiency in languageProficiencies) 
             { 
-                throw new UserException("Teacher not found !", UserExceptionType.UserNotFound);
+                uniqueProficiencies.Add(proficiency);
             }
-            Teacher teacher = GetTeacher(teacherId);
-            teacher.LanguageProficiencies = languageProficiencies;
+
+            foreach (LanguageProficiency proficiency in languageProficiencies.ToList())
+            {
+                int currentLevel = (int)proficiency.LanguageLevel;
+
+                while (currentLevel > 0)
+                { 
+                    currentLevel--;
+                    LanguageProficiency languageProficiency = new LanguageProficiency(proficiency.LanguageName, (LanguageLevel)currentLevel);
+                    uniqueProficiencies.Add(languageProficiency);
+                }
+            }
+            return uniqueProficiencies.ToList();
         }
     }
 }
