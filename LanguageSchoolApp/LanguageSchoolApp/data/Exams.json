@@ -106,5 +106,27 @@
       "filipruzic2003@gmail.com"
     ],
     "IsFinished": false
+  },
+  "1716166449": {
+    "Id": 1716166449,
+    "LanguageProficiency": {
+      "LanguageName": "spanish",
+      "LanguageLevel": 0
+    },
+    "ExamDate": "2025-08-08T12:00:00",
+    "MaxParticipants": 30,
+    "Participants": [],
+    "IsFinished": false
+  },
+  "687219922": {
+    "Id": 687219922,
+    "LanguageProficiency": {
+      "LanguageName": "spanish",
+      "LanguageLevel": 0
+    },
+    "ExamDate": "2025-08-08T12:30:00",
+    "MaxParticipants": 40,
+    "Participants": [],
+    "IsFinished": false
   }
 }

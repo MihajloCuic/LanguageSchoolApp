@@ -206,5 +206,10 @@ namespace LanguageSchoolApp.service.Exams
             exam.IsFinished = true;
             examRepository.UpdateExam(examId , exam);
         }
+
+        public bool ExamOverlaps(List<Exam> exams, Exam exam)
+        {
+            return exams.Any(e => e.ExamDate == exam.ExamDate);
+        }
     }
 }

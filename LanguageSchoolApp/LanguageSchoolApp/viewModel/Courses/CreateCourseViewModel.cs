@@ -1,6 +1,7 @@
 ﻿using LanguageSchoolApp.core;
 using LanguageSchoolApp.exceptions.Courses;
 using LanguageSchoolApp.exceptions.Exams;
+using LanguageSchoolApp.exceptions.Users;
 using LanguageSchoolApp.model;
 using LanguageSchoolApp.model.Courses;
 using LanguageSchoolApp.model.Exams;
@@ -298,6 +299,30 @@ namespace LanguageSchoolApp.viewModel.Courses
             DeleteCommand = new RelayCommand<object>(Delete, CanDelete);
         }
 
+        public CreateCourseViewModel()
+        {
+            courseService = App.ServiceProvider.GetService<ICourseService>();
+            teacherService = App.ServiceProvider.GetService<ITeacherService>();
+            PageNumber = 1;
+            BeginningDate = DateTime.Now;
+            CourseTypeParam = "Online";
+            IsOnlineChecked = true;
+            IsLiveChecked = false;
+            DeleteButtonVisible = Visibility.Collapsed;
+            _allPeriods = new List<ClassPeriod>();
+            InitializePeriodsList();
+
+            SetErrorFields();
+
+            AddClassPeriodCommand = new RelayCommand<object>(AddClassPeriod, CanAddClassPeriod);
+            DeleteItemCommand = new RelayCommand<ClassPeriod>(DeleteItem, CanDeleteItem);
+            OnlineCommand = new RelayCommand<object>(IsOnline, CanBeOnline);
+            LiveCommand = new RelayCommand<object>(IsLive, CanBeLive);
+            PreviousPageCommand = new RelayCommand<object>(PreviousPage, CanPreviousPage);
+            NextPageCommand = new RelayCommand<object>(NextPage, CanNextPage);
+            SubmitCommand = new RelayCommand<object>(Submit, CanSubmit);
+        }
+
         private void InitializePeriodsList()
         { 
             Periods = new ObservableCollection<ClassPeriodSlot>();
@@ -389,23 +414,46 @@ namespace LanguageSchoolApp.viewModel.Courses
             SetErrorFields();
             try
             {
-                if (!int.TryParse(MaxParticipants, out int maxParticipants)) 
-                { 
+                if (!int.TryParse(MaxParticipants, out int maxParticipants))
+                {
                     throw new CourseException("Max participants must be number", CourseExceptionType.InvalidMaxParticipants);
                 }
-                if (!int.TryParse(Duration, out int duration)) 
-                { 
+                if (!int.TryParse(Duration, out int duration))
+                {
                     throw new CourseException("Duration must be number", CourseExceptionType.InvalidDuration);
                 }
                 if (course == null)
                 {
-                    Course newCourse = courseService.CreateCourse(LanguageName, LanguageLevel, maxParticipants, duration, _allPeriods, BeginningDate, CourseTypeParam, _teacher);
-                    teacherService.AddCourse(newCourse.Id, _teacher.Email);
-                    PopupMessageView successPopup = new PopupMessageView("SUCCESS", "Course created successfully !");
-                    successPopup.Show();
+                    Teacher tempTeacher;
+                    if (_teacher == null)
+                    {
+                        Course tempCourse = new Course();
+                        tempCourse.Duration = duration;
+                        tempCourse.BeginningDate = BeginningDate;
+                        tempCourse.ClassPeriods = _allPeriods;
+                        tempCourse.LanguageProficiency = new LanguageProficiency(LanguageName, Enum.Parse<LanguageLevel>(LanguageLevel));
+                        tempTeacher = teacherService.SelectTeacherForCourse(tempCourse);
+                    }
+                    else
+                    { 
+                        tempTeacher = _teacher;
+                    }
+                    Course newCourse = courseService.CreateCourse(LanguageName, LanguageLevel, maxParticipants, duration, _allPeriods, BeginningDate, CourseTypeParam, tempTeacher);
+                    teacherService.AddCourse(newCourse.Id, tempTeacher.Email);
+                    if (_teacher == null)
+                    {
+                        PopupMessageView successPopup = new PopupMessageView("SUCCESS", $"Course assigned to {tempTeacher.Name} {tempTeacher.Surname} !");
+                        successPopup.Show();
+                    }
+                    else 
+                    {
+                        PopupMessageView successPopup = new PopupMessageView("SUCCESS", "Course created successfully !");
+                        successPopup.Show();
+                    }
+                    EmptyFields();
                 }
                 else
-                { 
+                {
                     courseService.UpdateCourse(course.Id, LanguageName, LanguageLevel, maxParticipants, duration, _allPeriods, BeginningDate, CourseTypeParam);
                     PopupMessageView successPopup = new PopupMessageView("SUCCESS", "Course updated successfully !");
                     successPopup.Show();
@@ -413,7 +461,7 @@ namespace LanguageSchoolApp.viewModel.Courses
             }
             catch (CourseException ex)
             {
-                switch (ex.Type) 
+                switch (ex.Type)
                 {
                     case CourseExceptionType.InvalidLanguageProficiency:
                         LanguageNameError = ex.Text;
@@ -445,6 +493,11 @@ namespace LanguageSchoolApp.viewModel.Courses
 
                 }
             }
+            catch (UserException ex)
+            {
+                PopupMessageView errorMessage = new PopupMessageView("ERROR", ex.Text);
+                errorMessage.Show();
+            }
         }
 
         private bool CanDelete(object? parameter) { return true; }
@@ -473,6 +526,19 @@ namespace LanguageSchoolApp.viewModel.Courses
             DurationError = "";
             CourseTypeParamError = "";
             ClassPeriodError = "";
+        }
+
+        private void EmptyFields()
+        {
+            LanguageName = "";
+            LanguageLevel = "";
+            BeginningDate = DateTime.Now;
+            MaxParticipants = "";
+            Duration = "";
+            ClassDay = "";
+            ClassTime = "";
+            _allPeriods.Clear();
+            UpdateSlots();
         }
     }
 }

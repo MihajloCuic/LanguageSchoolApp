@@ -15,7 +15,13 @@ namespace LanguageSchoolApp.model.Users
         public List<int> MyExamsIds { get; set; }
         public List<LanguageProficiency> LanguageProficiencies { get; set; }
 
-        public Teacher() { }
+        public Teacher() 
+        { 
+            MyGrades = new List<int>();
+            MyCoursesIds = new List<int>();
+            MyExamsIds = new List<int>();
+            LanguageProficiencies = new List<LanguageProficiency>();
+        }
 
         public Teacher(string _name, string _surname, Gender _gender,
                     DateTime _birthday, string _phoneNumber, string _email,

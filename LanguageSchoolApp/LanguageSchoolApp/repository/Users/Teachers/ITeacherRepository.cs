@@ -1,11 +1,7 @@
 ﻿using LanguageSchoolApp.model;
+using LanguageSchoolApp.model.Courses;
+using LanguageSchoolApp.model.Exams;
 using LanguageSchoolApp.model.Users;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LanguageSchoolApp.repository.Users.Teachers
 {
@@ -25,5 +21,7 @@ namespace LanguageSchoolApp.repository.Users.Teachers
         void DeleteExam(int examId, string teacherId);
         List<Teacher> FilteredTeachers(string languageName, LanguageLevel languageLevel, int grade);
         List<Teacher> SortTeachers(List<Teacher> teachers, SortingDirection name, SortingDirection grade);
+        Teacher SelectTeacherForCourse(Course course);
+        Teacher SelectTeacherForExam(Exam exam);
     }
 }

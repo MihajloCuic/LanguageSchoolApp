@@ -1,7 +1,10 @@
 ﻿using LanguageSchoolApp.exceptions.Users;
 using LanguageSchoolApp.model;
 using LanguageSchoolApp.model.Courses;
+using LanguageSchoolApp.model.Exams;
 using LanguageSchoolApp.model.Users;
+using LanguageSchoolApp.service.Courses;
+using LanguageSchoolApp.service.Exams;
 using Newtonsoft.Json;
 using System.IO;
 
@@ -11,9 +14,13 @@ namespace LanguageSchoolApp.repository.Users.Teachers
     {
         private static readonly string filename = Path.Combine("..", "..", "..", "data", "Teachers.json");
         private readonly Dictionary<string, Teacher> allTeachers;
+        private readonly ICourseService courseService;
+        private readonly IExamService examService;
 
-        public TeacherRepository() 
+        public TeacherRepository(ICourseService _courseService, IExamService _examService) 
         {
+            courseService = _courseService;
+            examService = _examService;
             allTeachers = ReadFromFile();
         }
 
@@ -183,6 +190,62 @@ namespace LanguageSchoolApp.repository.Users.Teachers
                 return teachers.OrderByDescending(teacher => teacher.Name).ThenByDescending(teacher => teacher.CalculateAverageGrade()).ToList();
             }
             return new List<Teacher>();
+        }
+
+        public Teacher SelectTeacherForCourse(Course course) 
+        {
+            Teacher selectedTeacher = new Teacher();
+            foreach (Teacher teacher in allTeachers.Values) 
+            {
+                if (!teacher.LanguageProficiencies.Contains(course.LanguageProficiency)) //teacher must have right proficiency level
+                {
+                    continue;
+                }
+                List<Course> teachersCourses = courseService.GetAllCoursesById(teacher.MyCoursesIds);
+                if (courseService.CourseOverlap(teachersCourses, course)) // teacher can't have overlapping classes with new course
+                {
+                    continue;
+                }
+                if (teacher.CalculateAverageGrade() > selectedTeacher.CalculateAverageGrade()) // if teacher has better grade than previously chosen he gets chosen
+                { 
+                    selectedTeacher = teacher;
+                }
+            }
+
+            if (selectedTeacher.Email == null)
+            {
+                throw new UserException("Couldn't find teacher for this course !", UserExceptionType.UserNotFound);
+            }
+
+            return selectedTeacher;
+        }
+
+        public Teacher SelectTeacherForExam(Exam exam) 
+        {
+            Teacher selectedTeacher = new Teacher();
+            foreach (Teacher teacher in allTeachers.Values) 
+            {
+                if (!teacher.LanguageProficiencies.Contains(exam.LanguageProficiency))
+                { 
+                    continue;
+                }
+                List<Exam> teachersExams = examService.GetAllExamsById(teacher.MyExamsIds);
+                if (examService.ExamOverlaps(teachersExams, exam))
+                {
+                    continue;
+                }
+                if (teacher.CalculateAverageGrade() > selectedTeacher.CalculateAverageGrade())
+                { 
+                    selectedTeacher = teacher;
+                }
+            }
+
+            if (selectedTeacher.Email == null) 
+            {
+                throw new UserException("Couldn't find teacher for this course !", UserExceptionType.UserNotFound);
+            }
+
+            return selectedTeacher;
         }
     }
 }

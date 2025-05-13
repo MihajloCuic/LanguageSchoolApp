@@ -298,7 +298,12 @@
       "LanguageLevel": 1
     },
     "MaxParticipants": 20,
-    "ParticipantsIds": ["student@gmail.com", "zoran@gmail.com", "jelena@gmail.com", "filipruzic2003@gmail.com"],
+    "ParticipantsIds": [
+      "student@gmail.com",
+      "zoran@gmail.com",
+      "jelena@gmail.com",
+      "filipruzic2003@gmail.com"
+    ],
     "Duration": 4,
     "ClassPeriods": [
       {
@@ -315,6 +320,121 @@
       }
     ],
     "BeginningDate": "2024-06-06T00:00:00",
+    "CourseType": 0,
+    "IsFinished": false
+  },
+  "440882214": {
+    "Id": 440882214,
+    "LanguageProficiency": {
+      "LanguageName": "mandarin",
+      "LanguageLevel": 5
+    },
+    "MaxParticipants": 30,
+    "ParticipantsIds": [],
+    "Duration": 2,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 3,
+        "StartTime": "20:30:00"
+      }
+    ],
+    "BeginningDate": "2025-07-11T00:00:00",
+    "CourseType": 0,
+    "IsFinished": false
+  },
+  "1620959337": {
+    "Id": 1620959337,
+    "LanguageProficiency": {
+      "LanguageName": "mandarin",
+      "LanguageLevel": 5
+    },
+    "MaxParticipants": 45,
+    "ParticipantsIds": [],
+    "Duration": 3,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 4,
+        "StartTime": "20:30:00"
+      }
+    ],
+    "BeginningDate": "2025-07-16T00:00:00",
+    "CourseType": 0,
+    "IsFinished": false
+  },
+  "654787848": {
+    "Id": 654787848,
+    "LanguageProficiency": {
+      "LanguageName": "spanish",
+      "LanguageLevel": 0
+    },
+    "MaxParticipants": 10,
+    "ParticipantsIds": [],
+    "Duration": 3,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 4,
+        "StartTime": "18:30:00"
+      },
+      {
+        "DayOfWeek": 2,
+        "StartTime": "18:30:00"
+      },
+      {
+        "DayOfWeek": 1,
+        "StartTime": "20:00:00"
+      },
+      {
+        "DayOfWeek": 7,
+        "StartTime": "20:00:00"
+      }
+    ],
+    "BeginningDate": "2025-08-08T00:00:00",
+    "CourseType": 0,
+    "IsFinished": false
+  },
+  "1435012226": {
+    "Id": 1435012226,
+    "LanguageProficiency": {
+      "LanguageName": "spanish",
+      "LanguageLevel": 0
+    },
+    "MaxParticipants": 20,
+    "ParticipantsIds": [],
+    "Duration": 10,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 6,
+        "StartTime": "09:00:00"
+      }
+    ],
+    "BeginningDate": "2025-10-10T00:00:00",
+    "CourseType": 0,
+    "IsFinished": false
+  },
+  "158557165": {
+    "Id": 158557165,
+    "LanguageProficiency": {
+      "LanguageName": "mandarin",
+      "LanguageLevel": 5
+    },
+    "MaxParticipants": 15,
+    "ParticipantsIds": [],
+    "Duration": 12,
+    "ClassPeriods": [
+      {
+        "DayOfWeek": 6,
+        "StartTime": "11:00:00"
+      },
+      {
+        "DayOfWeek": 7,
+        "StartTime": "11:00:00"
+      },
+      {
+        "DayOfWeek": 3,
+        "StartTime": "19:00:00"
+      }
+    ],
+    "BeginningDate": "2025-12-19T00:00:00",
     "CourseType": 0,
     "IsFinished": false
   }

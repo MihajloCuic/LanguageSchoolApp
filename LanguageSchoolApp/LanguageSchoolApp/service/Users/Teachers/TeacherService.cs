@@ -1,6 +1,7 @@
 ﻿using LanguageSchoolApp.exceptions.Users;
 using LanguageSchoolApp.model;
 using LanguageSchoolApp.model.Courses;
+using LanguageSchoolApp.model.Exams;
 using LanguageSchoolApp.model.Users;
 using LanguageSchoolApp.repository.Users.Teachers;
 using LanguageSchoolApp.service.Courses;
@@ -158,6 +159,16 @@ namespace LanguageSchoolApp.service.Users.Teachers
                 }
             }
             return uniqueProficiencies.ToList();
+        }
+
+        public Teacher SelectTeacherForCourse(Course course) 
+        {
+            return teacherRepository.SelectTeacherForCourse(course);
+        }
+
+        public Teacher SelectTeacherForExam(Exam exam) 
+        { 
+            return teacherRepository.SelectTeacherForExam(exam);
         }
     }
 }
