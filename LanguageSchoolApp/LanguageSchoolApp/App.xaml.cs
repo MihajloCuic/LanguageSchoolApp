@@ -11,6 +11,7 @@ using LanguageSchoolApp.repository.Users.Students;
 using LanguageSchoolApp.repository.Users.Teachers;
 using LanguageSchoolApp.service.Courses;
 using LanguageSchoolApp.service.Exams;
+using LanguageSchoolApp.service.Helpers;
 using LanguageSchoolApp.service.Notifications;
 using LanguageSchoolApp.service.Users.Directors;
 using LanguageSchoolApp.service.Users.PenaltyPoints;
@@ -66,6 +67,8 @@ namespace LanguageSchoolApp
 
             services.AddSingleton<ICourseDropoutRequestRepository, CourseDropoutRequestRepository>();
             services.AddSingleton<ICourseDropoutRequestService, CourseDropoutRequestService>();
+
+            services.AddSingleton<IEmailService, EmailService>();
         }
     }
 

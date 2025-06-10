@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using LanguageSchoolApp.service.Validation;
 using LanguageSchoolApp.exceptions.Courses;
 using System.Security.Cryptography;
+using LanguageSchoolApp.service.Users.Directors;
 
 namespace LanguageSchoolApp.service.Courses
 {

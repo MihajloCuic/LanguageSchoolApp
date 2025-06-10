@@ -12,8 +12,9 @@ namespace LanguageSchoolApp.service.Notifications
     {
         Dictionary<int, Notification> GetAllNotifications();
         Notification GetNotification(int id);
+        bool NotificationExists(int id);
         List<Notification> GetUnreadNotificationsByReceiver(string receiverId);
-        void AddNotification(int id, Notification notification);
+        void AddNotification(string senderId, string receiverId, NotificationType notificationType, string message);
         void DeleteNotification(int id);
         int GenerateId(string senderId, string receiverId, NotificationType notificationType);
     }

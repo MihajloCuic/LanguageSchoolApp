@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LanguageSchoolApp.exceptions.Notifications;
 using LanguageSchoolApp.model;
 using LanguageSchoolApp.model.Notifications;
 using LanguageSchoolApp.repository.Notifications;
@@ -28,16 +29,31 @@ namespace LanguageSchoolApp.service.Notifications
             return notificationRepository.GetNotification(id);
         }
 
+        public bool NotificationExists(int id)
+        { 
+            return notificationRepository.NotificationExists(id);
+        }
+
         public List<Notification> GetUnreadNotificationsByReceiver(string receiverId) 
         { 
             return notificationRepository.GetUnreadNotificationsByReceiver(receiverId);
         }
 
-        public void AddNotification(int id, Notification notification) 
-        { }
+        public void AddNotification(string senderId, string receiverId, NotificationType notificationType, string message) 
+        { 
+            int notificationId = GenerateId(senderId, receiverId, notificationType);
+            Notification notification = new Notification(notificationId, senderId, receiverId, notificationType, message, false);
+            notificationRepository.AddNotification(notificationId, notification);
+        }
 
         public void DeleteNotification(int id) 
-        { }
+        {
+            if (!NotificationExists(id)) 
+            {
+                throw new NotificationException("Notification not found !", NotificationExceptionType.NotificationNotFound);
+            }
+            notificationRepository.DeleteNotification(id);
+        }
 
         public int GenerateId(string senderId, string receiverId, NotificationType notificationType)
         {

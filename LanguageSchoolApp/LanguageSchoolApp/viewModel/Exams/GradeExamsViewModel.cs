@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using Microsoft.Extensions.DependencyInjection;
 using LanguageSchoolApp.view;
 using LanguageSchoolApp.model;
+using LanguageSchoolApp.service.Users.Directors;
 
 namespace LanguageSchoolApp.viewModel.Exams
 {
@@ -14,6 +15,7 @@ namespace LanguageSchoolApp.viewModel.Exams
     {
         private readonly IExamService examService;
         private readonly IStudentService studentService;
+        private readonly IDirectorService directorService;
         private readonly Exam exam;
         private Student? selectedStudent;
 
@@ -147,6 +149,7 @@ namespace LanguageSchoolApp.viewModel.Exams
         { 
             examService = App.ServiceProvider.GetService<IExamService>();
             studentService = App.ServiceProvider.GetService<IStudentService>();
+            directorService = App.ServiceProvider.GetService<IDirectorService>();
 
             exam = examService.GetExam(examId);
             LanguageName = exam.LanguageProficiency.LanguageName;
@@ -180,6 +183,7 @@ namespace LanguageSchoolApp.viewModel.Exams
             }
 
             examService.FinishExam(exam.Id);
+            directorService.AddFinishedExam(exam.Id);
             SwitchToTeacherExamView();
         }
 

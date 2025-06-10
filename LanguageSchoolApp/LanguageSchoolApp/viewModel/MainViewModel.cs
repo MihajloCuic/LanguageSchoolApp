@@ -11,6 +11,7 @@ using LanguageSchoolApp.viewModel.Reports;
 using LanguageSchoolApp.view.Users;
 using LanguageSchoolApp.service.Users.Students;
 using LanguageSchoolApp.service.Users.Teachers;
+using LanguageSchoolApp.viewModel.Notifications;
 
 namespace LanguageSchoolApp.viewModel
 {
@@ -105,10 +106,8 @@ namespace LanguageSchoolApp.viewModel
         //director menu options
         public ActiveTeachersViewModel ActiveTeachersVM { get; set; }
         public CreateTeacherViewModel CreateTeacherVM { get; set; }
-        //public SmartCourseMakingViewModel SmartCourseMakingVM { get; set; }
-        //public SmartExamMakingViewModel SmartExamMakingVM { get; set; }
         public SendExamResultsViewModel SendExamResultsVM { get; set; }
-        public SendCourseResultsViewModel SendCourseResultsVM { get; set; }
+        public CourseGradeNotificationViewModel SendCourseResultsVM { get; set; }
         public ReportsViewModel ReportsVM { get; set; }
 
         public RelayCommand<object> LogoutCommand { get; set; }
@@ -175,7 +174,7 @@ namespace LanguageSchoolApp.viewModel
                 CreateCourseVM = new CreateCourseViewModel();
                 CreateExamVM = new CreateExamViewModel();
                 SendExamResultsVM = new SendExamResultsViewModel();
-                SendCourseResultsVM = new SendCourseResultsViewModel();
+                SendCourseResultsVM = new CourseGradeNotificationViewModel(director);
                 ReportsVM = new ReportsViewModel();
                 CurrentView = ActiveTeachersVM;
 
@@ -424,7 +423,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Director)
             {
-                return !(CurrentView is SendCourseResultsViewModel);
+                return !(CurrentView is CourseGradeNotificationViewModel);
             }
             return false;
         }

@@ -39,6 +39,32 @@ namespace LanguageSchoolApp.repository.Users.Directors
             return director;
         }
 
+        public void AddFinishedCourse(int courseId) 
+        { 
+            director.FinishedCoursesIds.Add(courseId);
+            WriteToFile();
+        }
+
+        public List<int> RemoveFinishedCourse(int courseId) 
+        { 
+            director.FinishedCoursesIds.Remove(courseId);
+            WriteToFile();
+            return director.FinishedCoursesIds;
+        }
+
+        public void AddFinishedExam(int examId) 
+        { 
+            director.FinishedExamsIds.Add(examId);
+            WriteToFile();
+        }
+
+        public List<int> RemoveFinishedExam(int examId) 
+        { 
+            director.FinishedExamsIds.Remove(examId);
+            WriteToFile();
+            return director.FinishedExamsIds;
+        }
+
         public void WriteToFile()
         {
             try

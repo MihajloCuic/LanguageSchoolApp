@@ -33,6 +33,26 @@ namespace LanguageSchoolApp.service.Users.Directors
             return directorRepository.UpdateDirector(name, surname, gender, birthday, phoneNumber, email, password);
         }
 
+        public void AddFinishedCourse(int courseId)
+        { 
+            directorRepository.AddFinishedCourse(courseId);
+        }
+
+        public List<int> RemoveFinishedCourse(int courseId)
+        { 
+            return directorRepository.RemoveFinishedCourse(courseId);
+        }
+
+        public void AddFinishedExam(int examId)
+        { 
+            directorRepository.AddFinishedExam(examId);
+        }
+
+        public List<int> RemoveFinishedExam(int examId)
+        { 
+            return directorRepository.RemoveFinishedExam(examId);
+        }
+
         public bool ValidateDirector(string name, string surname, string genderStr, string birthdayStr, string phoneNumber, string email, string password, string confirmPassword) 
         {
             Validations.ValidateUser(name, surname, genderStr, birthdayStr, phoneNumber, password, confirmPassword);

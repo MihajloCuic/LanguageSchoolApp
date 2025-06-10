@@ -9,6 +9,8 @@
              xmlns:viewModelExams="clr-namespace:LanguageSchoolApp.viewModel.Exams"
              xmlns:viewExams="clr-namespace:LanguageSchoolApp.view.Exams"
              xmlns:converter="clr-namespace:LanguageSchoolApp.converter"
+             xmlns:viewModelNotifications="clr-namespace:LanguageSchoolApp.viewModel.Notifications"
+             xmlns:viewNotifications="clr-namespace:LanguageSchoolApp.view.Notifications"
              StartupUri="view/Users/Login.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -135,6 +137,9 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModelUsers:CreateTeacherViewModel}">
                 <viewUsers:CreateTeacherView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelNotifications:CourseGradeNotificationViewModel}">
+                <viewNotifications:CourseGradeNotification/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
