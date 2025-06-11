@@ -27,11 +27,12 @@ namespace LanguageSchoolApp.repository.Notifications
 
         public Notification GetNotification(int id) 
         {
-            if (!allNotifications.ContainsKey(id)) 
-            { 
-                //throw notification exception
-            }
             return allNotifications[id];
+        }
+
+        public bool NotificationExists(int id)
+        { 
+            return allNotifications.ContainsKey(id);
         }
 
         public List<Notification> GetUnreadNotificationsByReceiver(string receiverId) 
@@ -48,10 +49,16 @@ namespace LanguageSchoolApp.repository.Notifications
         }
 
         public void AddNotification(int id, Notification notification) 
-        { }
+        {
+            allNotifications.Add(id, notification);
+            WriteToFile();
+        }
 
         public void DeleteNotification(int id) 
-        { }
+        { 
+            allNotifications.Remove(id);
+            WriteToFile();
+        }
 
         public void WriteToFile()
         {

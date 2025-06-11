@@ -7,6 +7,9 @@ using LanguageSchoolApp.service.Users.Teachers;
 using LanguageSchoolApp.view;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
+using LanguageSchoolApp.model.Courses;
+using LanguageSchoolApp.model;
+using LanguageSchoolApp.exceptions.Users;
 
 namespace LanguageSchoolApp.viewModel.Exams
 {
@@ -179,20 +182,64 @@ namespace LanguageSchoolApp.viewModel.Exams
             DeleteCommand = new RelayCommand<object>(Delete, CanDelete);
         }
 
+        public CreateExamViewModel()
+        {
+            examService = App.ServiceProvider.GetService<IExamService>();
+            teacherService = App.ServiceProvider.GetService<ITeacherService>();
+            examApplicationService = App.ServiceProvider.GetService<IExamApplicationService>();
+
+            ExamDate = DateTime.Now;
+            SetErrorField();
+            DeleteButtonVisible = Visibility.Collapsed;
+            SubmitCommand = new RelayCommand<object>(Submit, CanSubmit);
+        }
+
         private bool CanSubmit(object? parameter) { return true; }
         private void Submit(object? parameter) 
         {
             SetErrorField();
             try
             {
+                if (ExamTime == null)
+                {
+                    PopupMessageView errorMessage = new PopupMessageView("ERROR", "You must enter exam time !");
+                    errorMessage.Show();
+                    return;
+                }
+                if (LanguageName == null || LanguageLevel == null)
+                {
+                    PopupMessageView errorMessage = new PopupMessageView("ERROR", "You must enter exams proficiency !");
+                    errorMessage.Show();
+                    return;
+                }
                 TimeSpan timeSpan = TimeSpan.Parse(ExamTime);
                 DateTime combinedDateTime = ExamDate.Add(timeSpan);
                 if (exam == null)
                 {
-                    Exam exam = examService.CreateExam(LanguageName, LanguageLevel, combinedDateTime.ToString("dd.MM.yyyy. HH:mm"), MaxParticipants, teacher);
-                    teacherService.AddExam(exam.Id, teacher.Email);
-                    PopupMessageView successPopup = new PopupMessageView("SUCCESS", "Exam created successfully !");
-                    successPopup.Show();
+                    Teacher tempTeacher;
+                    if (teacher == null)
+                    {
+                        Exam ex = new Exam();
+                        ex.ExamDate = combinedDateTime;
+                        ex.LanguageProficiency = new LanguageProficiency(LanguageName, Enum.Parse<LanguageLevel>(LanguageLevel));
+                        tempTeacher = teacherService.SelectTeacherForExam(ex);
+                    }
+                    else
+                    {
+                        tempTeacher = teacher;
+                    }
+                    Exam exam = examService.CreateExam(LanguageName, LanguageLevel, combinedDateTime.ToString("dd.MM.yyyy. HH:mm"), MaxParticipants, tempTeacher);
+                    teacherService.AddExam(exam.Id, tempTeacher.Email);
+                    if (teacher == null)
+                    {
+                        PopupMessageView successPopup = new PopupMessageView("SUCCESS", $"Exam assigned to {tempTeacher.Name} {tempTeacher.Surname} !");
+                        successPopup.Show();
+                    }
+                    else 
+                    {
+                        PopupMessageView successPopup = new PopupMessageView("SUCCESS", "Exam created successfully !");
+                        successPopup.Show();
+                    }
                     EmptyFields();
                 }
                 else
@@ -202,10 +249,10 @@ namespace LanguageSchoolApp.viewModel.Exams
                     successPopup.Show();
                 }
             }
-            catch (ExamException ex) 
+            catch (ExamException ex)
             {
                 switch (ex.Type)
-                { 
+                {
                     case ExamExceptionType.InvalidLanguageName:
                         LanguageNameError = ex.Text;
                         break;
@@ -228,6 +275,11 @@ namespace LanguageSchoolApp.viewModel.Exams
                         DefaultError = ex.Text;
                         break;
                 }
+            }
+            catch (UserException ex)
+            {
+                PopupMessageView errorMessage = new PopupMessageView("ERROR", ex.Text);
+                errorMessage.Show();
             }
         }
 

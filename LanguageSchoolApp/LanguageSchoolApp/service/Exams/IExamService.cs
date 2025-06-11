@@ -28,5 +28,6 @@ namespace LanguageSchoolApp.service.Exams
         void SignupStudentToExam(int examId, string studentId);
         void WithdrawStudentFromExam(int examId, string studentId);
         void FinishExam(int examId);
+        bool ExamOverlaps(List<Exam> exams, Exam exam);
     }
 }

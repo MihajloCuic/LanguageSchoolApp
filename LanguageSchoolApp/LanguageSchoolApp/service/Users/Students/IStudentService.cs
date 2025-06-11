@@ -28,5 +28,6 @@ namespace LanguageSchoolApp.service.Users.Students
         void DeleteStudentPenaltyPoint(string studentId, int penaltyPointId);
         GradedStudent GradeStudent(string studentId, int grade);
         void GradeStudentsExam(string studentId, ExamResults examResults);
+        List<Student> SortStudentsByGrades(List<Student> students, int courseId, int topCount = 10);
     }
 }

@@ -67,9 +67,21 @@
     "Password": "sifra"
   },
   "mirkoTeacher@gmail.com": {
-    "MyGrades": [],
-    "MyCoursesIds": [],
-    "MyExamsIds": [],
+    "MyGrades": [
+      10,
+      8,
+      9,
+      7,
+      10
+    ],
+    "MyCoursesIds": [
+      654787848,
+      1435012226
+    ],
+    "MyExamsIds": [
+      1716166449,
+      687219922
+    ],
     "LanguageProficiencies": [
       {
         "LanguageName": "english",
@@ -116,35 +128,19 @@
     "Email": "mirkoTeacher@gmail.com",
     "Password": "sifra"
   },
-  "dejanadejanic1998@gmail.com": {
-    "MyGrades": [],
-    "MyCoursesIds": [],
-    "MyExamsIds": [],
-    "LanguageProficiencies": [],
-    "Name": "Dejana",
-    "Surname": "Dejanic",
-    "Gender": 1,
-    "Birthday": "1998-03-04T00:00:00",
-    "PhoneNumber": "0613284439",
-    "Email": "dejanadejanic1998@gmail.com",
-    "Password": "sifra"
-  },
-  "marinkomadzgalj1983@gmail.com": {
-    "MyGrades": [],
-    "MyCoursesIds": [],
-    "MyExamsIds": [],
-    "LanguageProficiencies": [],
-    "Name": "Marinko",
-    "Surname": "Madzgalj",
-    "Gender": 0,
-    "Birthday": "1983-10-10T00:00:00",
-    "PhoneNumber": "0653390606",
-    "Email": "marinkomadzgalj1983@gmail.com",
-    "Password": "sifra"
-  },
   "anja.mirinkovic@gmail.com": {
-    "MyGrades": [],
-    "MyCoursesIds": [],
+    "MyGrades": [
+      10,
+      2,
+      5,
+      9,
+      7
+    ],
+    "MyCoursesIds": [
+      440882214,
+      1620959337,
+      158557165
+    ],
     "MyExamsIds": [],
     "LanguageProficiencies": [
       {

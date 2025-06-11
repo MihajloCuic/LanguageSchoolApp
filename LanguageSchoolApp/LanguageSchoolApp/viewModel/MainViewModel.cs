@@ -11,6 +11,7 @@ using LanguageSchoolApp.viewModel.Reports;
 using LanguageSchoolApp.view.Users;
 using LanguageSchoolApp.service.Users.Students;
 using LanguageSchoolApp.service.Users.Teachers;
+using LanguageSchoolApp.viewModel.Notifications;
 
 namespace LanguageSchoolApp.viewModel
 {
@@ -105,10 +106,8 @@ namespace LanguageSchoolApp.viewModel
         //director menu options
         public ActiveTeachersViewModel ActiveTeachersVM { get; set; }
         public CreateTeacherViewModel CreateTeacherVM { get; set; }
-        public SmartCourseMakingViewModel SmartCourseMakingVM { get; set; }
-        public SmartExamMakingViewModel SmartExamMakingVM { get; set; }
-        public SendExamResultsViewModel SendExamResultsVM { get; set; }
-        public SendCourseResultsViewModel SendCourseResultsVM { get; set; }
+        public ExamGradeNotificationViewModel SendExamResultsVM { get; set; }
+        public CourseGradeNotificationViewModel SendCourseResultsVM { get; set; }
         public ReportsViewModel ReportsVM { get; set; }
 
         public RelayCommand<object> LogoutCommand { get; set; }
@@ -172,10 +171,10 @@ namespace LanguageSchoolApp.viewModel
                 ActiveTeachersVM = new ActiveTeachersViewModel();
                 ActiveTeachersVM.OpenEditWindowAction = EditTeacher;
                 ActiveTeachersVM.OpenCreateTeacherView = OpenCreateTeacherView;
-                SmartCourseMakingVM = new SmartCourseMakingViewModel();
-                SmartExamMakingVM = new SmartExamMakingViewModel();
-                SendExamResultsVM = new SendExamResultsViewModel();
-                SendCourseResultsVM = new SendCourseResultsViewModel();
+                CreateCourseVM = new CreateCourseViewModel();
+                CreateExamVM = new CreateExamViewModel();
+                SendExamResultsVM = new ExamGradeNotificationViewModel(director);
+                SendCourseResultsVM = new CourseGradeNotificationViewModel(director);
                 ReportsVM = new ReportsViewModel();
                 CurrentView = ActiveTeachersVM;
 
@@ -317,7 +316,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Director)
             {
-                return !(CurrentView is SmartCourseMakingViewModel);
+                return !(CurrentView is CreateCourseViewModel);
             }
             return false;
         }
@@ -340,7 +339,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Director)
             {
-                CurrentView = SmartCourseMakingVM;
+                CurrentView = CreateCourseVM;
             }
         }
 
@@ -356,7 +355,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Director)
             {
-                return !(CurrentView is SmartExamMakingViewModel);
+                return !(CurrentView is CreateExamViewModel);
             }
             return false;
         }
@@ -376,7 +375,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Director)
             {
-                CurrentView = SmartExamMakingVM;
+                CurrentView = CreateExamVM;
             }
         }
 
@@ -392,7 +391,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Director)
             {
-                return !(CurrentView is SendExamResultsViewModel);
+                return !(CurrentView is ExamGradeNotificationViewModel);
             }
             return false;
         }
@@ -424,7 +423,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Director)
             {
-                return !(CurrentView is SendCourseResultsViewModel);
+                return !(CurrentView is CourseGradeNotificationViewModel);
             }
             return false;
         }

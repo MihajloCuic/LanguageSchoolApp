@@ -195,5 +195,25 @@
     "PhoneNumber": "0683233878",
     "Email": "zeljkozeljanovic@gmail.com",
     "Password": "sifra"
+  },
+  "muhajlo.cuic@gmail.com": {
+    "ProfessionalDegree": 5,
+    "FinishedCourses": [
+      {
+        "CourseId": 952824467,
+        "Grade": 5
+      }
+    ],
+    "FinishedExamResults": [],
+    "EnrolledCourseId": -1,
+    "PenaltyPoints": [],
+    "Blocked": false,
+    "Name": "Mihajlo",
+    "Surname": "Cuic",
+    "Gender": 0,
+    "Birthday": "2003-05-09T00:00:00",
+    "PhoneNumber": "0683233878",
+    "Email": "muhajlo.cuic@gmail.com",
+    "Password": "sifra"
   }
 }

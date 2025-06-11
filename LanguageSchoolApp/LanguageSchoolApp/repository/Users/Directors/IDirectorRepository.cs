@@ -12,6 +12,10 @@ namespace LanguageSchoolApp.repository.Users.Directors
     {
         Director GetDirector();
         Director UpdateDirector(string name, string surname, Gender gender, DateTime birthday, string phoneNumber, string email, string password);
+        void AddFinishedCourse(int courseId);
+        List<int> RemoveFinishedCourse(int courseId);
+        void AddFinishedExam(int examId);
+        List<int> RemoveFinishedExam(int examId);
         void WriteToFile();
     }
 }

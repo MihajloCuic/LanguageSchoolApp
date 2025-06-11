@@ -25,5 +25,6 @@ namespace LanguageSchoolApp.service.Courses
         void AddStudentToCourse(string studentId, int courseId);
         void FinishCourse(int courseId);
         bool IsFinished(int courseId);
+        bool CourseOverlap(List<Course> courses, Course course);
     }
 }

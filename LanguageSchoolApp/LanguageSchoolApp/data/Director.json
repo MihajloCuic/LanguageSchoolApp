@@ -1,4 +1,13 @@
 {
+  "FinishedCoursesIds": [
+    4,
+    952824467
+  ],
+  "FinishedExamsIds": [
+    2,
+    7,
+    8
+  ],
   "Name": "Marinko",
   "Surname": "Marinkovic",
   "Gender": 0,

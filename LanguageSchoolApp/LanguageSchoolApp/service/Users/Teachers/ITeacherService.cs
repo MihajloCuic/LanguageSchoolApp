@@ -1,5 +1,6 @@
 ﻿using LanguageSchoolApp.model;
 using LanguageSchoolApp.model.Courses;
+using LanguageSchoolApp.model.Exams;
 using LanguageSchoolApp.model.Users;
 using System;
 using System.Collections.Generic;
@@ -26,5 +27,7 @@ namespace LanguageSchoolApp.service.Users.Teachers
         void GradeTeacher(int grade, string teacherId);
         List<Teacher> SortTeachers(List<Teacher> teachers, string name, string grade);
         List<Teacher> FilteredTeachers(string languageName, LanguageLevel languageLevel, int grade);
+        Teacher SelectTeacherForCourse(Course course);
+        Teacher SelectTeacherForExam(Exam exam);
     }
 }

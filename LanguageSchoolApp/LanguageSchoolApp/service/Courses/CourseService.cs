@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using LanguageSchoolApp.service.Validation;
 using LanguageSchoolApp.exceptions.Courses;
 using System.Security.Cryptography;
+using LanguageSchoolApp.service.Users.Directors;
 
 namespace LanguageSchoolApp.service.Courses
 {
@@ -238,6 +239,26 @@ namespace LanguageSchoolApp.service.Courses
             }
             Course course = GetCourse(courseId);
             return course.IsFinished;
+        }
+
+        public bool CourseOverlap(List<Course> courses, Course course)
+        {
+            List<Course> overlappingCourses = courses.Where(c => c.BeginningDate.AddDays(7 * c.Duration) >= course.BeginningDate).ToList();
+            if (overlappingCourses.Count == 0)
+            {
+                return false;
+            }
+            foreach (Course c in overlappingCourses)
+            {
+                foreach (ClassPeriod cp in c.ClassPeriods)
+                {
+                    if (course.ClassPeriods.Any(classPeriod => classPeriod.Equals(cp)))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
     }
 }

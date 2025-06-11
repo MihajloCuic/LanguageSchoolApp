@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using Microsoft.Extensions.DependencyInjection;
 using LanguageSchoolApp.view;
 using LanguageSchoolApp.service.Courses;
+using LanguageSchoolApp.service.Users.Directors;
 
 namespace LanguageSchoolApp.viewModel.Courses
 {
@@ -13,6 +14,7 @@ namespace LanguageSchoolApp.viewModel.Courses
     {
         private readonly IStudentService studentService;
         private readonly ICourseService courseService;
+        private readonly IDirectorService directorService;
         private readonly Course course;
         private readonly Teacher teacher;
         private List<GradedStudent> _allGradedStudents;
@@ -72,6 +74,7 @@ namespace LanguageSchoolApp.viewModel.Courses
         {
             studentService = App.ServiceProvider.GetService<IStudentService>();
             courseService = App.ServiceProvider.GetService<ICourseService>();
+            directorService = App.ServiceProvider.GetService<IDirectorService>();
             course = _course;
             teacher = _teacher;
 
@@ -103,6 +106,7 @@ namespace LanguageSchoolApp.viewModel.Courses
             PopupMessageView successPopup = new PopupMessageView("SUCCESS", "Course finished successfully !");
             successPopup.Show();
             courseService.FinishCourse(course.Id);
+            directorService.AddFinishedCourse(course.Id);
             SwitchToTeacherCourses(teacher.Email);
         }
 
