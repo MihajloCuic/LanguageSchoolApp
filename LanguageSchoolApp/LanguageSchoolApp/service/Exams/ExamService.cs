@@ -62,9 +62,9 @@ namespace LanguageSchoolApp.service.Exams
             return false;
         }
 
-        public List<Exam> GetAvailableExams(List<Course> finishedCourses)
+        public List<Exam> GetAvailableExams(List<Course> finishedCourses, List<Exam> finishedExams)
         { 
-            return examRepository.GetAvailableExams(finishedCourses);
+            return examRepository.GetAvailableExams(finishedCourses, finishedExams);
         }
 
         public List<Exam> GetAllFilteredExams(List<Exam> exams, string languageName, string languageLevelStr) 

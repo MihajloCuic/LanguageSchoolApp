@@ -16,7 +16,7 @@ namespace LanguageSchoolApp.repository.Exams
         Exam GetExam(int examId);
         bool ExamExists(int examId);
         List<Exam> GetAllExamsById(List<int> examsIds);
-        List<Exam> GetAvailableExams(List<Course> finishedCourses);
+        List<Exam> GetAvailableExams(List<Course> finishedCourses, List<Exam> finishedExams);
         List<Exam> GetAllFilteredExams(List<Exam> exams, string languageName, LanguageLevel? languageLevel);
         List<Exam> SortExams(List<Exam> exams, SortingDirection examDateSorting);
         void CreateExam(Exam exam);

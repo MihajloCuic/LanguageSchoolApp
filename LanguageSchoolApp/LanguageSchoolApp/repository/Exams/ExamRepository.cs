@@ -49,11 +49,15 @@ namespace LanguageSchoolApp.repository.Exams
             return allExams[examId];
         }
 
-        public List<Exam> GetAvailableExams(List<Course> finishedCourses)
+        public List<Exam> GetAvailableExams(List<Course> finishedCourses, List<Exam> finishedExams)
         { 
             List<Exam> availableExams = new List<Exam>();
             foreach (Exam exam in allExams.Values) 
             {
+                if (finishedExams.Any(e => e.LanguageProficiency.Equals(exam.LanguageProficiency)))
+                {
+                    continue;
+                }
                 if (!finishedCourses.Any(course => course.LanguageProficiency.Equals(exam.LanguageProficiency))) 
                 { 
                     continue;

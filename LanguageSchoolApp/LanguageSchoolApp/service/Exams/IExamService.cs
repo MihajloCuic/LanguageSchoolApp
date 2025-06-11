@@ -16,7 +16,7 @@ namespace LanguageSchoolApp.service.Exams
         bool ExamExists(int examId);
         Exam GetExam(int examId);
         bool CheckIfExamsMatch(int exam, List<int> teachersExams, DateTime examDate);
-        List<Exam> GetAvailableExams(List<Course> finishedCourses);
+        List<Exam> GetAvailableExams(List<Course> finishedCourses, List<Exam> finishedExams);
         List<Exam> GetAllFilteredExams(List<Exam> exams, string languageName, string languageLevelStr);
         List<Exam> SortExams(List<Exam> exams, string examDateSortingStr);
         Exam CreateExam(string languageName, string languageLevelStr, string examDateStr, int maxParticipants, Teacher teacher);
