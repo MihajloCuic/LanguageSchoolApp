@@ -141,6 +141,9 @@
             <DataTemplate DataType="{x:Type viewModelNotifications:CourseGradeNotificationViewModel}">
                 <viewNotifications:CourseGradeNotification/>
             </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelNotifications:ExamGradeNotificationViewModel}">
+                <viewNotifications:ExamGradeNotification/>
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

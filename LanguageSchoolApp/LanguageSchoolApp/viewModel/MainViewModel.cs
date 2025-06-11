@@ -106,7 +106,7 @@ namespace LanguageSchoolApp.viewModel
         //director menu options
         public ActiveTeachersViewModel ActiveTeachersVM { get; set; }
         public CreateTeacherViewModel CreateTeacherVM { get; set; }
-        public SendExamResultsViewModel SendExamResultsVM { get; set; }
+        public ExamGradeNotificationViewModel SendExamResultsVM { get; set; }
         public CourseGradeNotificationViewModel SendCourseResultsVM { get; set; }
         public ReportsViewModel ReportsVM { get; set; }
 
@@ -173,7 +173,7 @@ namespace LanguageSchoolApp.viewModel
                 ActiveTeachersVM.OpenCreateTeacherView = OpenCreateTeacherView;
                 CreateCourseVM = new CreateCourseViewModel();
                 CreateExamVM = new CreateExamViewModel();
-                SendExamResultsVM = new SendExamResultsViewModel();
+                SendExamResultsVM = new ExamGradeNotificationViewModel(director);
                 SendCourseResultsVM = new CourseGradeNotificationViewModel(director);
                 ReportsVM = new ReportsViewModel();
                 CurrentView = ActiveTeachersVM;
@@ -391,7 +391,7 @@ namespace LanguageSchoolApp.viewModel
             }
             if (CurrentUser is Director)
             {
-                return !(CurrentView is SendExamResultsViewModel);
+                return !(CurrentView is ExamGradeNotificationViewModel);
             }
             return false;
         }

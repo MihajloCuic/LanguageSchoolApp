@@ -198,7 +198,12 @@
   },
   "muhajlo.cuic@gmail.com": {
     "ProfessionalDegree": 5,
-    "FinishedCourses": [],
+    "FinishedCourses": [
+      {
+        "CourseId": 952824467,
+        "Grade": 5
+      }
+    ],
     "FinishedExamResults": [],
     "EnrolledCourseId": -1,
     "PenaltyPoints": [],

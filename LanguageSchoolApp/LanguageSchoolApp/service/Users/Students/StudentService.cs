@@ -14,6 +14,7 @@ using LanguageSchoolApp.repository.Exams;
 using LanguageSchoolApp.service.Exams;
 using LanguageSchoolApp.model.Exams;
 using LanguageSchoolApp.service.Users.PenaltyPoints;
+using LanguageSchoolApp.converter;
 
 namespace LanguageSchoolApp.service.Users.Students
 {
@@ -208,6 +209,13 @@ namespace LanguageSchoolApp.service.Users.Students
             Student student = GetStudent(studentId);
             student.FinishedExamResults.Add(examResults);
             studentRepository.UpdateStudent(studentId, student);
+        }
+
+        public List<Student> SortStudentsByGrades(List<Student> students, int courseId, int topCount = 10) 
+        {
+            return students.Where(student => student.FinishedCourses.Any(fc => fc.CourseId == courseId))
+                .OrderByDescending(student => student.FinishedCourses
+                .First(fc => fc.CourseId == courseId).Grade).Take(topCount).ToList();
         }
     }
 }

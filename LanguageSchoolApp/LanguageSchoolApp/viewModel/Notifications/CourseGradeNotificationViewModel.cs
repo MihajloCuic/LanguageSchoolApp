@@ -82,7 +82,9 @@ namespace LanguageSchoolApp.viewModel.Notifications
             {
                 Course course = courseService.GetCourse(courseId);
                 List<Student> students = studentService.GetAllStudentsByIds(course.ParticipantsIds);
-                emailService.SendCourseResults(students, course);
+                int top10 = course.ParticipantsIds.Count == 0 ? 0 : Math.Max(1, (int)Math.Round(course.ParticipantsIds.Count * 0.1));
+                List<Student> selectedStudents = studentService.SortStudentsByGrades(students, courseId, top10);
+                emailService.SendCourseResults(selectedStudents, course);
                 List<Course> finishedCourses = courseService.GetAllCoursesById(directorService.RemoveFinishedCourse(courseId));
                 UpdateCourseList(finishedCourses);
 
