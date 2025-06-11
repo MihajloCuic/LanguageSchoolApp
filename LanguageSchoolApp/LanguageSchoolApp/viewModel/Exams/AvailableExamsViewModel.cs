@@ -104,7 +104,9 @@ namespace LanguageSchoolApp.viewModel.Exams
         {
             List<int> coursesIds = _student.FinishedCourses.Select(fc => fc.CourseId).ToList();
             List<Course> finishedCourses = courseService.GetAllCoursesById(coursesIds);
-            return examService.GetAvailableExams(finishedCourses);
+            List<int> examIds = _student.FinishedExamResults.Select(fe => fe.ExamId).ToList();
+            List<Exam> finishedExams = examService.GetAllExamsById(examIds);
+            return examService.GetAvailableExams(finishedCourses, finishedExams);
         }
 
         private List<Exam> GetSlicedAvailableExams()
