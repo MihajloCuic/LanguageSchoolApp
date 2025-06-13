@@ -217,5 +217,18 @@ namespace LanguageSchoolApp.service.Users.Students
                 .OrderByDescending(student => student.FinishedCourses
                 .First(fc => fc.CourseId == courseId).Grade).Take(topCount).ToList();
         }
+
+        public Dictionary<string, int> PenaltyPointsStudentReport()
+        {
+            Dictionary<string, int> results = new Dictionary<string, int>();
+            Dictionary<int, int> reportData = studentRepository.PenaltyPointsStudentReport();
+
+            foreach (var item in reportData)
+            {
+                results.Add(item.Key.ToString() + " Penalty Points", item.Value);
+            }
+
+            return results;
+        }
     }
 }

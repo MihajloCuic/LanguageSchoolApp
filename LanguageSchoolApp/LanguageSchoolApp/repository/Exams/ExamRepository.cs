@@ -54,7 +54,8 @@ namespace LanguageSchoolApp.repository.Exams
             List<Exam> availableExams = new List<Exam>();
             foreach (Exam exam in allExams.Values) 
             {
-                if (finishedExams.Any(e => e.LanguageProficiency.Equals(exam.LanguageProficiency)))
+                if (finishedExams.Any(e => e.LanguageProficiency.LanguageName == exam.LanguageProficiency.LanguageName && 
+                                           e.LanguageProficiency.LanguageLevel >= exam.LanguageProficiency.LanguageLevel))
                 {
                     continue;
                 }

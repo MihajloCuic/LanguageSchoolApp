@@ -11,6 +11,8 @@
              xmlns:converter="clr-namespace:LanguageSchoolApp.converter"
              xmlns:viewModelNotifications="clr-namespace:LanguageSchoolApp.viewModel.Notifications"
              xmlns:viewNotifications="clr-namespace:LanguageSchoolApp.view.Notifications"
+             xmlns:viewModelReports="clr-namespace:LanguageSchoolApp.viewModel.Reports"
+             xmlns:viewReports="clr-namespace:LanguageSchoolApp.view.Reports"
              StartupUri="view/Users/Login.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -143,6 +145,15 @@
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModelNotifications:ExamGradeNotificationViewModel}">
                 <viewNotifications:ExamGradeNotification/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelReports:ReportsViewModel}">
+                <viewReports:ReportsView/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelReports:CartesianChartViewModel}">
+                <viewReports:CartesianChart/>
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModelReports:PieChartViewModel}">
+                <viewReports:PieChart/>
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

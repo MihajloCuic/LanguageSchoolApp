@@ -96,7 +96,7 @@ namespace LanguageSchoolApp.viewModel.Courses
 
             try
             {
-                penaltyPointService.CreatePenaltyPoint(SelectedStudentId, SelectedReason);
+                penaltyPointService.CreatePenaltyPoint(SelectedStudentId, course.Id, SelectedReason);
                 PopupMessageView successPopup = new PopupMessageView("SUCCESS", "You assigned penalty point successfully !");
                 successPopup.Show();
             }

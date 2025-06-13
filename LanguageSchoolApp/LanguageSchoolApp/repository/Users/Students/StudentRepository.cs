@@ -54,6 +54,24 @@ namespace LanguageSchoolApp.repository.Users.Students
             WriteToFile();
         }
 
+        public Dictionary<int, int> PenaltyPointsStudentReport()
+        {
+            Dictionary<int, int> reportResults = new Dictionary<int, int>();
+            reportResults.Add(0, 0);
+            reportResults.Add(1, 0);
+            reportResults.Add(2, 0);
+            reportResults.Add(3, 0);
+            foreach (Student student in allStudents.Values)
+            {
+                if (student.PenaltyPoints.Count > 3)
+                {
+                    throw new PenaltyPointException("Student cannot have more than 3 penalty points !", PenaltyPointExceptionType.StudentReportError);
+                }
+                reportResults[student.PenaltyPoints.Count] += 1;
+            }
+            return reportResults;
+        }
+
         public Student GetStudent(string studentId) 
         {
             if (!allStudents.ContainsKey(studentId)) 

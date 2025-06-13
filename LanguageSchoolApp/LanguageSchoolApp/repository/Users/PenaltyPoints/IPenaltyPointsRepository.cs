@@ -15,6 +15,7 @@ namespace LanguageSchoolApp.repository.Users.PenaltyPoints
         bool PenaltyPointExists(int id);
         void CreatePenaltyPoint(PenaltyPoint penaltyPoint);
         void UpdatePenaltyPoint(PenaltyPoint penaltyPoint);
+        Dictionary<int, int> PenaltyPointsReport();
         void WriteToFile();
     }
 }

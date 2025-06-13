@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using LanguageSchoolApp.exceptions.Users;
 using LanguageSchoolApp.service.Users.Students;
+using LanguageSchoolApp.service.Courses;
+using LanguageSchoolApp.model.Courses;
 
 namespace LanguageSchoolApp.service.Users.PenaltyPoints
 {
@@ -16,11 +18,13 @@ namespace LanguageSchoolApp.service.Users.PenaltyPoints
     {
         private readonly IPenaltyPointsRepository penaltyPointsRepository;
         private readonly IStudentService studentService;
+        private readonly ICourseService courseService;
 
-        public PenaltyPointService(IPenaltyPointsRepository _penaltyPointsRepository, IStudentService _studentService)
+        public PenaltyPointService(IPenaltyPointsRepository _penaltyPointsRepository, IStudentService _studentService, ICourseService _courseService)
         {
             penaltyPointsRepository = _penaltyPointsRepository;
             studentService = _studentService;
+            courseService = _courseService;
         }
 
         public Dictionary<int, PenaltyPoint> GetAllPenaltyPoints() 
@@ -43,15 +47,15 @@ namespace LanguageSchoolApp.service.Users.PenaltyPoints
             return penaltyPointsRepository.PenaltyPointExists(id);
         }
 
-        public void CreatePenaltyPoint(string studentId, PenaltyReason reason) 
+        public void CreatePenaltyPoint(string studentId, int courseId, PenaltyReason reason) 
         {
-            int id = GenerateId(studentId, DateTime.Now, reason);
+            int id = GenerateId(studentId, courseId, reason);
             if (PenaltyPointExists(id))
             {
                 throw new PenaltyPointException("Penalty point already exists !", PenaltyPointExceptionType.PenaltyPointExists);
             }
 
-            PenaltyPoint penaltyPoint = new PenaltyPoint(id, reason, DateTime.Now);
+            PenaltyPoint penaltyPoint = new PenaltyPoint(id, courseId, reason, DateTime.Now);
             penaltyPointsRepository.CreatePenaltyPoint(penaltyPoint);
             studentService.AssignStudentPenaltyPoint(studentId, id);
         }
@@ -69,15 +73,29 @@ namespace LanguageSchoolApp.service.Users.PenaltyPoints
             studentService.DeleteStudentPenaltyPoint(studentId, id);
         }
 
-        public int GenerateId(string studentId, DateTime receivedDate, PenaltyReason reason) 
+        public int GenerateId(string studentId, int courseId, PenaltyReason reason) 
         { 
-            string combination = studentId + receivedDate.ToString("ddMMyyyy") + reason.ToString();
+            string combination = studentId + courseId.ToString() + DateTime.Now.ToString("ddMMyyyy") + reason.ToString();
             using (SHA256 sha256 = SHA256.Create())
             {
                 byte[] hashBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(combination));
                 int hashCode = BitConverter.ToInt32(hashBytes, 0);
                 return hashCode == int.MinValue ? 0 : Math.Abs(hashCode);
             }
+        }
+
+        public Dictionary<string, double> PenaltyPointsCourseReport()
+        {
+            Dictionary<int, int> reportResults = penaltyPointsRepository.PenaltyPointsReport();
+            List<Course> courses = courseService.GetAllCoursesById(reportResults.Keys.ToList());
+            Dictionary<string, double> results = new Dictionary<string, double>();
+            foreach (var item in reportResults)
+            {
+                Course course = courses.First(course => course.Id == item.Key);
+                string course_name = course.LanguageProficiency.LanguageName + " " + course.LanguageProficiency.LanguageLevel.ToString() + " " + course.Id;
+                results.Add(course_name, item.Value);
+            }
+            return results;
         }
     }
 }

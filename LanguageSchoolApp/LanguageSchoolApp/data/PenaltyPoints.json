@@ -1,18 +1,21 @@
 {
   "478904544": {
     "Id": 478904544,
+    "CourseId": 952824467,
     "Reason": 0,
     "ReceivedDate": "2025-04-18T16:26:34.3203603+02:00",
     "Deleted": false
   },
   "1186469178": {
     "Id": 1186469178,
+    "CourseId": 952824467,
     "Reason": 2,
     "ReceivedDate": "2025-04-18T19:18:38.2036978+02:00",
     "Deleted": false
   },
   "720895496": {
     "Id": 720895496,
+    "CourseId": 1,
     "Reason": 3,
     "ReceivedDate": "2025-04-18T23:02:20.091306+02:00",
     "Deleted": false

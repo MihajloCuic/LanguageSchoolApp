@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LanguageSchoolApp.model.Users;
+using LanguageSchoolApp.service.Courses;
 
 namespace LanguageSchoolApp.repository.Users.PenaltyPoints
 {
@@ -51,6 +52,22 @@ namespace LanguageSchoolApp.repository.Users.PenaltyPoints
         {
             allPenaltyPoints[penaltyPoint.Id] = penaltyPoint;
             WriteToFile();
+        }
+
+        public Dictionary<int, int> PenaltyPointsReport()
+        {
+            Dictionary<int, int> reportResults = new Dictionary<int, int>();
+            foreach (PenaltyPoint penaltyPoint in allPenaltyPoints.Values)
+            {
+                if (!reportResults.ContainsKey(penaltyPoint.CourseId))
+                {
+                    reportResults[penaltyPoint.CourseId] = 0;
+                }
+
+                reportResults[penaltyPoint.CourseId] += 1;
+            }
+
+            return reportResults;
         }
 
         public  void WriteToFile()

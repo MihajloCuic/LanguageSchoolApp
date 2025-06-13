@@ -17,5 +17,6 @@ namespace LanguageSchoolApp.repository.Users.Students
         public void UpdateStudent(string studentId, Student student);
         public void DeleteStudent(string studentId);
         void WriteToFile();
+        Dictionary<int, int> PenaltyPointsStudentReport();
     }
 }

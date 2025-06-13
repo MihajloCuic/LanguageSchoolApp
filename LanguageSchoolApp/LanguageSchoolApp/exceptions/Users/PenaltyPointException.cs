@@ -9,7 +9,8 @@ namespace LanguageSchoolApp.exceptions.Users
     public enum PenaltyPointExceptionType
     { 
         PenaltyPointExists,
-        PenaltyPointNotFound
+        PenaltyPointNotFound,
+        StudentReportError
     }
 
     public class PenaltyPointException : Exception

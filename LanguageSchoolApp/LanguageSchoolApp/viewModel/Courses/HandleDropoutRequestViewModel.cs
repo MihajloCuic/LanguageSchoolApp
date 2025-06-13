@@ -108,7 +108,7 @@ namespace LanguageSchoolApp.viewModel.Courses
             {
                 dropoutRequestService.ProcessDropoutRequest(request.Id);
                 studentService.WithdrawStudentFromCourse(request.StudentId);
-                penaltyPointService.CreatePenaltyPoint(request.StudentId, PenaltyReason.CourseDropout);
+                penaltyPointService.CreatePenaltyPoint(request.StudentId, request.CourseId, PenaltyReason.CourseDropout);
 
                 PopupMessageView successPopup = new PopupMessageView("SUCCESS", "Student withdrawn from course successfully !");
                 successPopup.Show();

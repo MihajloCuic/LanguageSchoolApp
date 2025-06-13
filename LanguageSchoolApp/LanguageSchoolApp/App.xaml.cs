@@ -13,6 +13,7 @@ using LanguageSchoolApp.service.Courses;
 using LanguageSchoolApp.service.Exams;
 using LanguageSchoolApp.service.Helpers;
 using LanguageSchoolApp.service.Notifications;
+using LanguageSchoolApp.service.Reports;
 using LanguageSchoolApp.service.Users.Directors;
 using LanguageSchoolApp.service.Users.PenaltyPoints;
 using LanguageSchoolApp.service.Users.Students;
@@ -69,6 +70,7 @@ namespace LanguageSchoolApp
             services.AddSingleton<ICourseDropoutRequestService, CourseDropoutRequestService>();
 
             services.AddSingleton<IEmailService, EmailService>();
+            services.AddSingleton<IReportService, ReportService>();
         }
     }
 
